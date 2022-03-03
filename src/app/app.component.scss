@@ -1,0 +1,46 @@
+@import '../scss/00_imports';
+
+:host(.c-root) {
+  --color-bg: #{color(mercury)};
+  --color-type: #{color(corbeau)};
+  --progress-start: 20%;
+  --progress-end: 100%;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-type);
+}
+
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  @include container-padding;
+}
+
+.l-abstract {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: blue;
+    border-radius: 6rem;
+    transform: translate(-5%, -50%) rotate(45deg);
+  }
+}
+// Dark mode
+:host(.c-root.dark) {
+  --color-bg: #{color(corbeau)};
+  --color-type: #{color(empty)};
+}
