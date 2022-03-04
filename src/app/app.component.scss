@@ -1,20 +1,21 @@
 @import '../scss/00_imports';
 
 :host(.c-root) {
-  --color-bg: #{color(mercury)};
-  --color-type: #{color(corbeau)};
   --progress-start: 20%;
   --progress-end: 100%;
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  transition: background 320ms ease;
   background-color: var(--color-bg);
   color: var(--color-type);
 }
 
 main {
   position: relative;
+  flex-grow: 1;
   width: 100%;
   height: 100%;
   @include container-padding;
@@ -22,6 +23,7 @@ main {
 
 .l-abstract {
   position: absolute;
+  z-index: 0;
   top: 0;
   left: 0;
   width: 100%;
@@ -34,13 +36,9 @@ main {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: blue;
+    max-width: 1440px;
+    background: linear-gradient(55deg, rgba(color(forest), 0.045) 0%, rgba(color(mercury), 0) 30%);
     border-radius: 6rem;
-    transform: translate(-5%, -50%) rotate(45deg);
+    transform: translate(-5%, -45%) rotate(-45deg);
   }
-}
-// Dark mode
-:host(.c-root.dark) {
-  --color-bg: #{color(corbeau)};
-  --color-type: #{color(empty)};
 }

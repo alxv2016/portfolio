@@ -1,0 +1,27 @@
+<header #header class="header__container">
+  <div class="header__brand" aria-label="Tech Talks">
+    <svg class="header-logo" viewBox="0 0 72 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M23.5668 22.6243V23.8553H0V22.5879L11.475 0H12.8863L23.5668 22.6243ZM16.6156 19.1132L12.0909 9.37514L7.13138 19.1132H16.6156V19.1132ZM27.9824 19.2579V0.181053H23.2047V17.1224L25.6295 22.2267L25.7386 22.4796V23.9636H36.8515V19.2579H27.9824ZM71.7842 0.144681V1.41043L61.1053 24H59.6933L48.219 1.41124V0.144681H71.785H71.7842ZM64.8331 4.92318H55.314L60.2736 14.6604L64.8347 4.92318H64.8331Z"
+        fill="currentColor"
+      />
+      <path
+        d="M50.39 5.35722L48.6523 1.9544L48.5076 1.70141V0.144684H48.2182L42.68 7.9639L37.1409 0.144684H31.3132L39.7839 12.0901L31.3132 23.9636H37.1409L42.68 16.1808L48.2182 23.9636H54.0822L45.6116 12.0901L50.39 5.35722Z"
+        fill="currentColor"
+      />
+      <path
+        d="M65.0505 24C66.67 24 67.9829 22.6871 67.9829 21.0676C67.9829 19.4481 66.67 18.1352 65.0505 18.1352C63.431 18.1352 62.1181 19.4481 62.1181 21.0676C62.1181 22.6871 63.431 24 65.0505 24Z"
+        fill="#FFB800"
+      />
+    </svg>
+  </div>
+  <button (click)="toggleDarkMode()" #darkModeToggle class="dark-mode-btn" aria-label="Dark mode toggle">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22ZM13 4.07C16.94 4.56 20 7.92 20 12C20 16.08 16.95 19.44 13 19.93V4.07Z"
+        fill="currentColor"
+      />
+    </svg>
+  </button>
+</header>
+<div #cursor class="cursor"></div>

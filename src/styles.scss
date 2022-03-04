@@ -8,3 +8,12 @@
 @import './scss/06_typography';
 @import './scss/07_base';
 // Third party over-rides
+:root {
+  --color-bg: #{color(mercury)};
+  --color-type: #{color(corbeau)};
+}
+
+body.dark {
+  --color-bg: #{color(corbeau)};
+  --color-type: #{color(mercury)};
+}
