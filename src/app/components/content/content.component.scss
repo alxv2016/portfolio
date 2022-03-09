@@ -59,6 +59,7 @@
 
 .discipline {
   position: relative;
+  display: inline-block;
   &:before {
     content: '';
     position: absolute;
