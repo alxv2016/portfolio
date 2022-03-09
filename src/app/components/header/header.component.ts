@@ -19,16 +19,16 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.darkModeService.darkModeState$.subscribe((darkState) => {
-      if (darkState.prefersDark) {
-        this.render.addClass(this.htmlBody, 'dark');
-        this.render.addClass(this.darkModeToggle.nativeElement, 'toggled');
-        this.render.setAttribute(this.darkModeToggle.nativeElement, 'aria-checked', 'true');
-      } else {
-        this.render.removeClass(this.htmlBody, 'dark');
-        this.render.removeClass(this.darkModeToggle.nativeElement, 'toggled');
-        this.render.setAttribute(this.darkModeToggle.nativeElement, 'aria-checked', 'false');
-      }
-    });
+    // this.darkModeService.darkModeState$.subscribe((darkState) => {
+    //   if (darkState.prefersDark) {
+    //     this.render.addClass(this.htmlBody, 'dark');
+    //     this.render.addClass(this.darkModeToggle.nativeElement, 'toggled');
+    //     this.render.setAttribute(this.darkModeToggle.nativeElement, 'aria-checked', 'true');
+    //   } else {
+    //     this.render.removeClass(this.htmlBody, 'dark');
+    //     this.render.removeClass(this.darkModeToggle.nativeElement, 'toggled');
+    //     this.render.setAttribute(this.darkModeToggle.nativeElement, 'aria-checked', 'false');
+    //   }
+    // });
   }
 }

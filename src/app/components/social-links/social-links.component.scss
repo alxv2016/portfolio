@@ -1,0 +1,46 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-social-links) {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-top: $layout--md;
+  @include breakpoint(sm) {
+    margin-top: $layout--lg;
+  }
+  @include breakpoint(md) {
+    margin-top: $layout--xl;
+  }
+}
+
+.c-social-links {
+  &__list {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
+    &-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      width: 44px;
+    }
+  }
+}
+
+.social-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  width: 44px;
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+}

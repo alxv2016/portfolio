@@ -24,13 +24,15 @@ body {
   line-height: $body-line-height;
   font-weight: 400;
   height: 100%;
-  // color: color('dark');
-  // background-color: color('light');
+  // cursor: none;
+  color: var(--color-type);
+  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // removes bounce in scrolling
   overscroll-behavior: none;
   font-size: $body--2;
+  transition: background 320ms ease;
   @include breakpoint(sm) {
     font-size: $body--1;
   }

@@ -13,10 +13,5 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {}
 
-  ngAfterViewInit(): void {
-    // this.darkModeService.darkModeState$.subscribe((darkState) => {
-    //     darkState.prefersDark ? this.render.addClass(this.element.nativeElement, 'dark'):
-    //     this.render.removeChild(this.element.nativeElement, 'dark');
-    // });
-  }
+  ngAfterViewInit(): void {}
 }

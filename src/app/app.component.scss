@@ -8,9 +8,6 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  transition: background 320ms ease;
-  background-color: var(--color-bg);
-  color: var(--color-type);
 }
 
 main {
@@ -39,6 +36,6 @@ main {
     max-width: 1440px;
     background: linear-gradient(55deg, rgba(color(forest), 0.045) 0%, rgba(color(mercury), 0) 30%);
     border-radius: 6rem;
-    transform: translate(-5%, -45%) rotate(-45deg);
+    transform: translate(-10%, -45%) rotate(-60deg);
   }
 }
