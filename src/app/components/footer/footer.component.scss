@@ -1,0 +1,32 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-footer) {
+  position: relative;
+  display: block;
+  width: 100%;
+  @include container-padding;
+}
+
+.c-footer {
+  &__nav {
+    position: relative;
+    width: 100%;
+    padding: $spacing--lg 0;
+  }
+
+  &__list {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  &-link {
+    font-weight: font-weight(bold);
+    font-size: $body--2;
+    color: currentColor;
+  }
+}
