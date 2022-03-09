@@ -11,6 +11,7 @@ const initialState: AlxvCollection = {
   headline: null,
   disciplines: null,
   content: null,
+  content_callout: null,
   social_links: null,
   site_links: null,
 };

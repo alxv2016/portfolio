@@ -33,6 +33,7 @@ export interface AlxvCollection {
   headline: string | null;
   disciplines: Discipline[] | null;
   content: string | null;
+  content_callout: string | null;
   social_links: Sociallink[] | null;
   site_links: Sitelink[] | null;
 }
