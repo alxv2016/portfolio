@@ -1,5 +1,5 @@
 <nav class="c-footer__nav">
-  <h2 class="sr-only">Learn more about me</h2>
+  <h2 class="sr-only">{{ siteContent?.navigation_title }}</h2>
   <ul class="c-footer__list">
     <li class="c-footer__list-item" *ngFor="let link of siteContent?.site_links">
       <button class="c-footer-link">{{ link.link }}</button>

@@ -34,7 +34,9 @@ export interface AlxvCollection {
   disciplines: Discipline[] | null;
   content: string | null;
   content_callout: string | null;
+  social_media_title: string | null;
   social_links: Sociallink[] | null;
+  navigation_title: string | null;
   site_links: Sitelink[] | null;
 }
 
@@ -43,6 +45,7 @@ interface Sitelink {
 }
 
 interface Sociallink {
+  social_media_id: string;
   social_media: string;
   social_media_link: Socialmedialink;
 }
