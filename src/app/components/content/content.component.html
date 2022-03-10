@@ -1,7 +1,12 @@
 <div class="c-content__container">
-  <span class="overline">{{ siteContent?.callout }}</span>
-  <h2 class="headline">{{ siteContent?.headline }} <span class="discipline">development</span></h2>
-  <p class="body">{{ siteContent?.content }}</p>
-  <p class="body">{{ siteContent?.content_callout }}</p>
+  <div>
+    <span class="overline">{{ siteContent?.callout }}</span>
+    <h2 class="headline">{{ siteContent?.headline }} <span class="discipline">development</span></h2>
+    <p class="body">{{ siteContent?.content }}</p>
+    <p class="body">{{ siteContent?.content_callout }}</p>
+  </div>
+  <c-social-links></c-social-links>
 </div>
-<c-social-links></c-social-links>
+<div class="pixi-canvas">
+  <div #pixiCanvas class="pixi-canvas__container"></div>
+</div>

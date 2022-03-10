@@ -39,6 +39,14 @@
   justify-content: center;
   height: 44px;
   width: 44px;
+  color: var(--color-type);
+  border-radius: 100%;
+  transition: color 320ms ease;
+  transition: background 320ms ease;
+  &:hover,
+  &:focus {
+    background-color: rgba(color(forest), 0.175);
+  }
   svg {
     height: 24px;
     width: 24px;
