@@ -11,11 +11,13 @@
 :root {
   --color-bg: #{color(mercury)};
   --color-type: #{color(corbeau)};
+  --color-abstract: #{color(forest)};
 }
 
 body.dark {
   --color-bg: #{color(corbeau)};
   --color-type: #{color(mercury)};
+  --color-abstract: #{color(forest)};
 }
 
 // Utilities

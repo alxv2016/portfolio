@@ -26,18 +26,38 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
   overflow: hidden;
+  color: var(--color-abstract);
   &::before {
     content: '';
     position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
+    z-index: 1;
     height: 100%;
     width: 100%;
-    max-width: 1440px;
-    background: linear-gradient(55deg, rgba(color(forest), 0.045) 0%, rgba(color(mercury), 0) 30%);
-    border-radius: 6rem;
-    transform: translate(-10%, -45%) rotate(-60deg);
+    opacity: 0;
+    @include frosted-glass(color(empty), 0);
   }
+  @include breakpoint(lg) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+.orb-lines {
+  color: color(atomic);
+}
+
+.orb-lines-accent {
+  color: color(potion);
+}
+
+.c-orb {
+  position: relative;
+  width: 480px;
+  height: 480px;
+  transform: skewX(-40deg);
 }

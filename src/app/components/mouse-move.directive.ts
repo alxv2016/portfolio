@@ -1,30 +1,23 @@
-import {AfterViewInit, Directive, ElementRef, HostListener, Renderer2, ViewChild} from '@angular/core';
-import {fromEvent, map} from 'rxjs';
+import {AfterViewInit, Directive, ElementRef, HostListener, NgZone, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {fromEvent, map, Observable, switchMap, throttleTime} from 'rxjs';
 import {gsap} from 'gsap';
+import {ContentService} from '../services/content.service';
 
 @Directive({
   selector: '[appMouseMove]',
 })
-export class MouseMoveDirective implements AfterViewInit {
-  constructor(private render: Renderer2, private element: ElementRef) {}
+export class MouseMoveDirective implements OnInit, AfterViewInit {
+  $mouseMove!: Observable<any>;
+  parent = this.element.nativeElement.ownerDocument;
+  constructor(
+    private render: Renderer2,
+    private element: ElementRef,
+    private zone: NgZone,
+    private contentService: ContentService
+  ) {}
 
-  private handleMouse(el: HTMLElement, pos: any) {
-    const bounds = el.getBoundingClientRect();
-    const mousePos = {
-      x: pos.x - bounds.width / 2,
-      y: pos.y - bounds.height / 2,
-    };
-    gsap.to(el, {
-      x: mousePos.x,
-      y: mousePos.y,
-      opacity: 1,
-      ease: 'power4.out',
-    });
-  }
-
-  private handleTargets(els: any, cursor: any, pos: any) {
+  private powerMagnets(els: any, pos: any) {
     els.forEach((el: HTMLElement) => {
-      const innerEl = el.querySelector('.js-magnet');
       const bounds = el.getBoundingClientRect();
       const triggerDistance = bounds.width * 0.7;
       const elCenter = {
@@ -37,42 +30,85 @@ export class MouseMoveDirective implements AfterViewInit {
       };
       const angle = Math.atan2(elDistance.x, elDistance.y);
       const hypotenuse = Math.sqrt(elDistance.x * elDistance.x + elDistance.y * elDistance.y);
-      gsap.to(innerEl, {
+      gsap.to(el, {
         x: 0,
         y: 0,
         ease: 'back',
       });
-      this.render.removeClass(el, 'target--hover');
       if (hypotenuse < triggerDistance) {
-        gsap.to(cursor, {
-          opacity: 0,
-          ease: 'power4',
-        });
-        gsap.to(innerEl, {
+        gsap.to(el, {
           x: -(Math.sin(angle) * hypotenuse) / 2,
           y: -(Math.cos(angle) * hypotenuse) / 2,
           ease: 'power4.out',
         });
-        this.render.addClass(el, 'target--hover');
       }
     });
   }
 
-  ngAfterViewInit(): void {
-    const cursor = this.element.nativeElement.querySelector('.cursor');
-    const targets = this.element.nativeElement.querySelectorAll('.target');
-    const mouseMovement$ = fromEvent<MouseEvent>(window, 'mousemove').pipe(
-      map((ev: MouseEvent) => {
-        return {
-          x: ev.clientX,
-          y: ev.clientY,
-        };
-      })
-    );
+  private animateAbstract(lines: any, linesAccent: any, pos: any) {
+    const hypo = Math.sqrt(pos.x * pos.x + pos.y * pos.y);
+    const angle = Math.atan2(pos.x, pos.y);
+    const x = Math.sin(angle) * hypo;
+    const y = Math.cos(angle) * hypo;
 
-    mouseMovement$.subscribe((cursorPos) => {
-      this.handleMouse(cursor, cursorPos);
-      this.handleTargets(targets, cursor, cursorPos);
+    gsap.to(lines, {
+      strokeDashoffset: x / 2 - y / 2,
+      stagger: {
+        from: 'end',
+        each: 0.025,
+      },
+      ease: 'power4.out',
+    });
+
+    gsap.to(linesAccent, {
+      strokeDashoffset: x / 2 - y / 2,
+      stagger: {
+        from: 'end',
+        each: 0.03,
+      },
+      ease: 'power2.out',
+    });
+  }
+
+  ngOnInit(): void {
+    // Get mousemove event and elements outside of Angular's change detection for performance
+    this.zone.runOutsideAngular(() => {
+      this.$mouseMove = fromEvent<MouseEvent>(window, 'mousemove').pipe(
+        throttleTime(60),
+        switchMap((ev) => {
+          // switchmap to siteContent$ for to capture elements not yet loaded in DOM
+          return this.contentService.siteContent$.pipe(
+            map((_) => {
+              const targets = this.parent.querySelectorAll('.js-magnet');
+              const magnets = Array.from(targets);
+              return {x: ev.clientX, y: ev.clientY, magnets};
+            })
+          );
+        })
+      );
+    });
+  }
+
+  ngAfterViewInit(): void {
+    const lines = this.parent.querySelectorAll('.orb-lines > line');
+    const linesAccent = this.parent.querySelectorAll('.orb-lines-accent > line');
+    if (lines) {
+      gsap.set(lines, {
+        strokeDasharray: (i, target) => target.getTotalLength(),
+        strokeWidth: (i) => i / 2,
+      });
+      gsap.set(linesAccent, {
+        strokeDasharray: (i, target) => target.getTotalLength(),
+        strokeWidth: (i) => i / 2,
+      });
+    }
+    this.$mouseMove.subscribe((m) => {
+      if (m.magnets.length !== 0) {
+        this.powerMagnets(m.magnets, m);
+      }
+      if (lines && linesAccent) {
+        this.animateAbstract(lines, linesAccent, m);
+      }
     });
   }
 }

@@ -75,19 +75,3 @@
     background-color: color(orange);
   }
 }
-
-.c-orb-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  // color: blue;
-}
-
-.c-orb {
-  position: absolute;
-  right: 0;
-  width: 600px;
-  height: 600px;
-  transform: skewX(-30deg);
-}

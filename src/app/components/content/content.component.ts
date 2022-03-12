@@ -38,69 +38,7 @@ export class ContentComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngAfterViewInit(): void {
-    const orbLines = this.orbLine.map((l) => l.nativeElement);
-    const orbTL = gsap.timeline({
-      repeat: -1,
-    });
-
-    const bounds = this.orb.nativeElement.getBoundingClientRect();
-    const hypo = Math.sqrt(bounds.width * bounds.width + bounds.height * bounds.height);
-    const angle = Math.atan2(bounds.width, bounds.height);
-    const x = Math.sin(angle) * hypo;
-    const y = Math.cos(angle) * hypo;
-
-    const mouseMovement$ = fromEvent<MouseEvent>(window, 'mousemove').pipe(
-      throttleTime(60),
-      map((ev: MouseEvent) => {
-        return {
-          x: ev.clientX,
-          y: ev.clientY,
-        };
-      })
-    );
-
-    gsap.set(orbLines, {
-      strokeDasharray: (i, target) => target.getTotalLength(),
-      strokeDashoffset: (i, target) => target.getTotalLength(),
-      strokeWidth: (i, target) => i / 2,
-    });
-
-    mouseMovement$.subscribe((cursorPos) => {
-      const hypo = Math.sqrt(cursorPos.x * cursorPos.x + cursorPos.y * cursorPos.y);
-      const angle = Math.atan2(cursorPos.x, cursorPos.y);
-      const x = Math.sin(angle) * hypo;
-      const y = Math.cos(angle) * hypo;
-
-      gsap.to(orbLines, {
-        strokeDashoffset: (i, target) => {
-          return x - y;
-        },
-        stagger: 0.145,
-        ease: 'back',
-      });
-
-      console.log(x, y);
-    });
-
-    // orbTL.to(
-    //   orbLines,
-    //   {
-    //     strokeDashoffset: (i, target) => {
-    //       return x;
-    //     },
-    //     stagger: 0.145,
-    //     ease: 'sine.out',
-    //   }
-    // )
-    // .to(orbLines, {
-    //   strokeDashoffset: (i, target) => {
-    //     return y;
-    //   },
-    //   stagger: 0.145,
-    //   ease: 'sine.in',
-    // })
-  }
+  ngAfterViewInit(): void {}
 
   ngOnDestroy(): void {
     this.unsubscribe$.next(0);
