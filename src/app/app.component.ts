@@ -17,11 +17,12 @@ import {AlxvCollection} from './services/models/content.interface';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private unsubscribe$ = new Subject();
   siteContent?: AlxvCollection;
   @HostBinding('class') class = 'c-root';
   @ViewChild('darkModeToggle') darkModeToggle!: ElementRef;
+  @ViewChild('pixiCanvas') pixiCanvas!: ElementRef;
   constructor(private element: ElementRef, private render: Renderer2, private contentService: ContentService) {}
 
   ngOnInit(): void {
@@ -35,6 +36,8 @@ export class AppComponent implements OnInit, OnDestroy {
         this.siteContent = resp;
       });
   }
+
+  ngAfterViewInit(): void {}
 
   ngOnDestroy(): void {
     this.unsubscribe$.next(0);
