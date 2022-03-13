@@ -31,11 +31,8 @@
   display: block;
   line-height: $heading-line-height;
   font-weight: font-weight(bold);
-  font-size: $body--2;
+  font-size: $body--1;
   margin-bottom: $spacing--xs;
-  @include breakpoint(sm) {
-    font-size: $body--1;
-  }
   @include breakpoint(md) {
     font-size: $subtitle;
   }
@@ -44,14 +41,11 @@
 .headline {
   position: relative;
   font-weight: font-weight(black);
-  font-size: $title--2;
+  font-size: $large--title;
   line-height: $heading-line-height;
   margin-bottom: $spacing--2xl;
-  @include breakpoint(sm) {
-    font-size: $title--1;
-  }
   @include breakpoint(md) {
-    font-size: $large--title;
+    font-size: $huge--title;
   }
 }
 
@@ -60,6 +54,10 @@
   @include breakpoint(md) {
     font-size: $subtitle;
   }
+}
+
+strong {
+  font-weight: font-weight(bold);
 }
 
 .discipline {

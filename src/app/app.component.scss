@@ -27,8 +27,6 @@ main {
   width: 100%;
   height: 100%;
   display: none;
-  align-items: flex-end;
-  justify-content: center;
   overflow: hidden;
   color: var(--color-abstract);
   &::before {
@@ -42,9 +40,13 @@ main {
   }
   @include breakpoint(lg) {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-end;
   }
+}
+
+.orb-lines-bg {
+  opacity: 0.45;
 }
 
 .orb-lines {
@@ -59,5 +61,11 @@ main {
   position: relative;
   width: 480px;
   height: 480px;
-  transform: skewX(-40deg);
+  right: 24px;
+  margin-bottom: $layout--xl;
+  transform: skewX(-12deg);
+  svg {
+    width: inherit;
+    height: inherit;
+  }
 }
