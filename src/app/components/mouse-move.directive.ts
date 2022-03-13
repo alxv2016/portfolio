@@ -92,6 +92,7 @@ export class MouseMoveDirective implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     const lines = this.parent.querySelectorAll('.orb-lines > path');
     const linesAccent = this.parent.querySelectorAll('.orb-lines-accent > path');
+
     if (lines) {
       gsap.set(lines, {
         strokeDasharray: (i, target) => target.getTotalLength(),

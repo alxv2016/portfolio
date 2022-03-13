@@ -9,7 +9,7 @@ const initialState: AlxvCollection = {
   page_title: null,
   callout: null,
   headline: null,
-  disciplines: null,
+  discipline: null,
   content: null,
   content_callout: null,
   social_media_title: null,

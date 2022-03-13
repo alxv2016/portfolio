@@ -23,13 +23,9 @@ import {gsap} from 'gsap';
 export class ContentComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject();
   siteContent?: AlxvCollection;
-  app: any;
-  time = 0;
   @HostBinding('class') class = 'c-content';
-  @ViewChild('orb') orb!: ElementRef;
-  // @ViewChild('svgTest') svgTest!: ElementRef;
-  @ViewChildren('orbLineBG', {read: ElementRef}) orbLineBG!: QueryList<ElementRef>;
-  @ViewChildren('orbLine', {read: ElementRef}) orbLine!: QueryList<ElementRef>;
+  // @ViewChild('discipline') discipline!: ElementRef;
+  @ViewChildren('discipline', {read: ElementRef}) discipline!: QueryList<ElementRef>;
   constructor(private element: ElementRef, private render: Renderer2, private contentService: ContentService) {}
 
   ngOnInit(): void {

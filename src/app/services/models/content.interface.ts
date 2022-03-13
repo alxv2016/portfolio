@@ -31,7 +31,7 @@ export interface AlxvCollection {
   page_title: string | null;
   callout: string | null;
   headline: string | null;
-  disciplines: Discipline[] | null;
+  discipline: string | null;
   content: string | null;
   content_callout: string | null;
   social_media_title: string | null;
@@ -54,8 +54,4 @@ interface Socialmedialink {
   link_type: string;
   url: string;
   target: string;
-}
-
-interface Discipline {
-  discipline: string;
 }
