@@ -20,7 +20,7 @@
     left: 0;
     height: inherit;
     width: inherit;
-    background-color: rgba(black, 0.25);
+    background-color: rgba(black, 1);
     opacity: 0;
     will-change: opacity;
     transition: opacity 325ms ease;
@@ -36,10 +36,19 @@
   }
 }
 // Animate state
-:host-context(.c-bottom-sheet.c-bottom-sheet--animate .c-bottom-sheet-window) {
-  transform: none;
-  transition: transform 325ms ease-out;
-  visibility: visible;
+:host-context(.c-bottom-sheet--animate) {
+  .c-bottom-sheet-window {
+    visibility: visible;
+    transition: transform 275ms ease;
+  }
+}
+
+// Opened state
+:host-context(.c-bottom-sheet.c-bottom-sheet--visible) {
+  .c-bottom-sheet-window {
+    visibility: visible;
+    transform: none;
+  }
 }
 
 .c-bottom-sheet-window {

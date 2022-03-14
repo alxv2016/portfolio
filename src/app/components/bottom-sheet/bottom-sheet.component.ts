@@ -13,6 +13,7 @@ export class BottomSheetComponent implements OnInit, AfterViewInit {
   constructor(private element: ElementRef, private render: Renderer2) {
     this.openBottomSheet = this.openBottomSheet.bind(this);
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
+    this.closeBottomSheet = this.closeBottomSheet.bind(this);
   }
 
   private onTransitionEnd(ev: TransitionEvent) {
@@ -27,13 +28,12 @@ export class BottomSheetComponent implements OnInit, AfterViewInit {
       this.render.addClass(this.bottomSheet, 'c-bottom-sheet--visible');
       this.bottomSheet?.addEventListener('transitionend', this.onTransitionEnd);
     }
-    console.log(this.bottomSheet, e);
   }
 
   closeBottomSheet() {
     this.render.addClass(this.bottomSheet, 'c-bottom-sheet--animate');
     this.render.removeClass(this.bottomSheet, 'c-bottom-sheet--visible');
-    this.bottomSheet?.addEventListener('transitionend', this.onTransitionEnd);
+    this.bottomSheet!.addEventListener('transitionend', this.onTransitionEnd);
   }
 
   ngOnInit(): void {
@@ -41,13 +41,13 @@ export class BottomSheetComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.bottomSheet = this.element.nativeElement;
-    this.bottomSheet?.addEventListener('click', this.closeBottomSheet);
+    this.bottomSheet!.addEventListener('click', this.closeBottomSheet);
     this.bottomSheetWindow.nativeElement.addEventListener('click', (e: Event) => e.stopPropagation());
     const triggerBtn = this.parent.querySelector('.js-bs-trigger');
     if (triggerBtn) {
+      this.render.setAttribute(triggerBtn, 'aria-haspopup', 'true');
+      this.render.setAttribute(triggerBtn, 'aria-expanded', 'false');
       triggerBtn.addEventListener('click', this.openBottomSheet);
-      console.log(triggerBtn);
     }
   }
 }
