@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, HostBinding, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostBinding, NgZone, OnInit, Renderer2, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'c-bottom-sheet',
@@ -10,7 +10,7 @@ export class BottomSheetComponent implements OnInit, AfterViewInit {
   bottomSheet: HTMLElement | null = this.element.nativeElement;
   @HostBinding('class') class = 'c-bottom-sheet';
   @ViewChild('bottomSheetWindow') bottomSheetWindow!: ElementRef;
-  constructor(private element: ElementRef, private render: Renderer2) {
+  constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {
     this.openBottomSheet = this.openBottomSheet.bind(this);
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
     this.closeBottomSheet = this.closeBottomSheet.bind(this);
@@ -26,7 +26,7 @@ export class BottomSheetComponent implements OnInit, AfterViewInit {
     if (sourceBtn) {
       this.render.addClass(this.bottomSheet, 'c-bottom-sheet--animate');
       this.render.addClass(this.bottomSheet, 'c-bottom-sheet--visible');
-      this.bottomSheet?.addEventListener('transitionend', this.onTransitionEnd);
+      this.bottomSheet!.addEventListener('transitionend', this.onTransitionEnd);
     }
   }
 
@@ -41,13 +41,15 @@ export class BottomSheetComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.bottomSheet!.addEventListener('click', this.closeBottomSheet);
-    this.bottomSheetWindow.nativeElement.addEventListener('click', (e: Event) => e.stopPropagation());
     const triggerBtn = this.parent.querySelector('.js-bs-trigger');
-    if (triggerBtn) {
-      this.render.setAttribute(triggerBtn, 'aria-haspopup', 'true');
-      this.render.setAttribute(triggerBtn, 'aria-expanded', 'false');
-      triggerBtn.addEventListener('click', this.openBottomSheet);
-    }
+    this.zone.runOutsideAngular(() => {
+      this.bottomSheet!.addEventListener('click', this.closeBottomSheet);
+      this.bottomSheetWindow.nativeElement.addEventListener('click', (e: Event) => e.stopPropagation());
+      if (triggerBtn) {
+        this.render.setAttribute(triggerBtn, 'aria-haspopup', 'true');
+        this.render.setAttribute(triggerBtn, 'aria-expanded', 'false');
+        triggerBtn.addEventListener('click', this.openBottomSheet);
+      }
+    });
   }
 }
