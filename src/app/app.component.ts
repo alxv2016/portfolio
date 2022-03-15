@@ -7,8 +7,12 @@ import {
   OnInit,
   Renderer2,
   ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import {Subject, switchMap, takeUntil} from 'rxjs';
+import {NotificationDirective} from './components/notification/notification.directive';
+import {NotificationService} from './components/notification/notification.service';
+import {TesterComponent} from './components/tester/tester.component';
 import {ContentService} from './services/content.service';
 import {AlxvCollection} from './services/models/content.interface';
 
@@ -23,7 +27,13 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   @HostBinding('class') class = 'c-root';
   @ViewChild('darkModeToggle') darkModeToggle!: ElementRef;
   @ViewChild('pixiCanvas') pixiCanvas!: ElementRef;
-  constructor(private element: ElementRef, private render: Renderer2, private contentService: ContentService) {}
+  @ViewChild(NotificationDirective, {static: true}) notificationHost!: NotificationDirective;
+  constructor(
+    private element: ElementRef,
+    private render: Renderer2,
+    private contentService: ContentService,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.contentService
@@ -37,7 +47,14 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       });
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    console.log(this.notificationHost.viewContainerRef);
+    this.notificationService.containerElementViewRef = this.notificationHost.viewContainerRef;
+  }
+
+  testComponentRender() {
+    this.notificationService.newNotification(TesterComponent);
+  }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next(0);

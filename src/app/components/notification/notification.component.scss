@@ -1,0 +1,13 @@
+:host {
+  width: 95%;
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translate(-50%, -0%);
+}
+
+i {
+  position: relative;
+  left: calc(100% - 1.5rem);
+  top: 1.5rem;
+}
