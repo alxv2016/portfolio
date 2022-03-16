@@ -48,8 +48,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.notificationHost.viewContainerRef);
-    this.notificationService.containerElementViewRef = this.notificationHost.viewContainerRef;
+    this.notificationService.viewContainerRef = this.notificationHost.viewContainerRef;
   }
 
   testComponentRender() {
