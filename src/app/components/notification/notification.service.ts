@@ -5,11 +5,11 @@ import {NotificationModule} from './notification.module';
 @Injectable({providedIn: NotificationModule})
 export class NotificationService {
   // Our component's ref
-  componentRef!: ComponentRef<NotificationComponent>;
+  private componentRef!: ComponentRef<NotificationComponent>;
   // The view container's ref
-  viewContainerRef!: ViewContainerRef;
+  private viewContainerRef!: ViewContainerRef;
 
-  newNotification(childComponent: Type<any>) {
+  createNotification(childComponent: Type<any>): void {
     // If an instance already exist destroy it first
     if (this.componentRef) {
       this.componentRef.destroy();
@@ -19,6 +19,10 @@ export class NotificationService {
     this.insertChildComponent(childComponent);
     // Watch onClose subject to destroy component ref
     this.destroyComponent(this.componentRef);
+  }
+
+  hookOnHost(viewContainerRef: ViewContainerRef): void {
+    this.viewContainerRef = viewContainerRef;
   }
 
   private insertChildComponent(childComponent: Type<any>): void {
