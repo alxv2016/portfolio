@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   HostBinding,
+  Injector,
   OnDestroy,
   OnInit,
   Renderer2,
@@ -10,6 +11,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import {Subject, switchMap, takeUntil} from 'rxjs';
+import {BottomPaneDirective} from './components/bottom-pane/bottom-pane.directive';
 import {NotificationDirective} from './components/notification/notification.directive';
 import {NotificationService} from './components/notification/notification.service';
 import {TesterComponent} from './components/tester/tester.component';
@@ -28,6 +30,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('darkModeToggle') darkModeToggle!: ElementRef;
   @ViewChild('pixiCanvas') pixiCanvas!: ElementRef;
   @ViewChild(NotificationDirective, {static: true}) notificationHost!: NotificationDirective;
+  @ViewChild(BottomPaneDirective, {static: true}) bottomPaneHost!: BottomPaneDirective;
   constructor(
     private element: ElementRef,
     private render: Renderer2,
@@ -48,7 +51,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.notificationService.hookOnHost(this.notificationHost.viewContainerRef);
+    // this.notificationService.hookOnHost(this.bottomPaneHost.viewContainerRef);
   }
 
   testComponentRender() {

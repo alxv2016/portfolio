@@ -27,7 +27,7 @@ export class NotificationService {
 
   private insertChildComponent(childComponent: Type<any>): void {
     this.componentRef = this.viewContainerRef.createComponent(NotificationComponent);
-    this.componentRef.instance.childComponent = childComponent;
+    this.componentRef.instance.childComponentType = childComponent;
   }
 
   private destroyComponent(componentRef: ComponentRef<NotificationComponent>): void {

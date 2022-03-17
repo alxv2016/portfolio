@@ -6,6 +6,7 @@ import {SocialLinksComponent} from './social-links/social-links.component';
 import {FooterComponent} from './footer/footer.component';
 import {BottomSheetComponent} from './bottom-sheet/bottom-sheet.component';
 import {TesterComponent} from './tester/tester.component';
+import {BottomPaneModule} from './bottom-pane/bottom-pane.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import {TesterComponent} from './tester/tester.component';
     BottomSheetComponent,
     TesterComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, BottomPaneModule],
   exports: [
     HeaderComponent,
     ContentComponent,
