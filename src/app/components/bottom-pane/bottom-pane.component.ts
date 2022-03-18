@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   HostBinding,
+  HostListener,
   NgZone,
   OnDestroy,
   OnInit,
@@ -24,7 +25,8 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   _bottomPaneEvent$ = new BehaviorSubject<boolean>(false);
   bottomPane$ = this._bottomPaneEvent$.asObservable();
   parent: HTMLElement = this.element.nativeElement.parentElement;
-  bottomSheet: HTMLElement | null = this.element.nativeElement;
+  bottomSheet: HTMLElement = this.element.nativeElement;
+  _hostEvents: any[] = [];
   @HostBinding('class') class = 'c-bottom-pane';
   @ViewChild('bottomSheetWindow') bottomSheetWindow!: ElementRef;
   // Capture the element template where the child component will be inserted we let Angular know that it's a ViewContainerRef
@@ -40,7 +42,7 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     }
     requestAnimationFrame(() => {
       this.render.removeClass(this.bottomSheet, 'c-bottom-pane--animate');
-      this.bottomSheet?.removeEventListener('transitionend', this.onTransitionEnd);
+      this.bottomSheet.removeEventListener('transitionend', this.onTransitionEnd);
     });
   }
 
@@ -58,25 +60,34 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     requestAnimationFrame(() => {
       this.render.addClass(this.bottomSheet, 'c-bottom-pane--animate');
       this.render.addClass(this.bottomSheet, 'c-bottom-pane--visible');
-      this.bottomSheet!.addEventListener('transitionend', this.onTransitionEnd);
+      this.render.listen(this.bottomSheet, 'transitionend', this.onTransitionEnd);
     });
   }
 
   closeBottomSheet() {
     this.render.addClass(this.bottomSheet, 'c-bottom-pane--animate');
     this.render.removeClass(this.bottomSheet, 'c-bottom-pane--visible');
-    this.bottomSheet!.addEventListener('transitionend', (e) => this.onTransitionEnd(e, true));
+    this.render.listen(this.bottomSheet, 'transitionend', (e) => this.onTransitionEnd(e, true));
   }
 
   ngAfterViewInit(): void {
-    this.createComponent();
     this.zone.runOutsideAngular(() => {
-      this.bottomSheet!.addEventListener('click', this.closeBottomSheet);
-      this.bottomSheetWindow.nativeElement.addEventListener('click', (e: Event) => e.stopPropagation());
+      this.createComponent();
+      this._hostEvents.push(
+        this.render.listen(this.bottomSheet, 'click', this.closeBottomSheet),
+        this.render.listen(this.bottomSheetWindow.nativeElement, 'click', (e: MouseEvent) => e.stopPropagation()),
+        this.render.listen('window', 'keydown', (e: KeyboardEvent) => {
+          console.log(e);
+          if (e.key === 'Escape') {
+            this.closeBottomSheet();
+          }
+        })
+      );
     });
   }
 
   ngOnDestroy(): void {
+    this._hostEvents.forEach((fn) => fn());
     this.destroyComponent();
   }
 }
