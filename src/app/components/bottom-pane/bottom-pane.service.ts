@@ -22,6 +22,7 @@ export class BottomPaneService {
       this.componentRef.instance._bottomPaneEvent$.next(false);
     }
     // Create new instance of child component
+    console.log('Component created');
     this.insertChildComponent(childComponent);
     this.componentRef.instance._bottomPaneEvent$.next(true);
     // Watch onClose subject to destroy component ref
