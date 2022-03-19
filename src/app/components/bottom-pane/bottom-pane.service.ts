@@ -15,16 +15,19 @@ export class BottomPaneService {
   @ViewChild(BottomPaneDirective, {static: true}) bottomPaneHost!: BottomPaneDirective;
   constructor() {}
 
-  createBottomPane(childComponent: Type<any>): void {
+  createBottomPane(childComponent: Type<any>, title?: string): void {
     // If an instance already exist destroy it first
     if (this.componentRef) {
       this.componentRef.destroy();
-      this.componentRef.instance._bottomPaneEvent$.next(false);
+      this.componentRef.instance.bottomPaneEvent$.next(false);
     }
     // Create new instance of child component
     console.log('Component created');
     this.insertChildComponent(childComponent);
-    this.componentRef.instance._bottomPaneEvent$.next(true);
+    if (title) {
+      this.componentRef.instance.hostTitle = title;
+    }
+    this.componentRef.instance.bottomPaneEvent$.next(true);
     // Watch onClose subject to destroy component ref
     this.destroyComponent(this.componentRef);
   }

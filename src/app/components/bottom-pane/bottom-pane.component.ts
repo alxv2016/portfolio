@@ -22,12 +22,14 @@ import {BehaviorSubject, first, Subject} from 'rxjs';
 export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   // Child Component Ref
   childComponentType!: Type<any>;
-  _bottomPaneEvent$ = new BehaviorSubject<boolean>(false);
-  bottomPane$ = this._bottomPaneEvent$.asObservable();
-  parent: HTMLElement = this.element.nativeElement.parentElement;
-  bottomSheet: HTMLElement = this.element.nativeElement;
-  elementClicked!: HTMLElement;
-  _hostEvents: any[] = [];
+  bottomPaneEvent$ = new BehaviorSubject<boolean>(false);
+  bottomPane$ = this.bottomPaneEvent$.asObservable();
+  hostTitle?: null | string;
+  hostElement: HTMLElement = this.element.nativeElement;
+  triggerElement!: HTMLElement;
+  transitionEventHandler: any;
+  keydownEventHandler: any;
+  clickEventHandlers: any[] = [];
   @HostBinding('class') class = 'c-bottom-pane';
   @ViewChild('bottomSheetWindow') bottomSheetWindow!: ElementRef;
   // Capture the element template where the child component will be inserted we let Angular know that it's a ViewContainerRef
@@ -35,41 +37,30 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
     this.closeBottomSheet = this.closeBottomSheet.bind(this);
-    this.focustTrap = this.focustTrap.bind(this);
+    this.focusTrap = this.focusTrap.bind(this);
   }
-
-  private focustTrap(ev: KeyboardEvent) {
-    const ownerDocument = this.element.nativeElement.ownerDocument;
-    const focusableEls = this.bottomSheet.querySelectorAll<HTMLElement>(
-      'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
-    );
-    const firstFocusEl = focusableEls[0];
-    const lastFocusEl = focusableEls[focusableEls.length - 1];
-    firstFocusEl.focus();
-
-    function handleBackTab() {
-      if (ownerDocument.activeElement === firstFocusEl) {
+  // Controls Bottom Pane focus trap
+  private focusTrap(ev: KeyboardEvent, ownerDocument: Document, firstTabStop: HTMLElement, lastTabStob: HTMLElement) {
+    // Focus trap
+    function tabPrevious() {
+      if (ownerDocument.activeElement === firstTabStop) {
         ev.preventDefault();
-        lastFocusEl.focus();
+        lastTabStob.focus();
       }
     }
-    function handleForwardTab() {
-      if (ownerDocument.activeElement === lastFocusEl) {
+    function tabNext() {
+      if (ownerDocument.activeElement === lastTabStob) {
         ev.preventDefault();
-        firstFocusEl.focus();
+        firstTabStop.focus();
       }
     }
 
     switch (ev.key) {
       case 'Tab':
-        if (focusableEls.length === 1) {
-          ev.preventDefault();
-          break;
-        }
         if (ev.shiftKey) {
-          handleBackTab();
+          tabPrevious();
         } else {
-          handleForwardTab();
+          tabNext();
         }
         break;
       case 'Escape':
@@ -79,59 +70,78 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
         break;
     }
   }
-
-  private onTransitionEnd(ev: TransitionEvent, destroy?: boolean) {
+  // Listens for transitionend event
+  private onTransitionEnd(ev: TransitionEvent, destroy: boolean = false) {
     if (destroy) {
       this.destroyComponent();
     }
     requestAnimationFrame(() => {
-      this.render.removeClass(this.bottomSheet, 'c-bottom-pane--animate');
-      this.bottomSheet.removeEventListener('transitionend', this.onTransitionEnd);
+      this.render.removeClass(this.hostElement, 'c-bottom-pane--animate');
+      this.transitionEventHandler();
     });
   }
 
   private destroyComponent(): void {
     if (this.componentPortal) {
       this.componentPortal.clear();
-      this._bottomPaneEvent$.next(false);
     }
+    this.keydownEventHandler();
+    this.bottomPaneEvent$.next(false);
   }
 
   private createComponent(): void {
+    // Save element clicked
     const ownerDocument = this.element.nativeElement.ownerDocument;
+    this.triggerElement = ownerDocument.activeElement;
     // We use the element template to create and insert the child component
     this.componentPortal.clear();
     this.componentPortal.createComponent(this.childComponentType);
-    // Capture element clicked
-    this.elementClicked = ownerDocument.activeElement;
-
     requestAnimationFrame(() => {
-      this.render.addClass(this.bottomSheet, 'c-bottom-pane--animate');
-      this.render.addClass(this.bottomSheet, 'c-bottom-pane--visible');
-      this.render.listen(this.bottomSheet, 'transitionend', this.onTransitionEnd);
+      this.render.addClass(this.hostElement, 'c-bottom-pane--animate');
+      this.render.addClass(this.hostElement, 'c-bottom-pane--visible');
+      this.transitionEventHandler = this.render.listen(this.hostElement, 'transitionend', this.onTransitionEnd);
+    });
+    // Listen to keydown events
+    // Focus first element
+    const focusElsNodeList = this.hostElement.querySelectorAll<HTMLElement>(
+      'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
+    );
+    // Convert NodeList to Array
+    const focusEls = Array.from<HTMLElement>(focusElsNodeList);
+    const firstTabStop = focusEls[0];
+    const lastTabStob = focusEls[focusEls.length - 1];
+    this.keydownEventHandler = this.render.listen('window', 'keydown', (e) =>
+      this.focusTrap(e, ownerDocument, firstTabStop, lastTabStob)
+    );
+    // Focus first element after transition ends - visibility initially hidden
+    const focusEvent = this.render.listen(this.bottomSheetWindow.nativeElement, 'transitionend', (e) => {
+      firstTabStop.focus();
+      focusEvent();
     });
   }
-
+  // Close the modal
   closeBottomSheet() {
-    this.render.addClass(this.bottomSheet, 'c-bottom-pane--animate');
-    this.render.removeClass(this.bottomSheet, 'c-bottom-pane--visible');
-    this.render.listen(this.bottomSheet, 'transitionend', (e) => this.onTransitionEnd(e, true));
-    this.elementClicked.focus();
+    this.render.addClass(this.hostElement, 'c-bottom-pane--animate');
+    this.render.removeClass(this.hostElement, 'c-bottom-pane--visible');
+    this.transitionEventHandler = this.render.listen(this.hostElement, 'transitionend', (e) =>
+      this.onTransitionEnd(e, true)
+    );
+    this.triggerElement.focus();
   }
 
   ngAfterViewInit(): void {
+    this.render.setAttribute(this.hostElement, 'tabIndex', '-1');
     this.zone.runOutsideAngular(() => {
       this.createComponent();
-      this._hostEvents.push(
-        this.render.listen(this.bottomSheet, 'click', this.closeBottomSheet),
-        this.render.listen(this.bottomSheetWindow.nativeElement, 'click', (e: MouseEvent) => e.stopPropagation()),
-        this.render.listen('window', 'keydown', this.focustTrap)
+      this.clickEventHandlers.push(
+        this.render.listen(this.hostElement, 'click', this.closeBottomSheet),
+        this.render.listen(this.bottomSheetWindow.nativeElement, 'click', (e: MouseEvent) => e.stopPropagation())
       );
     });
   }
 
   ngOnDestroy(): void {
-    this._hostEvents.forEach((fn) => fn());
+    this.clickEventHandlers.forEach((fn) => fn());
     this.destroyComponent();
   }
 }
