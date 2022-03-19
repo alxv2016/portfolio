@@ -12,7 +12,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject, first, Subject} from 'rxjs';
 
 @Component({
   selector: 'c-bottom-pane',
@@ -35,6 +35,7 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
     this.closeBottomSheet = this.closeBottomSheet.bind(this);
+    this.focustTrap = this.focustTrap.bind(this);
   }
 
   private focustTrap(ev: KeyboardEvent) {
@@ -44,24 +45,38 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     );
     const firstFocusEl = focusableEls[0];
     const lastFocusEl = focusableEls[focusableEls.length - 1];
-    const tabbed = ev.key === 'Tab';
+    firstFocusEl.focus();
 
-    if (!tabbed) {
-      return;
+    function handleBackTab() {
+      if (ownerDocument.activeElement === firstFocusEl) {
+        ev.preventDefault();
+        lastFocusEl.focus();
+      }
+    }
+    function handleForwardTab() {
+      if (ownerDocument.activeElement === lastFocusEl) {
+        ev.preventDefault();
+        firstFocusEl.focus();
+      }
     }
 
-    if (ev.shiftKey) {
-      // Shift Tabbed
-      if (ownerDocument.activeElement === firstFocusEl) {
-        lastFocusEl.focus();
-        ev.preventDefault();
-      }
-    } else {
-      // Tabbeb
-      if (ownerDocument.activeElement === lastFocusEl) {
-        firstFocusEl.focus();
-        ev.preventDefault();
-      }
+    switch (ev.key) {
+      case 'Tab':
+        if (focusableEls.length === 1) {
+          ev.preventDefault();
+          break;
+        }
+        if (ev.shiftKey) {
+          handleBackTab();
+        } else {
+          handleForwardTab();
+        }
+        break;
+      case 'Escape':
+        this.closeBottomSheet();
+        break;
+      default:
+        break;
     }
   }
 
@@ -83,16 +98,12 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   }
 
   private createComponent(): void {
+    const ownerDocument = this.element.nativeElement.ownerDocument;
     // We use the element template to create and insert the child component
     this.componentPortal.clear();
     this.componentPortal.createComponent(this.childComponentType);
-    this.bottomSheet.tabIndex = 0;
-    this.bottomSheet.focus();
-    this._hostEvents.push(
-      this.render.listen(this.element.nativeElement.parentElement, 'click', (e) => {
-        this.elementClicked = e.target;
-      })
-    );
+    // Capture element clicked
+    this.elementClicked = ownerDocument.activeElement;
 
     requestAnimationFrame(() => {
       this.render.addClass(this.bottomSheet, 'c-bottom-pane--animate');
@@ -114,12 +125,7 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
       this._hostEvents.push(
         this.render.listen(this.bottomSheet, 'click', this.closeBottomSheet),
         this.render.listen(this.bottomSheetWindow.nativeElement, 'click', (e: MouseEvent) => e.stopPropagation()),
-        this.render.listen('window', 'keydown', (e: KeyboardEvent) => {
-          if (e.key === 'Escape') {
-            this.closeBottomSheet();
-          }
-          this.focustTrap(e);
-        })
+        this.render.listen('window', 'keydown', this.focustTrap)
       );
     });
   }

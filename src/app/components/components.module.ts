@@ -4,27 +4,12 @@ import {HeaderComponent} from './header/header.component';
 import {ContentComponent} from './content/content.component';
 import {SocialLinksComponent} from './social-links/social-links.component';
 import {FooterComponent} from './footer/footer.component';
-import {BottomSheetComponent} from './bottom-sheet/bottom-sheet.component';
 import {TesterComponent} from './tester/tester.component';
 import {BottomPaneModule} from './bottom-pane/bottom-pane.module';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    ContentComponent,
-    SocialLinksComponent,
-    FooterComponent,
-    BottomSheetComponent,
-    TesterComponent,
-  ],
+  declarations: [HeaderComponent, ContentComponent, SocialLinksComponent, FooterComponent, TesterComponent],
   imports: [CommonModule, BottomPaneModule],
-  exports: [
-    HeaderComponent,
-    ContentComponent,
-    SocialLinksComponent,
-    FooterComponent,
-    BottomSheetComponent,
-    TesterComponent,
-  ],
+  exports: [HeaderComponent, ContentComponent, SocialLinksComponent, FooterComponent, TesterComponent],
 })
 export class ComponentsModule {}
