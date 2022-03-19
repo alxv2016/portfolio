@@ -43,7 +43,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openBottomPane(): void {
-    this.bottomPaneService.createBottomPane(TesterComponent, 'Hello World from Footer');
+    this.bottomPaneService.createBottomPane(TesterComponent);
   }
 
   ngOnDestroy(): void {
