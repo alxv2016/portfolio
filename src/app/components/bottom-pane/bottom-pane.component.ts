@@ -26,6 +26,7 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   bottomPane$ = this._bottomPaneEvent$.asObservable();
   parent: HTMLElement = this.element.nativeElement.parentElement;
   bottomSheet: HTMLElement = this.element.nativeElement;
+  elementClicked!: HTMLElement;
   _hostEvents: any[] = [];
   @HostBinding('class') class = 'c-bottom-pane';
   @ViewChild('bottomSheetWindow') bottomSheetWindow!: ElementRef;
@@ -34,6 +35,34 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
     this.closeBottomSheet = this.closeBottomSheet.bind(this);
+  }
+
+  private focustTrap(ev: KeyboardEvent) {
+    const ownerDocument = this.element.nativeElement.ownerDocument;
+    const focusableEls = this.bottomSheet.querySelectorAll<HTMLElement>(
+      'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
+    );
+    const firstFocusEl = focusableEls[0];
+    const lastFocusEl = focusableEls[focusableEls.length - 1];
+    const tabbed = ev.key === 'Tab';
+
+    if (!tabbed) {
+      return;
+    }
+
+    if (ev.shiftKey) {
+      // Shift Tabbed
+      if (ownerDocument.activeElement === firstFocusEl) {
+        lastFocusEl.focus();
+        ev.preventDefault();
+      }
+    } else {
+      // Tabbeb
+      if (ownerDocument.activeElement === lastFocusEl) {
+        firstFocusEl.focus();
+        ev.preventDefault();
+      }
+    }
   }
 
   private onTransitionEnd(ev: TransitionEvent, destroy?: boolean) {
@@ -57,6 +86,14 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     // We use the element template to create and insert the child component
     this.componentPortal.clear();
     this.componentPortal.createComponent(this.childComponentType);
+    this.bottomSheet.tabIndex = 0;
+    this.bottomSheet.focus();
+    this._hostEvents.push(
+      this.render.listen(this.element.nativeElement.parentElement, 'click', (e) => {
+        this.elementClicked = e.target;
+      })
+    );
+
     requestAnimationFrame(() => {
       this.render.addClass(this.bottomSheet, 'c-bottom-pane--animate');
       this.render.addClass(this.bottomSheet, 'c-bottom-pane--visible');
@@ -68,6 +105,7 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     this.render.addClass(this.bottomSheet, 'c-bottom-pane--animate');
     this.render.removeClass(this.bottomSheet, 'c-bottom-pane--visible');
     this.render.listen(this.bottomSheet, 'transitionend', (e) => this.onTransitionEnd(e, true));
+    this.elementClicked.focus();
   }
 
   ngAfterViewInit(): void {
@@ -77,10 +115,10 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
         this.render.listen(this.bottomSheet, 'click', this.closeBottomSheet),
         this.render.listen(this.bottomSheetWindow.nativeElement, 'click', (e: MouseEvent) => e.stopPropagation()),
         this.render.listen('window', 'keydown', (e: KeyboardEvent) => {
-          console.log(e);
           if (e.key === 'Escape') {
             this.closeBottomSheet();
           }
+          this.focustTrap(e);
         })
       );
     });
