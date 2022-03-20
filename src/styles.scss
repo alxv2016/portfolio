@@ -26,6 +26,10 @@ body.dark {
   --color-clock-digit-accent: #{color(hotter)};
 }
 
+body.overlay {
+  overflow: hidden;
+}
+
 // Utilities
 .sr-only:not(:focus):not(:active) {
   clip: rect(0 0 0 0);

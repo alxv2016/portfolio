@@ -7,6 +7,7 @@
   height: 100%;
   width: 100%;
   margin-top: $layout--lg;
+  user-select: none;
   @include breakpoint(sm) {
     margin-top: $layout--xl;
   }
@@ -40,11 +41,17 @@
 
 .headline {
   position: relative;
-  font-weight: font-weight(black);
-  font-size: $large--title;
+  font-weight: font-weight('black');
+  font-size: $title--2;
   line-height: $heading-line-height;
   margin-bottom: $spacing--2xl;
+  @include breakpoint(sm) {
+    font-size: $title--1;
+  }
   @include breakpoint(md) {
+    font-size: $large--title;
+  }
+  @include breakpoint(lg) {
     font-size: $huge--title;
   }
 }

@@ -61,7 +61,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     switch (true) {
       case link.link_id === 'about':
         console.log('about');
-        this.bottomPaneService.createBottomPane(AboutContentComponent, link.link);
+        this.bottomPaneService.createBottomPane(AboutContentComponent, link.link, this.siteContent);
         break;
       case link.link_id === 'playground':
         console.log('playground');

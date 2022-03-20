@@ -2,10 +2,10 @@
   <h2 class="sr-only">{{ siteContent?.navigation_title }}</h2>
   <ul class="c-footer__list">
     <li class="c-footer__list-item">
-      <button class="c-footer-link js-magnet" (click)="openClock()">{{ timeNow }}</button>
+      <button class="c-footer-link" (click)="openClock()">{{ timeNow }}</button>
     </li>
     <li class="c-footer__list-item" *ngFor="let link of siteContent?.site_links">
-      <button class="c-footer-link js-magnet" (click)="openBottomPane(link)">{{ link.link }}</button>
+      <button class="c-footer-link" (click)="openBottomPane(link)">{{ link.link }}</button>
     </li>
   </ul>
 </nav>

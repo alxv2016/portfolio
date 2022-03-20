@@ -1,6 +1,8 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
+  ComponentRef,
   ElementRef,
   HostBinding,
   HostListener,
@@ -22,6 +24,7 @@ import {BehaviorSubject, first, Subject} from 'rxjs';
 export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   // Child Component Ref
   childComponentType!: Type<any>;
+  private childComponent?: ComponentRef<any> | null = null;
   bottomPaneEvent$ = new BehaviorSubject<boolean>(false);
   bottomPane$ = this.bottomPaneEvent$.asObservable();
   hostTitle?: null | string;
@@ -30,11 +33,17 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   transitionEventHandler: any;
   keydownEventHandler: any;
   clickEventHandlers: any[] = [];
+  contentData: any = null;
   @HostBinding('class') class = 'c-bottom-pane';
   @ViewChild('bottomSheetWindow') bottomSheetWindow!: ElementRef;
   // Capture the element template where the child component will be inserted we let Angular know that it's a ViewContainerRef
   @ViewChild('componentPortal', {read: ViewContainerRef, static: true}) componentPortal!: ViewContainerRef;
-  constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {
+  constructor(
+    private element: ElementRef,
+    private render: Renderer2,
+    private zone: NgZone,
+    private cdr: ChangeDetectorRef
+  ) {
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
     this.closeBottomSheet = this.closeBottomSheet.bind(this);
     this.focusTrap = this.focusTrap.bind(this);
@@ -85,6 +94,9 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     if (this.componentPortal) {
       this.componentPortal.clear();
     }
+    if (this.childComponent) {
+      this.childComponent.changeDetectorRef.detach();
+    }
     this.keydownEventHandler();
     this.bottomPaneEvent$.next(false);
   }
@@ -92,13 +104,17 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   private createComponent(): void {
     // Save element clicked
     const ownerDocument = this.element.nativeElement.ownerDocument;
+    const body = ownerDocument.querySelector('body');
     this.triggerElement = ownerDocument.activeElement;
     // We use the element template to create and insert the child component
     this.componentPortal.clear();
-    this.componentPortal.createComponent(this.childComponentType);
+    this.childComponent = this.componentPortal.createComponent(this.childComponentType);
+    this.childComponent.instance.data = this.contentData;
+    this.childComponent.changeDetectorRef.detectChanges();
     requestAnimationFrame(() => {
       this.render.addClass(this.hostElement, 'c-bottom-pane--animate');
       this.render.addClass(this.hostElement, 'c-bottom-pane--visible');
+      this.render.addClass(body, 'overlay');
       this.transitionEventHandler = this.render.listen(this.hostElement, 'transitionend', this.onTransitionEnd);
     });
     // Listen to keydown events
@@ -121,8 +137,11 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   }
   // Close the modal
   closeBottomSheet() {
+    const ownerDocument = this.element.nativeElement.ownerDocument;
+    const body = ownerDocument.querySelector('body');
     this.render.addClass(this.hostElement, 'c-bottom-pane--animate');
     this.render.removeClass(this.hostElement, 'c-bottom-pane--visible');
+    this.render.removeClass(body, 'overlay');
     this.transitionEventHandler = this.render.listen(this.hostElement, 'transitionend', (e) =>
       this.onTransitionEnd(e, true)
     );
@@ -142,6 +161,7 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.clickEventHandlers.forEach((fn) => fn());
+
     this.destroyComponent();
   }
 }

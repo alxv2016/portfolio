@@ -1,4 +1,19 @@
-import {AfterViewInit, Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  SimpleChanges,
+} from '@angular/core';
 import {Subject, takeUntil} from 'rxjs';
 import {ContentService} from 'src/app/services/content.service';
 import {AlxvCollection} from 'src/app/services/models/content.interface';
@@ -8,17 +23,22 @@ import {AlxvCollection} from 'src/app/services/models/content.interface';
   templateUrl: './about-content.component.html',
   styleUrls: ['./about-content.component.scss'],
 })
-export class AboutContentComponent implements OnInit, OnDestroy {
+export class AboutContentComponent implements OnInit, OnDestroy, AfterViewInit {
   private unsubscribe$ = new Subject();
-  siteContent?: AlxvCollection;
-  @HostBinding('class') class = 'c-about-content';
-  constructor(private contentService: ContentService) {}
+  contentCheck = false;
+  @Input() data: any;
+  constructor(
+    private cd: ChangeDetectorRef,
+    private contentService: ContentService,
+    private render: Renderer2,
+    private element: ElementRef
+  ) {}
 
   ngOnInit(): void {
-    this.contentService.siteContent$.pipe(takeUntil(this.unsubscribe$)).subscribe((resp) => {
-      this.siteContent = resp;
-    });
+    this.render.addClass(this.element.nativeElement, 'c-about-content');
   }
+
+  ngAfterViewInit(): void {}
 
   ngOnDestroy(): void {
     this.unsubscribe$.next(0);

@@ -14,7 +14,6 @@ import {Subject, switchMap, takeUntil} from 'rxjs';
 import {BottomPaneDirective} from './components/bottom-pane/bottom-pane.directive';
 import {NotificationDirective} from './components/notification/notification.directive';
 import {NotificationService} from './components/notification/notification.service';
-import {TesterComponent} from './components/tester/tester.component';
 import {ContentService} from './services/content.service';
 import {AlxvCollection} from './services/models/content.interface';
 
@@ -52,10 +51,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     // this.notificationService.hookOnHost(this.bottomPaneHost.viewContainerRef);
-  }
-
-  testComponentRender() {
-    this.notificationService.createNotification(TesterComponent);
   }
 
   ngOnDestroy(): void {
