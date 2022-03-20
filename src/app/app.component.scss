@@ -69,3 +69,22 @@ main {
     height: inherit;
   }
 }
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 280px;
+  height: 280px;
+  background-color: white;
+  border-radius: 100%;
+  opacity: 0;
+  transform-origin: center center;
+  mix-blend-mode: difference;
+  backface-visibility: hidden;
+  visibility: hidden;
+  @include breakpoint(lg) {
+    visibility: visible;
+  }
+}

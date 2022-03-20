@@ -12,7 +12,6 @@ import {Subject, takeUntil} from 'rxjs';
 import {AppComponent} from 'src/app/app.component';
 import {ContentService} from 'src/app/services/content.service';
 import {AlxvCollection} from 'src/app/services/models/content.interface';
-import {BottomPaneDirective} from '../bottom-pane/bottom-pane.directive';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import {TesterComponent} from '../tester/tester.component';
 
