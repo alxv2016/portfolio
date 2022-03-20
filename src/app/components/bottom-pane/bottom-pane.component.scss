@@ -21,7 +21,7 @@
     left: 0;
     height: inherit;
     width: inherit;
-    background-color: rgba(black, 0.75);
+    @include frosted-glass(color(void), 0.125);
     will-change: opacity;
     opacity: 0;
     transition: opacity 275ms 75ms ease;
@@ -56,8 +56,8 @@
   max-width: 968px;
   height: 100%;
   max-height: 80%;
-  color: black;
-  background-color: white;
+  color: currentColor;
+  background-color: var(--color-bottom-pane-bg);
   border-top-left-radius: $spacing--lg;
   border-top-right-radius: $spacing--lg;
   overflow: hidden;
@@ -73,7 +73,7 @@
     width: inherit;
     height: inherit;
     border-radius: inherit;
-    @include elevate-5(black, 0.075);
+    @include elevate-5(color(void), 0.075);
   }
 
   &__header {
@@ -131,7 +131,8 @@
       min-width: 88px;
       height: inherit;
       border-radius: 4px;
-      background-color: rgba(black, 0.25);
+      background-color: currentColor;
+      opacity: 0.145;
     }
   }
 }
@@ -140,6 +141,7 @@
   position: relative;
   font-weight: font-weight('bold');
   font-size: $subtitle;
+  color: currentColor;
   margin: 0;
   margin-top: $spacing--md;
   @include breakpoint(md) {
@@ -154,7 +156,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
+  color: currentColor;
   height: 44px;
   width: 44px;
   border-radius: 100%;
@@ -171,5 +173,13 @@
   svg {
     height: 24px;
     width: 24px;
+  }
+}
+
+body.dark {
+  :host-context(.c-bottom-pane) {
+    &::before {
+      @include frosted-glass(color(void), 0.65);
+    }
   }
 }

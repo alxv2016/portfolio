@@ -12,12 +12,18 @@
   --color-bg: #{color(mercury)};
   --color-type: #{color(corbeau)};
   --color-abstract: #{color(forest)};
+  --color-bottom-pane-bg: #{color(mercury)};
+  --color-clock-digits: #{color(sabbath)};
+  --color-clock-digit-accent: #{color(hotter)};
 }
 
 body.dark {
   --color-bg: #{color(corbeau)};
   --color-type: #{color(mercury)};
   --color-abstract: #{color(forest)};
+  --color-bottom-pane-bg: #{color(void)};
+  --color-clock-digits: #{color(baby)};
+  --color-clock-digit-accent: #{color(hotter)};
 }
 
 // Utilities

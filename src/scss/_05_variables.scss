@@ -49,9 +49,13 @@ $colors: (
   orange: #ffb800,
   mercury: #eeeceb,
   corbeau: #13112a,
+  void: #121219,
   forest: #3a4335,
   potion: #b2d148,
   atomic: #ec9d71,
+  sabbath: #240b28,
+  hotter: #e8525a,
+  baby: #e1c4f3,
 ) !default;
 // Type scale
 // Using a modular type scale we define our font size in em units for responsive scaling
@@ -70,11 +74,8 @@ $large--title: 2.986rem; //(2.489 * 1.2) 47px
 $huge--title: 3.58rem; // (2.968 * 1.2) 57px
 $headliner--1: 4.3rem; //68px;
 $headliner--2: 5.16rem; //82.56px
-$clock-digit--xs: 7.43rem;
 $clock-digit--sm: 8.916rem;
 $clock-digit--md: 12.839rem;
-$clock-digit--lg: 15.407rem;
-$clock-digit--xl: 18.488rem;
 // Spacing scale
 $spacing--2xs: 0.125rem; // 2px
 $spacing--xs: 0.25rem; // 4px

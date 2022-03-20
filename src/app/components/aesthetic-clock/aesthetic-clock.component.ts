@@ -28,6 +28,7 @@ export class AestheticClockComponent implements OnInit, AfterViewInit {
   hours?: string | null;
   todaysDate?: string | null;
   meridian?: string | null;
+  initial = -10;
   @ViewChildren('digit', {read: ElementRef}) digit!: QueryList<ElementRef>;
   @ViewChildren('colon', {read: ElementRef}) colon!: QueryList<ElementRef>;
   constructor(private element: ElementRef, private render: Renderer2, private ngZone: NgZone) {
@@ -48,53 +49,24 @@ export class AestheticClockComponent implements OnInit, AfterViewInit {
     this.hours = now.format('hh');
     this.meridian = now.format('A');
     requestAnimationFrame(this.initClock);
+    const time = Math.floor(Number(this.seconds)) * 10;
+    let sec = time % 30;
+    this.initGSAP(sec);
   }
 
-  private initGSAP(): void {
+  private initGSAP(time: number): void {
     const colons = this.colon.map((c) => c.nativeElement);
-    const digits = this.digit.map((d) => d.nativeElement);
-    const clockTL = gsap.timeline({
-      repeat: -1,
+    // const digits = this.digit.map((d) => d.nativeElement);
+    gsap.to(colons, {
+      xPercent: Math.floor(Math.cos(time) * 100),
+      yPercent: Math.floor(Math.sin(time) * 100) * -1,
+      ease: 'back',
+      stagger: 0.125,
     });
-
-    clockTL
-      .fromTo(
-        digits,
-        {
-          yPercent: -20,
-        },
-        {
-          yPercent: 20,
-          stagger: {
-            each: 0.25,
-            from: 'end',
-          },
-          duration: 2,
-        }
-      )
-      .to(
-        digits,
-        {
-          yPercent: -20,
-          stagger: {
-            each: 0.25,
-            from: 'end',
-          },
-          duration: 2,
-        },
-        1.55
-      );
-    // .to(colons, {
-    //   xPercent: Math.floor(Math.cos(count) * 80),
-    //   yPercent: Math.floor(Math.sin(count) * 80) * -1,
-    //   ease: 'back',
-    //   stagger: 0.125,
-    // });
   }
 
   ngAfterViewInit(): void {
     this.ngZone.runOutsideAngular(() => {
-      this.initGSAP();
       requestAnimationFrame(this.initClock);
     });
   }
