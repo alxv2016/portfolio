@@ -40,7 +40,8 @@ export interface AlxvCollection {
   site_links: Sitelink[] | null;
 }
 
-interface Sitelink {
+export interface Sitelink {
+  link_id: string;
   link: string;
 }
 

@@ -5,7 +5,7 @@
       <button class="c-footer-link js-magnet" (click)="openClock()">{{ timeNow }}</button>
     </li>
     <li class="c-footer__list-item" *ngFor="let link of siteContent?.site_links">
-      <button class="c-footer-link js-magnet" (click)="openBottomPane()">{{ link.link }}</button>
+      <button class="c-footer-link js-magnet" (click)="openBottomPane(link)">{{ link.link }}</button>
     </li>
   </ul>
 </nav>

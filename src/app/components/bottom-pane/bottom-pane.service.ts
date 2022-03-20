@@ -22,7 +22,6 @@ export class BottomPaneService {
       this.componentRef.instance.bottomPaneEvent$.next(false);
     }
     // Create new instance of child component
-    console.log('Component created');
     this.insertChildComponent(childComponent);
     if (title) {
       this.componentRef.instance.hostTitle = title;

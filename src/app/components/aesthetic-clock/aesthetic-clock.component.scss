@@ -40,7 +40,7 @@
   flex-shrink: 0;
   width: 200px;
   @include breakpoint(sm) {
-    width: 260px;
+    width: 240px;
   }
 
   &__container {
@@ -127,7 +127,7 @@
 
   &__label {
     font-size: $title--3;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1;
     color: var(--color-clock-digits);
     @include breakpoint(sm) {
@@ -139,6 +139,7 @@
 .c-clock-message {
   font-size: $body--1;
   font-weight: font-weight(bold);
+  color: var(--color-clock-digits);
 }
 
 .c-clock-date-label {

@@ -51,6 +51,8 @@
 
 .c-bottom-pane-window {
   position: relative;
+  display: flex;
+  flex-direction: column;
   z-index: 7;
   width: 100%;
   max-width: 968px;
@@ -82,26 +84,31 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 0 $spacing--lg;
+    @include breakpoint(md) {
+      padding: 0 $spacing--xl;
+    }
+    background-color: inherit;
   }
 
   &__content {
-    position: absolute;
+    position: relative;
     border-radius: inherit;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    padding: $spacing--lg $spacing--lg 0;
+    flex-grow: 1;
+    padding: $spacing--lg $spacing--lg;
     padding-right: 44px;
     overflow-x: hidden;
     overflow-y: auto;
     @include breakpoint(md) {
-      padding: $spacing--xl $spacing--xl 0;
+      padding: $spacing--xl $spacing--xl;
       padding-right: 44px;
     }
     /* Works on Chrome, Edge, and Safari */
     &::-webkit-scrollbar {
-      width: auto;
+      width: 8px;
     }
 
     &::-webkit-scrollbar-track {
@@ -109,9 +116,9 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: color(forest);
+      background-color: currentColor;
       border-radius: 20px;
-      border: 2px solid white;
+      border: 2px solid transparent;
     }
   }
 
@@ -151,6 +158,7 @@
 
 .close-btn {
   position: absolute;
+  z-index: 1;
   top: $spacing--lg;
   right: $spacing--sm;
   display: flex;

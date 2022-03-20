@@ -11,7 +11,7 @@ import {
 import {Subject, takeUntil} from 'rxjs';
 import {AppComponent} from 'src/app/app.component';
 import {ContentService} from 'src/app/services/content.service';
-import {AlxvCollection} from 'src/app/services/models/content.interface';
+import {AlxvCollection, Sitelink} from 'src/app/services/models/content.interface';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import {TesterComponent} from '../tester/tester.component';
 import * as moment from 'moment';
@@ -57,8 +57,23 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.bottomPaneService.hookOnHost(parent.bottomPaneHost.viewContainerRef);
   }
 
-  openBottomPane(): void {
-    this.bottomPaneService.createBottomPane(TesterComponent);
+  openBottomPane(link: Sitelink): void {
+    switch (true) {
+      case link.link_id === 'about':
+        console.log('about');
+        this.bottomPaneService.createBottomPane(TesterComponent, link.link);
+        break;
+      case link.link_id === 'playground':
+        console.log('playground');
+        this.bottomPaneService.createBottomPane(TesterComponent, link.link);
+        break;
+      case link.link_id === 'contact':
+        console.log('contact');
+        this.bottomPaneService.createBottomPane(TesterComponent, link.link);
+        break;
+      default:
+        break;
+    }
   }
 
   openClock(): void {

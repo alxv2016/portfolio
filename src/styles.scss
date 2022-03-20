@@ -18,10 +18,10 @@
 }
 
 body.dark {
-  --color-bg: #{color(corbeau)};
+  --color-bg: #{color(void)};
   --color-type: #{color(mercury)};
   --color-abstract: #{color(forest)};
-  --color-bottom-pane-bg: #{color(void)};
+  --color-bottom-pane-bg: #{color(corbeau)};
   --color-clock-digits: #{color(baby)};
   --color-clock-digit-accent: #{color(hotter)};
 }
