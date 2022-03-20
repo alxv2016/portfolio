@@ -13,7 +13,6 @@ import {AppComponent} from 'src/app/app.component';
 import {ContentService} from 'src/app/services/content.service';
 import {AlxvCollection, Sitelink} from 'src/app/services/models/content.interface';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
-import {TesterComponent} from '../tester/tester.component';
 import * as moment from 'moment';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
 import {AboutContentComponent} from '../about-content/about-content.component';
@@ -66,11 +65,9 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       case link.link_id === 'playground':
         console.log('playground');
-        this.bottomPaneService.createBottomPane(TesterComponent, link.link);
         break;
       case link.link_id === 'contact':
         console.log('contact');
-        this.bottomPaneService.createBottomPane(TesterComponent, link.link);
         break;
       default:
         break;
