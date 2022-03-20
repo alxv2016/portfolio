@@ -63,13 +63,6 @@ strong {
 .discipline {
   position: relative;
   display: inline-block;
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: color(orange);
-  }
+  text-decoration: underline color(orange);
+  text-decoration-thickness: 6px;
 }
