@@ -15,23 +15,32 @@ import {
 } from '@angular/core';
 import {gsap} from 'gsap';
 import * as moment from 'moment';
-import {Subject} from 'rxjs';
+import {Subject, takeUntil} from 'rxjs';
+import {ContentService} from 'src/app/services/content.service';
+import {AlxvCollection} from 'src/app/services/models/content.interface';
 
 @Component({
   selector: 'c-clock',
   templateUrl: './aesthetic-clock.component.html',
   styleUrls: ['./aesthetic-clock.component.scss'],
 })
-export class AestheticClockComponent implements OnInit, AfterViewInit {
+export class AestheticClockComponent implements OnInit, AfterViewInit, OnDestroy {
   seconds?: string | null;
   minutes?: string | null;
   hours?: string | null;
   todaysDate?: string | null;
   meridian?: string | null;
   initial = -10;
+  private unsubscribe$ = new Subject();
+  siteContent?: AlxvCollection;
   @ViewChildren('digit', {read: ElementRef}) digit!: QueryList<ElementRef>;
   @ViewChildren('colon', {read: ElementRef}) colon!: QueryList<ElementRef>;
-  constructor(private element: ElementRef, private render: Renderer2, private ngZone: NgZone) {
+  constructor(
+    private element: ElementRef,
+    private render: Renderer2,
+    private ngZone: NgZone,
+    private contentService: ContentService
+  ) {
     this.initGSAP = this.initGSAP.bind(this);
     this.initClock = this.initClock.bind(this);
   }
@@ -52,6 +61,9 @@ export class AestheticClockComponent implements OnInit, AfterViewInit {
     const time = Math.floor(Number(this.seconds)) * 10;
     let sec = time % 30;
     this.initGSAP(sec);
+    this.contentService.siteContent$.pipe(takeUntil(this.unsubscribe$)).subscribe((resp) => {
+      this.siteContent = resp;
+    });
   }
 
   private initGSAP(time: number): void {
@@ -69,5 +81,10 @@ export class AestheticClockComponent implements OnInit, AfterViewInit {
     this.ngZone.runOutsideAngular(() => {
       requestAnimationFrame(this.initClock);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next(0);
+    this.unsubscribe$.complete();
   }
 }

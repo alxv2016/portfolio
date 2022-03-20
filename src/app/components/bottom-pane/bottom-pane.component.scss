@@ -99,11 +99,13 @@
     width: 100%;
     flex-grow: 1;
     padding: $spacing--lg $spacing--lg;
+    padding-top: $spacing--xl;
     padding-right: 44px;
     overflow-x: hidden;
     overflow-y: auto;
     @include breakpoint(md) {
       padding: $spacing--xl $spacing--xl;
+      padding-top: $spacing--2xl;
       padding-right: 44px;
     }
     /* Works on Chrome, Edge, and Safari */

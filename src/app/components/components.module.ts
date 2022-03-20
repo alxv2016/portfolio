@@ -4,9 +4,9 @@ import {HeaderComponent} from './header/header.component';
 import {ContentComponent} from './content/content.component';
 import {SocialLinksComponent} from './social-links/social-links.component';
 import {FooterComponent} from './footer/footer.component';
-import {TesterComponent} from './tester/tester.component';
 import {BottomPaneModule} from './bottom-pane/bottom-pane.module';
 import {AestheticClockComponent} from './aesthetic-clock/aesthetic-clock.component';
+import {AboutContentComponent} from './about-content/about-content.component';
 
 @NgModule({
   declarations: [
@@ -14,8 +14,8 @@ import {AestheticClockComponent} from './aesthetic-clock/aesthetic-clock.compone
     ContentComponent,
     SocialLinksComponent,
     FooterComponent,
-    TesterComponent,
     AestheticClockComponent,
+    AboutContentComponent,
   ],
   imports: [CommonModule, BottomPaneModule],
   exports: [
@@ -23,8 +23,8 @@ import {AestheticClockComponent} from './aesthetic-clock/aesthetic-clock.compone
     ContentComponent,
     SocialLinksComponent,
     FooterComponent,
-    TesterComponent,
     AestheticClockComponent,
+    AboutContentComponent,
   ],
 })
 export class ComponentsModule {}

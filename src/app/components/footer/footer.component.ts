@@ -16,6 +16,7 @@ import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import {TesterComponent} from '../tester/tester.component';
 import * as moment from 'moment';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
+import {AboutContentComponent} from '../about-content/about-content.component';
 
 @Component({
   selector: 'c-footer',
@@ -37,11 +38,11 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private initClock() {
     const now = moment();
-    const seconds = now.format('ss');
+    // const seconds = now.format('ss');
     const minutes = now.format('mm');
     const hours = now.format('h');
-    const meridian = now.format('a');
-    this.timeNow = `${hours}:${minutes}:${seconds} ${meridian}`;
+    const meridian = now.format('A');
+    this.timeNow = `${hours}:${minutes} ${meridian}`;
     requestAnimationFrame(this.initClock);
   }
 
@@ -61,7 +62,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     switch (true) {
       case link.link_id === 'about':
         console.log('about');
-        this.bottomPaneService.createBottomPane(TesterComponent, link.link);
+        this.bottomPaneService.createBottomPane(AboutContentComponent, link.link);
         break;
       case link.link_id === 'playground':
         console.log('playground');

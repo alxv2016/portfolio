@@ -38,11 +38,17 @@ export interface AlxvCollection {
   social_links: Sociallink[] | null;
   navigation_title: string | null;
   site_links: Sitelink[] | null;
+  about_content: Content[] | null;
+  time_quote: string | null;
 }
 
 export interface Sitelink {
   link_id: string;
   link: string;
+}
+
+interface Content {
+  paragraph: string;
 }
 
 interface Sociallink {

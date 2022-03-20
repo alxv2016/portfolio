@@ -1,0 +1,14 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-about-content) {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+p {
+  font-size: $body--1;
+  @include breakpoint(md) {
+    font-size: $subtitle;
+  }
+}
