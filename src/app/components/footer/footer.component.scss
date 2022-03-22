@@ -29,5 +29,7 @@
     font-size: $body--2;
     color: currentColor;
     line-height: 1.25;
+    min-height: 44px;
+    padding: $spacing--xs $spacing--md;
   }
 }

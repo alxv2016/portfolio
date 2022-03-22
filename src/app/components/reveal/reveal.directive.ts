@@ -1,8 +1,8 @@
 import {Directive, ViewContainerRef} from '@angular/core';
 
 @Directive({
-  selector: '[bottomPaneHost]',
+  selector: '[reveal]',
 })
-export class BottomPaneDirective {
+export class RevealDirective {
   constructor(public viewContainerRef: ViewContainerRef) {}
 }

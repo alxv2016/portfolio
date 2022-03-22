@@ -8,10 +8,19 @@ import {ComponentsModule} from './components/components.module';
 import {MouseMoveDirective} from './components/mouse-move.directive';
 import {NotificationModule} from './components/notification/notification.module';
 import {BottomPaneModule} from './components/bottom-pane/bottom-pane.module';
+import {RevealModule} from './components/reveal/reveal.module';
 
 @NgModule({
   declarations: [AppComponent, MouseMoveDirective],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ComponentsModule, NotificationModule, BottomPaneModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ComponentsModule,
+    NotificationModule,
+    BottomPaneModule,
+    RevealModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
