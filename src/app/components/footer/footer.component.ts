@@ -5,6 +5,7 @@ import {
   Injector,
   OnDestroy,
   OnInit,
+  Renderer2,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
@@ -30,7 +31,8 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private contentService: ContentService,
     private bottomPaneService: BottomPaneService,
-    private inject: Injector
+    private inject: Injector,
+    private render: Renderer2
   ) {
     this.initClock = this.initClock.bind(this);
   }
@@ -52,6 +54,11 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  private sendEmail(email: string, subject: string): void {
+    const mailTo = `mailto:${email}?subject=${subject}`;
+    window.open(mailTo);
+  }
+
   ngAfterViewInit(): void {
     const parent = this.inject.get<AppComponent>(AppComponent);
     this.bottomPaneService.hookOnHost(parent.bottomPaneHost.viewContainerRef);
@@ -68,6 +75,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       case link.link_id === 'contact':
         console.log('contact');
+        this.sendEmail('avong2011@gmail.com', 'Hello');
         break;
       default:
         break;
