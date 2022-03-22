@@ -99,7 +99,7 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   private createComponent(): void {
     // Save element clicked
     const ownerDocument = this.element.nativeElement.ownerDocument;
-    const body = ownerDocument.querySelector('body');
+    const body = ownerDocument.body;
     this.clickedElement = ownerDocument.activeElement;
     // We use the element template to create and insert the child component
     this.componentPortal.clear();

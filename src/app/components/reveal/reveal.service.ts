@@ -14,14 +14,8 @@ export class RevealService {
   @ViewChild(RevealDirective, {static: true}) revealHost!: RevealDirective;
   constructor() {}
 
-  createReveal(reverse: boolean = false, colors?: string[], amount?: number): void {
+  createReveal(reverse: boolean = false): void {
     this.componentRef = this.viewContainerRef.createComponent(RevealComponent);
-    if (amount) {
-      this.componentRef.instance.amount = amount;
-    }
-    if (colors) {
-      this.componentRef.instance.colors = colors;
-    }
     if (reverse) {
       this.componentRef.instance.reverse = reverse;
     }

@@ -76,7 +76,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       case link.link_id === 'playground':
         // console.log('playground');
-        this.revealService.createReveal();
+        this.revealService.createReveal(false);
         break;
       case link.link_id === 'contact':
         console.log('contact');

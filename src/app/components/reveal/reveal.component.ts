@@ -21,35 +21,31 @@ export class RevealComponent implements AfterViewInit {
   state$ = new BehaviorSubject<boolean>(false);
   host: HTMLElement = this.element.nativeElement;
   reverse: boolean = false;
-  colors: string[] | null = null;
-  amount = 8;
+  amount = 3;
   @HostBinding('class') class = 'c-reveal';
   @Input() direction: string = 'up';
   constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {}
 
-  private createRevealBlocks(amount: number, colors?: string[] | null) {
+  private createRevealBlocks() {
+    const document = this.element.nativeElement.ownerDocument;
+    const style = getComputedStyle(document.body);
+    const block1 = style.getPropertyValue('--color-reveal-block1');
+    const block2 = style.getPropertyValue('--color-reveal-block2');
+    const block3 = style.getPropertyValue('--color-reveal-block3');
+    const colors = [block1, block2, block3];
     const revealBlocks = [];
-    const revealColors = [];
-    for (let i = 0; i < amount; i++) {
+    for (let i = 0; i < this.amount; i++) {
       const div = this.render.createElement('div');
-      revealColors.push('yellow', 'blue');
       this.render.addClass(div, 'c-reveal-block');
-      this.render.setStyle(div, 'background-color', revealColors[i]);
-      if (colors && colors.length !== 0 && colors.length === amount) {
-        this.render.setStyle(div, 'background-color', colors[i]);
-      }
+      this.render.setStyle(div, 'background-color', colors[i]);
       revealBlocks.push(div);
     }
-
-    console.log(revealColors, revealBlocks);
     return revealBlocks;
   }
 
-  private createReveal(reverse: boolean, colors: string[] | null, amount: number): void {
-    // Create divs dynamically?
-    console.log('hello');
+  private createReveal(reverse: boolean): void {
     reverse ? this.render.addClass(this.host, 'c-reveal--top') : this.render.addClass(this.host, 'c-reveal--bottom');
-    const revealBlocks = this.createRevealBlocks(amount, colors);
+    const revealBlocks = this.createRevealBlocks();
     revealBlocks.forEach((div) => {
       this.render.appendChild(this.host, div);
     });
@@ -67,7 +63,7 @@ export class RevealComponent implements AfterViewInit {
           ease: 'power3.out',
         })
         .to(revealBlocks, {
-          yPercent: -100,
+          yPercent: reverse ? 100 : -100,
           stagger: {
             each: 0.25,
             from: 'end',
@@ -87,7 +83,7 @@ export class RevealComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.zone.runOutsideAngular(() => {
-      this.createReveal(this.reverse, this.colors, this.amount);
+      this.createReveal(this.reverse);
     });
   }
 }

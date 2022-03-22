@@ -1,19 +1,7 @@
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  HostListener,
-  Injector,
-  NgZone,
-  OnInit,
-  Renderer2,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, NgZone, OnInit, Renderer2} from '@angular/core';
 import {fromEvent, map, Observable, switchMap, throttleTime} from 'rxjs';
 import {gsap} from 'gsap';
 import {ContentService} from '../services/content.service';
-import {ContentComponent} from './content/content.component';
 
 @Directive({
   selector: '[appMouseMove]',
@@ -25,8 +13,7 @@ export class MouseMoveDirective implements OnInit, AfterViewInit {
     private render: Renderer2,
     private element: ElementRef,
     private zone: NgZone,
-    private contentService: ContentService,
-    private inject: Injector
+    private contentService: ContentService
   ) {}
 
   private powerMagnets(els: any, pos: any) {
