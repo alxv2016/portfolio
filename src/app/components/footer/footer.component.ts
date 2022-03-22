@@ -17,6 +17,7 @@ import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import * as moment from 'moment';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
 import {AboutContentComponent} from '../about-content/about-content.component';
+import {RevealService} from '../reveal/reveal.service';
 
 @Component({
   selector: 'c-footer',
@@ -31,6 +32,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private contentService: ContentService,
     private bottomPaneService: BottomPaneService,
+    private revealService: RevealService,
     private inject: Injector,
     private render: Renderer2
   ) {
@@ -61,7 +63,8 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     const parent = this.inject.get<AppComponent>(AppComponent);
-    this.bottomPaneService.hookOnHost(parent.bottomPaneHost.viewContainerRef);
+    this.bottomPaneService.getBottomPaneHost(parent.bottomPaneHost.viewContainerRef);
+    this.revealService.getRevealHost(parent.revealHost.viewContainerRef);
   }
 
   openBottomPane(link: Sitelink): void {
@@ -72,6 +75,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       case link.link_id === 'playground':
         console.log('playground');
+        this.revealService.createReveal();
         break;
       case link.link_id === 'contact':
         console.log('contact');

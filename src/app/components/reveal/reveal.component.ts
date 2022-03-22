@@ -20,26 +20,59 @@ import {gsap} from 'gsap';
 export class RevealComponent implements AfterViewInit, OnDestroy {
   state$ = new BehaviorSubject<boolean>(false);
   host: HTMLElement = this.element.nativeElement;
-  transitionEventHandler: any;
+  reverse: boolean = false;
   @HostBinding('class') class = 'c-reveal';
   @Input() direction: string = 'up';
   constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {}
 
-  private onTransitionEnd(ev: TransitionEvent): void {
-    requestAnimationFrame(() => {
-      this.render.removeClass(this.host, 'c-reveal--animate');
-      this.render.removeClass(this.host, 'c-reveal--visible');
-      this.destroyReveal();
-      this.transitionEventHandler();
-    });
+  private createRevealBlocks(amount: number = 1, colors?: string[] | null) {
+    const revealBlocks = [];
+    for (let i = 0; i < amount; i++) {
+      const div = this.render.createElement('div');
+      this.render.addClass(div, 'c-reveal-block');
+      if (colors && colors.length !== 0 && colors.length === amount) {
+        this.render.setStyle(div, 'background-color', colors[i]);
+      }
+      revealBlocks.push(div);
+    }
+    return revealBlocks;
   }
 
-  private createReveal(): void {
+  private createReveal(reverse: boolean): void {
     // Create divs dynamically?
+    console.log('hello');
+    reverse ? this.render.addClass(this.host, 'c-reveal--top') : this.render.addClass(this.host, 'c-reveal--bottom');
+    const colors = ['red', 'green', 'blue'];
+
+    const revealBlocks = this.createRevealBlocks(3, colors);
+    revealBlocks.forEach((div) => {
+      this.render.appendChild(this.host, div);
+    });
+
     requestAnimationFrame(() => {
-      this.render.addClass(this.host, 'c-reveal--animate');
       this.render.addClass(this.host, 'c-reveal--visible');
-      this.transitionEventHandler = this.render.listen(this.host, 'transitionend', this.onTransitionEnd);
+      const revealTL = gsap.timeline();
+      revealTL
+        .to(revealBlocks, {
+          y: 0,
+          stagger: {
+            each: 0.25,
+            from: 'start',
+          },
+          ease: 'power3.out',
+        })
+        .to(revealBlocks, {
+          yPercent: -100,
+          stagger: {
+            each: 0.25,
+            from: 'end',
+          },
+          ease: 'power3.out',
+          onComplete: () => {
+            this.render.removeClass(this.host, 'c-reveal--visible');
+            this.destroyReveal();
+          },
+        });
     });
   }
 
@@ -49,7 +82,7 @@ export class RevealComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.zone.runOutsideAngular(() => {
-      this.createReveal();
+      this.createReveal(this.reverse);
     });
   }
 

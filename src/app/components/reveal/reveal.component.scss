@@ -1,1 +1,37 @@
 @import '../../../scss/00_imports';
+
+:host-context(.c-reveal) {
+  position: fixed;
+  display: block;
+  z-index: 6;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  // pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+:host-context(.c-reveal--visible) {
+  visibility: visible;
+}
+
+:host-context(.c-reveal--bottom) .c-reveal-block {
+  transform: translateY(100%);
+}
+
+:host-context(.c-reveal--top) .c-reveal-block {
+  transform: translateY(-100%);
+}
+
+.c-reveal-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  background-color: transparent;
+}

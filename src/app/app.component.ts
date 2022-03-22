@@ -14,6 +14,7 @@ import {Subject, switchMap, takeUntil} from 'rxjs';
 import {BottomPaneDirective} from './components/bottom-pane/bottom-pane.directive';
 import {NotificationDirective} from './components/notification/notification.directive';
 import {NotificationService} from './components/notification/notification.service';
+import {RevealDirective} from './components/reveal/reveal.directive';
 import {ContentService} from './services/content.service';
 import {AlxvCollection} from './services/models/content.interface';
 
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('pixiCanvas') pixiCanvas!: ElementRef;
   @ViewChild(NotificationDirective, {static: true}) notificationHost!: NotificationDirective;
   @ViewChild(BottomPaneDirective, {static: true}) bottomPaneHost!: BottomPaneDirective;
+  @ViewChild(RevealDirective, {static: true}) revealHost!: RevealDirective;
   constructor(
     private element: ElementRef,
     private render: Renderer2,

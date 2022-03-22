@@ -19,6 +19,7 @@ export class RevealService {
       this.componentRef.destroy();
       this.componentRef.instance.state$.next(false);
     }
+    this.componentRef = this.viewContainerRef.createComponent(RevealComponent);
     this.componentRef.instance.state$.next(true);
     // Watch component's state to destroy
     this.getState().subscribe((state) => {

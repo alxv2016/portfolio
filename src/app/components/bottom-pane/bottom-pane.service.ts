@@ -37,7 +37,7 @@ export class BottomPaneService {
     });
   }
 
-  hookOnHost(viewContainerRef: ViewContainerRef): void {
+  getBottomPaneHost(viewContainerRef: ViewContainerRef): void {
     this.viewContainerRef = viewContainerRef;
   }
 
