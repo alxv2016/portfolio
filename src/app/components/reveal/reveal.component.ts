@@ -17,10 +17,12 @@ import {gsap} from 'gsap';
   templateUrl: './reveal.component.html',
   styleUrls: ['./reveal.component.scss'],
 })
-export class RevealComponent implements AfterViewInit, OnDestroy {
+export class RevealComponent implements AfterViewInit {
   state$ = new BehaviorSubject<boolean>(false);
   host: HTMLElement = this.element.nativeElement;
   reverse: boolean = false;
+  colors: string[] | null = null;
+  amount = 3;
   @HostBinding('class') class = 'c-reveal';
   @Input() direction: string = 'up';
   constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {}
@@ -70,13 +72,13 @@ export class RevealComponent implements AfterViewInit, OnDestroy {
           ease: 'power3.out',
           onComplete: () => {
             this.render.removeClass(this.host, 'c-reveal--visible');
-            this.destroyReveal();
+            this.updateState();
           },
         });
     });
   }
 
-  private destroyReveal(): void {
+  private updateState(): void {
     this.state$.next(false);
   }
 
@@ -84,9 +86,5 @@ export class RevealComponent implements AfterViewInit, OnDestroy {
     this.zone.runOutsideAngular(() => {
       this.createReveal(this.reverse);
     });
-  }
-
-  ngOnDestroy(): void {
-    this.destroyReveal();
   }
 }

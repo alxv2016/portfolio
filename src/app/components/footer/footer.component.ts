@@ -65,6 +65,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     const parent = this.inject.get<AppComponent>(AppComponent);
     this.bottomPaneService.getBottomPaneHost(parent.bottomPaneHost.viewContainerRef);
     this.revealService.getRevealHost(parent.revealHost.viewContainerRef);
+    this.revealService.getAnimationState().subscribe((ev) => console.log('animation state', ev));
   }
 
   openBottomPane(link: Sitelink): void {
@@ -74,7 +75,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
         this.bottomPaneService.createBottomPane(AboutContentComponent, link.link, this.siteContent?.about_content);
         break;
       case link.link_id === 'playground':
-        console.log('playground');
+        // console.log('playground');
         this.revealService.createReveal();
         break;
       case link.link_id === 'contact':
