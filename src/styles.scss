@@ -9,19 +9,19 @@
 @import './scss/07_base';
 // Third party over-rides
 :root {
-  --color-bg: #{color(mercury)};
-  --color-type: #{color(corbeau)};
-  --color-abstract: #{color(forest)};
-  --color-bottom-pane-bg: #{color(mercury)};
+  --color-bg: #{neutral(grey10)};
+  --color-type: #{neutral(grey80)};
+  --color-bottom-pane-bg: #{neutral(grey0)};
+  --color-abstract: #{neutral(grey50)};
   --color-clock-digits: #{color(sabbath)};
   --color-clock-digit-accent: #{color(hotter)};
 }
 
 body.dark {
-  --color-bg: #{color(void)};
-  --color-type: #{color(mercury)};
-  --color-abstract: #{color(forest)};
-  --color-bottom-pane-bg: #{color(corbeau)};
+  --color-bg: #{neutral(grey90)};
+  --color-type: #{neutral(grey20)};
+  --color-bottom-pane-bg: #{neutral(grey80)};
+  --color-abstract: #{neutral(grey60)};
   --color-clock-digits: #{color(baby)};
   --color-clock-digit-accent: #{color(hotter)};
 }

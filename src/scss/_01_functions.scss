@@ -17,6 +17,10 @@
   @return map-get($colors, $key);
 }
 
+@function neutral($key: 'grey60') {
+  @return map-get($neutrals, $key);
+}
+
 @function icon-size($key: 'xs') {
   @return map-get($icon-sizes, $key);
 }

@@ -45,17 +45,26 @@ $breakpoints: (
 ) !default;
 // Colors
 $colors: (
-  empty: #f9fdfd,
   orange: #ffb800,
-  mercury: #eeeceb,
-  corbeau: #13112a,
-  void: #121219,
   forest: #3a4335,
   potion: #b2d148,
   atomic: #ec9d71,
   sabbath: #240b28,
   hotter: #e8525a,
   baby: #e1c4f3,
+) !default;
+
+$neutrals: (
+  grey0: #fffafa,
+  grey10: #eeeceb,
+  grey20: #e0dad8,
+  grey30: #c6bebb,
+  grey40: #a19795,
+  grey50: #756c6a,
+  grey60: #4d4645,
+  grey70: #302c2b,
+  grey80: #211d1d,
+  grey90: #1c1919,
 ) !default;
 // Type scale
 // Using a modular type scale we define our font size in em units for responsive scaling

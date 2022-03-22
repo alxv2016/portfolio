@@ -29,15 +29,6 @@ main {
   display: none;
   overflow: hidden;
   color: var(--color-abstract);
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    @include frosted-glass(color(empty), 0);
-  }
   @include breakpoint(lg) {
     display: flex;
     align-items: flex-end;
