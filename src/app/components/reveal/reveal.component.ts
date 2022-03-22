@@ -22,31 +22,34 @@ export class RevealComponent implements AfterViewInit {
   host: HTMLElement = this.element.nativeElement;
   reverse: boolean = false;
   colors: string[] | null = null;
-  amount = 3;
+  amount = 8;
   @HostBinding('class') class = 'c-reveal';
   @Input() direction: string = 'up';
   constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {}
 
-  private createRevealBlocks(amount: number = 1, colors?: string[] | null) {
+  private createRevealBlocks(amount: number, colors?: string[] | null) {
     const revealBlocks = [];
+    const revealColors = [];
     for (let i = 0; i < amount; i++) {
       const div = this.render.createElement('div');
+      revealColors.push('yellow', 'blue');
       this.render.addClass(div, 'c-reveal-block');
+      this.render.setStyle(div, 'background-color', revealColors[i]);
       if (colors && colors.length !== 0 && colors.length === amount) {
         this.render.setStyle(div, 'background-color', colors[i]);
       }
       revealBlocks.push(div);
     }
+
+    console.log(revealColors, revealBlocks);
     return revealBlocks;
   }
 
-  private createReveal(reverse: boolean): void {
+  private createReveal(reverse: boolean, colors: string[] | null, amount: number): void {
     // Create divs dynamically?
     console.log('hello');
     reverse ? this.render.addClass(this.host, 'c-reveal--top') : this.render.addClass(this.host, 'c-reveal--bottom');
-    const colors = ['red', 'green', 'blue'];
-
-    const revealBlocks = this.createRevealBlocks(3, colors);
+    const revealBlocks = this.createRevealBlocks(amount, colors);
     revealBlocks.forEach((div) => {
       this.render.appendChild(this.host, div);
     });
@@ -84,7 +87,7 @@ export class RevealComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.zone.runOutsideAngular(() => {
-      this.createReveal(this.reverse);
+      this.createReveal(this.reverse, this.colors, this.amount);
     });
   }
 }
