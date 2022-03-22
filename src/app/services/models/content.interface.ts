@@ -38,7 +38,7 @@ export interface AlxvCollection {
   social_links: Sociallink[] | null;
   navigation_title: string | null;
   site_links: Sitelink[] | null;
-  about_content: Content[] | null;
+  about_content: AboutContent[] | null;
   time_quote: string | null;
 }
 
@@ -47,7 +47,7 @@ export interface Sitelink {
   link: string;
 }
 
-interface Content {
+export interface AboutContent {
   paragraph: string;
 }
 

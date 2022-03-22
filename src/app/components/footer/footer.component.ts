@@ -61,7 +61,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     switch (true) {
       case link.link_id === 'about':
         console.log('about');
-        this.bottomPaneService.createBottomPane(AboutContentComponent, link.link, this.siteContent);
+        this.bottomPaneService.createBottomPane(AboutContentComponent, link.link, this.siteContent?.about_content);
         break;
       case link.link_id === 'playground':
         console.log('playground');
@@ -75,7 +75,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openClock(): void {
-    this.bottomPaneService.createBottomPane(AestheticClockComponent);
+    this.bottomPaneService.createBottomPane(AestheticClockComponent, null, this.siteContent?.time_quote);
   }
 
   ngOnDestroy(): void {

@@ -1,1 +1,3 @@
-<p *ngFor="let p of data?.about_content">{{ p.paragraph }}</p>
+<ng-container *ngIf="data">
+  <p *ngFor="let p of data">{{ p.paragraph }}</p>
+</ng-container>

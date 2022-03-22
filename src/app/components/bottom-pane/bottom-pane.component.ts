@@ -1,20 +1,18 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ComponentRef,
   ElementRef,
   HostBinding,
-  HostListener,
+  Input,
   NgZone,
   OnDestroy,
-  OnInit,
   Renderer2,
   Type,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import {BehaviorSubject, first, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'c-bottom-pane',
@@ -22,28 +20,23 @@ import {BehaviorSubject, first, Subject} from 'rxjs';
   styleUrls: ['./bottom-pane.component.scss'],
 })
 export class BottomPaneComponent implements AfterViewInit, OnDestroy {
-  // Child Component Ref
-  childComponentType!: Type<any>;
+  // Child component type i.e ExampleComponent
+  componentType!: Type<any>;
+  // Child component reference (Component being inserted into bottom pane)
   private childComponent?: ComponentRef<any> | null = null;
-  bottomPaneEvent$ = new BehaviorSubject<boolean>(false);
-  bottomPane$ = this.bottomPaneEvent$.asObservable();
-  hostTitle?: null | string;
-  hostElement: HTMLElement = this.element.nativeElement;
-  triggerElement!: HTMLElement;
+  state$ = new BehaviorSubject<boolean>(false);
+  title?: null | string;
+  host: HTMLElement = this.element.nativeElement;
+  clickedElement!: HTMLElement;
   transitionEventHandler: any;
   keydownEventHandler: any;
   clickEventHandlers: any[] = [];
-  contentData: any = null;
   @HostBinding('class') class = 'c-bottom-pane';
+  @Input() contentData: any = null;
   @ViewChild('bottomSheetWindow') bottomSheetWindow!: ElementRef;
   // Capture the element template where the child component will be inserted we let Angular know that it's a ViewContainerRef
   @ViewChild('componentPortal', {read: ViewContainerRef, static: true}) componentPortal!: ViewContainerRef;
-  constructor(
-    private element: ElementRef,
-    private render: Renderer2,
-    private zone: NgZone,
-    private cdr: ChangeDetectorRef
-  ) {
+  constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
     this.closeBottomSheet = this.closeBottomSheet.bind(this);
     this.focusTrap = this.focusTrap.bind(this);
@@ -85,7 +78,8 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
       this.destroyComponent();
     }
     requestAnimationFrame(() => {
-      this.render.removeClass(this.hostElement, 'c-bottom-pane--animate');
+      this.render.removeClass(this.host, 'c-bottom-pane--animate');
+      // remove transitionend event
       this.transitionEventHandler();
     });
   }
@@ -97,29 +91,34 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     if (this.childComponent) {
       this.childComponent.changeDetectorRef.detach();
     }
+    // remove keydownevent
     this.keydownEventHandler();
-    this.bottomPaneEvent$.next(false);
+    this.state$.next(false);
   }
 
   private createComponent(): void {
     // Save element clicked
     const ownerDocument = this.element.nativeElement.ownerDocument;
     const body = ownerDocument.querySelector('body');
-    this.triggerElement = ownerDocument.activeElement;
+    this.clickedElement = ownerDocument.activeElement;
     // We use the element template to create and insert the child component
     this.componentPortal.clear();
-    this.childComponent = this.componentPortal.createComponent(this.childComponentType);
-    this.childComponent.instance.data = this.contentData;
-    this.childComponent.changeDetectorRef.detectChanges();
+    this.childComponent = this.componentPortal.createComponent(this.componentType);
+    if (this.contentData) {
+      // Pass data
+      this.childComponent.instance.data = this.contentData;
+      // Manually active change detector for dynamic components
+      this.childComponent.changeDetectorRef.detectChanges();
+    }
     requestAnimationFrame(() => {
-      this.render.addClass(this.hostElement, 'c-bottom-pane--animate');
-      this.render.addClass(this.hostElement, 'c-bottom-pane--visible');
+      this.render.addClass(this.host, 'c-bottom-pane--animate');
+      this.render.addClass(this.host, 'c-bottom-pane--visible');
       this.render.addClass(body, 'overlay');
-      this.transitionEventHandler = this.render.listen(this.hostElement, 'transitionend', this.onTransitionEnd);
+      this.transitionEventHandler = this.render.listen(this.host, 'transitionend', this.onTransitionEnd);
     });
     // Listen to keydown events
     // Focus first element
-    const focusElsNodeList = this.hostElement.querySelectorAll<HTMLElement>(
+    const focusElsNodeList = this.host.querySelectorAll<HTMLElement>(
       'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
     );
     // Convert NodeList to Array
@@ -130,38 +129,36 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
       this.focusTrap(e, ownerDocument, firstTabStop, lastTabStob)
     );
     // Focus first element after transition ends - visibility initially hidden
-    const focusEvent = this.render.listen(this.bottomSheetWindow.nativeElement, 'transitionend', (e) => {
+    const transitionEnd = this.render.listen(this.bottomSheetWindow.nativeElement, 'transitionend', (e) => {
       firstTabStop.focus();
-      focusEvent();
+      transitionEnd();
     });
   }
   // Close the modal
   closeBottomSheet() {
     const ownerDocument = this.element.nativeElement.ownerDocument;
     const body = ownerDocument.querySelector('body');
-    this.render.addClass(this.hostElement, 'c-bottom-pane--animate');
-    this.render.removeClass(this.hostElement, 'c-bottom-pane--visible');
+    this.render.addClass(this.host, 'c-bottom-pane--animate');
+    this.render.removeClass(this.host, 'c-bottom-pane--visible');
     this.render.removeClass(body, 'overlay');
-    this.transitionEventHandler = this.render.listen(this.hostElement, 'transitionend', (e) =>
-      this.onTransitionEnd(e, true)
-    );
-    this.triggerElement.focus();
+    this.transitionEventHandler = this.render.listen(this.host, 'transitionend', (e) => this.onTransitionEnd(e, true));
+    this.clickedElement.focus();
   }
 
   ngAfterViewInit(): void {
-    this.render.setAttribute(this.hostElement, 'tabIndex', '-1');
+    this.render.setAttribute(this.host, 'tabIndex', '-1');
     this.zone.runOutsideAngular(() => {
       this.createComponent();
       this.clickEventHandlers.push(
-        this.render.listen(this.hostElement, 'click', this.closeBottomSheet),
+        this.render.listen(this.host, 'click', this.closeBottomSheet),
         this.render.listen(this.bottomSheetWindow.nativeElement, 'click', (e: MouseEvent) => e.stopPropagation())
       );
     });
   }
 
   ngOnDestroy(): void {
+    // Remove all events
     this.clickEventHandlers.forEach((fn) => fn());
-
     this.destroyComponent();
   }
 }

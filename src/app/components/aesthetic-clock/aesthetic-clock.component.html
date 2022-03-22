@@ -23,6 +23,6 @@
   </div>
 </div>
 <div class="c-clock__date">
-  <h1 class="c-clock-message">{{ siteContent?.time_quote }}</h1>
+  <h1 class="c-clock-message" *ngIf="data">{{ data }}</h1>
   <p class="c-clock-date-label">{{ todaysDate }}</p>
 </div>
