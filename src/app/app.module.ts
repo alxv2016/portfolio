@@ -9,6 +9,7 @@ import {MouseMoveDirective} from './components/mouse-move.directive';
 import {NotificationModule} from './components/notification/notification.module';
 import {BottomPaneModule} from './components/bottom-pane/bottom-pane.module';
 import {RevealModule} from './components/reveal/reveal.module';
+import {PagesModule} from './pages/pages.module';
 
 @NgModule({
   declarations: [AppComponent, MouseMoveDirective],
@@ -20,6 +21,7 @@ import {RevealModule} from './components/reveal/reveal.module';
     NotificationModule,
     BottomPaneModule,
     RevealModule,
+    PagesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

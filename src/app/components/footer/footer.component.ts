@@ -3,6 +3,8 @@ import {
   Component,
   HostBinding,
   Injector,
+  Input,
+  NgZone,
   OnDestroy,
   OnInit,
   Renderer2,
@@ -11,13 +13,13 @@ import {
 } from '@angular/core';
 import {Subject, takeUntil} from 'rxjs';
 import {AppComponent} from 'src/app/app.component';
-import {ContentService} from 'src/app/services/content.service';
 import {AlxvCollection, Sitelink} from 'src/app/services/models/content.interface';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import * as moment from 'moment';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
 import {AboutContentComponent} from '../about-content/about-content.component';
 import {RevealService} from '../reveal/reveal.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'c-footer',
@@ -26,15 +28,16 @@ import {RevealService} from '../reveal/reveal.service';
 })
 export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject();
-  siteContent?: AlxvCollection;
   timeNow: string = '00:00:00';
+  @Input() siteContent?: AlxvCollection;
   @HostBinding('class') class = 'c-footer';
   constructor(
-    private contentService: ContentService,
     private bottomPaneService: BottomPaneService,
     private revealService: RevealService,
     private inject: Injector,
-    private render: Renderer2
+    private render: Renderer2,
+    private router: Router,
+    private zone: NgZone
   ) {
     this.initClock = this.initClock.bind(this);
   }
@@ -51,9 +54,6 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.initClock();
-    this.contentService.siteContent$.pipe(takeUntil(this.unsubscribe$)).subscribe((resp) => {
-      this.siteContent = resp;
-    });
   }
 
   private sendEmail(email: string, subject: string): void {
@@ -65,18 +65,27 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     const parent = this.inject.get<AppComponent>(AppComponent);
     this.bottomPaneService.getBottomPaneHost(parent.bottomPaneHost.viewContainerRef);
     this.revealService.getRevealHost(parent.revealHost.viewContainerRef);
-    this.revealService.getAnimationState().subscribe((ev) => console.log('animation state', ev));
   }
 
   openBottomPane(link: Sitelink): void {
     switch (true) {
-      case link.link_id === 'about':
-        console.log('about');
-        this.bottomPaneService.createBottomPane(AboutContentComponent, link.link, this.siteContent?.about_content);
+      case link.link_id === 'process':
+        console.log('process');
+        // this.bottomPaneService.createBottomPane(AboutContentComponent, link.link, this.siteContent?.about_content);
+        this.revealService.createReveal(false);
+        this.revealService
+          .getAnimationState()
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe((state) => {
+            this.zone.run(() => {
+              if (state) {
+                this.router.navigate(['process']);
+              }
+            });
+          });
         break;
       case link.link_id === 'playground':
         // console.log('playground');
-        this.revealService.createReveal(false);
         break;
       case link.link_id === 'contact':
         console.log('contact');

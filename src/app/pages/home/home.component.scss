@@ -1,27 +1,27 @@
 @import '../../../scss/00_imports';
 
-:host-context(.c-content) {
+:host-context(.c-home) {
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
-  margin-top: $layout--lg;
+  padding-top: $layout--lg;
   user-select: none;
   @include breakpoint(sm) {
-    margin-top: $layout--xl;
+    padding-top: $layout--xl;
   }
   @include breakpoint(md) {
-    margin-top: $layout--2xl;
+    padding-top: $layout--2xl;
     flex-direction: row;
   }
 }
 
-.c-content {
+.c-home {
   &__container {
     order: 1;
     width: 100%;
-    max-width: 768px;
+    max-width: 728px;
     @include breakpoint(md) {
       order: 0;
     }
@@ -29,7 +29,7 @@
 }
 
 .overline {
-  display: block;
+  display: inline-block;
   line-height: $heading-line-height;
   font-weight: font-weight(bold);
   font-size: $body--1;
@@ -41,6 +41,7 @@
 
 .headline {
   position: relative;
+  display: inline-block;
   font-weight: font-weight('black');
   font-size: $title--2;
   line-height: $heading-line-height;
@@ -72,4 +73,66 @@ strong {
   display: inline-block;
   text-decoration: underline color(orange);
   text-decoration-thickness: 6px;
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 280px;
+  height: 280px;
+  background-color: white;
+  border-radius: 100%;
+  opacity: 0;
+  transform-origin: center center;
+  mix-blend-mode: difference;
+  backface-visibility: hidden;
+  visibility: hidden;
+  @include breakpoint(lg) {
+    visibility: visible;
+  }
+}
+
+.l-abstract {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  overflow: hidden;
+  color: var(--color-abstract);
+  @include breakpoint(lg) {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+}
+
+.orb-lines-bg {
+  opacity: 0.45;
+}
+
+.orb-lines {
+  color: color(orange);
+}
+
+.orb-lines-accent {
+  color: color(atomic);
+}
+
+.c-orb {
+  position: relative;
+  width: 480px;
+  height: 480px;
+  right: 24px;
+  margin-bottom: $layout--md;
+  transform: skewX(-12deg);
+  svg {
+    width: inherit;
+    height: inherit;
+  }
 }

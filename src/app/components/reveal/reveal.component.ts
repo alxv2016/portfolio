@@ -19,6 +19,7 @@ import {gsap} from 'gsap';
 })
 export class RevealComponent implements AfterViewInit {
   state$ = new BehaviorSubject<boolean>(false);
+  animationState$ = new BehaviorSubject<boolean>(false);
   host: HTMLElement = this.element.nativeElement;
   reverse: boolean = false;
   amount = 3;
@@ -69,16 +70,16 @@ export class RevealComponent implements AfterViewInit {
             from: 'end',
           },
           ease: 'power3.out',
+          onStart: () => {
+            this.animationState$.next(true);
+          },
           onComplete: () => {
             this.render.removeClass(this.host, 'c-reveal--visible');
-            this.updateState();
+            this.animationState$.next(false);
+            this.state$.next(false);
           },
         });
     });
-  }
-
-  private updateState(): void {
-    this.state$.next(false);
   }
 
   ngAfterViewInit(): void {

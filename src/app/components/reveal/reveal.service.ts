@@ -8,7 +8,6 @@ import {RevealModule} from './reveal.module';
   providedIn: RevealModule,
 })
 export class RevealService {
-  animationState$ = new BehaviorSubject<boolean>(false);
   private componentRef!: ComponentRef<RevealComponent>;
   private viewContainerRef!: ViewContainerRef;
   @ViewChild(RevealDirective, {static: true}) revealHost!: RevealDirective;
@@ -19,12 +18,10 @@ export class RevealService {
     if (reverse) {
       this.componentRef.instance.reverse = reverse;
     }
-    this.animationState$.next(false);
     this.componentRef.instance.state$.next(true);
     // Watch component's state to destroy
     this.getState().subscribe((state) => {
       if (!state) {
-        this.animationState$.next(true);
         this.componentRef.destroy();
       }
     });
@@ -39,10 +36,6 @@ export class RevealService {
   }
 
   getAnimationState(): Observable<boolean> {
-    return this.animationState$.asObservable();
-  }
-
-  resetAnimationState(): void {
-    this.animationState$.next(false);
+    return this.componentRef.instance.animationState$.asObservable();
   }
 }

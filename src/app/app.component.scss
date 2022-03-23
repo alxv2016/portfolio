@@ -1,8 +1,6 @@
 @import '../scss/00_imports';
 
 :host(.c-root) {
-  --progress-start: 20%;
-  --progress-end: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -15,67 +13,8 @@ main {
   flex-grow: 1;
   width: 100%;
   height: 100%;
+  section {
+    height: 100%;
+  }
   @include container-padding;
-}
-
-.l-abstract {
-  position: absolute;
-  pointer-events: none;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
-  overflow: hidden;
-  color: var(--color-abstract);
-  @include breakpoint(lg) {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-  }
-}
-
-.orb-lines-bg {
-  opacity: 0.45;
-}
-
-.orb-lines {
-  color: color(orange);
-}
-
-.orb-lines-accent {
-  color: color(atomic);
-}
-
-.c-orb {
-  position: relative;
-  width: 480px;
-  height: 480px;
-  right: 24px;
-  margin-bottom: $layout--xl;
-  transform: skewX(-12deg);
-  svg {
-    width: inherit;
-    height: inherit;
-  }
-}
-
-.cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  width: 280px;
-  height: 280px;
-  background-color: white;
-  border-radius: 100%;
-  opacity: 0;
-  transform-origin: center center;
-  mix-blend-mode: difference;
-  backface-visibility: hidden;
-  visibility: hidden;
-  @include breakpoint(lg) {
-    visibility: visible;
-  }
 }

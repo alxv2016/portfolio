@@ -1,5 +1,5 @@
 <header #header class="header__container">
-  <div class="header__brand" aria-label="ALXV Toronto Logo" tabindex="0">
+  <button class="header__brand js-magnet" aria-label="ALXV Toronto Logo" tabindex="0" (click)="goHome()">
     <svg class="header-logo" viewBox="0 0 72 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M23.5668 22.6243V23.8553H0V22.5879L11.475 0H12.8863L23.5668 22.6243ZM16.6156 19.1132L12.0909 9.37514L7.13138 19.1132H16.6156V19.1132ZM27.9824 19.2579V0.181053H23.2047V17.1224L25.6295 22.2267L25.7386 22.4796V23.9636H36.8515V19.2579H27.9824ZM71.7842 0.144681V1.41043L61.1053 24H59.6933L48.219 1.41124V0.144681H71.785H71.7842ZM64.8331 4.92318H55.314L60.2736 14.6604L64.8347 4.92318H64.8331Z"
@@ -14,7 +14,7 @@
         fill="#FFB800"
       />
     </svg>
-  </div>
+  </button>
   <button
     (click)="toggleDarkMode()"
     #darkModeToggle
