@@ -15,9 +15,9 @@
   --color-abstract: #{neutral(grey50)};
   --color-clock-digits: #{color(sabbath)};
   --color-clock-digit-accent: #{color(hotter)};
-  --color-reveal-block1: #{neutral(grey50)};
-  --color-reveal-block2: #{neutral(grey60)};
-  --color-reveal-block3: #{neutral(grey70)};
+  --color-reveal-block1: #{color(orange)};
+  --color-reveal-block2: #{neutral(grey20)};
+  --color-reveal-block3: #{neutral(grey0)};
 }
 
 body.dark {
@@ -28,9 +28,9 @@ body.dark {
   --color-clock-digits: #{color(baby)};
   --color-clock-digit-accent: #{color(hotter)};
 
-  --color-reveal-block1: #{neutral(grey50)};
-  --color-reveal-block2: #{neutral(grey60)};
-  --color-reveal-block3: #{neutral(grey70)};
+  --color-reveal-block1: #{color(orange)};
+  --color-reveal-block2: #{neutral(grey70)};
+  --color-reveal-block3: #{neutral(grey90)};
 }
 
 body.overlay {
