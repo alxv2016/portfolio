@@ -22,14 +22,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 14px;
-    width: auto;
-    @include breakpoint(md) {
-      height: 16px;
-    }
-    @include breakpoint(lg) {
-      height: 18px;
-    }
+    height: 44px;
+    padding: 0 $spacing--sm;
   }
 }
 
@@ -38,6 +32,14 @@
   width: inherit;
   transition: color 320ms ease;
   color: var(--color-type);
+  height: 14px;
+  width: auto;
+  @include breakpoint(md) {
+    height: 16px;
+  }
+  @include breakpoint(lg) {
+    height: 18px;
+  }
 }
 
 .dark-mode-btn {

@@ -1,114 +1,116 @@
-<div class="c-home__container">
-  <div>
-    <span class="overline">{{ siteContent?.callout }}</span>
-    <h2 #headline class="headline">
-      {{ siteContent?.headline }}
-      <span class="discipline">{{ siteContent?.discipline }}</span>
-    </h2>
-    <p class="body">{{ siteContent?.content }}</p>
-    <p class="body">
-      <strong>{{ siteContent?.content_callout }}</strong>
-    </p>
+<section>
+  <div class="c-home__container">
+    <div>
+      <span class="overline">{{ siteContent?.callout }}</span>
+      <h2 #headline class="headline">
+        {{ siteContent?.headline }}
+        <span class="discipline">{{ siteContent?.discipline }}</span>
+      </h2>
+      <p class="body">{{ siteContent?.content }}</p>
+      <p class="body">
+        <strong>{{ siteContent?.content_callout }}</strong>
+      </p>
+    </div>
+    <c-social-links [siteContent]="siteContent"></c-social-links>
   </div>
-  <c-social-links [siteContent]="siteContent"></c-social-links>
-</div>
-<div #cursor class="cursor cursor--small"></div>
-<div class="l-abstract">
-  <div class="c-orb">
-    <svg viewBox="0 0 404 402" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g class="orb-lines-bg" stroke="url(#a)">
-        <path d="M1 151v100" />
-        <path d="M16 111v180" />
-        <path d="M32 86v230" />
-        <path d="M47 67v268" />
-        <path d="M63 52v298" />
-        <path d="M78 39v324" />
-        <path d="M94 29v344" />
-        <path d="M109 21v360" />
-        <path d="M125 14v374" />
-        <path d="M140 9v384" />
-        <path d="M156 5v392" />
-        <path d="M171 2v398" />
-        <path d="M187 0v402" />
-        <path d="M202 0v402" />
-        <path d="M217 0v402" />
-        <path d="M233 2v398" />
-        <path d="M248 5v392" />
-        <path d="M264 9v384" />
-        <path d="M279 14v374" />
-        <path d="M295 21v360" />
-        <path d="M310 29v344" />
-        <path d="M326 39v324" />
-        <path d="M341 52v298" />
-        <path d="M357 67v268" />
-        <path d="M372 86v230" />
-        <path d="M388 111v180" />
-        <path d="M403 151v100" />
-      </g>
-      <g class="orb-lines" stroke="currentColor">
-        <path d="M1 151v100" />
-        <path d="M16 111v180" />
-        <path d="M32 86v230" />
-        <path d="M47 67v268" />
-        <path d="M63 52v298" />
-        <path d="M78 39v324" />
-        <path d="M94 29v344" />
-        <path d="M109 21v360" />
-        <path d="M125 14v374" />
-        <path d="M140 9v384" />
-        <path d="M156 5v392" />
-        <path d="M171 2v398" />
-        <path d="M187 0v402" />
-        <path d="M202 0v402" />
-        <path d="M217 0v402" />
-        <path d="M233 2v398" />
-        <path d="M248 5v392" />
-        <path d="M264 9v384" />
-        <path d="M279 14v374" />
-        <path d="M295 21v360" />
-        <path d="M310 29v344" />
-        <path d="M326 39v324" />
-        <path d="M341 52v298" />
-        <path d="M357 67v268" />
-        <path d="M372 86v230" />
-        <path d="M388 111v180" />
-        <path d="M403 151v100" />
-      </g>
-      <g class="orb-lines-accent" stroke="currentColor">
-        <path d="M1 151v100" />
-        <path d="M16 111v180" />
-        <path d="M32 86v230" />
-        <path d="M47 67v268" />
-        <path d="M63 52v298" />
-        <path d="M78 39v324" />
-        <path d="M94 29v344" />
-        <path d="M109 21v360" />
-        <path d="M125 14v374" />
-        <path d="M140 9v384" />
-        <path d="M156 5v392" />
-        <path d="M171 2v398" />
-        <path d="M187 0v402" />
-        <path d="M202 0v402" />
-        <path d="M217 0v402" />
-        <path d="M233 2v398" />
-        <path d="M248 5v392" />
-        <path d="M264 9v384" />
-        <path d="M279 14v374" />
-        <path d="M295 21v360" />
-        <path d="M310 29v344" />
-        <path d="M326 39v324" />
-        <path d="M341 52v298" />
-        <path d="M357 67v268" />
-        <path d="M372 86v230" />
-        <path d="M388 111v180" />
-        <path d="M403 151v100" />
-      </g>
-      <defs>
-        <linearGradient id="a" x1="247" y1="397" x2="247" y2="5" gradientUnits="userSpaceOnUse">
-          <stop stop-color="currentColor" />
-          <stop stop-color="currentColor" offset="1" stop-opacity="0" />
-        </linearGradient>
-      </defs>
-    </svg>
+  <div #cursor class="cursor cursor--small"></div>
+  <div class="l-abstract">
+    <div class="c-orb">
+      <svg viewBox="0 0 404 402" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="orb-lines-bg" stroke="url(#a)">
+          <path d="M1 151v100" />
+          <path d="M16 111v180" />
+          <path d="M32 86v230" />
+          <path d="M47 67v268" />
+          <path d="M63 52v298" />
+          <path d="M78 39v324" />
+          <path d="M94 29v344" />
+          <path d="M109 21v360" />
+          <path d="M125 14v374" />
+          <path d="M140 9v384" />
+          <path d="M156 5v392" />
+          <path d="M171 2v398" />
+          <path d="M187 0v402" />
+          <path d="M202 0v402" />
+          <path d="M217 0v402" />
+          <path d="M233 2v398" />
+          <path d="M248 5v392" />
+          <path d="M264 9v384" />
+          <path d="M279 14v374" />
+          <path d="M295 21v360" />
+          <path d="M310 29v344" />
+          <path d="M326 39v324" />
+          <path d="M341 52v298" />
+          <path d="M357 67v268" />
+          <path d="M372 86v230" />
+          <path d="M388 111v180" />
+          <path d="M403 151v100" />
+        </g>
+        <g class="orb-lines" stroke="currentColor">
+          <path d="M1 151v100" />
+          <path d="M16 111v180" />
+          <path d="M32 86v230" />
+          <path d="M47 67v268" />
+          <path d="M63 52v298" />
+          <path d="M78 39v324" />
+          <path d="M94 29v344" />
+          <path d="M109 21v360" />
+          <path d="M125 14v374" />
+          <path d="M140 9v384" />
+          <path d="M156 5v392" />
+          <path d="M171 2v398" />
+          <path d="M187 0v402" />
+          <path d="M202 0v402" />
+          <path d="M217 0v402" />
+          <path d="M233 2v398" />
+          <path d="M248 5v392" />
+          <path d="M264 9v384" />
+          <path d="M279 14v374" />
+          <path d="M295 21v360" />
+          <path d="M310 29v344" />
+          <path d="M326 39v324" />
+          <path d="M341 52v298" />
+          <path d="M357 67v268" />
+          <path d="M372 86v230" />
+          <path d="M388 111v180" />
+          <path d="M403 151v100" />
+        </g>
+        <g class="orb-lines-accent" stroke="currentColor">
+          <path d="M1 151v100" />
+          <path d="M16 111v180" />
+          <path d="M32 86v230" />
+          <path d="M47 67v268" />
+          <path d="M63 52v298" />
+          <path d="M78 39v324" />
+          <path d="M94 29v344" />
+          <path d="M109 21v360" />
+          <path d="M125 14v374" />
+          <path d="M140 9v384" />
+          <path d="M156 5v392" />
+          <path d="M171 2v398" />
+          <path d="M187 0v402" />
+          <path d="M202 0v402" />
+          <path d="M217 0v402" />
+          <path d="M233 2v398" />
+          <path d="M248 5v392" />
+          <path d="M264 9v384" />
+          <path d="M279 14v374" />
+          <path d="M295 21v360" />
+          <path d="M310 29v344" />
+          <path d="M326 39v324" />
+          <path d="M341 52v298" />
+          <path d="M357 67v268" />
+          <path d="M372 86v230" />
+          <path d="M388 111v180" />
+          <path d="M403 151v100" />
+        </g>
+        <defs>
+          <linearGradient id="a" x1="247" y1="397" x2="247" y2="5" gradientUnits="userSpaceOnUse">
+            <stop stop-color="currentColor" />
+            <stop stop-color="currentColor" offset="1" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
   </div>
-</div>
+</section>

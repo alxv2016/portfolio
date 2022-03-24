@@ -1,11 +1,16 @@
 /* Typography styles */
 p {
-  font-size: $body--2;
+  // font-size: $body--2;
+  // @include breakpoint(md) {
+  //   font-size: $body--1;
+  // }
+  font-size: $body--1;
   @include breakpoint(md) {
-    font-size: $body--1;
+    font-size: $subtitle;
   }
   strong {
-    color: color('volt');
+    color: currentColor;
+    font-weight: font-weight(bold);
   }
 }
 

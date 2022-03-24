@@ -58,18 +58,18 @@ export class RevealComponent implements AfterViewInit {
         .to(revealBlocks, {
           y: 0,
           stagger: {
-            each: 0.25,
+            each: 0.125,
             from: 'start',
           },
-          ease: 'power3.out',
+          ease: 'power4.out',
         })
         .to(revealBlocks, {
           yPercent: reverse ? 100 : -100,
           stagger: {
-            each: 0.25,
+            each: 0.125,
             from: 'end',
           },
-          ease: 'power3.out',
+          ease: 'power4.out',
           onStart: () => {
             this.animationState$.next(true);
           },

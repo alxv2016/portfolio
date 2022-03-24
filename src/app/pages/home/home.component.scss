@@ -8,6 +8,7 @@
   width: 100%;
   padding-top: $layout--lg;
   user-select: none;
+  padding-bottom: $layout--2xl;
   @include breakpoint(sm) {
     padding-top: $layout--xl;
   }
@@ -42,7 +43,7 @@
 .headline {
   position: relative;
   display: inline-block;
-  font-weight: font-weight('black');
+  font-weight: 900;
   font-size: $title--2;
   line-height: $heading-line-height;
   margin-bottom: $spacing--2xl;
@@ -54,13 +55,6 @@
   }
   @include breakpoint(lg) {
     font-size: $huge--title;
-  }
-}
-
-.body {
-  font-size: $body--1;
-  @include breakpoint(md) {
-    font-size: $subtitle;
   }
 }
 

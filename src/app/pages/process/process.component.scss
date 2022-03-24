@@ -1,0 +1,118 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-process) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding-top: $layout--lg;
+  user-select: none;
+  padding-bottom: $layout--2xl;
+  @include breakpoint(sm) {
+    padding-top: $layout--xl;
+  }
+  @include breakpoint(md) {
+    padding-top: $layout--2xl;
+  }
+  section ~ section {
+    margin-top: $layout--2xl;
+  }
+}
+
+.c-process {
+  &__container {
+    order: 1;
+    width: 100%;
+    max-width: 728px;
+    @include breakpoint(md) {
+      order: 0;
+    }
+  }
+}
+
+.overline {
+  display: inline-block;
+  line-height: $heading-line-height;
+  font-weight: font-weight(bold);
+  font-size: $body--1;
+  margin-bottom: $spacing--xs;
+  @include breakpoint(md) {
+    font-size: $subtitle;
+  }
+}
+
+.headline {
+  position: relative;
+  display: inline-block;
+  font-weight: 900;
+  font-size: $title--2;
+  line-height: $heading-line-height;
+  margin-bottom: $spacing--2xl;
+  @include breakpoint(sm) {
+    font-size: $title--1;
+  }
+  @include breakpoint(md) {
+    font-size: $large--title;
+  }
+  @include breakpoint(lg) {
+    font-size: $huge--title;
+  }
+}
+
+.sub-headline {
+  position: relative;
+  display: inline-block;
+  font-weight: 900;
+  font-size: $title--2;
+  line-height: $heading-line-height;
+  margin-bottom: $spacing--2xl;
+  @include breakpoint(sm) {
+    font-size: $title--1;
+  }
+  @include breakpoint(md) {
+    font-size: $large--title;
+  }
+}
+
+.discipline {
+  position: relative;
+  display: inline-block;
+  text-decoration: underline color(orange);
+  text-decoration-thickness: 6px;
+}
+
+.c-process-grid {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  width: 100%;
+  @include breakpoint(md) {
+    flex-direction: row;
+  }
+  &__col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    @include breakpoint(md) {
+      width: auto;
+    }
+  }
+  &__col ~ &__col {
+    padding-top: $spacing--xl;
+    @include breakpoint(md) {
+      padding-top: 0;
+      padding-left: $spacing--3xl;
+    }
+  }
+}
+
+.animation {
+  position: relative;
+  align-self: center;
+  height: 200px;
+  width: 200px;
+  border: 1px solid red;
+}

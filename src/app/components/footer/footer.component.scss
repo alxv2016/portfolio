@@ -1,17 +1,26 @@
 @import '../../../scss/00_imports';
 
 :host-context(.c-footer) {
-  position: relative;
-  display: block;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: 0;
   width: 100%;
-  @include container-padding;
+  padding: $spacing--xl 0;
+  pointer-events: none;
 }
 
 .c-footer {
   &__nav {
     position: relative;
     width: 100%;
-    padding: $spacing--lg 0;
+    pointer-events: auto;
+    @include container-padding;
+    @include frosted-glass(neutral(grey10), 0.75);
+    border: 1px solid rgba(neutral(grey80), 0.025);
+    @include breakpoint(md) {
+      border-radius: $spacing--xs;
+    }
   }
 
   &__list {
@@ -20,8 +29,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    padding: $spacing--xs 0;
     width: 100%;
-    max-width: 568px;
+    max-width: 768px;
+    margin: auto;
   }
 
   &-link {
@@ -31,5 +42,12 @@
     line-height: 1.25;
     min-height: 44px;
     padding: $spacing--xs $spacing--md;
+  }
+}
+
+body.dark {
+  :host-context(.c-footer) .c-footer__nav {
+    @include frosted-glass(neutral(grey90), 0.75);
+    border: 1px solid rgba(neutral(grey0), 0.025);
   }
 }
