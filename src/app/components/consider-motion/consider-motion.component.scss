@@ -1,0 +1,6 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-consider-motion) {
+  position: relative;
+  display: block;
+}

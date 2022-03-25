@@ -22,6 +22,7 @@ import {ConsiderMotionComponent} from './consider-motion/consider-motion.compone
   imports: [CommonModule, BottomPaneModule],
   exports: [
     RelationshipMotionComponent,
+    ConsiderMotionComponent,
     HeaderComponent,
     SocialLinksComponent,
     FooterComponent,
