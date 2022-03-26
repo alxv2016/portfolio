@@ -21,7 +21,6 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.contentService.siteContent$.pipe(takeUntil(this.unsubscribe$)).subscribe((resp) => {
       this.siteContent = resp;
-      console.log(resp);
     });
   }
 

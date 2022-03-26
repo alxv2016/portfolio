@@ -11,11 +11,16 @@
 }
 
 .c-footer {
+  &__container {
+    position: relative;
+    width: 100%;
+    @include container-padding;
+  }
   &__nav {
     position: relative;
     width: 100%;
     pointer-events: auto;
-    @include container-padding;
+    max-width: 475px;
     @include frosted-glass(neutral(grey10), 0.75);
     border: 1px solid rgba(neutral(grey80), 0.025);
     @include breakpoint(md) {
@@ -29,9 +34,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: $spacing--xs 0;
-    width: 100%;
-    max-width: 768px;
+    padding: $spacing--xs $spacing--md;
     margin: auto;
   }
 

@@ -11,7 +11,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import {Subject, takeUntil} from 'rxjs';
+import {filter, Subject, takeUntil} from 'rxjs';
 import {AppComponent} from 'src/app/app.component';
 import {AlxvCollection, Sitelink} from 'src/app/services/models/content.interface';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
@@ -19,7 +19,7 @@ import * as moment from 'moment';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
 import {AboutContentComponent} from '../about-content/about-content.component';
 import {RevealService} from '../reveal/reveal.service';
-import {Router} from '@angular/router';
+import {Router, RouterEvent} from '@angular/router';
 
 @Component({
   selector: 'c-footer',
@@ -65,6 +65,8 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     const parent = this.inject.get<AppComponent>(AppComponent);
     this.bottomPaneService.getBottomPaneHost(parent.bottomPaneHost.viewContainerRef);
     this.revealService.getRevealHost(parent.revealHost.viewContainerRef);
+    // console.log(this.router.isActiveMatchOptions());
+    this.router.events.pipe(filter((e) => e instanceof RouterEvent)).subscribe((e) => console.log(e));
   }
 
   openBottomPane(link: Sitelink): void {

@@ -1,11 +1,13 @@
-<nav class="c-footer__nav">
-  <h2 class="sr-only">{{ siteContent?.navigation_title }}</h2>
-  <ul class="c-footer__list">
-    <li class="c-footer__list-item">
-      <button class="c-footer-link" (click)="openClock()">{{ timeNow }}</button>
-    </li>
-    <li class="c-footer__list-item" *ngFor="let link of siteContent?.site_links">
-      <button class="c-footer-link" (click)="openBottomPane(link)">{{ link.link }}</button>
-    </li>
-  </ul>
-</nav>
+<div class="c-footer__container">
+  <nav class="c-footer__nav">
+    <h2 class="sr-only">{{ siteContent?.navigation_title }}</h2>
+    <ul class="c-footer__list">
+      <li class="c-footer__list-item">
+        <button class="c-footer-link" (click)="openClock()">{{ timeNow }}</button>
+      </li>
+      <li class="c-footer__list-item" *ngFor="let link of siteContent?.site_links">
+        <button class="c-footer-link" (click)="openBottomPane(link)">{{ link.link }}</button>
+      </li>
+    </ul>
+  </nav>
+</div>

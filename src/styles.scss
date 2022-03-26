@@ -47,3 +47,51 @@ body.overlay {
   white-space: nowrap;
   width: 1px;
 }
+
+.headline {
+  position: relative;
+  display: inline-block;
+  font-weight: 900;
+  font-size: $title--2;
+  line-height: $heading-line-height;
+  margin-bottom: $spacing--2xl;
+  @include breakpoint(sm) {
+    font-size: $title--1;
+  }
+  @include breakpoint(md) {
+    font-size: $large--title;
+  }
+  @include breakpoint(lg) {
+    font-size: $huge--title;
+  }
+  em {
+    font-style: normal;
+    position: relative;
+    display: inline-block;
+    text-decoration: underline color(orange);
+    text-decoration-thickness: 6px;
+  }
+}
+
+.sub-headline {
+  position: relative;
+  display: inline-block;
+  font-weight: 900;
+  font-size: $title--2;
+  line-height: $heading-line-height;
+  margin-bottom: $spacing--2xl;
+  em {
+    font-style: normal;
+    position: relative;
+    display: inline-block;
+    text-decoration: underline color(orange);
+    text-decoration-thickness: 6px;
+  }
+
+  @include breakpoint(sm) {
+    font-size: $title--1;
+  }
+  @include breakpoint(md) {
+    font-size: $large--title;
+  }
+}
