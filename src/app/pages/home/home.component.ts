@@ -1,21 +1,14 @@
 import {
-  AfterViewChecked,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
   HostBinding,
   NgZone,
-  OnChanges,
   OnDestroy,
   OnInit,
-  QueryList,
-  Renderer2,
-  SimpleChanges,
-  ViewChild,
-  ViewChildren,
 } from '@angular/core';
-import {fromEvent, map, Observable, Subject, switchMap, takeUntil, throttleTime} from 'rxjs';
+import {fromEvent, map, Observable, Subject, takeUntil, throttleTime} from 'rxjs';
 import {ContentService} from 'src/app/services/content.service';
 import {AlxvCollection} from 'src/app/services/models/content.interface';
 import {gsap} from 'gsap';
@@ -27,51 +20,20 @@ import {gsap} from 'gsap';
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject();
-  mouseMove$!: Observable<any>;
   siteContent?: AlxvCollection;
-  headline?: HTMLElement | null;
-  eventHandlers: any[] = [];
   @HostBinding('class') class = 'c-home';
-  @ViewChildren('section', {read: QueryList}) section!: QueryList<ElementRef>;
-  @ViewChild('cursor') cursor!: ElementRef;
   constructor(
     private element: ElementRef,
-    private render: Renderer2,
     private contentService: ContentService,
     private zone: NgZone,
     private changeRef: ChangeDetectorRef
   ) {}
 
-  // private headlinerHover(cursor: HTMLElement, headliner: HTMLElement): void {
-  //   const mouseEnterEv = this.render.listen(headliner, 'mouseenter', (e) => {
-  //     gsap.to(cursor, {
-  //       scale: 1,
-  //       ease: 'back',
-  //       opacity: 1,
-  //     });
-  //   });
-
-  //   const mouseLeaveEv = this.render.listen(headliner, 'mouseleave', (e) => {
-  //     gsap.to(cursor, {
-  //       scale: 0.025,
-  //       ease: 'back',
-  //       opacity: 0,
-  //     });
-  //   });
-
-  //   this.eventHandlers.push(mouseEnterEv, mouseLeaveEv);
-  // }
-
-  private mouseMove() {
-    this.mouseMove$ = fromEvent<MouseEvent>(window, 'mousemove').pipe(
+  private mouseEvent(): Observable<any> {
+    return fromEvent<MouseEvent>(window, 'mousemove').pipe(
       throttleTime(60),
-      switchMap((ev) => {
-        // switchmap to siteContent$ for to capture elements not yet loaded in DOM
-        return this.contentService.siteContent$.pipe(
-          map((_) => {
-            return {x: ev.clientX, y: ev.clientY};
-          })
-        );
+      map((ev) => {
+        return {x: ev.clientX, y: ev.clientY};
       })
     );
   }
@@ -102,14 +64,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.mouseMove();
     this.contentService.siteContent$.pipe(takeUntil(this.unsubscribe$)).subscribe((resp) => {
+      this.changeRef.detectChanges();
       this.siteContent = resp;
-      this.headline = this.element.nativeElement.querySelector('.headline');
     });
   }
 
-  private initAbastract() {
+  private applyLineStrokes() {
     const lines = this.element.nativeElement.querySelectorAll('.orb-lines > path');
     const linesAccent = this.element.nativeElement.querySelectorAll('.orb-lines-accent > path');
     if (lines) {
@@ -129,31 +90,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    const abstract = this.initAbastract();
-    // const cursor = this.cursor.nativeElement;
-    // const boudings = cursor.getBoundingClientRect();
-    // if (cursor) {
-    //   gsap.set(cursor, {
-    //     scale: 0.025,
-    //   });
-    // }
-
+    const abstract = this.applyLineStrokes();
     // run outside of angular's change detection
     this.zone.runOutsideAngular(() => {
-      this.mouseMove$.pipe(takeUntil(this.unsubscribe$)).subscribe((m) => {
-        this.animateAbstract(abstract.lines, abstract.linesAccent, m);
-        // gsap.to(cursor, {
-        //   x: m.x - boudings.width / 2,
-        //   y: m.y - boudings.height / 2,
-        //   ease: 'ease',
-        // });
-      });
+      this.mouseEvent()
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((m) => {
+          this.animateAbstract(abstract.lines, abstract.linesAccent, m);
+        });
     });
-    //this.headlinerHover(cursor, this.headline);
   }
 
   ngOnDestroy(): void {
-    this.eventHandlers.forEach((fn) => fn());
     this.unsubscribe$.next(0);
     this.unsubscribe$.complete();
   }

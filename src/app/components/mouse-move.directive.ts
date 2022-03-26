@@ -1,15 +1,13 @@
-import {AfterViewInit, Directive, ElementRef, NgZone, OnInit} from '@angular/core';
-import {fromEvent, map, Observable, switchMap, throttleTime} from 'rxjs';
+import {AfterViewInit, Directive, ElementRef, NgZone} from '@angular/core';
+import {fromEvent, map, Observable, throttleTime} from 'rxjs';
 import {gsap} from 'gsap';
-import {ContentService} from '../services/content.service';
 
 @Directive({
-  selector: '[appMouseMove]',
+  selector: '[mouseMove]',
 })
-export class MouseMoveDirective implements OnInit, AfterViewInit {
-  $mouseMove!: Observable<any>;
+export class MouseMoveDirective implements AfterViewInit {
   parent = this.element.nativeElement.ownerDocument;
-  constructor(private element: ElementRef, private zone: NgZone, private contentService: ContentService) {}
+  constructor(private element: ElementRef, private zone: NgZone) {}
 
   private powerMagnets(els: any, pos: any) {
     els.forEach((el: HTMLElement) => {
@@ -40,18 +38,13 @@ export class MouseMoveDirective implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit(): void {
-    this.$mouseMove = fromEvent<MouseEvent>(window, 'mousemove').pipe(
+  private mouseEvent(): Observable<any> {
+    return fromEvent<MouseEvent>(window, 'mousemove').pipe(
       throttleTime(60),
-      switchMap((ev) => {
-        // switchmap to siteContent$ for to capture elements not yet loaded in DOM
-        return this.contentService.siteContent$.pipe(
-          map((_) => {
-            const targets = this.parent.querySelectorAll('.js-magnet');
-            const magnets = Array.from(targets);
-            return {x: ev.clientX, y: ev.clientY, magnets};
-          })
-        );
+      map((ev) => {
+        const targets = this.parent.querySelectorAll('.js-magnet');
+        const magnets = Array.from(targets);
+        return {x: ev.clientX, y: ev.clientY, magnets};
       })
     );
   }
@@ -59,7 +52,7 @@ export class MouseMoveDirective implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Get mousemove event and elements outside of Angular's change detection for performance
     this.zone.runOutsideAngular(() => {
-      this.$mouseMove.subscribe((m) => {
+      this.mouseEvent().subscribe((m) => {
         if (m.magnets.length !== 0) {
           this.powerMagnets(m.magnets, m);
         }

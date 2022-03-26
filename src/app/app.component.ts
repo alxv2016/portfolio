@@ -1,21 +1,6 @@
-import {
-  AfterContentChecked,
-  AfterViewInit,
-  Component,
-  ElementRef,
-  HostBinding,
-  Injector,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {Subject, switchMap, takeUntil} from 'rxjs';
+import {AfterContentChecked, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
+import {switchMap} from 'rxjs';
 import {BottomPaneDirective} from './components/bottom-pane/bottom-pane.directive';
-import {NotificationDirective} from './components/notification/notification.directive';
-import {NotificationService} from './components/notification/notification.service';
 import {RevealDirective} from './components/reveal/reveal.directive';
 import {ContentService} from './services/content.service';
 import {AlxvCollection} from './services/models/content.interface';
@@ -25,43 +10,23 @@ import {AlxvCollection} from './services/models/content.interface';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked {
-  private unsubscribe$ = new Subject();
+export class AppComponent implements OnInit, AfterContentChecked {
   siteContent?: AlxvCollection;
   @HostBinding('class') class = 'c-root';
-  @ViewChild('darkModeToggle') darkModeToggle!: ElementRef;
-  @ViewChild(NotificationDirective, {static: true}) notificationHost!: NotificationDirective;
   @ViewChild(BottomPaneDirective, {static: true}) bottomPaneHost!: BottomPaneDirective;
   @ViewChild(RevealDirective, {static: true}) revealHost!: RevealDirective;
-  constructor(
-    private element: ElementRef,
-    private render: Renderer2,
-    private contentService: ContentService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private contentService: ContentService) {}
 
   ngOnInit(): void {
     this.contentService
       .getSiteContent()
-      .pipe(
-        switchMap((_) => this.contentService.siteContent$),
-        takeUntil(this.unsubscribe$)
-      )
+      .pipe(switchMap((_) => this.contentService.siteContent$))
       .subscribe((resp) => {
         this.siteContent = resp;
       });
   }
 
   ngAfterContentChecked(): void {
-    console.log('hi');
-  }
-
-  ngAfterViewInit(): void {
-    // this.notificationService.hookOnHost(this.bottomPaneHost.viewContainerRef);
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next(0);
-    this.unsubscribe$.complete();
+    console.log('change detection went off');
   }
 }
