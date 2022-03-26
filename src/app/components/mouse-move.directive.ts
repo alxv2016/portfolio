@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, ElementRef, NgZone, OnInit, Renderer2} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, NgZone, OnInit} from '@angular/core';
 import {fromEvent, map, Observable, switchMap, throttleTime} from 'rxjs';
 import {gsap} from 'gsap';
 import {ContentService} from '../services/content.service';
@@ -9,12 +9,7 @@ import {ContentService} from '../services/content.service';
 export class MouseMoveDirective implements OnInit, AfterViewInit {
   $mouseMove!: Observable<any>;
   parent = this.element.nativeElement.ownerDocument;
-  constructor(
-    private render: Renderer2,
-    private element: ElementRef,
-    private zone: NgZone,
-    private contentService: ContentService
-  ) {}
+  constructor(private element: ElementRef, private zone: NgZone, private contentService: ContentService) {}
 
   private powerMagnets(els: any, pos: any) {
     els.forEach((el: HTMLElement) => {
@@ -46,29 +41,29 @@ export class MouseMoveDirective implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // Get mousemove event and elements outside of Angular's change detection for performance
-    this.zone.runOutsideAngular(() => {
-      this.$mouseMove = fromEvent<MouseEvent>(window, 'mousemove').pipe(
-        throttleTime(60),
-        switchMap((ev) => {
-          // switchmap to siteContent$ for to capture elements not yet loaded in DOM
-          return this.contentService.siteContent$.pipe(
-            map((_) => {
-              const targets = this.parent.querySelectorAll('.js-magnet');
-              const magnets = Array.from(targets);
-              return {x: ev.clientX, y: ev.clientY, magnets};
-            })
-          );
-        })
-      );
-    });
+    this.$mouseMove = fromEvent<MouseEvent>(window, 'mousemove').pipe(
+      throttleTime(60),
+      switchMap((ev) => {
+        // switchmap to siteContent$ for to capture elements not yet loaded in DOM
+        return this.contentService.siteContent$.pipe(
+          map((_) => {
+            const targets = this.parent.querySelectorAll('.js-magnet');
+            const magnets = Array.from(targets);
+            return {x: ev.clientX, y: ev.clientY, magnets};
+          })
+        );
+      })
+    );
   }
 
   ngAfterViewInit(): void {
-    this.$mouseMove.subscribe((m) => {
-      if (m.magnets.length !== 0) {
-        this.powerMagnets(m.magnets, m);
-      }
+    // Get mousemove event and elements outside of Angular's change detection for performance
+    this.zone.runOutsideAngular(() => {
+      this.$mouseMove.subscribe((m) => {
+        if (m.magnets.length !== 0) {
+          this.powerMagnets(m.magnets, m);
+        }
+      });
     });
   }
 }

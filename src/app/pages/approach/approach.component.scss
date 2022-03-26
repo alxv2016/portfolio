@@ -15,8 +15,52 @@
   @include breakpoint(md) {
     padding-top: $layout--2xl;
   }
+  section {
+    position: relative;
+  }
   section ~ section {
     margin-top: $layout--2xl;
+  }
+}
+
+.l-content--hide {
+  --a-start: 0%;
+  --a-end: 0%;
+  &::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+      355deg,
+      rgba(neutral('grey90'), 1) var(--a-start),
+      rgba(neutral('grey90'), 0) var(--a-end)
+    );
+    will-change: transform;
+  }
+}
+
+.l-content--reveal {
+  --a-start: 0%;
+  --a-end: 0%;
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+      175deg,
+      rgba(neutral('grey90'), 0) var(--a-start),
+      rgba(neutral('grey90'), 1) var(--a-end)
+    );
+    transform-origin: bottom center;
+    will-change: transform;
   }
 }
 

@@ -1,33 +1,18 @@
-import {
-  AfterViewInit,
-  Component,
-  HostBinding,
-  Injector,
-  Input,
-  NgZone,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
-import {filter, Subject, takeUntil} from 'rxjs';
+import {AfterViewInit, ChangeDetectorRef, Component, HostBinding, Injector, Input, NgZone, OnInit} from '@angular/core';
 import {AppComponent} from 'src/app/app.component';
 import {AlxvCollection, Sitelink} from 'src/app/services/models/content.interface';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
-import * as moment from 'moment';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
-import {AboutContentComponent} from '../about-content/about-content.component';
 import {RevealService} from '../reveal/reveal.service';
-import {Router, RouterEvent} from '@angular/router';
+import {Router} from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'c-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
-  private unsubscribe$ = new Subject();
+export class FooterComponent implements OnInit, AfterViewInit {
   timeNow: string = '00:00:00';
   @Input() siteContent?: AlxvCollection;
   @HostBinding('class') class = 'c-footer';
@@ -35,25 +20,28 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     private bottomPaneService: BottomPaneService,
     private revealService: RevealService,
     private inject: Injector,
-    private render: Renderer2,
     private router: Router,
-    private zone: NgZone
+    private zone: NgZone,
+    private changeRef: ChangeDetectorRef
   ) {
     this.initClock = this.initClock.bind(this);
   }
 
   private initClock() {
     const now = moment();
-    // const seconds = now.format('ss');
+    const seconds = now.format('ss');
     const minutes = now.format('mm');
     const hours = now.format('h');
     const meridian = now.format('A');
-    this.timeNow = `${hours}:${minutes} ${meridian}`;
+    this.timeNow = `${hours}:${minutes}:${seconds} ${meridian}`;
+    // Only trigger angular change detection here
+    this.changeRef.detectChanges();
     requestAnimationFrame(this.initClock);
   }
 
   ngOnInit(): void {
-    this.initClock();
+    // Run requestAnimationFrame outside angular change detection
+    this.zone.runOutsideAngular(() => this.initClock());
   }
 
   private sendEmail(email: string, subject: string): void {
@@ -65,25 +53,20 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
     const parent = this.inject.get<AppComponent>(AppComponent);
     this.bottomPaneService.getBottomPaneHost(parent.bottomPaneHost.viewContainerRef);
     this.revealService.getRevealHost(parent.revealHost.viewContainerRef);
-    // console.log(this.router.isActiveMatchOptions());
-    this.router.events.pipe(filter((e) => e instanceof RouterEvent)).subscribe((e) => console.log(e));
   }
 
   openBottomPane(link: Sitelink): void {
     switch (true) {
-      case link.link_id === 'approach':
-        // this.bottomPaneService.createBottomPane(AboutContentComponent, link.link, this.siteContent?.about_content);
+      case link.link_id === 'approach' && this.router.url !== `/${link.link_id}`:
         this.revealService.createReveal(false);
-        this.revealService
-          .getAnimationState()
-          .pipe(takeUntil(this.unsubscribe$))
-          .subscribe((state) => {
-            this.zone.run(() => {
-              if (state) {
-                this.router.navigate(['approach']);
-              }
-            });
+        this.revealService.getAnimationState().subscribe((state: boolean) => {
+          // need to trigger zone because reveal animations runs outside of ngZone (GSAP)
+          this.zone.run(() => {
+            if (state) {
+              this.router.navigate(['approach']);
+            }
           });
+        });
         break;
       case link.link_id === 'playground':
         // console.log('playground');
@@ -99,10 +82,5 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openClock(): void {
     this.bottomPaneService.createBottomPane(AestheticClockComponent, null, this.siteContent?.time_quote);
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next(0);
-    this.unsubscribe$.complete();
   }
 }

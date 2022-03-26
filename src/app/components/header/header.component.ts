@@ -1,6 +1,15 @@
-import {AfterViewInit, Component, ElementRef, HostBinding, NgZone, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostBinding,
+  NgZone,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import {Router} from '@angular/router';
-import {fromEvent, map, throttleTime} from 'rxjs';
 import {DarkModeService} from 'src/app/services/dark-mode.service';
 import {RevealService} from '../reveal/reveal.service';
 
@@ -8,6 +17,7 @@ import {RevealService} from '../reveal/reveal.service';
   selector: 'c-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements AfterViewInit {
   htmlBody = this.element.nativeElement.parentElement.parentElement;

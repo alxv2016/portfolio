@@ -1,4 +1,4 @@
-<section *ngFor="let p of siteContent?.approach">
+<section *ngFor="let p of siteContent?.approach; index as i">
   <div class="c-process__container">
     <span class="overline" *ngIf="p.approach_callout">{{ p.approach_callout }}</span>
     <div [innerHTML]="p.approach_content | asHTML"></div>

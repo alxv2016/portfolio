@@ -8,10 +8,7 @@ import {Prismic} from './models/prismic.interface';
 const initialState: AlxvCollection = {
   page_title: null,
   callout: null,
-  headline: null,
-  discipline: null,
   content: null,
-  content_callout: null,
   social_media_title: null,
   social_links: null,
   navigation_title: null,

@@ -30,16 +30,13 @@ interface Result {
 export interface AlxvCollection {
   page_title: string | null;
   callout: string | null;
-  headline: string | null;
-  discipline: string | null;
-  content: string | null;
-  content_callout: string | null;
+  content: Content[] | null;
   social_media_title: string | null;
   social_links: Sociallink[] | null;
   navigation_title: string | null;
-  site_links: Sitelink[] | null;
-  about_content: AboutContent[] | null;
   time_quote: string | null;
+  site_links: Sitelink[] | null;
+  about_content: Aboutcontent[] | null;
   approach: Approach[] | null;
 }
 
@@ -79,4 +76,14 @@ interface Span {
   start: number;
   end: number;
   type: string;
+}
+
+interface Aboutcontent {
+  paragraph: string;
+}
+
+interface Content {
+  type: string;
+  text: string;
+  spans: Span[];
 }

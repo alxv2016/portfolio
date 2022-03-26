@@ -1,10 +1,12 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostBinding,
   Input,
   NgZone,
+  OnDestroy,
   OnInit,
   QueryList,
   ViewChildren,
@@ -17,17 +19,18 @@ import * as moment from 'moment';
   templateUrl: './aesthetic-clock.component.html',
   styleUrls: ['./aesthetic-clock.component.scss'],
 })
-export class AestheticClockComponent implements OnInit, AfterViewInit {
+export class AestheticClockComponent implements OnInit, AfterViewInit, OnDestroy {
   seconds?: string | null;
   minutes?: string | null;
   hours?: string | null;
   todaysDate?: string | null;
   meridian?: string | null;
+  test: any;
   @ViewChildren('digit', {read: ElementRef}) digit!: QueryList<ElementRef>;
   @ViewChildren('colon', {read: ElementRef}) colon!: QueryList<ElementRef>;
   @Input() data: any;
   @HostBinding('class') class = 'c-clock';
-  constructor(private ngZone: NgZone) {
+  constructor(private ngZone: NgZone, private changeRef: ChangeDetectorRef) {
     this.initGSAP = this.initGSAP.bind(this);
     this.initClock = this.initClock.bind(this);
   }
@@ -43,10 +46,11 @@ export class AestheticClockComponent implements OnInit, AfterViewInit {
     this.minutes = now.format('mm');
     this.hours = now.format('hh');
     this.meridian = now.format('A');
-    requestAnimationFrame(this.initClock);
     const time = Math.floor(Number(this.seconds)) * 10;
     let sec = time % 30;
+    this.changeRef.detectChanges();
     this.initGSAP(sec);
+    requestAnimationFrame(this.initClock);
   }
 
   private initGSAP(time: number): void {
@@ -60,8 +64,10 @@ export class AestheticClockComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.ngZone.runOutsideAngular(() => {
-      requestAnimationFrame(this.initClock);
-    });
+    this.ngZone.runOutsideAngular(() => this.initClock());
+  }
+
+  ngOnDestroy(): void {
+    // cancelAnimationFrame(this.test);
   }
 }

@@ -1,4 +1,5 @@
 import {
+  AfterContentChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -10,6 +11,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 import {Subject, switchMap, takeUntil} from 'rxjs';
 import {BottomPaneDirective} from './components/bottom-pane/bottom-pane.directive';
 import {NotificationDirective} from './components/notification/notification.directive';
@@ -23,12 +25,11 @@ import {AlxvCollection} from './services/models/content.interface';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked {
   private unsubscribe$ = new Subject();
   siteContent?: AlxvCollection;
   @HostBinding('class') class = 'c-root';
   @ViewChild('darkModeToggle') darkModeToggle!: ElementRef;
-  @ViewChild('pixiCanvas') pixiCanvas!: ElementRef;
   @ViewChild(NotificationDirective, {static: true}) notificationHost!: NotificationDirective;
   @ViewChild(BottomPaneDirective, {static: true}) bottomPaneHost!: BottomPaneDirective;
   @ViewChild(RevealDirective, {static: true}) revealHost!: RevealDirective;
@@ -49,6 +50,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe((resp) => {
         this.siteContent = resp;
       });
+  }
+
+  ngAfterContentChecked(): void {
+    console.log('hi');
   }
 
   ngAfterViewInit(): void {

@@ -1,6 +1,4 @@
-import {AfterViewInit, Component, HostBinding, NgZone, OnDestroy, OnInit} from '@angular/core';
-import {gsap} from 'gsap';
-import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import {Component, ElementRef, HostBinding, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from 'rxjs';
 import {ContentService} from 'src/app/services/content.service';
 import {AlxvCollection} from 'src/app/services/models/content.interface';
@@ -10,22 +8,16 @@ import {AlxvCollection} from 'src/app/services/models/content.interface';
   templateUrl: './approach.component.html',
   styleUrls: ['./approach.component.scss'],
 })
-export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ApproachComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject();
   siteContent?: AlxvCollection;
   @HostBinding('class') class = 'c-approach';
-  constructor(private zone: NgZone, private contentService: ContentService) {
-    gsap.registerPlugin(ScrollTrigger);
-  }
+  constructor(private contentService: ContentService) {}
 
   ngOnInit(): void {
     this.contentService.siteContent$.pipe(takeUntil(this.unsubscribe$)).subscribe((resp) => {
       this.siteContent = resp;
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.zone.runOutsideAngular(() => {});
   }
 
   ngOnDestroy(): void {
