@@ -18,6 +18,7 @@ const initialState: AlxvCollection = {
   site_links: null,
   about_content: null,
   time_quote: null,
+  approach: null,
 };
 
 @Injectable({

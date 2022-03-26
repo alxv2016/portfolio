@@ -40,6 +40,7 @@ export interface AlxvCollection {
   site_links: Sitelink[] | null;
   about_content: AboutContent[] | null;
   time_quote: string | null;
+  approach: Approach[] | null;
 }
 
 export interface Sitelink {
@@ -61,4 +62,21 @@ interface Socialmedialink {
   link_type: string;
   url: string;
   target: string;
+}
+
+interface Approach {
+  approach_callout?: string;
+  approach_content: Approachcontent[];
+}
+
+interface Approachcontent {
+  type: string;
+  text: string;
+  spans: Span[];
+}
+
+interface Span {
+  start: number;
+  end: number;
+  type: string;
 }

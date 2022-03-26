@@ -69,8 +69,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openBottomPane(link: Sitelink): void {
     switch (true) {
-      case link.link_id === 'process':
-        console.log('process');
+      case link.link_id === 'approach':
         // this.bottomPaneService.createBottomPane(AboutContentComponent, link.link, this.siteContent?.about_content);
         this.revealService.createReveal(false);
         this.revealService
@@ -79,7 +78,7 @@ export class FooterComponent implements OnInit, AfterViewInit, OnDestroy {
           .subscribe((state) => {
             this.zone.run(() => {
               if (state) {
-                this.router.navigate(['process']);
+                this.router.navigate(['approach']);
               }
             });
           });

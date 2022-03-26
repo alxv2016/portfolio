@@ -1,0 +1,16 @@
+<section *ngFor="let p of siteContent?.approach">
+  <div class="c-process__container">
+    <div>
+      <span class="overline" *ngIf="p.approach_callout">{{ p.approach_callout }}</span>
+      <ng-container *ngFor="let p2 of p.approach_content">
+        <h2 class="headline" *ngIf="p2.type === 'heading2'">
+          {{ p2.text }}
+        </h2>
+        <h3 class="sub-headline" *ngIf="p2.type === 'heading3'">
+          {{ p2.text }}
+        </h3>
+        <p *ngIf="p2.type === 'paragraph'">{{ p2.text }}</p>
+      </ng-container>
+    </div>
+  </div>
+</section>
