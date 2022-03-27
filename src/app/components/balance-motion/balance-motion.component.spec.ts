@@ -1,19 +1,19 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {RelationshipMotionComponent} from './relationship-motion.component';
+import {BalanceMotionComponent} from './balance-motion.component';
 
 describe('RelationshipMotionComponent', () => {
-  let component: RelationshipMotionComponent;
-  let fixture: ComponentFixture<RelationshipMotionComponent>;
+  let component: BalanceMotionComponent;
+  let fixture: ComponentFixture<BalanceMotionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RelationshipMotionComponent],
+      declarations: [BalanceMotionComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RelationshipMotionComponent);
+    fixture = TestBed.createComponent(BalanceMotionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

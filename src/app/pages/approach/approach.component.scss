@@ -1,6 +1,8 @@
 @import '../../../scss/00_imports';
 
 :host-context(.c-approach) {
+  --a-start: 70%;
+  --a-end: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -24,57 +26,46 @@
 }
 
 .l-content--hide {
-  --a-start: 0%;
-  --a-end: 0%;
   &::after {
     position: absolute;
+    pointer-events: none;
     content: '';
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 1;
     height: 100%;
     width: 100%;
     background: linear-gradient(
       355deg,
-      rgba(neutral('grey90'), 1) var(--a-start),
-      rgba(neutral('grey90'), 0) var(--a-end)
+      rgba(neutral('grey10'), 1) var(--a-start),
+      rgba(neutral('grey10'), 0) var(--a-end)
     );
     will-change: transform;
   }
 }
 
-.l-content--reveal {
-  --a-start: 0%;
-  --a-end: 0%;
-  &::before {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 0;
-    z-index: 2;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(
-      175deg,
-      rgba(neutral('grey90'), 0) var(--a-start),
-      rgba(neutral('grey90'), 1) var(--a-end)
-    );
-    transform-origin: bottom center;
-    will-change: transform;
-  }
-}
+// .l-content--reveal {
+//   --a-start: 0%;
+//   --a-end: 0%;
+//   &::before {
+//     position: absolute;
+//     content: '';
+//     top: 0;
+//     left: 0;
+//     z-index: 2;
+//     height: 100%;
+//     width: 100%;
+//     background: linear-gradient(
+//       175deg,
+//       rgba(neutral('grey90'), 0) var(--a-start),
+//       rgba(neutral('grey90'), 1) var(--a-end)
+//     );
+//     transform-origin: bottom center;
+//     will-change: transform;
+//   }
+// }
 
 .c-approach {
-  &__hero {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 400px;
-    margin-bottom: $layout--xl;
-    overflow: hidden;
-  }
   &__content {
     position: relative;
   }
@@ -83,7 +74,7 @@
     width: 100%;
     max-width: 728px;
     @include breakpoint(md) {
-      order: 0;
+      margin: auto;
     }
   }
 }
@@ -99,50 +90,127 @@
   }
 }
 
-.headline {
-  position: relative;
-  display: inline-block;
-  font-weight: 900;
-  font-size: $title--2;
-  line-height: $heading-line-height;
-  margin-bottom: $spacing--2xl;
-  @include breakpoint(sm) {
-    font-size: $title--1;
-  }
-  @include breakpoint(md) {
-    font-size: $large--title;
-  }
-  @include breakpoint(lg) {
-    font-size: $huge--title;
-  }
-}
+// .headline {
+//   position: relative;
+//   display: inline-block;
+//   font-weight: 900;
+//   font-size: $title--2;
+//   line-height: $heading-line-height;
+//   margin-bottom: $spacing--2xl;
+//   @include breakpoint(sm) {
+//     font-size: $title--1;
+//   }
+//   @include breakpoint(md) {
+//     font-size: $large--title;
+//   }
+//   @include breakpoint(lg) {
+//     font-size: $huge--title;
+//   }
+// }
 
-.sub-headline {
-  position: relative;
-  display: inline-block;
-  font-weight: 900;
-  font-size: $title--2;
-  line-height: $heading-line-height;
-  margin-bottom: $spacing--2xl;
-  @include breakpoint(sm) {
-    font-size: $title--1;
-  }
-  @include breakpoint(md) {
-    font-size: $large--title;
-  }
-}
+// .sub-headline {
+//   position: relative;
+//   display: inline-block;
+//   font-weight: 900;
+//   font-size: $title--2;
+//   line-height: $heading-line-height;
+//   margin-bottom: $spacing--2xl;
+//   @include breakpoint(sm) {
+//     font-size: $title--1;
+//   }
+//   @include breakpoint(md) {
+//     font-size: $large--title;
+//   }
+// }
 
-.discipline {
-  position: relative;
-  display: inline-block;
-  text-decoration: underline color(orange);
-  text-decoration-thickness: 6px;
-}
+// .discipline {
+//   position: relative;
+//   display: inline-block;
+//   text-decoration: underline color(orange);
+//   text-decoration-thickness: 6px;
+// }
 
-.scrolling-headline-container {
-  position: absolute;
+.c-hero {
+  position: relative;
   display: flex;
+  align-items: stretch;
+  flex-direction: column;
   width: 100%;
+  overflow: hidden;
+  margin-bottom: $layout--xl;
+  border-radius: $spacing--md;
+  transition: all 25ms ease;
+  &::before {
+    --progress-start: 40%;
+    --progress-end: 90%;
+    position: absolute;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 2;
+    content: '';
+    height: 100%;
+    width: 100%;
+    mix-blend-mode: normal;
+    background: radial-gradient(
+      circle,
+      rgba(neutral(grey0), 0) var(--progress-start),
+      rgba(neutral(grey10), 1) var(--progress-end)
+    );
+    mask: $noiseFilter,
+      radial-gradient(
+        circle,
+        rgba(neutral(grey10), 0) var(--progress-start),
+        rgba(neutral(grey20), 1) var(--progress-end)
+      );
+  }
+  @include breakpoint(md) {
+    flex-direction: row;
+    margin-bottom: $layout--2xl;
+  }
+
+  &__col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    @include breakpoint(md) {
+      width: auto;
+    }
+  }
+  &__col ~ &__col {
+    padding-top: $spacing--sm;
+    @include breakpoint(md) {
+      padding-top: 0;
+    }
+  }
+  &__marquee {
+    position: absolute;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    padding: $spacing--lg;
+    @include breakpoint(md) {
+      align-items: flex-end;
+    }
+  }
+}
+
+.hero-title {
+  position: relative;
+  z-index: 2;
+  font-size: $body--1;
+  font-weight: 900;
+  line-height: 1.25;
+  margin: 0;
+  @include breakpoint(md) {
+    font-size: $subtitle;
+  }
 }
 
 .scrolling-headline-track {
@@ -159,34 +227,77 @@
     line-height: 1;
     white-space: nowrap;
     user-select: none;
-    font-size: $huge--title * 2;
+    font-size: $headliner--1;
     margin: 0;
+    color: var(--color-marquee-text);
+    @include breakpoint(sm) {
+      font-size: calc(68px + 16 * ((100vw - 568px) / (992 - 568)));
+    }
+    @include breakpoint(lg) {
+      font-size: $headliner--1 * 2;
+    }
   }
 }
 
-.c-process-grid {
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-  width: 100%;
-  @include breakpoint(md) {
-    flex-direction: row;
+:host-context(.c-approach) .c-balance-motion {
+  width: 320px;
+  height: 320px;
+  @include breakpoint(sm) {
+    width: 345px;
+    height: 345px;
   }
-  &__col {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    @include breakpoint(md) {
-      width: auto;
-    }
-  }
-  &__col ~ &__col {
-    padding-top: $spacing--xl;
-    @include breakpoint(md) {
-      padding-top: 0;
-      padding-left: $spacing--3xl;
-    }
+  @include breakpoint(lg) {
+    width: 420px;
+    height: 420px;
   }
 }
+
+body.dark {
+  :host-context(.c-approach) .c-hero::before {
+    background: radial-gradient(
+      circle,
+      rgba(neutral(grey0), 0) var(--progress-start),
+      rgba(neutral(grey90), 1) var(--progress-end)
+    );
+    mask: $noiseFilter,
+      radial-gradient(
+        circle,
+        rgba(neutral(grey70), 0) var(--progress-start),
+        rgba(neutral(grey70), 1) var(--progress-end)
+      );
+  }
+
+  :host-context(.c-approach) .l-content--hide::after {
+    background: linear-gradient(
+      355deg,
+      rgba(neutral('grey90'), 1) var(--a-start),
+      rgba(neutral('grey90'), 0) var(--a-end)
+    );
+  }
+}
+// .c-process-grid {
+//   display: flex;
+//   align-items: stretch;
+//   flex-direction: column;
+//   width: 100%;
+//   @include breakpoint(md) {
+//     flex-direction: row;
+//   }
+//   &__col {
+//     position: relative;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     width: 100%;
+//     @include breakpoint(md) {
+//       width: auto;
+//     }
+//   }
+//   &__col ~ &__col {
+//     padding-top: $spacing--xl;
+//     @include breakpoint(md) {
+//       padding-top: 0;
+//       padding-left: $spacing--3xl;
+//     }
+//   }
+// }

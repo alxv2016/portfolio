@@ -1,0 +1,21 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-balance-motion) {
+  position: relative;
+  display: block;
+  height: 420px;
+  width: 420px;
+  svg {
+    height: inherit;
+    width: inherit;
+  }
+}
+
+.c-balance-motion__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}

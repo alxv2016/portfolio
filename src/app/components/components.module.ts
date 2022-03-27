@@ -6,7 +6,7 @@ import {FooterComponent} from './footer/footer.component';
 import {BottomPaneModule} from './bottom-pane/bottom-pane.module';
 import {AestheticClockComponent} from './aesthetic-clock/aesthetic-clock.component';
 import {AboutContentComponent} from './about-content/about-content.component';
-import {RelationshipMotionComponent} from './relationship-motion/relationship-motion.component';
+import {BalanceMotionComponent} from './balance-motion/balance-motion.component';
 import {ConsiderMotionComponent} from './consider-motion/consider-motion.component';
 
 @NgModule({
@@ -16,12 +16,12 @@ import {ConsiderMotionComponent} from './consider-motion/consider-motion.compone
     FooterComponent,
     AestheticClockComponent,
     AboutContentComponent,
-    RelationshipMotionComponent,
+    BalanceMotionComponent,
     ConsiderMotionComponent,
   ],
   imports: [CommonModule, BottomPaneModule],
   exports: [
-    RelationshipMotionComponent,
+    BalanceMotionComponent,
     ConsiderMotionComponent,
     HeaderComponent,
     SocialLinksComponent,

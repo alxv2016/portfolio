@@ -2,6 +2,7 @@
 
 :host-context(.c-footer) {
   position: fixed;
+  z-index: 3;
   display: flex;
   align-items: center;
   bottom: 0;
