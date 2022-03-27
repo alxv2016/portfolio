@@ -101,6 +101,8 @@ strong {
   justify-content: center;
   overflow: hidden;
   color: var(--color-abstract);
+  transition: all 24ms ease;
+  border-radius: 1rem;
   // @include breakpoint(lg) {
   //   display: flex;
   //   align-items: flex-end;
@@ -110,33 +112,34 @@ strong {
     --progress-start: 30%;
     --progress-end: 80%;
     position: absolute;
-    position: absolute;
-    //mix-blend-mode: luminosity;
+    border-radius: inherit;
+    // mix-blend-mode: luminosity;
     z-index: 2;
     content: '';
     height: 100%;
     width: 100%;
     background: radial-gradient(
       circle,
-      rgba(neutral(grey90), 0) var(--progress-start),
-      rgba(neutral(grey90), 1) var(--progress-end)
+      rgba(neutral(grey0), 0) var(--progress-start),
+      rgba(neutral(grey10), 1) var(--progress-end)
     );
     mask: $noiseFilter,
       radial-gradient(
         circle,
-        rgba(neutral(grey90), 0) var(--progress-start),
-        rgba(neutral(grey90), 1) var(--progress-end)
+        rgba(neutral(grey70), 0) var(--progress-start),
+        rgba(neutral(grey70), 1) var(--progress-end)
       );
   }
   &:before {
     position: absolute;
+    border-radius: inherit;
     z-index: 1;
     content: '';
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    @include frosted-glass2(neutral(grey90), 0);
+    @include frosted-glass2(neutral(grey10), 0);
   }
 }
 
@@ -169,5 +172,26 @@ strong {
   svg {
     width: inherit;
     height: inherit;
+  }
+}
+
+body.dark {
+  :host-context(.c-home) .l-abstract {
+    &:after {
+      background: radial-gradient(
+        circle,
+        rgba(neutral(grey90), 0) var(--progress-start),
+        rgba(neutral(grey90), 1) var(--progress-end)
+      );
+      mask: $noiseFilter,
+        radial-gradient(
+          circle,
+          rgba(neutral(grey90), 0) var(--progress-start),
+          rgba(neutral(grey90), 1) var(--progress-end)
+        );
+    }
+    &:before {
+      @include frosted-glass2(neutral(grey90), 0);
+    }
   }
 }

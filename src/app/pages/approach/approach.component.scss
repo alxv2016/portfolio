@@ -65,6 +65,19 @@
 }
 
 .c-approach {
+  &__hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 400px;
+    margin-bottom: $layout--xl;
+    overflow: hidden;
+  }
+  &__content {
+    position: relative;
+  }
   &__container {
     order: 1;
     width: 100%;
@@ -124,6 +137,31 @@
   display: inline-block;
   text-decoration: underline color(orange);
   text-decoration-thickness: 6px;
+}
+
+.scrolling-headline-container {
+  position: absolute;
+  display: flex;
+  width: 100%;
+}
+
+.scrolling-headline-track {
+  position: relative;
+  display: flex;
+}
+
+.scrolling-headline {
+  white-space: nowrap;
+  padding-left: $layout--lg;
+  span {
+    display: inline-block;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+    user-select: none;
+    font-size: $huge--title * 2;
+    margin: 0;
+  }
 }
 
 .c-process-grid {
