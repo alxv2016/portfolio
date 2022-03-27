@@ -45,9 +45,12 @@
     position: relative;
     width: 100%;
   }
-  // &:hover, &:focus {
-  //   background-color: rgba(neutral(grey70), 0.0125);
-  // }
+  &:hover,
+  &:focus {
+    .project-link-title {
+      color: color(orange);
+    }
+  }
 }
 
 .project-link-date {
@@ -77,6 +80,7 @@
   line-height: 1.25;
   font-size: $subtitle;
   font-weight: 900;
+  transition: color 275ms ease;
   @include breakpoint(md) {
     font-size: $subtitle--2;
   }
