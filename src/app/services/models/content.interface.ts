@@ -38,6 +38,7 @@ export interface AlxvCollection {
   site_links: Sitelink[] | null;
   about_content: Aboutcontent[] | null;
   approach: Approach[] | null;
+  playground: Playground[] | null;
 }
 
 export interface Sitelink {
@@ -87,3 +88,19 @@ interface Content {
   text: string;
   spans: Span[];
 }
+
+interface Playground {
+  project_image: Projectimage;
+  project_id: string;
+  project_date: string;
+  project_title: string;
+  project_description: string;
+  project_link: Projectlink;
+}
+
+interface Projectlink {
+  link_type: string;
+  url: string;
+}
+
+interface Projectimage {}

@@ -6,6 +6,7 @@ import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.compon
 import {RevealService} from '../reveal/reveal.service';
 import {Router} from '@angular/router';
 import * as moment from 'moment';
+import {PlaygroundComponent} from 'src/app/pages/playground/playground.component';
 
 @Component({
   selector: 'c-footer',
@@ -70,6 +71,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
         break;
       case link.link_id === 'playground':
         // console.log('playground');
+        this.bottomPaneService.createBottomPane(PlaygroundComponent, 'Coding Playground', this.siteContent?.playground);
         break;
       case link.link_id === 'contact':
         console.log('contact');

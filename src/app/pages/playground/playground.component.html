@@ -1,1 +1,11 @@
-<p>playground works!</p>
+<ul class="playground-list">
+  <li *ngFor="let playground of data" class="playground-list__item">
+    <a class="project-link" [href]="playground.project_link.url" target="_blank">
+      <span class="project-link-date">{{ playground.project_date }}</span>
+      <div class="project-link__content">
+        <h2 class="project-link-title">{{ playground.project_title }}</h2>
+        <p class="project-link-descr">{{ playground.project_description }}</p>
+      </div>
+    </a>
+  </li>
+</ul>
