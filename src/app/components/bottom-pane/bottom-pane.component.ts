@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ComponentRef,
   ElementRef,
@@ -18,6 +19,7 @@ import {BehaviorSubject} from 'rxjs';
   selector: 'c-bottom-pane',
   templateUrl: './bottom-pane.component.html',
   styleUrls: ['./bottom-pane.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   // Child component type i.e ExampleComponent

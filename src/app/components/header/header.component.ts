@@ -1,6 +1,8 @@
 import {
+  AfterContentChecked,
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostBinding,
@@ -30,7 +32,8 @@ export class HeaderComponent implements AfterViewInit {
     private element: ElementRef,
     private render: Renderer2,
     private darkModeService: DarkModeService,
-    private router: Router
+    private router: Router,
+    private cd: ChangeDetectorRef
   ) {}
 
   toggleDarkMode(): void {
@@ -59,6 +62,7 @@ export class HeaderComponent implements AfterViewInit {
         this.render.removeClass(this.darkModeToggle.nativeElement, 'toggled');
         this.render.setAttribute(this.darkModeToggle.nativeElement, 'aria-checked', 'false');
       }
+      this.cd.markForCheck();
     });
   }
 }

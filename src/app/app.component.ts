@@ -1,4 +1,4 @@
-import {AfterContentChecked, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
+import {AfterContentChecked, Component, DoCheck, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {switchMap} from 'rxjs';
 import {BottomPaneDirective} from './components/bottom-pane/bottom-pane.directive';
 import {RevealDirective} from './components/reveal/reveal.directive';
@@ -10,7 +10,7 @@ import {AlxvCollection} from './services/models/content.interface';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterContentChecked {
+export class AppComponent implements OnInit, DoCheck {
   siteContent?: AlxvCollection;
   @HostBinding('class') class = 'c-root';
   @ViewChild(BottomPaneDirective, {static: true}) bottomPaneHost!: BottomPaneDirective;
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
       });
   }
 
-  ngAfterContentChecked(): void {
-    console.log('change detection went off');
+  ngDoCheck(): void {
+    console.log('AppComponent', 'change detection went off');
   }
 }

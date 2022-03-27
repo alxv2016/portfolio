@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -18,6 +19,7 @@ import * as moment from 'moment';
   selector: 'c-clock',
   templateUrl: './aesthetic-clock.component.html',
   styleUrls: ['./aesthetic-clock.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AestheticClockComponent implements OnInit, AfterViewInit, OnDestroy {
   seconds?: string | null;
@@ -48,9 +50,9 @@ export class AestheticClockComponent implements OnInit, AfterViewInit, OnDestroy
     this.meridian = now.format('A');
     const time = Math.floor(Number(this.seconds)) * 10;
     let sec = time % 30;
-    this.changeRef.detectChanges();
     this.initGSAP(sec);
     requestAnimationFrame(this.initClock);
+    this.changeRef.detectChanges();
   }
 
   private initGSAP(time: number): void {

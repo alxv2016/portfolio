@@ -1,6 +1,9 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  DoCheck,
   ElementRef,
   HostBinding,
   Input,
@@ -25,7 +28,14 @@ export class RevealComponent implements AfterViewInit {
   amount = 3;
   @HostBinding('class') class = 'c-reveal';
   @Input() direction: string = 'up';
-  constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {}
+  constructor(
+    private element: ElementRef,
+    private render: Renderer2,
+    private zone: NgZone,
+    private cd: ChangeDetectorRef
+  ) {
+    this.cd.detach();
+  }
 
   private createRevealBlocks() {
     const document = this.element.nativeElement.ownerDocument;

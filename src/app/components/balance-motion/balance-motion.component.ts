@@ -1,4 +1,15 @@
-import {AfterViewInit, Component, ElementRef, HostBinding, Input, NgZone, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  NgZone,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {gsap} from 'gsap';
 import {Observable} from 'rxjs';
 
@@ -13,6 +24,7 @@ interface Shapes {
   selector: 'c-balance-motion',
   templateUrl: './balance-motion.component.html',
   styleUrls: ['./balance-motion.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BalanceMotionComponent implements AfterViewInit {
   @HostBinding('class') class = 'c-balance-motion';
@@ -21,7 +33,7 @@ export class BalanceMotionComponent implements AfterViewInit {
   @ViewChild('shapesGroup') shapesGroup!: ElementRef;
   @ViewChild('circle') circle!: ElementRef;
   @ViewChild('diamond') diamond!: ElementRef;
-  constructor(private zone: NgZone) {}
+  constructor(private zone: NgZone, private cd: ChangeDetectorRef) {}
 
   private setInitialState(shapes: Shapes): void {
     // Set initial states

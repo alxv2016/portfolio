@@ -1,4 +1,15 @@
-import {AfterViewInit, ChangeDetectorRef, Component, HostBinding, Injector, Input, NgZone, OnInit} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  HostBinding,
+  Injector,
+  Input,
+  NgZone,
+  OnInit,
+} from '@angular/core';
 import {AppComponent} from 'src/app/app.component';
 import {AlxvCollection, Sitelink} from 'src/app/services/models/content.interface';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
@@ -12,6 +23,7 @@ import {PlaygroundComponent} from 'src/app/pages/playground/playground.component
   selector: 'c-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent implements OnInit, AfterViewInit {
   timeNow: string = '00:00:00';
@@ -23,7 +35,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
     private inject: Injector,
     private router: Router,
     private zone: NgZone,
-    private changeRef: ChangeDetectorRef
+    private cd: ChangeDetectorRef
   ) {
     this.initClock = this.initClock.bind(this);
   }
@@ -34,10 +46,10 @@ export class FooterComponent implements OnInit, AfterViewInit {
     const minutes = now.format('mm');
     const hours = now.format('h');
     const meridian = now.format('A');
-    this.timeNow = `${hours}:${minutes}:${seconds} ${meridian}`;
+    this.timeNow = `${hours}:${minutes} ${meridian}`;
     // Only trigger angular change detection here
-    this.changeRef.detectChanges();
     requestAnimationFrame(this.initClock);
+    this.cd.detectChanges();
   }
 
   ngOnInit(): void {

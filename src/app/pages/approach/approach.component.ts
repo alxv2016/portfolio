@@ -1,6 +1,9 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  DoCheck,
   ElementRef,
   EventEmitter,
   HostBinding,
@@ -20,6 +23,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
   selector: 'c-approach',
   templateUrl: './approach.component.html',
   styleUrls: ['./approach.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject();
@@ -28,7 +32,12 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('class') class = 'c-approach';
   @ViewChild('scrollingHeadline') scrollHeadline!: ElementRef;
   @ViewChild('hero') hero!: ElementRef;
-  constructor(private contentService: ContentService, private zone: NgZone, private element: ElementRef) {
+  constructor(
+    private contentService: ContentService,
+    private zone: NgZone,
+    private element: ElementRef,
+    private cd: ChangeDetectorRef
+  ) {
     this.zone.runOutsideAngular(() => {
       gsap.registerPlugin(ScrollTrigger);
     });
@@ -37,6 +46,7 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.contentService.siteContent$.pipe(takeUntil(this.unsubscribe$)).subscribe((resp) => {
       this.siteContent = resp;
+      this.cd.markForCheck();
     });
   }
 
