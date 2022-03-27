@@ -1,5 +1,16 @@
-import {AfterViewInit, Component, ElementRef, HostBinding, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Subject, takeUntil} from 'rxjs';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {BehaviorSubject, Observable, Subject, takeUntil} from 'rxjs';
 import {ContentService} from 'src/app/services/content.service';
 import {AlxvCollection} from 'src/app/services/models/content.interface';
 import {gsap} from 'gsap';
@@ -12,6 +23,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 })
 export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject();
+  reversing$ = new BehaviorSubject<boolean>(false);
   siteContent?: AlxvCollection;
   @HostBinding('class') class = 'c-approach';
   @ViewChild('scrollingHeadline') scrollHeadline!: ElementRef;
@@ -28,6 +40,10 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  reverseUpdate(): Observable<boolean> {
+    return this.reversing$.asObservable();
+  }
+
   private initGSAP() {
     const scrollingHeadline = this.scrollHeadline.nativeElement;
     gsap.to(scrollingHeadline, {
@@ -38,15 +54,32 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     gsap.to(this.element.nativeElement, {
-      '--a-start': '0%',
-      '--a-end': '0%',
+      '--a-start': '100%',
+      '--a-end': '100%',
       duration: 6,
+      ease: 'linear',
       scrollTrigger: {
         markers: false,
         trigger: this.hero.nativeElement,
         start: 'top top',
         end: 'bottom top',
         scrub: 0.45,
+      },
+    });
+
+    gsap.to(this.element.nativeElement, {
+      scrollTrigger: {
+        markers: false,
+        trigger: this.hero.nativeElement,
+        start: 'top center',
+        end: 'bottom center',
+        scrub: 0.45,
+        onLeave: () => {
+          this.reversing$.next(true);
+        },
+        onEnterBack: () => {
+          this.reversing$.next(false);
+        },
       },
     });
   }

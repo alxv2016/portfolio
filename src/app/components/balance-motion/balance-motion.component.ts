@@ -1,5 +1,6 @@
-import {AfterViewInit, Component, ElementRef, HostBinding, NgZone, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostBinding, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import {gsap} from 'gsap';
+import {Observable} from 'rxjs';
 
 interface Shapes {
   group: HTMLElement | null;
@@ -15,6 +16,7 @@ interface Shapes {
 })
 export class BalanceMotionComponent implements AfterViewInit {
   @HostBinding('class') class = 'c-balance-motion';
+  @Input() reversing?: Observable<boolean>;
   @ViewChild('arc') arc!: ElementRef;
   @ViewChild('shapesGroup') shapesGroup!: ElementRef;
   @ViewChild('circle') circle!: ElementRef;
@@ -243,10 +245,28 @@ export class BalanceMotionComponent implements AfterViewInit {
     this.setInitialState(shapes);
     const intro = this.shapesIntro(shapes);
     const loop = this.shapesLoop(shapes);
-    intro.play();
-    intro.eventCallback('onComplete', () => {
-      loop.play();
-    });
+    if (this.reversing) {
+      this.reversing?.subscribe((ev) => {
+        // console.log('comp', ev)
+        if (ev) {
+          loop.restart();
+          loop.eventCallback('onStart', () => {
+            loop.pause();
+          });
+          intro.reverse();
+        } else {
+          intro.play();
+          intro.eventCallback('onComplete', () => {
+            loop.play();
+          });
+        }
+      });
+    } else {
+      intro.play();
+      intro.eventCallback('onComplete', () => {
+        loop.play();
+      });
+    }
   }
 
   ngAfterViewInit(): void {

@@ -1,8 +1,8 @@
 @import '../../../scss/00_imports';
 
 :host-context(.c-approach) {
-  --a-start: 70%;
-  --a-end: 100%;
+  --a-start: 30%;
+  --a-end: 15%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -36,9 +36,9 @@
     height: 100%;
     width: 100%;
     background: linear-gradient(
-      355deg,
-      rgba(neutral('grey10'), 1) var(--a-start),
-      rgba(neutral('grey10'), 0) var(--a-end)
+      175deg,
+      rgba(neutral('grey10'), 0) var(--a-end),
+      rgba(neutral('grey10'), 1) var(--a-start)
     );
     will-change: transform;
   }
@@ -203,7 +203,7 @@
 
 .hero-title {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   font-size: $body--1;
   font-weight: 900;
   line-height: 1.25;
@@ -269,9 +269,9 @@ body.dark {
 
   :host-context(.c-approach) .l-content--hide::after {
     background: linear-gradient(
-      355deg,
-      rgba(neutral('grey90'), 1) var(--a-start),
-      rgba(neutral('grey90'), 0) var(--a-end)
+      175deg,
+      rgba(neutral('grey90'), 0) var(--a-end),
+      rgba(neutral('grey90'), 1) var(--a-start)
     );
   }
 }
