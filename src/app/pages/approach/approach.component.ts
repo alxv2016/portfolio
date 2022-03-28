@@ -58,31 +58,17 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
     const scrollingHeadline = this.scrollHeadline.nativeElement;
     gsap.to(scrollingHeadline, {
       x: '-50%',
-      duration: 20,
+      duration: 28,
       ease: 'linear',
       repeat: -1,
     });
 
     gsap.to(this.element.nativeElement, {
-      '--a-start': '100%',
-      '--a-end': '100%',
-      duration: 6,
-      ease: 'linear',
       scrollTrigger: {
         markers: false,
         trigger: this.hero.nativeElement,
         start: 'top top',
         end: 'bottom top',
-        scrub: 0.45,
-      },
-    });
-
-    gsap.to(this.element.nativeElement, {
-      scrollTrigger: {
-        markers: false,
-        trigger: this.hero.nativeElement,
-        start: 'top center',
-        end: 'bottom center',
         scrub: 0.45,
         onLeave: () => {
           this.reversing$.next(true);

@@ -1,9 +1,7 @@
 @import '../../../scss/00_imports';
 
 :host-context(.c-home) {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+  display: block;
   height: 100%;
   width: 100%;
   padding-top: $layout--lg;
@@ -19,12 +17,12 @@
 
 .c-home {
   &__container {
-    order: 1;
+    position: relative;
+    z-index: 2;
     width: 100%;
     max-width: 728px;
-    @include breakpoint(md) {
-      order: 0;
-    }
+    padding-right: $spacing--lg;
+    padding-bottom: $spacing--lg;
   }
 }
 
@@ -39,58 +37,57 @@
   }
 }
 
-.headline {
-  position: relative;
-  display: inline-block;
-  font-weight: 900;
-  font-size: $title--2;
-  line-height: $heading-line-height;
-  margin-bottom: $spacing--2xl;
-  @include breakpoint(sm) {
-    font-size: $title--1;
-  }
-  @include breakpoint(md) {
-    font-size: $large--title;
-  }
-  @include breakpoint(lg) {
-    font-size: $huge--title;
-  }
-}
+// .headline {
+//   position: relative;
+//   display: inline-block;
+//   font-weight: 900;
+//   font-size: $title--2;
+//   line-height: $heading-line-height;
+//   margin-bottom: $spacing--2xl;
+//   @include breakpoint(sm) {
+//     font-size: $title--1;
+//   }
+//   @include breakpoint(md) {
+//     font-size: $large--title;
+//   }
+//   @include breakpoint(lg) {
+//     font-size: $huge--title;
+//   }
+// }
 
-strong {
-  font-weight: font-weight(bold);
-}
+// strong {
+//   font-weight: font-weight(bold);
+// }
 
-.discipline {
-  position: relative;
-  display: inline-block;
-  text-decoration: underline color(orange);
-  text-decoration-thickness: 6px;
-}
+// .discipline {
+//   position: relative;
+//   display: inline-block;
+//   text-decoration: underline color(orange);
+//   text-decoration-thickness: 6px;
+// }
 
-.cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  width: 60px;
-  height: 60px;
-  background-color: white;
-  border-radius: 100%;
-  opacity: 0;
-  transform-origin: center center;
-  mix-blend-mode: difference;
-  backface-visibility: hidden;
-  visibility: hidden;
-  @include breakpoint(lg) {
-    visibility: visible;
-  }
-}
+// .cursor {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   pointer-events: none;
+//   width: 60px;
+//   height: 60px;
+//   background-color: white;
+//   border-radius: 100%;
+//   opacity: 0;
+//   transform-origin: center center;
+//   mix-blend-mode: difference;
+//   backface-visibility: hidden;
+//   visibility: hidden;
+//   @include breakpoint(lg) {
+//     visibility: visible;
+//   }
+// }
 
 .l-abstract {
   position: absolute;
   pointer-events: none;
-  z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
@@ -108,37 +105,16 @@ strong {
   //   align-items: flex-end;
   //   justify-content: flex-end;
   // }
-  &:after {
-    --progress-start: 30%;
-    --progress-end: 80%;
-    position: absolute;
-    border-radius: inherit;
-    // mix-blend-mode: luminosity;
-    z-index: 2;
-    content: '';
-    height: 100%;
-    width: 100%;
-    background: radial-gradient(
-      circle,
-      rgba(neutral(grey0), 0) var(--progress-start),
-      rgba(neutral(grey10), 1) var(--progress-end)
-    );
-    mask: $noiseFilter,
-      radial-gradient(
-        circle,
-        rgba(neutral(grey70), 0) var(--progress-start),
-        rgba(neutral(grey70), 1) var(--progress-end)
-      );
-  }
   &:before {
     position: absolute;
-    border-radius: inherit;
     z-index: 1;
+    border-radius: inherit;
     content: '';
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background: linear-gradient(0deg, rgba(neutral(grey10), 0) 30%, rgba(neutral(grey10), 1) 100%);
     @include frosted-glass2(neutral(grey10), 0);
   }
 }
@@ -157,17 +133,13 @@ strong {
 
 .c-orb {
   position: relative;
-  // width: 480px;
-  // height: 480px;
   width: 568px;
   height: 568px;
-  // right: 64px;
   margin-bottom: $layout--md;
   transform: skewX(-12deg);
   @include breakpoint(lg) {
     width: 768px;
     height: 768px;
-    // right: 64px;
   }
   svg {
     width: inherit;
@@ -177,20 +149,8 @@ strong {
 
 body.dark {
   :host-context(.c-home) .l-abstract {
-    &:after {
-      background: radial-gradient(
-        circle,
-        rgba(neutral(grey90), 0) var(--progress-start),
-        rgba(neutral(grey90), 1) var(--progress-end)
-      );
-      mask: $noiseFilter,
-        radial-gradient(
-          circle,
-          rgba(neutral(grey90), 0) var(--progress-start),
-          rgba(neutral(grey90), 1) var(--progress-end)
-        );
-    }
     &:before {
+      background: linear-gradient(0deg, rgba(neutral(grey90), 0) 30%, rgba(neutral(grey90), 1) 100%);
       @include frosted-glass2(neutral(grey90), 0);
     }
   }
