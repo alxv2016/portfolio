@@ -47,7 +47,7 @@
 .header-logo {
   height: inherit;
   width: inherit;
-  transition: color 320ms ease;
+  transition: color 275ms ease;
   height: 14px;
   width: auto;
   @include breakpoint(md) {
@@ -56,6 +56,10 @@
   @include breakpoint(lg) {
     height: 18px;
   }
+}
+
+.dot {
+  color: var(--color-type-underline);
 }
 
 .time-btn {

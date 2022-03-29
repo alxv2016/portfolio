@@ -33,7 +33,7 @@
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
-  color: currentColor;
+  color: var(--color-type-muted);
   text-decoration: none;
   padding: $spacing--lg;
   transition: background-color 275ms ease;
@@ -48,7 +48,7 @@
   &:hover,
   &:focus {
     .project-link-title {
-      color: color(orange);
+      color: var(--color-type-link);
       text-decoration: underline;
     }
   }
@@ -61,6 +61,7 @@
   font-size: $overline;
   white-space: nowrap;
   font-weight: 900;
+  color: currentColor;
   margin-top: $spacing--sm;
   &::before {
     position: absolute;
@@ -71,7 +72,7 @@
     right: -34px;
     height: 2px;
     width: 24px;
-    background-color: color(orange);
+    background-color: var(--color-type-link);
   }
 }
 
@@ -82,6 +83,7 @@
   font-size: $subtitle;
   font-weight: 900;
   transition: color 275ms ease;
+  color: var(--color-type-link);
   @include breakpoint(md) {
     font-size: $subtitle--2;
   }
@@ -112,6 +114,7 @@
 .project-link-window-icon {
   height: 16px;
   width: 16px;
+  color: var(--color-type-muted);
 }
 
 .project-link-title ~ .project-link-window-icon {
@@ -122,7 +125,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  // justify-content: space-between;
   width: 100%;
 }
 
