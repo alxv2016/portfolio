@@ -19,9 +19,10 @@
   }
   &__nav {
     position: relative;
-    width: 100%;
+    display: inline-flex;
+    // width: 100%;
     pointer-events: auto;
-    max-width: 475px;
+    // max-width: auto;
     @include frosted-glass(neutral(grey10), 0.75);
     border: 1px solid rgba(neutral(grey80), 0.025);
     @include breakpoint(md) {
@@ -34,9 +35,13 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: $spacing--xs $spacing--md;
     margin: auto;
+  }
+
+  &__list-item ~ &__list-item {
+    margin-left: $spacing--md;
   }
 
   &-link {

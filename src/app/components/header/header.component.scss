@@ -25,6 +25,22 @@
     height: 44px;
     padding: 0 $spacing--sm;
   }
+
+  &__button-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    button ~ button {
+      margin-left: $spacing--xs;
+      @include breakpoint(sm) {
+        margin-left: $spacing--sm;
+      }
+      @include breakpoint(md) {
+        margin-left: $spacing--md;
+      }
+    }
+  }
 }
 
 .header-logo {
@@ -42,12 +58,27 @@
   }
 }
 
+.time-btn {
+  font-weight: font-weight(bold);
+  font-size: $body--2;
+  color: currentColor;
+  line-height: 1.25;
+  min-height: 44px;
+  padding: 0 $spacing--md;
+  transition: color 320ms ease;
+  transition: background 320ms ease;
+  &:hover,
+  &:focus {
+    background-color: rgba(color(forest), 0.175);
+  }
+}
+
 .dark-mode-btn {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-type);
+  color: currentColor;
   height: 44px;
   width: 44px;
   border-radius: 100%;

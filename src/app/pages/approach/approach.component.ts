@@ -56,7 +56,7 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
   private initGSAP() {
     gsap.to(this.element.nativeElement, {
       scrollTrigger: {
-        markers: true,
+        markers: false,
         trigger: this.hero.nativeElement,
         start: 'top top',
         end: 'bottom top',

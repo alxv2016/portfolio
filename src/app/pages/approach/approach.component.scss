@@ -11,6 +11,14 @@
 }
 
 .c-approach {
+  &__hero-container {
+    position: relative;
+    margin-bottom: $layout--xl;
+    @include breakpoint(md) {
+      margin-top: $layout--lg;
+      margin-bottom: $layout--2xl;
+    }
+  }
   &__container {
     width: 100%;
     max-width: 728px;

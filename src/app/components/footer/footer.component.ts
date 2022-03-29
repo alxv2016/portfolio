@@ -16,19 +16,19 @@ import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
 import {RevealService} from '../reveal/reveal.service';
 import {Router} from '@angular/router';
-import * as moment from 'moment';
 import {PlaygroundComponent} from 'src/app/pages/playground/playground.component';
 
 @Component({
+  host: {
+    class: 'c-footer',
+  },
   selector: 'c-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FooterComponent implements OnInit, AfterViewInit {
-  timeNow: string = '00:00:00';
+export class FooterComponent implements AfterViewInit {
   @Input() siteContent?: AlxvCollection;
-  @HostBinding('class') class = 'c-footer';
   constructor(
     private bottomPaneService: BottomPaneService,
     private revealService: RevealService,
@@ -36,30 +36,15 @@ export class FooterComponent implements OnInit, AfterViewInit {
     private router: Router,
     private zone: NgZone,
     private cd: ChangeDetectorRef
-  ) {
-    this.initClock = this.initClock.bind(this);
-  }
-
-  private initClock() {
-    const now = moment();
-    const seconds = now.format('ss');
-    const minutes = now.format('mm');
-    const hours = now.format('h');
-    const meridian = now.format('A');
-    this.timeNow = `${hours}:${minutes} ${meridian}`;
-    // Only trigger angular change detection here
-    requestAnimationFrame(this.initClock);
-    this.cd.detectChanges();
-  }
-
-  ngOnInit(): void {
-    // Run requestAnimationFrame outside angular change detection
-    this.zone.runOutsideAngular(() => this.initClock());
-  }
+  ) {}
 
   private sendEmail(email: string, subject: string): void {
     const mailTo = `mailto:${email}?subject=${subject}`;
     window.open(mailTo);
+  }
+
+  private contactLink(url: string): void {
+    window.open(url, '_blank');
   }
 
   ngAfterViewInit(): void {
@@ -87,14 +72,11 @@ export class FooterComponent implements OnInit, AfterViewInit {
         break;
       case link.link_id === 'contact':
         console.log('contact');
-        this.sendEmail('avong2011@gmail.com', 'Hello');
+        // this.sendEmail('avong2011@gmail.com', 'Hello');
+        this.contactLink('https://www.linkedin.com/in/avong');
         break;
       default:
         break;
     }
-  }
-
-  openClock(): void {
-    this.bottomPaneService.createBottomPane(AestheticClockComponent, null, this.siteContent?.time_quote);
   }
 }
