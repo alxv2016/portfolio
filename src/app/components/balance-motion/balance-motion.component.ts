@@ -259,7 +259,7 @@ export class BalanceMotionComponent implements AfterViewInit {
     const loop = this.shapesLoop(shapes);
     if (this.reversing) {
       this.reversing?.subscribe((ev) => {
-        // console.log('comp', ev)
+        console.log('comp', ev);
         if (ev) {
           loop.restart();
           loop.eventCallback('onStart', () => {

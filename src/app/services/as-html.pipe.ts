@@ -17,10 +17,10 @@ export class AsHTMLPipe implements PipeTransform {
 
   private htmlSerializer(type: any, element: any, content: any, children: any) {
     if (element.type === 'heading2') {
-      return `<h2 class="headline">${children}</h2>`;
+      return `<h2 class="display-2">${children}</h2>`;
     }
     if (element.type === 'heading3') {
-      return `<h3 class="sub-headline">${children}</h3>`;
+      return `<h3 class="display-3">${children}</h3>`;
     }
     return null;
   }

@@ -30,7 +30,6 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
   reversing$ = new BehaviorSubject<boolean>(false);
   siteContent?: AlxvCollection;
   @HostBinding('class') class = 'c-approach';
-  @ViewChild('scrollingHeadline') scrollHeadline!: ElementRef;
   @ViewChild('hero') hero!: ElementRef;
   constructor(
     private contentService: ContentService,
@@ -55,17 +54,9 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private initGSAP() {
-    const scrollingHeadline = this.scrollHeadline.nativeElement;
-    gsap.to(scrollingHeadline, {
-      x: '-50%',
-      duration: 28,
-      ease: 'linear',
-      repeat: -1,
-    });
-
     gsap.to(this.element.nativeElement, {
       scrollTrigger: {
-        markers: false,
+        markers: true,
         trigger: this.hero.nativeElement,
         start: 'top top',
         end: 'bottom top',

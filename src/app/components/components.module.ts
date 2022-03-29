@@ -7,6 +7,7 @@ import {BottomPaneModule} from './bottom-pane/bottom-pane.module';
 import {AestheticClockComponent} from './aesthetic-clock/aesthetic-clock.component';
 import {AboutContentComponent} from './about-content/about-content.component';
 import {BalanceMotionComponent} from './balance-motion/balance-motion.component';
+import {HeroComponent} from './hero/hero.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {BalanceMotionComponent} from './balance-motion/balance-motion.component'
     AestheticClockComponent,
     AboutContentComponent,
     BalanceMotionComponent,
+    HeroComponent,
   ],
   imports: [CommonModule, BottomPaneModule],
   exports: [
@@ -25,6 +27,7 @@ import {BalanceMotionComponent} from './balance-motion/balance-motion.component'
     FooterComponent,
     AestheticClockComponent,
     AboutContentComponent,
+    HeroComponent,
   ],
 })
 export class ComponentsModule {}

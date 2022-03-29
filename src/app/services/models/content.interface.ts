@@ -39,6 +39,7 @@ export interface AlxvCollection {
   about_content: Aboutcontent[] | null;
   approach: Approach[] | null;
   playground: Playground[] | null;
+  hero_headline: string | null;
 }
 
 export interface Sitelink {

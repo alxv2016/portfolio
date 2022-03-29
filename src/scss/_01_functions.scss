@@ -21,18 +21,10 @@
   @return map-get($neutrals, $key);
 }
 
-@function icon-size($key: 'xs') {
-  @return map-get($icon-sizes, $key);
-}
-
 @function max-width($key: 'xs') {
   @return map-get($max-width, $key);
 }
 
 @function font-weight($key: 'regular') {
   @return map-get($font-weights, $key);
-}
-
-@function font-family($key: 'roboto') {
-  @return map-get($font-families, $key);
 }

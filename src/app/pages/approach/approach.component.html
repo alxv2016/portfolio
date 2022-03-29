@@ -1,26 +1,9 @@
-<div class="c-approach__wrapper">
-  <div #hero class="c-hero">
-    <div class="c-hero__col">
-      <c-balance-motion [reversing]="reverseUpdate()"></c-balance-motion>
-    </div>
-    <div class="c-hero__col">
-      <h2 class="hero-title">The Balance between Design & Development.</h2>
-    </div>
-    <div class="c-hero__marquee">
-      <div #scrollingHeadline class="scrolling-headline-track">
-        <div class="scrolling-headline">
-          <span>Designer — Developer.</span>
-        </div>
-        <div class="scrolling-headline">
-          <span>Designer — Developer.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <section *ngFor="let p of siteContent?.approach; index as i">
-    <div class="c-approach__container">
-      <span class="overline" *ngIf="p.approach_callout">{{ p.approach_callout }}</span>
-      <div [innerHTML]="p.approach_content | asHTML"></div>
-    </div>
-  </section>
+<div #hero>
+  <c-hero [siteContent]="siteContent" [reversing]="reverseUpdate()"></c-hero>
 </div>
+<section *ngFor="let p of siteContent?.approach">
+  <div class="c-approach__container">
+    <span class="overline" *ngIf="p.approach_callout">{{ p.approach_callout }}</span>
+    <div [innerHTML]="p.approach_content | asHTML"></div>
+  </div>
+</section>

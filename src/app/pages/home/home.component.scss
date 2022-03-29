@@ -20,51 +20,18 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 728px;
-    padding-right: $spacing--lg;
-    padding-bottom: $spacing--lg;
+  }
+  &__content {
+    position: relative;
+    margin-bottom: $layout--md;
+    @include breakpoint(sm) {
+      margin-bottom: $layout--lg;
+    }
+    @include breakpoint(md) {
+      margin-bottom: $layout--xl;
+    }
   }
 }
-
-.overline {
-  display: inline-block;
-  line-height: $heading-line-height;
-  font-weight: font-weight(bold);
-  font-size: $body--1;
-  margin-bottom: $spacing--xs;
-  @include breakpoint(md) {
-    font-size: $subtitle;
-  }
-}
-
-// .headline {
-//   position: relative;
-//   display: inline-block;
-//   font-weight: 900;
-//   font-size: $title--2;
-//   line-height: $heading-line-height;
-//   margin-bottom: $spacing--2xl;
-//   @include breakpoint(sm) {
-//     font-size: $title--1;
-//   }
-//   @include breakpoint(md) {
-//     font-size: $large--title;
-//   }
-//   @include breakpoint(lg) {
-//     font-size: $huge--title;
-//   }
-// }
-
-// strong {
-//   font-weight: font-weight(bold);
-// }
-
-// .discipline {
-//   position: relative;
-//   display: inline-block;
-//   text-decoration: underline color(orange);
-//   text-decoration-thickness: 6px;
-// }
 
 // .cursor {
 //   position: fixed;
@@ -100,11 +67,6 @@
   color: var(--color-abstract);
   transition: all 24ms ease;
   border-radius: 1rem;
-  // @include breakpoint(lg) {
-  //   display: flex;
-  //   align-items: flex-end;
-  //   justify-content: flex-end;
-  // }
   &:before {
     position: absolute;
     z-index: 1;

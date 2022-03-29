@@ -24,8 +24,7 @@ body {
   line-height: $body-line-height;
   font-weight: 400;
   height: 100%;
-  // cursor: none;
-  color: var(--color-type);
+  color: var(--color-type-base);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -40,6 +39,7 @@ body {
 // Links
 a {
   //color: $link-color;
+  color: var(--color-type-link);
   text-decoration: underline;
   // Remove the gray background on active links in IE 11.
   background-color: transparent;

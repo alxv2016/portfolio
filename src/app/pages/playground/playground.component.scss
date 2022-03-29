@@ -107,3 +107,24 @@
     padding-top: 0;
   }
 }
+
+.project-link-window-icon {
+  height: 16px;
+  width: 16px;
+}
+
+.project-link-title ~ .project-link-window-icon {
+  margin-left: $spacing--sm;
+}
+
+.project-link-title-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  // justify-content: space-between;
+  width: 100%;
+}
+
+.project-link-title-group ~ .project-link-descr {
+  margin-top: $spacing--md;
+}

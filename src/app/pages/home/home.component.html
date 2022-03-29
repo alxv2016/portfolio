@@ -1,6 +1,6 @@
 <section class="c-home__container">
   <span class="overline">{{ siteContent?.callout }}</span>
-  <div #section [innerHTML]="siteContent?.content | asHTML"></div>
+  <div #section class="c-home__content" [innerHTML]="siteContent?.content | asHTML"></div>
   <c-social-links [siteContent]="siteContent"></c-social-links>
 </section>
 <div class="l-abstract">
