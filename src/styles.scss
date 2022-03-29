@@ -10,40 +10,50 @@
 // Third party over-rides
 :root {
   --color-bg: #{neutral(grey10)};
+  --color-bg-rgb: #{hexToRGB(neutral(grey10))};
+  --color-bg-btn-rgb: #{hexToRGB(primary(green80))};
+  --color-outline-rgb: #{hexToRGB(neutral(grey80))};
+  --color-shadow-rgb: #{hexToRGB(neutral(grey90))};
+  --color-abstract-primary: #{accent1(neon40)};
+  --color-abstract-secondary: #{accent1(neon50)};
   --color-bottom-pane-bg: #{neutral(grey0)};
-  --color-abstract: #{neutral(grey50)};
-  --color-clock-digits: #{color(sabbath)};
-  --color-clock-digit-accent: #{color(hotter)};
-  --color-reveal-block1: #{color(orange)};
+  --color-reveal-block1: #{accent1(neon40)};
   --color-reveal-block2: #{neutral(grey20)};
-  --color-reveal-block3: #{neutral(grey0)};
+  --color-reveal-block3: #{neutral(grey10)};
+
   // Typography Colors
-  --color-type-base: #{neutral(grey80)};
+  --color-type-base: #{primary(green60)};
+  --color-type-overline: #{primary(green40)};
   --color-type-neutral: #{neutral(grey30)};
-  --color-type-underline: #{color(orange)};
-  --color-type-link: #{color(orange)};
-  --color-type-overline: #{neutral(grey60)};
-  --color-type-strong: #{neutral(grey90)};
+  --color-type-underline: #{accent1(neon60)};
+  --color-type-link: #{accent1(neon80)};
+  --color-type-strong: #{primary(green70)};
+  --color-type-clock: #{accent2(pink90)};
+  --color-type-clock-accent: #{accent2(pink50)};
 }
 
 body.dark {
   --color-bg: #{neutral(grey90)};
+  --color-bg-rgb: #{hexToRGB(neutral(grey90))};
+  --color-bg-btn-rgb: #{hexToRGB(primary(green30))};
+  --color-outline-rgb: #{hexToRGB(neutral(grey10))};
+  --color-shadow-rgb: #{hexToRGB(neutral(grey90))};
+  --color-abstract-primary: #{accent1(neon40)};
+  --color-abstract-secondary: #{accent1(neon40)};
   --color-bottom-pane-bg: #{neutral(grey80)};
-  --color-abstract: #{neutral(grey60)};
-  --color-clock-digits: #{color(baby)};
-  --color-clock-digit-accent: #{color(hotter)};
-
-  --color-reveal-block1: #{color(orange)};
+  --color-reveal-block1: #{accent1(neon50)};
   --color-reveal-block2: #{neutral(grey70)};
-  --color-reveal-block3: #{neutral(grey90)};
+  --color-reveal-block3: #{neutral(grey80)};
 
   // Typography Colors
-  --color-type-base: #{neutral(grey20)};
-  --color-type-neutral: #{neutral(grey70)};
-  --color-type-underline: #{color(orange)};
-  --color-type-link: #{color(orange)};
-  --color-type-overline: #{neutral(grey40)};
-  --color-type-strong: #{neutral(grey10)};
+  --color-type-base: #{primary(green10)};
+  --color-type-overline: #{primary(green30)};
+  --color-type-neutral: #{primary(green60)};
+  --color-type-underline: #{accent1(neon40)};
+  --color-type-link: #{accent1(neon40)};
+  --color-type-strong: #{primary(green0)};
+  --color-type-clock: #{accent2(pink10)};
+  --color-type-clock-accent: #{accent2(pink60)};
 }
 
 body.overlay {

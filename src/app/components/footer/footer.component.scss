@@ -23,8 +23,8 @@
     // width: 100%;
     pointer-events: auto;
     // max-width: auto;
-    @include frosted-glass(neutral(grey10), 0.75);
-    border: 1px solid rgba(neutral(grey80), 0.025);
+    @include frosted-glass(var(--color-bg-rgb), 0.75);
+    border: 1px solid rgba(var(--color-outline-rgb), 0.025);
     @include breakpoint(md) {
       border-radius: $spacing--xs;
     }
@@ -51,12 +51,5 @@
     line-height: 1.25;
     min-height: 44px;
     padding: $spacing--xs $spacing--md;
-  }
-}
-
-body.dark {
-  :host-context(.c-footer) .c-footer__nav {
-    @include frosted-glass(neutral(grey90), 0.75);
-    border: 1px solid rgba(neutral(grey0), 0.025);
   }
 }

@@ -38,7 +38,7 @@
   transition: background 320ms ease;
   &:hover,
   &:focus {
-    background-color: rgba(color(forest), 0.175);
+    background-color: rgba(var(--color-bg-btn-rgb), 0.075);
   }
   svg {
     height: 24px;

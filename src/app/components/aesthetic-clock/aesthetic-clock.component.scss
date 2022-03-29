@@ -64,7 +64,7 @@
   letter-spacing: -0.25rem;
   font-style: italic;
   font-size: $clock-digit--sm;
-  color: var(--color-clock-digits);
+  color: var(--color-type-clock);
 
   @include breakpoint(sm) {
     font-size: $clock-digit--md;
@@ -72,7 +72,7 @@
 
   &--seconds {
     font-weight: 600;
-    color: var(--color-clock-digit-accent);
+    color: var(--color-type-clock-accent);
   }
 }
 
@@ -97,8 +97,7 @@
     height: 16px;
     width: 16px;
     border-radius: 100%;
-    background-color: color(hotter);
-    @include elevate-3(color(hotter), 0.125);
+    background-color: var(--color-type-clock-accent);
     @include breakpoint(sm) {
       height: 24px;
       width: 24px;
@@ -129,7 +128,7 @@
     font-size: $title--3;
     font-weight: 700;
     line-height: 1;
-    color: var(--color-clock-digits);
+    color: var(--color-type-clock);
     @include breakpoint(sm) {
       font-size: $title--2;
     }
@@ -139,7 +138,7 @@
 .c-clock-message {
   font-size: $body--1;
   font-weight: font-weight(bold);
-  color: var(--color-clock-digits);
+  color: var(--color-type-clock);
 }
 
 .c-clock-date-label {

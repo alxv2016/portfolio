@@ -22,7 +22,7 @@
     left: 0;
     height: inherit;
     width: inherit;
-    @include frosted-glass(neutral(grey20), 0.125);
+    @include frosted-glass(var(--color-bg-rgb), 0.125);
     will-change: opacity;
     opacity: 0;
     transition: opacity 275ms 75ms ease;
@@ -66,19 +66,8 @@
   border-top-right-radius: $spacing--lg;
   overflow: hidden;
   transform: translateY(102%);
+  @include elevate-5(var(--color-shadow-rgb), 0.045);
   visibility: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    width: inherit;
-    height: inherit;
-    border-radius: inherit;
-    @include elevate-5(neutral(grey80), 0.075);
-  }
 
   &__header {
     position: relative;
@@ -173,25 +162,16 @@
   width: 44px;
   border-radius: 100%;
   background-color: transparent;
-  transition: color 320ms ease;
-  transition: background 320ms ease;
+  transition: background 275ms ease;
   @include breakpoint(md) {
     right: $spacing--lg;
   }
   &:hover,
   &:focus {
-    background-color: rgba(color(forest), 0.175);
+    background-color: rgba(var(--color-bg-btn-rgb), 0.075);
   }
   svg {
     height: 24px;
     width: 24px;
-  }
-}
-
-body.dark {
-  :host-context(.c-bottom-pane) {
-    &::before {
-      @include frosted-glass(neutral(grey90), 0.65);
-    }
   }
 }

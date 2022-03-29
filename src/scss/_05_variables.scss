@@ -51,30 +51,17 @@ $colors: (
   baby: #e1c4f3,
 ) !default;
 
-$neutrals: (
-  grey0: #fffafa,
-  grey10: #eeeceb,
-  grey20: #e0dad8,
-  grey30: #c6bebb,
-  grey40: #a19795,
-  grey50: #756c6a,
-  grey60: #4d4645,
-  grey70: #302c2b,
-  grey80: #211d1d,
-  grey90: #1c1919,
-) !default;
-
 $primary: (
   green0: #fcfdfd,
-  green10: #dde4e6,
-  green20: #becbce,
-  green30: #9fb2b6,
-  green40: #81989d,
-  green50: #647e83,
-  green60: #476369,
-  green70: #2b484e,
-  green80: #0f2d33,
-  green90: #070023,
+  green10: #d2dedd,
+  green20: #a9bebd,
+  green30: #819d9d,
+  green40: #5a797a,
+  green50: #345357,
+  green60: #0f2d33,
+  green70: #07262c,
+  green80: #021c22,
+  green90: #001115,
 ) !default;
 
 $secondary: (
@@ -126,7 +113,7 @@ $neutral: (
   grey60: #5b5a5d,
   grey70: #3c393c,
   grey80: #1c1919,
-  grey90: #090707,
+  grey90: #121010,
 ) !default;
 // Type scale
 // Using a modular type scale we define our font size in em units for responsive scaling

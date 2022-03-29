@@ -18,7 +18,23 @@
 }
 
 @function neutral($key: 'grey60') {
-  @return map-get($neutrals, $key);
+  @return map-get($neutral, $key);
+}
+
+@function primary($key: 'green80') {
+  @return map-get($primary, $key);
+}
+
+@function secondary($key: 'lime50') {
+  @return map-get($secondary, $key);
+}
+
+@function accent1($key: 'neon50') {
+  @return map-get($accent1, $key);
+}
+
+@function accent2($key: 'pink50') {
+  @return map-get($accent2, $key);
 }
 
 @function max-width($key: 'xs') {
@@ -27,4 +43,8 @@
 
 @function font-weight($key: 'regular') {
   @return map-get($font-weights, $key);
+}
+
+@function hexToRGB($hex) {
+  @return red($hex), green($hex), blue($hex);
 }
