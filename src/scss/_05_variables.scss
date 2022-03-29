@@ -63,6 +63,71 @@ $neutrals: (
   grey80: #211d1d,
   grey90: #1c1919,
 ) !default;
+
+$primary: (
+  green0: #fcfdfd,
+  green10: #dde4e6,
+  green20: #becbce,
+  green30: #9fb2b6,
+  green40: #81989d,
+  green50: #647e83,
+  green60: #476369,
+  green70: #2b484e,
+  green80: #0f2d33,
+  green90: #070023,
+) !default;
+
+$secondary: (
+  lime0: #feffff,
+  lime10: #e3fcf2,
+  lime20: #c8fadd,
+  lime30: #abf9c0,
+  lime40: #8ef998,
+  lime50: #79fa6f,
+  lime60: #58d34e,
+  lime70: #3ca732,
+  lime80: #257b1c,
+  lime90: #134f0d,
+) !default;
+
+$accent1: (
+  neon0: #fffffc,
+  neon10: #fffcca,
+  neon20: #ffff98,
+  neon30: #ffff67,
+  neon40: #f3ff3e,
+  neon50: #d1ff19,
+  neon60: #bbd200,
+  neon70: #9ea600,
+  neon80: #797900,
+  neon90: #4d4d00,
+) !default;
+
+$accent2: (
+  pink0: #fffdfd,
+  pink10: #f7dadb,
+  pink20: #f3b2bc,
+  pink30: #f387a0,
+  pink40: #f7578a,
+  pink50: #ff247d,
+  pink60: #d30763,
+  pink70: #a7004b,
+  pink80: #7b0035,
+  pink90: #4f0020,
+) !default;
+
+$neutral: (
+  grey0: #ffffff,
+  grey10: #fdfdfd,
+  grey20: #dddddc,
+  grey30: #bcbdbb,
+  grey40: #9b9d9c,
+  grey50: #7a7c7d,
+  grey60: #5b5a5d,
+  grey70: #3c393c,
+  grey80: #1c1919,
+  grey90: #090707,
+) !default;
 // Type scale
 // Using a modular type scale we define our font size in em units for responsive scaling
 // by multiplying the scale ratio of: 1.2, with our base font size of 1em(browser default of 16px)
