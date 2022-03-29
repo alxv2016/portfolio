@@ -67,6 +67,7 @@
   padding: 0 $spacing--md;
   transition: color 320ms ease;
   transition: background 320ms ease;
+  border-radius: $spacing--xs;
   &:hover,
   &:focus {
     background-color: rgba(color(forest), 0.175);
