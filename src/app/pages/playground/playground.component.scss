@@ -49,6 +49,7 @@
   &:focus {
     .project-link-title {
       color: color(orange);
+      text-decoration: underline;
     }
   }
 }

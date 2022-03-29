@@ -1,7 +1,6 @@
 @import '../../../scss/00_imports';
 
 :host-context(.header) {
-  --color-dark: #{color(corbeau)};
   position: relative;
   display: block;
   width: 100%;
@@ -16,11 +15,13 @@
     width: 100%;
     min-height: 68px;
     flex-shrink: 0;
+    color: currentColor;
     @include container-padding;
   }
   &__brand {
     display: flex;
     align-items: center;
+    color: currentColor;
     justify-content: center;
     height: 44px;
     padding: 0 $spacing--sm;
@@ -47,7 +48,6 @@
   height: inherit;
   width: inherit;
   transition: color 320ms ease;
-  color: var(--color-type);
   height: 14px;
   width: auto;
   @include breakpoint(md) {
