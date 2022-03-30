@@ -20,6 +20,7 @@
   --color-reveal-block1: #{accent1(neon40)};
   --color-reveal-block2: #{neutral(grey20)};
   --color-reveal-block3: #{neutral(grey10)};
+  --color-logo-muted: #{neutral(grey20)};
   // Motion
   --color-motion-circle: #{secondary(lime70)};
   --color-motion-semicircle: #{primary(green30)};
@@ -50,6 +51,7 @@ body.dark {
   --color-reveal-block1: #{accent1(neon50)};
   --color-reveal-block2: #{neutral(grey70)};
   --color-reveal-block3: #{neutral(grey80)};
+  --color-logo-muted: #{neutral(grey70)};
   // Motion
   --color-motion-circle: #{secondary(lime50)};
   --color-motion-semicircle: #{primary(green20)};

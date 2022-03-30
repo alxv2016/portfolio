@@ -26,4 +26,24 @@
       margin: auto;
     }
   }
+
+  &__end {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    width: 100%;
+    margin-top: $layout--xl;
+    color: var(--color-logo-muted);
+
+    svg {
+      transition: color 275ms ease;
+      height: 18px;
+      width: auto;
+      @include breakpoint(md) {
+        height: 24px;
+      }
+    }
+  }
 }
