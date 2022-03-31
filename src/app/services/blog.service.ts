@@ -1,47 +1,44 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, switchMap, map, catchError, of} from 'rxjs';
+import {BehaviorSubject, catchError, map, Observable, of, switchMap} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {AlxvCollection} from './models/content.interface';
+import {BlogResults} from './models/blog.interface';
 import {Prismic, PrismicQuery} from './models/prismic.interface';
+import * as moment from 'moment';
 
-const initialState: AlxvCollection = {
-  page_title: null,
-  callout: null,
-  content: null,
-  social_media_title: null,
-  social_links: null,
-  navigation_title: null,
-  site_links: null,
-  about_content: null,
-  time_quote: null,
-  approach: null,
-  playground: null,
-  hero_headline: null,
-};
+const initialState: BlogResults[] = [];
 
 @Injectable({
   providedIn: 'root',
 })
-export class ContentService {
+export class BlogService {
   private ep = environment.API_URL;
   private token = environment.TOKEN;
-  private _initialState = new BehaviorSubject<AlxvCollection>(initialState);
-  siteContent$ = this._initialState.asObservable();
+  private _initialState = new BehaviorSubject<BlogResults[]>(initialState);
+  blogContent$ = this._initialState.asObservable();
   constructor(private http: HttpClient) {}
-  // API
-  getSiteContent(): Observable<AlxvCollection> {
+
+  getBlogContent(): Observable<BlogResults[]> {
     return this.http.get<Prismic>(`${this.ep}`, {responseType: 'json'}).pipe(
       switchMap((ref) => {
         const refToken = ref.refs[0].ref;
-        const query = '[[at(document.type, "portfo")]]';
+        const query = '[[at(document.type, "alxv_blog")]]';
         const params = new HttpParams().set('ref', refToken).set('access_token', this.token).set('q', query);
         return this.http.get<PrismicQuery>(`${this.ep}/documents/search`, {params, responseType: 'json'}).pipe(
           map((resp) => {
-            const siteData = resp.results[0].data;
-            const siteContent = Object.assign(initialState, siteData);
+            const siteData = resp.results.map((res) => {
+              const date = moment(res.first_publication_date).format('MMM DD, YYYY');
+              return {
+                date,
+                data: res.data,
+                tags: res.tags,
+                url: res.url,
+                uid: res.uid,
+              };
+            });
+            const siteContent = siteData;
             this._initialState.next(siteContent);
-            return initialState;
+            return siteContent;
           })
         );
       }),

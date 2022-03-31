@@ -17,6 +17,8 @@ import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.compon
 import {RevealService} from '../reveal/reveal.service';
 import {Router} from '@angular/router';
 import {PlaygroundComponent} from 'src/app/pages/playground/playground.component';
+import {BlogResults} from 'src/app/services/models/blog.interface';
+import {BlogListComponent} from 'src/app/pages/blog-list/blog-list.component';
 
 @Component({
   host: {
@@ -29,6 +31,7 @@ import {PlaygroundComponent} from 'src/app/pages/playground/playground.component
 })
 export class FooterComponent implements AfterViewInit {
   @Input() siteContent?: AlxvCollection;
+  @Input() blogResults?: BlogResults[];
   constructor(
     private bottomPaneService: BottomPaneService,
     private revealService: RevealService,
@@ -69,6 +72,10 @@ export class FooterComponent implements AfterViewInit {
       case link.link_id === 'playground':
         // console.log('playground');
         this.bottomPaneService.createBottomPane(PlaygroundComponent, 'Coding Playground', this.siteContent?.playground);
+        break;
+      case link.link_id === 'blog':
+        // console.log('playground');
+        this.bottomPaneService.createBottomPane(BlogListComponent, 'Blogs', this.blogResults);
         break;
       case link.link_id === 'contact':
         console.log('contact');

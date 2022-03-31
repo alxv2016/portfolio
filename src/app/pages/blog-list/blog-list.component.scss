@@ -1,0 +1,127 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-blog-list) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.blog-list {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  &__item {
+    position: relative;
+    width: 100%;
+  }
+
+  &__item ~ &__item {
+    margin-top: $spacing--2xl;
+    @include breakpoint(md) {
+      margin-top: $spacing--3xl;
+    }
+  }
+}
+
+.blog-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  color: var(--color-type-muted);
+  text-decoration: none;
+  padding: $spacing--lg;
+  transition: background-color 275ms ease;
+  border-radius: $spacing--xs;
+  @include breakpoint(md) {
+    flex-direction: row;
+  }
+  &__content {
+    position: relative;
+    width: 100%;
+  }
+  &:hover,
+  &:focus {
+    .blog-link-title {
+      color: var(--color-type-link);
+      text-decoration: underline;
+    }
+  }
+}
+
+.blog-link-date {
+  position: relative;
+  display: block;
+  line-height: 1.25;
+  font-size: $overline;
+  white-space: nowrap;
+  font-weight: 900;
+  color: currentColor;
+  margin-top: $spacing--sm;
+  &::before {
+    position: absolute;
+    z-index: 0;
+    content: '';
+    top: 50%;
+    transform: translateY(-50%);
+    right: -34px;
+    height: 2px;
+    width: 24px;
+    background-color: var(--color-type-link);
+  }
+}
+
+.blog-link-title {
+  position: relative;
+  margin: 0;
+  line-height: 1.25;
+  font-size: $subtitle;
+  font-weight: 900;
+  transition: color 275ms ease;
+  color: var(--color-type-link);
+  @include breakpoint(md) {
+    font-size: $subtitle--2;
+  }
+}
+
+.blog-link-descr {
+  position: relative;
+  margin: 0;
+  font-size: $body--2;
+  @include breakpoint(md) {
+    font-size: $body--1;
+  }
+}
+
+.blog-link-title ~ .blog-link-descr {
+  margin-top: $spacing--sm;
+}
+
+.blog-link-date ~ .blog-link__content {
+  padding-left: 0;
+  padding-top: $spacing--sm;
+  @include breakpoint(md) {
+    padding-left: $layout--xl;
+    padding-top: 0;
+  }
+}
+
+.blog-link-window-icon {
+  height: 16px;
+  width: 16px;
+  color: var(--color-type-muted);
+}
+
+.blog-link-title ~ .blog-link-window-icon {
+  margin-left: $spacing--sm;
+}
+
+.blog-link-title-group ~ .blog-link-descr {
+  margin-top: $spacing--md;
+}

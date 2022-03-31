@@ -5,10 +5,12 @@ import {ComponentsModule} from '../components/components.module';
 import {ApproachComponent} from './approach/approach.component';
 import {AsHTMLPipe} from '../services/as-html.pipe';
 import {PlaygroundComponent} from './playground/playground.component';
+import {BlogListComponent} from './blog-list/blog-list.component';
+import {BlogComponent} from './blog/blog.component';
 
 @NgModule({
-  declarations: [HomeComponent, ApproachComponent, AsHTMLPipe, PlaygroundComponent],
+  declarations: [HomeComponent, ApproachComponent, AsHTMLPipe, PlaygroundComponent, BlogListComponent, BlogComponent],
   imports: [CommonModule, ComponentsModule],
-  exports: [PlaygroundComponent],
+  exports: [PlaygroundComponent, BlogListComponent],
 })
 export class PagesModule {}

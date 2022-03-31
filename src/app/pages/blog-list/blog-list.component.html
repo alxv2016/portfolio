@@ -1,0 +1,11 @@
+<ul class="blog-list">
+  <li *ngFor="let blog of data" class="blog-list__item">
+    <button class="blog-link" (click)="viewBlog()">
+      <span class="blog-link-date">{{ blog.date }}</span>
+      <div class="blog-link__content">
+        <h2 class="blog-link-title">{{ blog.data.page_title[0].text }}</h2>
+        <p class="blog-link-descr">{{ blog.data.page_description[0]?.text }}</p>
+      </div>
+    </button>
+  </li>
+</ul>

@@ -50,6 +50,12 @@ export class BottomPaneService {
     return this.componentRef.instance.state$.asObservable();
   }
 
+  closeBottomPane(): void {
+    if (this.componentRef) {
+      this.componentRef.instance.closeBottomSheet();
+    }
+  }
+
   // private destroyComponent(componentRef: ComponentRef<BottomPaneComponent>): void {
   //   componentRef.instance.state$.asObservable().subscribe((bool) => {
   //     if (!bool) {

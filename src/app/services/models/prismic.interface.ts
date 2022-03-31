@@ -13,6 +13,35 @@ export interface Prismic {
   license: string;
 }
 
+export interface PrismicQuery {
+  page: number;
+  results_per_page: number;
+  results_size: number;
+  total_results_size: number;
+  total_pages: number;
+  next_page?: any;
+  prev_page?: any;
+  results: Result[];
+  version: string;
+  license: string;
+}
+
+interface Result {
+  id: string;
+  uid: string;
+  url?: any;
+  type: string;
+  href: string;
+  tags: string[];
+  first_publication_date: string;
+  last_publication_date: string;
+  slugs: string[];
+  linked_documents: any[];
+  lang: string;
+  alternate_languages: any[];
+  data: any;
+}
+
 interface Experiments {
   draft: any[];
   running: any[];
