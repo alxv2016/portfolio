@@ -1,8 +1,10 @@
-<h1 class="sr-only">{{ siteContent?.page_title }}</h1>
-<c-header [siteContent]="siteContent"></c-header>
+<ng-container *ngIf="siteContent$ | async as data">
+  <h1 class="sr-only">{{ data.page_title }}</h1>
+</ng-container>
+<c-header></c-header>
 <main mouseMove>
   <router-outlet></router-outlet>
 </main>
-<c-footer [siteContent]="siteContent" [blogResults]="blogResults"></c-footer>
+<c-footer [siteContent$]="siteContent$"></c-footer>
 <ng-template bottomPaneHost></ng-template>
 <ng-template reveal></ng-template>

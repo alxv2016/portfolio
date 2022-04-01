@@ -21,6 +21,7 @@ import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
 import {AlxvCollection} from 'src/app/services/models/content.interface';
 import {AppComponent} from 'src/app/app.component';
+import {Observable} from 'rxjs';
 
 @Component({
   host: {
@@ -34,7 +35,6 @@ import {AppComponent} from 'src/app/app.component';
 export class HeaderComponent implements AfterViewInit {
   timeNow: string = '00:00:00';
   htmlBody = this.element.nativeElement.parentElement.parentElement;
-  @Input() siteContent?: AlxvCollection;
   @ViewChild('darkModeToggle') darkModeToggle!: ElementRef;
   @ViewChild('cursor') cursor!: ElementRef;
   constructor(
@@ -64,7 +64,7 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   openClock(): void {
-    this.bottomPaneService.createBottomPane(AestheticClockComponent, null, this.siteContent?.time_quote);
+    this.bottomPaneService.createBottomPane(AestheticClockComponent);
   }
 
   toggleDarkMode(): void {
@@ -85,7 +85,6 @@ export class HeaderComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const parent = this.inject.get<AppComponent>(AppComponent);
     this.bottomPaneService.getBottomPaneHost(parent.bottomPaneHost.viewContainerRef);
-
     // Run requestAnimationFrame outside angular change detection
     this.zone.runOutsideAngular(() => this.initClock());
     this.darkModeService.darkModeState$.subscribe((darkState) => {
@@ -98,7 +97,6 @@ export class HeaderComponent implements AfterViewInit {
         this.render.removeClass(this.darkModeToggle.nativeElement, 'toggled');
         this.render.setAttribute(this.darkModeToggle.nativeElement, 'aria-checked', 'false');
       }
-      this.cd.markForCheck();
     });
   }
 }

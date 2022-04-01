@@ -8,6 +8,7 @@ import * as prismicH from '@prismicio/helpers';
 export class AsHTMLPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}
   transform(content: any): SafeHtml {
+    // console.log(content);
     const asHTML = prismicH.asHTML<any>(content, null, this.htmlSerializer);
     if (asHTML) {
       return this.sanitizer.bypassSecurityTrustHtml(asHTML);

@@ -1,1 +1,19 @@
-<p>blog works!</p>
+<ng-container *ngIf="blogData$ | async as blog">
+  <div class="c-blog__hero">
+    <div class="c-blog__hero-image">
+      <img class="c-blog-cover-img" src="{{ blog.data.blog_image.url }}" />
+    </div>
+    <div class="c-blog__content">
+      <h1>{{ blog.data.page_title[0].text }}</h1>
+      <p>{{ blog.data.page_description[0].text }}</p>
+      <div class="">
+        <span>{{ blog.data.author_published_date }}</span>
+      </div>
+      <div>
+        <span>{{ blog.data.author[0].author_name }}</span>
+        <span>{{ blog.data.author[0].author_title }}</span>
+      </div>
+    </div>
+  </div>
+  <div [innerHtml]="blog.data.blog_content | asHTML"></div>
+</ng-container>

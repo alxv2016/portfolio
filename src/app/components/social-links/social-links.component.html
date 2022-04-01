@@ -1,6 +1,6 @@
-<ul class="c-social-links__list" aria-labelledby="#nav-title">
-  <h2 id="nav-title" class="sr-only">{{ siteContent?.social_media_title }}</h2>
-  <li class="c-social-links__list-item" *ngFor="let social of siteContent?.social_links">
+<ul class="c-social-links__list" aria-labelledby="#nav-title" *ngIf="siteContent$ | async as data">
+  <h2 id="nav-title" class="sr-only">{{ data.social_media_title }}</h2>
+  <li class="c-social-links__list-item" *ngFor="let social of data.social_links">
     <a
       href="{{ social.social_media_link.url }}"
       target="_blank"

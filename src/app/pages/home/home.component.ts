@@ -8,20 +8,21 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import {fromEvent, map, Observable, Subject, takeUntil, throttleTime} from 'rxjs';
+import {fromEvent, map, Observable, Subject, take, takeUntil, throttleTime} from 'rxjs';
 import {ContentService} from 'src/app/services/content.service';
 import {AlxvCollection} from 'src/app/services/models/content.interface';
 import {gsap} from 'gsap';
+import {PrismicResult} from 'src/app/services/models/prismic.interface';
 
 @Component({
+  host: {class: 'c-home'},
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject();
-  siteContent?: AlxvCollection;
-  @HostBinding('class') class = 'c-home';
+  siteContent$?: Observable<AlxvCollection | null>;
   constructor(
     private element: ElementRef,
     private contentService: ContentService,
@@ -64,10 +65,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.contentService.siteContent$.pipe(takeUntil(this.unsubscribe$)).subscribe((resp) => {
-      this.changeRef.detectChanges();
-      this.siteContent = resp;
-    });
+    this.siteContent$ = this.contentService.getSiteState();
   }
 
   private applyLineStrokes() {

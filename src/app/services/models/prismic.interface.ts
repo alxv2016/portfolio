@@ -1,3 +1,6 @@
+import {BlogCollection} from './blog.interface';
+import {AlxvCollection} from './content.interface';
+
 export interface Prismic {
   refs: Ref[];
   integrationFieldsRef?: any;
@@ -21,12 +24,12 @@ export interface PrismicQuery {
   total_pages: number;
   next_page?: any;
   prev_page?: any;
-  results: Result[];
+  results: PrismicResult[];
   version: string;
   license: string;
 }
 
-interface Result {
+export interface PrismicResult {
   id: string;
   uid: string;
   url?: any;
@@ -40,6 +43,22 @@ interface Result {
   lang: string;
   alternate_languages: any[];
   data: any;
+}
+
+export interface PrismicBlogResult {
+  id: string;
+  uid: string;
+  url?: any;
+  type: string;
+  href: string;
+  tags: string[];
+  first_publication_date: string;
+  last_publication_date: string;
+  slugs: string[];
+  linked_documents: any[];
+  lang: string;
+  alternate_languages: any[];
+  data: BlogCollection;
 }
 
 interface Experiments {

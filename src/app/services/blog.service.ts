@@ -1,12 +1,9 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, map, Observable, of, switchMap} from 'rxjs';
+import {BehaviorSubject, catchError, filter, map, Observable, of, switchMap, tap} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {BlogResults} from './models/blog.interface';
-import {Prismic, PrismicQuery} from './models/prismic.interface';
+import {Prismic, PrismicBlogResult, PrismicQuery} from './models/prismic.interface';
 import * as moment from 'moment';
-
-const initialState: BlogResults[] = [];
 
 @Injectable({
   providedIn: 'root',
@@ -14,38 +11,59 @@ const initialState: BlogResults[] = [];
 export class BlogService {
   private ep = environment.API_URL;
   private token = environment.TOKEN;
-  private _initialState = new BehaviorSubject<BlogResults[]>(initialState);
-  blogContent$ = this._initialState.asObservable();
+  private blogList$ = new BehaviorSubject<PrismicBlogResult[] | null>(null);
   constructor(private http: HttpClient) {}
 
-  getBlogContent(): Observable<BlogResults[]> {
+  getBlogListState(): Observable<PrismicBlogResult[] | null> {
+    return this.blogList$;
+  }
+
+  getBlog(id: string | null): Observable<PrismicBlogResult | null> {
     return this.http.get<Prismic>(`${this.ep}`, {responseType: 'json'}).pipe(
-      switchMap((ref) => {
-        const refToken = ref.refs[0].ref;
-        const query = '[[at(document.type, "alxv_blog")]]';
+      switchMap((prismic) => {
+        const refToken = prismic.refs[0].ref;
+        const query = `[[at(my.alxv_blog.uid, "${id}")]]`;
         const params = new HttpParams().set('ref', refToken).set('access_token', this.token).set('q', query);
         return this.http.get<PrismicQuery>(`${this.ep}/documents/search`, {params, responseType: 'json'}).pipe(
           map((resp) => {
-            const siteData = resp.results.map((res) => {
-              const date = moment(res.first_publication_date).format('MMM DD, YYYY');
-              return {
-                date,
-                data: res.data,
-                tags: res.tags,
-                url: res.url,
-                uid: res.uid,
-              };
-            });
-            const siteContent = siteData;
-            this._initialState.next(siteContent);
-            return siteContent;
+            resp.results[0].first_publication_date = moment(resp.results[0].first_publication_date).format(
+              'YYYY-MM-DD'
+            );
+            resp.results[0].last_publication_date = moment(resp.results[0].first_publication_date).format('YYYY-MM-DD');
+            return resp.results[0];
           })
         );
       }),
       catchError((error) => {
-        this._initialState.next(initialState);
-        return of(initialState);
+        return of(null);
       })
     );
+  }
+
+  getBlogList(): void {
+    this.http
+      .get<Prismic>(`${this.ep}`, {responseType: 'json'})
+      .pipe(
+        switchMap((prismic) => {
+          const refToken = prismic.refs[0].ref;
+          const query = '[[at(document.type, "alxv_blog")]]';
+          const params = new HttpParams().set('ref', refToken).set('access_token', this.token).set('q', query);
+          return this.http.get<PrismicQuery>(`${this.ep}/documents/search`, {params, responseType: 'json'}).pipe(
+            map((resp) => {
+              const blogList = resp.results;
+              blogList.forEach((result) => {
+                result.first_publication_date = moment(result.first_publication_date).format('YYYY-MM-DD');
+                result.last_publication_date = moment(result.first_publication_date).format('YYYY-MM-DD');
+              });
+              this.blogList$.next(blogList);
+              return blogList;
+            })
+          );
+        }),
+        catchError((error) => {
+          return of(null);
+        })
+      )
+      .subscribe();
   }
 }

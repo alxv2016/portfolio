@@ -1,16 +1,16 @@
 export interface AlxvCollection {
-  page_title: string | null;
-  callout: string | null;
-  content: Content[] | null;
-  social_media_title: string | null;
-  social_links: Sociallink[] | null;
-  navigation_title: string | null;
-  time_quote: string | null;
-  site_links: Sitelink[] | null;
-  about_content: Aboutcontent[] | null;
-  approach: Approach[] | null;
-  playground: Playground[] | null;
-  hero_headline: string | null;
+  page_title: string;
+  callout: string;
+  content: Content[];
+  social_media_title: string;
+  social_links: Sociallink[];
+  navigation_title: string;
+  time_quote: string;
+  site_links: Sitelink[];
+  about_content: Aboutcontent[];
+  approach: Approach[];
+  playground: Playground[];
+  hero_headline: string;
 }
 
 export interface Sitelink {

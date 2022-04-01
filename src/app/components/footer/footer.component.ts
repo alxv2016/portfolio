@@ -13,12 +13,13 @@ import {
 import {AppComponent} from 'src/app/app.component';
 import {AlxvCollection, Sitelink} from 'src/app/services/models/content.interface';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
-import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
 import {RevealService} from '../reveal/reveal.service';
 import {Router} from '@angular/router';
 import {PlaygroundComponent} from 'src/app/pages/playground/playground.component';
-import {BlogResults} from 'src/app/services/models/blog.interface';
 import {BlogListComponent} from 'src/app/pages/blog-list/blog-list.component';
+import {PrismicResult} from 'src/app/services/models/prismic.interface';
+import {Observable} from 'rxjs';
+import {BlogService} from 'src/app/services/blog.service';
 
 @Component({
   host: {
@@ -27,18 +28,17 @@ import {BlogListComponent} from 'src/app/pages/blog-list/blog-list.component';
   selector: 'c-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent implements AfterViewInit {
-  @Input() siteContent?: AlxvCollection;
-  @Input() blogResults?: BlogResults[];
+  @Input() siteContent$?: Observable<AlxvCollection | null>;
   constructor(
     private bottomPaneService: BottomPaneService,
     private revealService: RevealService,
     private inject: Injector,
     private router: Router,
     private zone: NgZone,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private blogService: BlogService
   ) {}
 
   private sendEmail(email: string, subject: string): void {
@@ -71,11 +71,12 @@ export class FooterComponent implements AfterViewInit {
         break;
       case link.link_id === 'playground':
         // console.log('playground');
-        this.bottomPaneService.createBottomPane(PlaygroundComponent, 'Coding Playground', this.siteContent?.playground);
+        this.bottomPaneService.createBottomPane(PlaygroundComponent, 'Coding Playground', 'this is a test');
         break;
       case link.link_id === 'blog':
         // console.log('playground');
-        this.bottomPaneService.createBottomPane(BlogListComponent, 'Blogs', this.blogResults);
+        this.blogService.getBlogList();
+        this.bottomPaneService.createBottomPane(BlogListComponent, 'Blogs');
         break;
       case link.link_id === 'contact':
         console.log('contact');

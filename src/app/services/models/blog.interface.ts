@@ -8,14 +8,6 @@ export interface BlogCollection {
   related_content: Relatedcontent[] | null;
 }
 
-export interface BlogResults {
-  date: string | null;
-  data: BlogCollection | null;
-  tags: string[] | null;
-  url: string | null;
-  uid: string | null;
-}
-
 interface Relatedcontent {
   content_id?: any;
   content_date?: any;

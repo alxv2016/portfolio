@@ -16,6 +16,7 @@ import {
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
+  host: {class: 'c-bottom-pane'},
   selector: 'c-bottom-pane',
   templateUrl: './bottom-pane.component.html',
   styleUrls: ['./bottom-pane.component.scss'],
@@ -33,7 +34,6 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   transitionEventHandler: any;
   keydownEventHandler: any;
   clickEventHandlers: any[] = [];
-  @HostBinding('class') class = 'c-bottom-pane';
   @Input() contentData: any = null;
   @ViewChild('bottomSheetWindow') bottomSheetWindow!: ElementRef;
   // Capture the element template where the child component will be inserted we let Angular know that it's a ViewContainerRef
@@ -108,10 +108,12 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     this.childComponent = this.componentPortal.createComponent(this.componentType);
     if (this.contentData) {
       // Pass data
-      this.childComponent.instance.data = this.contentData;
+      this.childComponent.instance.data$ = this.contentData;
       // Manually active change detector for dynamic components
       this.childComponent.changeDetectorRef.detectChanges();
     }
+    // Manually active change detector for dynamic components
+    this.childComponent.changeDetectorRef.detectChanges();
     requestAnimationFrame(() => {
       this.render.addClass(this.host, 'c-bottom-pane--animate');
       this.render.addClass(this.host, 'c-bottom-pane--visible');

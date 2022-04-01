@@ -20,16 +20,15 @@ import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 
 @Component({
+  host: {class: 'c-approach'},
   selector: 'c-approach',
   templateUrl: './approach.component.html',
   styleUrls: ['./approach.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
-  private unsubscribe$ = new Subject();
+export class ApproachComponent implements OnInit, AfterViewInit {
   reversing$ = new BehaviorSubject<boolean>(false);
-  siteContent?: AlxvCollection;
-  @HostBinding('class') class = 'c-approach';
+  siteContent$?: Observable<AlxvCollection | null>;
   @ViewChild('hero') hero!: ElementRef;
   constructor(
     private contentService: ContentService,
@@ -43,14 +42,11 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.contentService.siteContent$.pipe(takeUntil(this.unsubscribe$)).subscribe((resp) => {
-      this.siteContent = resp;
-      this.cd.markForCheck();
-    });
+    this.siteContent$ = this.contentService.getSiteState();
   }
 
   reverseUpdate(): Observable<boolean> {
-    return this.reversing$.asObservable();
+    return this.reversing$;
   }
 
   private initGSAP() {
@@ -75,10 +71,5 @@ export class ApproachComponent implements OnInit, AfterViewInit, OnDestroy {
     this.zone.runOutsideAngular(() => {
       this.initGSAP();
     });
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next(0);
-    this.unsubscribe$.complete();
   }
 }

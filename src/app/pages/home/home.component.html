@@ -1,7 +1,9 @@
 <section class="c-home__container">
-  <span class="overline">{{ siteContent?.callout }}</span>
-  <div #section class="c-home__content" [innerHTML]="siteContent?.content | asHTML"></div>
-  <c-social-links [siteContent]="siteContent"></c-social-links>
+  <ng-container *ngIf="siteContent$ | async as data">
+    <span class="overline">{{ data.callout }}</span>
+    <div #section class="c-home__content" [innerHTML]="data.content | asHTML"></div>
+  </ng-container>
+  <c-social-links [siteContent$]="siteContent$"></c-social-links>
 </section>
 <div class="l-abstract">
   <div class="c-orb">

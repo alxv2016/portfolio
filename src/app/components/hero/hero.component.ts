@@ -26,7 +26,7 @@ import {Observable} from 'rxjs';
 export class HeroComponent implements AfterViewInit, OnDestroy {
   gsapAnimation!: GSAPAnimation;
   @ViewChild('scrollingHeadline') scrollHeadline!: ElementRef;
-  @Input() siteContent?: AlxvCollection;
+  @Input() siteContent$?: Observable<AlxvCollection | null>;
   @Input() reversing?: Observable<boolean>;
   constructor(private cd: ChangeDetectorRef, private zone: NgZone) {}
 
@@ -41,7 +41,6 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.reversing);
     this.zone.runOutsideAngular(() => {
       this.initGSAP();
       this.cd.markForCheck();
