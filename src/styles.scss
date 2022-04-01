@@ -8,6 +8,8 @@
 @import './scss/06_typography';
 @import './scss/07_base';
 // Third party over-rides
+@import '~prismjs/themes/prism-tomorrow.css';
+
 :root {
   --color-bg: #{neutral(grey10)};
   --color-bg-rgb: #{hexToRGB(neutral(grey10))};
@@ -83,4 +85,13 @@ body.overlay {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+iframe.codepen-iframe {
+  position: relative;
+  width: 100%;
+  height: 568px;
+  border: none;
+  margin: 0;
+  padding: 0;
 }

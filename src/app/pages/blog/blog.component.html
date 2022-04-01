@@ -15,5 +15,5 @@
       </div>
     </div>
   </div>
-  <div [innerHtml]="blog.data.blog_content | asHTML"></div>
+  <div #htmlContent [innerHtml]="blog.data.blog_content | asHTML"></div>
 </ng-container>
