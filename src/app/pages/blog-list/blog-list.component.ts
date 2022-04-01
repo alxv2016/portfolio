@@ -53,6 +53,7 @@ export class BlogListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.blogList$ = this.blogService.getBlogListState();
+    this.blogList$.subscribe((e) => console.log(e));
   }
 
   ngAfterViewInit(): void {

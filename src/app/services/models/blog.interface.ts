@@ -1,20 +1,9 @@
 export interface BlogCollection {
-  page_title: Pagetitle[] | null;
-  page_description: Pagetitle[] | null;
-  author: Author[] | null;
-  author_tags: Authortag[] | null;
-  blog_image: Blogimage | null;
-  blog_content: Blogcontent[] | null;
-  related_content: Relatedcontent[] | null;
-}
-
-interface Relatedcontent {
-  content_id?: any;
-  content_date?: any;
-  content_author?: any;
-  content_title?: any;
-  content_description?: any;
-  content_link: Taglink;
+  page_title: string;
+  page_description: string;
+  author: Author[];
+  blog_image: Blogimage;
+  blog_content: Blogcontent[];
 }
 
 interface Blogcontent {
@@ -58,29 +47,10 @@ interface Dimensions {
   height: number;
 }
 
-interface Authortag {
-  tag_id: string;
-  tag: string;
-  tag_date: string;
-  tag_link: Taglink;
-}
-
-interface Taglink {
-  link_type: string;
-}
-
 interface Author {
   author_profile: Authorprofile;
   author_name: string;
   author_title: string;
-  author_length: string;
-  author_published_date: string;
 }
 
 interface Authorprofile {}
-
-interface Pagetitle {
-  type: string;
-  text: string;
-  spans: any[];
-}

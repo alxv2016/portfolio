@@ -3,9 +3,9 @@
     <button class="blog-link" (click)="viewBlog(blog.uid)">
       <span class="blog-link-date">{{ blog.first_publication_date }}</span>
       <div class="blog-link__content">
-        <h2 class="blog-link-title" *ngIf="blog.data.page_title.length !== 0">{{ blog.data.page_title[0].text }}</h2>
-        <p class="blog-link-descr" *ngIf="blog.data.page_description.length !== 0">
-          {{ blog.data.page_description[0].text }}
+        <h2 class="blog-link-title">{{ blog.data.page_title }}</h2>
+        <p class="blog-link-descr">
+          {{ blog.data.page_description }}
         </p>
       </div>
     </button>
