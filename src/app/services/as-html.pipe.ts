@@ -26,6 +26,9 @@ export class AsHTMLPipe implements PipeTransform {
     if (element.type === 'heading3') {
       return `<h3 class="display-3">${children}</h3>`;
     }
+    // if (element.data?.label === 'overline') {
+    //   return `<p class="overline">${children}</p>`;
+    // }
     if (element.data?.label === 'code-block') {
       return `<pre><code>${children}</code></pre>`;
     }

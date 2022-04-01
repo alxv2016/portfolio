@@ -37,3 +37,22 @@
   width: 100%;
   height: 100%;
 }
+
+.c-blog__grid {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.toc {
+  flex-shrink: 0;
+}
+.c-blog__toc {
+  flex-shrink: 0;
+  padding-right: $spacing--4xl;
+}
+
+.c-blog__col {
+  position: relative;
+}

@@ -19,9 +19,8 @@ import {RevealService} from '../reveal/reveal.service';
 import * as moment from 'moment';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
-import {AlxvCollection} from 'src/app/services/models/content.interface';
 import {AppComponent} from 'src/app/app.component';
-import {Observable} from 'rxjs';
+import {distinctUntilChanged, fromEvent, map, Observable, pairwise, share, throttleTime} from 'rxjs';
 
 @Component({
   host: {
@@ -82,11 +81,46 @@ export class HeaderComponent implements AfterViewInit {
     });
   }
 
+  private scrollEvent(): Observable<any> {
+    return fromEvent<any>(window, 'scroll').pipe(
+      throttleTime(60),
+      map(() => window.scrollY),
+      pairwise(),
+      map(([y1, y2]) => {
+        return {
+          scrollPos: y1,
+          direction: y2 < y1 ? false : true,
+        };
+      }),
+      distinctUntilChanged(),
+      share()
+    );
+  }
+
+  private watchHeader(): void {
+    const headerNav = this.element.nativeElement;
+    this.scrollEvent()
+      .pipe()
+      .subscribe((scroll) => {
+        if (headerNav) {
+          const headerHeight = headerNav.getBoundingClientRect().height;
+          if (scroll.scrollPos >= headerHeight) {
+            scroll.direction
+              ? this.render.setAttribute(headerNav, 'data-state', 'hidden')
+              : this.render.removeAttribute(headerNav, 'data-state');
+          }
+        }
+      });
+  }
+
   ngAfterViewInit(): void {
     const parent = this.inject.get<AppComponent>(AppComponent);
     this.bottomPaneService.getBottomPaneHost(parent.bottomPaneHost.viewContainerRef);
     // Run requestAnimationFrame outside angular change detection
-    this.zone.runOutsideAngular(() => this.initClock());
+    this.zone.runOutsideAngular(() => {
+      this.watchHeader();
+      this.initClock();
+    });
     this.darkModeService.darkModeState$.subscribe((darkState) => {
       if (darkState.prefersDark) {
         this.render.addClass(this.htmlBody, 'dark');

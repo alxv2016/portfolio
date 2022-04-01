@@ -4,7 +4,6 @@
 <ng-container *ngIf="siteContent$ | async as data">
   <section *ngFor="let p of data.approach">
     <div class="c-approach__container">
-      <span class="overline" *ngIf="p.approach_callout">{{ p.approach_callout }}</span>
       <div [innerHTML]="p.approach_content | asHTML"></div>
     </div>
   </section>

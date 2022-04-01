@@ -1,9 +1,17 @@
 @import '../../../scss/00_imports';
 
 :host-context(.header) {
-  position: relative;
+  position: fixed;
+  z-index: 3;
   display: block;
   width: 100%;
+  min-height: 68px;
+  transition: transform 275ms ease;
+  transform: translateY(0);
+  @include frosted-glass(var(--color-bg-rgb), 0.72);
+  &[data-state='hidden'] {
+    transform: translateY(-80px);
+  }
 }
 
 .header {
