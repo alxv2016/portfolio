@@ -68,6 +68,16 @@ form legend {
   }
 }
 
+p ~ .heading-1,
+p ~ .heading-2,
+p ~ .heading-3,
+p ~ .heading-4 {
+  margin-top: $layout--lg;
+  @include breakpoint(md) {
+    margin-top: $layout--xl;
+  }
+}
+
 .display ~ p {
   margin-top: $spacing--2xl;
   @include breakpoint(md) {
@@ -109,7 +119,8 @@ form legend {
   }
 }
 
-.display-3 {
+.display-3,
+.blog-title {
   font-size: $title--3;
   font-family: $heading-font-family;
   line-height: $heading-line-height;
@@ -140,6 +151,54 @@ form legend {
   }
 }
 
+.heading-2 {
+  position: relative;
+  font-size: $subtitle;
+  font-family: $heading-font-family;
+  line-height: $heading-line-height;
+  font-weight: font-weight('bold');
+  color: currentColor;
+  &:first-child {
+    margin-top: 0;
+  }
+  @include breakpoint(md) {
+    font-size: $subtitle--2;
+  }
+  @include breakpoint(lg) {
+    font-size: $title--3;
+  }
+}
+
+.heading-2 ~ p {
+  margin-top: $spacing--xl;
+  @include breakpoint(md) {
+    margin-top: $spacing--2xl;
+  }
+}
+
+.heading-3 {
+  position: relative;
+  font-size: $body--1;
+  font-family: $heading-font-family;
+  line-height: $heading-line-height;
+  font-weight: font-weight('bold');
+  color: currentColor;
+  &:first-child {
+    margin-top: 0;
+  }
+  @include breakpoint(md) {
+    font-size: $subtitle;
+  }
+}
+
+.heading-3 ~ p,
+.heading-4 ~ p {
+  margin-top: $spacing--md;
+  @include breakpoint(md) {
+    margin-top: $spacing--lg;
+  }
+}
+
 .overline {
   font-size: $body--1;
   font-weight: font-weight('bold');
@@ -157,6 +216,31 @@ form legend {
   color: currentColor;
   @include breakpoint(md) {
     font-size: $subtitle;
+  }
+}
+
+.blog-description {
+  font-size: $body--1;
+  color: var(--color-type-muted);
+  @include breakpoint(md) {
+    font-size: $subtitle;
+  }
+}
+
+.blog-date {
+  font-size: $body--2;
+  font-weight: font-weight('bold');
+  color: var(--color-type-overline);
+}
+
+.blog-date ~ .blog-title {
+  margin-top: $spacing--xs;
+}
+
+.blog-title ~ .blog-description {
+  margin-top: $spacing--sm;
+  @include breakpoint(md) {
+    margin-top: $spacing--md;
   }
 }
 

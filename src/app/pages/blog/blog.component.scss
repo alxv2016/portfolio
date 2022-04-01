@@ -10,7 +10,17 @@
   &__hero {
     position: relative;
     width: 100%;
-    margin-bottom: $layout--xl;
+    margin-top: $layout--xl;
+    margin-bottom: $layout--md;
+    @include breakpoint(md) {
+      margin-top: $layout--2xl;
+      margin-bottom: $layout--lg;
+    }
+
+    &-content {
+      position: relative;
+      width: 100%;
+    }
 
     &-image {
       position: relative;
@@ -18,41 +28,89 @@
       align-items: center;
       justify-content: center;
       height: 375px;
+      border-radius: $spacing--sm;
       overflow: hidden;
+      img {
+        position: relative;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &-content ~ &-image {
+      margin-top: $layout--sm;
+      @include breakpoint(md) {
+        margin-top: $layout--md;
+      }
+    }
+  }
+}
+
+.c-blog-title-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: $spacing--xl;
+}
+
+.c-blog-author {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @include breakpoint(sm) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__image {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    flex-shrink: 0;
+    border: 2px solid var(--color-logo-muted);
+    overflow: hidden;
+    img {
+      height: inherit;
+      width: inherit;
+      object-fit: cover;
     }
   }
 
-  &__content {
-    position: relative;
-    width: 100%;
-    background-color: var(--colo-bg);
-    margin: auto;
-    padding: $spacing--xl;
+  &__image ~ &__info {
+    margin-top: $spacing--lg;
+    @include breakpoint(sm) {
+      margin-top: 0;
+      margin-left: $spacing--lg;
+    }
   }
-}
 
-.c-blog-cover-img {
-  position: relative;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
+  &__info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
 
-.c-blog__grid {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
+  .blog-author {
+    position: relative;
+    display: inline-block;
+    font-weight: font-weight('bold');
+    line-height: $heading-line-height;
+    font-size: $body--1;
+    color: var(--color-type-link);
+    @include breakpoint(md) {
+      font-size: $subtitle;
+    }
+  }
 
-.toc {
-  flex-shrink: 0;
-}
-.c-blog__toc {
-  flex-shrink: 0;
-  padding-right: $spacing--4xl;
-}
-
-.c-blog__col {
-  position: relative;
+  .blog-author-title {
+    position: relative;
+    display: inline-block;
+    font-size: $body--2;
+    color: var(--color-type-overline);
+    @include breakpoint(md) {
+      font-size: $body--1;
+    }
+  }
 }

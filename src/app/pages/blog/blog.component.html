@@ -1,19 +1,24 @@
 <ng-container *ngIf="blogData$ | async as blog">
   <div class="c-blog__hero">
-    <div class="c-blog__hero-image">
-      <img class="c-blog-cover-img" src="{{ blog.data.blog_image.url }}" />
+    <div class="c-blog__hero-content">
+      <div class="c-blog-title-group">
+        <span class="blog-date">{{ blog.first_publication_date }}</span>
+        <h1 class="blog-title">{{ blog.data.page_title }}</h1>
+        <p class="blog-description">{{ blog.data.page_description }}</p>
+      </div>
+      <div class="c-blog-author">
+        <div class="c-blog-author__image">
+          <img src="{{ blog.data.author[0].author_profile.url }}" />
+        </div>
+        <div class="c-blog-author__info">
+          <span class="blog-author">{{ blog.data.author[0].author_name }}</span>
+          <span class="blog-author-title">{{ blog.data.author[0].author_title }}</span>
+        </div>
+      </div>
     </div>
-    <div class="c-blog__content">
-      <h1>{{ blog.data.page_title }}</h1>
-      <p>{{ blog.data.page_description }}</p>
-      <div class="">
-        <span>{{ blog.data.author_published_date }}</span>
-      </div>
-      <div>
-        <span>{{ blog.data.author[0].author_name }}</span>
-        <span>{{ blog.data.author[0].author_title }}</span>
-      </div>
+    <div class="c-blog__hero-image">
+      <img src="{{ blog.data.blog_image.url }}" />
     </div>
   </div>
-  <div #htmlContent [innerHtml]="blog.data.blog_content | asHTML"></div>
+  <div #htmlContent [innerHtml]="blog.data.blog_content | asHTML: true"></div>
 </ng-container>

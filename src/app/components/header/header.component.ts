@@ -13,14 +13,23 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import {Router} from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  PRIMARY_OUTLET,
+  Router,
+  RouterEvent,
+  UrlSegment,
+  UrlSegmentGroup,
+  UrlTree,
+} from '@angular/router';
 import {DarkModeService} from 'src/app/services/dark-mode.service';
 import {RevealService} from '../reveal/reveal.service';
 import * as moment from 'moment';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
 import {AppComponent} from 'src/app/app.component';
-import {distinctUntilChanged, fromEvent, map, Observable, pairwise, share, throttleTime} from 'rxjs';
+import {distinctUntilChanged, filter, fromEvent, map, Observable, pairwise, share, throttleTime} from 'rxjs';
 
 @Component({
   host: {
@@ -33,6 +42,7 @@ import {distinctUntilChanged, fromEvent, map, Observable, pairwise, share, throt
 })
 export class HeaderComponent implements AfterViewInit {
   timeNow: string = '00:00:00';
+  onBlog = false;
   htmlBody = this.element.nativeElement.parentElement.parentElement;
   @ViewChild('darkModeToggle') darkModeToggle!: ElementRef;
   @ViewChild('cursor') cursor!: ElementRef;
@@ -45,7 +55,8 @@ export class HeaderComponent implements AfterViewInit {
     private render: Renderer2,
     private darkModeService: DarkModeService,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute
   ) {
     this.initClock = this.initClock.bind(this);
   }
@@ -120,6 +131,19 @@ export class HeaderComponent implements AfterViewInit {
     this.zone.runOutsideAngular(() => {
       this.watchHeader();
       this.initClock();
+    });
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        const tree: UrlTree = this.router.parseUrl(e.url);
+        const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
+        const s: UrlSegment[] = g.segments;
+        if (s[0].path === 'blog') {
+          console.log('Im in blog');
+          this.onBlog = true;
+        } else {
+          this.onBlog = false;
+        }
+      }
     });
     this.darkModeService.darkModeState$.subscribe((darkState) => {
       if (darkState.prefersDark) {
