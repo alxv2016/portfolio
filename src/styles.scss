@@ -95,3 +95,21 @@ iframe.codepen-iframe {
   margin: 0;
   padding: 0;
 }
+
+.c-blog {
+  ul {
+    padding: $spacing--lg;
+    list-style: inside;
+    margin: $spacing--md 0;
+  }
+  li ~ li {
+    margin-top: $spacing--md;
+  }
+
+  code {
+    display: inline-block;
+    border-radius: $spacing--xs;
+    padding: $spacing--xs $spacing--sm;
+    background-color: var(--color-bottom-pane-bg);
+  }
+}

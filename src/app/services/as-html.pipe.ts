@@ -35,8 +35,11 @@ export class AsHTMLPipe implements PipeTransform {
     if (element.type === 'heading4') {
       return `<h4 class="heading-4">${children}</h4>`;
     }
+    if (element.type === 'list-item') {
+      return `<li class="ul-list-item">${children}</li>`;
+    }
     if (element.data?.label === 'code-block') {
-      return `<pre><code>${children}</code></pre>`;
+      return `<code>${children}</code>`;
     }
     if (element.data?.label === 'code-css') {
       return `<pre><code class="language-css">${children}</code></pre>`;
