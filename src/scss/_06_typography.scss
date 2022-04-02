@@ -2,6 +2,7 @@
 p {
   color: currentColor;
   font-size: $body--1;
+  line-height: $body-line-height;
   @include breakpoint(md) {
     font-size: $subtitle;
   }
@@ -11,7 +12,22 @@ p {
   }
 }
 
-p ~ p {
+p:only-child,
+p:only-of-type {
+  margin: 0;
+}
+
+p ~ p,
+h1 ~ p,
+h2 ~ p {
+  margin-top: $spacing--xl;
+  @include breakpoint(md) {
+    margin-top: $spacing--2xl;
+  }
+}
+
+h3 ~ p,
+h4 ~ p {
   margin-top: $spacing--lg;
   @include breakpoint(md) {
     margin-top: $spacing--xl;
@@ -22,10 +38,21 @@ h1,
 h2,
 h3,
 h4,
-form legend {
+form,
+legend {
   line-height: $heading-line-height;
   font-weight: inherit;
   margin: $spacing--xl 0 $spacing--sm;
+}
+
+.overline {
+  font-size: $body--1;
+  font-weight: font-weight('bold');
+  line-height: $heading-line-height;
+  color: var(--color-type-overline);
+  @include breakpoint(md) {
+    font-size: $subtitle;
+  }
 }
 
 .display-responsive {
@@ -66,60 +93,12 @@ form legend {
     text-decoration: underline;
     text-decoration-color: var(--color-type-underline);
   }
-}
-
-p ~ .heading-1,
-p ~ .heading-2,
-p ~ .heading-3,
-p ~ .heading-4 {
-  margin-top: $layout--lg;
-  @include breakpoint(md) {
-    margin-top: $layout--xl;
-  }
-}
-
-.display ~ p {
-  margin-top: $spacing--2xl;
-  @include breakpoint(md) {
-    margin-top: $spacing--3xl;
-  }
-}
-
-.display-2 {
-  font-size: $title--2;
-  font-family: $heading-font-family;
-  line-height: $heading-line-height;
-  font-weight: font-weight('semi-bold');
-  color: currentColor;
-  @include breakpoint(sm) {
-    font-size: $title--1;
-  }
-  @include breakpoint(md) {
-    font-size: $large--title;
-  }
-  @include breakpoint(lg) {
-    font-size: $huge--title;
-  }
-  em {
-    font-style: normal;
-    position: relative;
-    display: inline-block;
-    text-decoration: underline;
-    text-decoration-color: var(--color-type-underline);
-  }
   &:first-child {
     margin-top: 0;
   }
 }
 
-.display-2 ~ p {
-  margin-top: $spacing--2xl;
-  @include breakpoint(md) {
-    margin-top: $spacing--3xl;
-  }
-}
-
-.display-3,
+.display-2,
 .blog-title {
   font-size: $title--3;
   font-family: $heading-font-family;
@@ -144,13 +123,6 @@ p ~ .heading-4 {
   }
 }
 
-.display-3 ~ p {
-  margin-top: $spacing--xl;
-  @include breakpoint(md) {
-    margin-top: $spacing--2xl;
-  }
-}
-
 .heading-2 {
   position: relative;
   font-size: $subtitle;
@@ -169,13 +141,6 @@ p ~ .heading-4 {
   }
 }
 
-.heading-2 ~ p {
-  margin-top: $spacing--xl;
-  @include breakpoint(md) {
-    margin-top: $spacing--2xl;
-  }
-}
-
 .heading-3 {
   position: relative;
   font-size: $body--1;
@@ -186,24 +151,6 @@ p ~ .heading-4 {
   &:first-child {
     margin-top: 0;
   }
-  @include breakpoint(md) {
-    font-size: $subtitle;
-  }
-}
-
-.heading-3 ~ p,
-.heading-4 ~ p {
-  margin-top: $spacing--md;
-  @include breakpoint(md) {
-    margin-top: $spacing--lg;
-  }
-}
-
-.overline {
-  font-size: $body--1;
-  font-weight: font-weight('bold');
-  line-height: $heading-line-height;
-  color: var(--color-type-overline);
   @include breakpoint(md) {
     font-size: $subtitle;
   }
@@ -242,11 +189,4 @@ p ~ .heading-4 {
   @include breakpoint(md) {
     margin-top: $spacing--md;
   }
-}
-
-.overline ~ h1,
-.overline ~ h2,
-.overline ~ h3,
-.overline ~ h4 {
-  margin-top: $spacing--lg;
 }

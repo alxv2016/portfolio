@@ -2,11 +2,11 @@
   <c-hero [siteContent$]="siteContent$" [reversing]="reverseUpdate()"></c-hero>
 </div>
 <ng-container *ngIf="siteContent$ | async as data">
-  <section *ngFor="let p of data.approach">
-    <div class="c-approach__container">
-      <div [innerHTML]="p.approach_content | asHTML"></div>
-    </div>
-  </section>
+  <section
+    class="c-approach__container"
+    *ngFor="let p of data.approach"
+    [innerHTML]="p.approach_content | asHTML"
+  ></section>
 </ng-container>
 <div class="c-approach__end">
   <svg viewBox="0 0 72 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -7,7 +7,10 @@
   margin-top: 68px;
   padding-bottom: $layout--2xl;
   section ~ section {
-    margin-top: $layout--2xl;
+    margin-top: $layout--lg;
+    @include breakpoint(md) {
+      margin-top: $layout--xl;
+    }
   }
 }
 
@@ -15,14 +18,10 @@
   &__hero-container {
     position: relative;
     margin-bottom: $layout--xl;
-    @include breakpoint(md) {
-      margin-top: $layout--lg;
-      margin-bottom: $layout--2xl;
-    }
   }
   &__container {
     width: 100%;
-    max-width: 728px;
+    max-width: 768px;
     @include breakpoint(md) {
       margin: auto;
     }
@@ -35,7 +34,7 @@
     justify-content: center;
     height: 48px;
     width: 100%;
-    margin-top: $layout--xl;
+    margin-top: $layout--lg;
     color: var(--color-logo-muted);
 
     svg {

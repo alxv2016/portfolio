@@ -5,6 +5,7 @@
   display: block;
   width: 100%;
   padding-bottom: $layout--2xl;
+  margin-bottom: $layout--lg;
 }
 
 :host-context(.c-blog) {
@@ -56,6 +57,17 @@
       @include breakpoint(md) {
         margin-top: $layout--md;
       }
+    }
+  }
+
+  &__content {
+    position: relative;
+    width: 100%;
+    max-width: 768px;
+    margin-top: $layout--lg;
+    @include breakpoint(md) {
+      margin: auto;
+      margin-top: $layout--xl;
     }
   }
 }

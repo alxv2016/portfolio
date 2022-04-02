@@ -61,13 +61,13 @@ export class AsHTMLPipe implements PipeTransform {
 
   private htmlSerializer(type: any, element: any, content: any, children: any) {
     if (element.type === 'heading1') {
-      return `<h1 class="display-1">${children}</h1>`;
+      return `<h1>${children}</h1>`;
     }
     if (element.type === 'heading2') {
-      return `<h2 class="display-2">${children}</h2>`;
+      return `<h2 class="display">${children}</h2>`;
     }
     if (element.type === 'heading3') {
-      return `<h3 class="display-3">${children}</h3>`;
+      return `<h3 class="display-2">${children}</h3>`;
     }
     if (element.data?.label === 'underline') {
       return `<span class="underline">${children}</span>`;
