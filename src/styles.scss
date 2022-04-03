@@ -99,32 +99,37 @@ iframe.codepen-iframe {
 }
 
 .c-blog {
-  ul {
+  .rt-list {
     padding: $spacing--lg;
     list-style: inside;
     margin: $spacing--md 0;
-  }
-  li ~ li {
-    margin-top: $spacing--md;
-  }
 
-  code {
-    display: inline-block;
-    border-radius: $spacing--xs;
-    padding: $spacing--xs $spacing--sm;
-    background-color: var(--color-bottom-pane-bg);
+    li ~ li {
+      margin-top: $spacing--md;
+    }
   }
+  // pre {
+  //   white-space: pre-wrap;
+  // }
 
-  h1,
-  h2 {
+  // code {
+  //   // display: inline-block;
+  //   // border-radius: $spacing--xs;
+  //   // padding: $spacing--xs $spacing--sm;
+  //   // background-color: var(--color-bottom-pane-bg);
+  //   white-space: pre-wrap;
+  // }
+
+  .rt-heading-1,
+  .rt-heading-2 {
     margin-top: $layout--lg;
     @include breakpoint(md) {
       margin-top: $layout--xl;
     }
   }
 
-  h3,
-  h4,
+  .rt-heading-3,
+  .rt-heading-4,
   .block-img {
     margin-top: $layout--md;
     @include breakpoint(md) {

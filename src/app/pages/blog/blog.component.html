@@ -20,5 +20,5 @@
       <img src="{{ blog.data.blog_image.url }}" />
     </div>
   </div>
-  <section class="c-blog__content" #htmlContent [innerHtml]="blog.data.blog_content | asHTML: true"></section>
+  <section class="c-blog__content" #htmlContent [innerHtml]="blog.data.blog_content | asHTML"></section>
 </ng-container>

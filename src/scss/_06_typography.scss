@@ -45,7 +45,8 @@ legend {
   margin: $spacing--xl 0 $spacing--sm;
 }
 
-.overline {
+.overline,
+.rt-overline {
   font-size: $body--1;
   font-weight: font-weight('bold');
   line-height: $heading-line-height;
@@ -71,7 +72,8 @@ legend {
   }
 }
 
-.display {
+.display-2,
+.rt-display-2 {
   font-size: $title--2;
   font-family: $heading-font-family;
   line-height: $heading-line-height;
@@ -98,7 +100,8 @@ legend {
   }
 }
 
-.display-2,
+.display-3,
+.rt-display-3,
 .blog-title {
   font-size: $title--3;
   font-family: $heading-font-family;
@@ -123,7 +126,8 @@ legend {
   }
 }
 
-.heading-2 {
+.heading-2,
+.rt-heading-2 {
   position: relative;
   font-size: $subtitle;
   font-family: $heading-font-family;
@@ -141,7 +145,8 @@ legend {
   }
 }
 
-.heading-3 {
+.heading-3,
+.rt-heading-3 {
   position: relative;
   font-size: $body--1;
   font-family: $heading-font-family;
