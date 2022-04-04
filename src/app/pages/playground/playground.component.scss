@@ -52,6 +52,9 @@
       text-decoration: underline;
     }
   }
+  &:focus {
+    outline: auto;
+  }
 }
 
 .project-link-date {

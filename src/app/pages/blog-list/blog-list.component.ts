@@ -43,7 +43,6 @@ export class BlogListComponent implements OnInit, AfterViewInit {
       // need to trigger zone because reveal animations runs outside of ngZone (GSAP)
       this.zone.run(() => {
         if (state) {
-          console.log('comp', blogID);
           this.router.navigate(['blog', blogID]);
           this.bottomPaneService.closeBottomPane();
         }
