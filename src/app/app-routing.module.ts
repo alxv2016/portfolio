@@ -11,7 +11,7 @@ const routes: Routes = [
     path: 'blog/:id',
     component: BlogComponent,
   },
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
 ];
 
 @NgModule({
