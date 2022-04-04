@@ -1,8 +1,11 @@
+<ng-container *ngIf="homeContent$ | async as data">
+  <h1 class="sr-only">{{ data.page_title[0].text }}</h1>
+</ng-container>
 <section class="c-home__container">
-  <ng-container *ngIf="siteContent$ | async as data">
-    <div #section class="c-home__content" [innerHTML]="data.content | asHTML"></div>
+  <ng-container *ngIf="homeContent$ | async as data">
+    <div #section class="c-home__content" [innerHTML]="data.page_content[0].content | asHTML"></div>
   </ng-container>
-  <c-social-links [siteContent$]="siteContent$"></c-social-links>
+  <c-social-links [homeContent$]="homeContent$"></c-social-links>
 </section>
 <div class="l-abstract">
   <div class="c-orb">

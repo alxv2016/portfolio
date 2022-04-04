@@ -1,5 +1,4 @@
 import {BlogCollection} from './blog.interface';
-import {AlxvCollection} from './content.interface';
 
 export interface Prismic {
   refs: Ref[];

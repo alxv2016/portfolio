@@ -13,8 +13,8 @@ import {Observable} from 'rxjs';
 import {AppComponent} from 'src/app/app.component';
 import {BottomPaneService} from 'src/app/components/bottom-pane/bottom-pane.service';
 import {RevealService} from 'src/app/components/reveal/reveal.service';
-import {BlogService} from 'src/app/services/blog.service';
 import {PrismicResult} from 'src/app/services/models/prismic.interface';
+import {PrismicService} from 'src/app/services/prismic.service';
 
 @Component({
   host: {
@@ -33,7 +33,7 @@ export class BlogListComponent implements OnInit, AfterViewInit {
     private revealService: RevealService,
     private zone: NgZone,
     private bottomPaneService: BottomPaneService,
-    private blogService: BlogService,
+    private prismic: PrismicService,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -52,8 +52,7 @@ export class BlogListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.blogList$ = this.blogService.getBlogListState();
-    this.blogList$.subscribe((e) => console.log(e));
+    this.blogList$ = this.prismic.getBlogListState();
   }
 
   ngAfterViewInit(): void {

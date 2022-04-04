@@ -2,23 +2,30 @@
   <div class="c-blog__hero">
     <div class="c-blog__hero-content">
       <div class="c-blog-title-group">
-        <span class="blog-date">{{ blog.first_publication_date }}</span>
-        <h1 class="blog-title">{{ blog.data.page_title }}</h1>
-        <p class="blog-description">{{ blog.data.page_description }}</p>
+        <span class="blog-date">{{ blog.data.published_date }}</span>
+        <h1 class="blog-title">{{ blog.data.title[0].text }}</h1>
+        <p class="blog-description">{{ blog.data.description }}</p>
       </div>
       <div class="c-blog-author">
         <div class="c-blog-author__image">
-          <img src="{{ blog.data.author[0].author_profile.url }}" />
+          <img src="{{ blog.data.authors[0].author_image.url }}" alt="{{ blog.data.authors[0].author_image.alt }}" />
         </div>
         <div class="c-blog-author__info">
-          <span class="blog-author">{{ blog.data.author[0].author_name }}</span>
-          <span class="blog-author-title">{{ blog.data.author[0].author_title }}</span>
+          <span class="blog-author">{{ blog.data.authors[0].author_name }}</span>
+          <span class="blog-author-title">{{ blog.data.authors[0].author_title }}</span>
         </div>
       </div>
     </div>
     <div class="c-blog__hero-image">
-      <img src="{{ blog.data.blog_image.url }}" />
+      <img src="{{ blog.data.cover_image.url }}" alt="{{ blog.data.cover_image.alt }}" />
     </div>
   </div>
-  <section class="c-blog__content" #htmlContent [innerHtml]="blog.data.blog_content | asHTML"></section>
+  <section class="c-blog__content">
+    <div #htmlContent *ngFor="let section of blog.data.blog_content">
+      <div [outerHTML]="section.section_content | asHTML"></div>
+      <pre
+        *ngIf="section.section_code.length !== 0"
+      ><code class="language-{{section.code_language}}">{{section.section_code[0].text}}</code></pre>
+    </div>
+  </section>
 </ng-container>

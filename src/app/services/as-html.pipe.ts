@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform, Sanitizer, SecurityContext} from '@angular/core';
+import {ElementRef, Pipe, PipeTransform, Sanitizer, SecurityContext} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import * as prismicH from '@prismicio/helpers';
 
@@ -6,7 +6,7 @@ import * as prismicH from '@prismicio/helpers';
   name: 'asHTML',
 })
 export class AsHTMLPipe implements PipeTransform {
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer, private element: ElementRef) {}
 
   transform(content: any): SafeHtml {
     const asHTML = prismicH.asHTML<any>(content, null, this.htmlSerializer);
@@ -38,20 +38,10 @@ export class AsHTMLPipe implements PipeTransform {
         return `<h6 class="rt-heading-6">${children}</h6>`;
       case element.label === 'overline':
         return `<span class="rt-overline">${children}</span>`;
-      case element.label === 'css':
-        return `<pre class="language-css"><code>${children}</code></pre>`;
-      case element.label === 'scss':
-        return `<pre class="language-scss"><code>${children}</code></pre>`;
-      case element.label === 'html':
-        return `<pre class="language-html"><code>${children}</code></pre>`;
-      case element.label === 'js':
-        return `<pre class="language-js"><code>${children}</code></pre>`;
-      case element.label === 'ts':
-        return `<pre class="language-ts"><code>${children}</code></pre>`;
       case element.label === 'code':
-        return `<pre class="code"><code>${children}</code></pre>`;
+        return `<code class="rt-code-block">${children}</code>`;
       case element.label === 'iframe':
-        return `<iframe class="codepen-iframe" scrolling="no" frameborder="no" loading="lazy" allowtransparency="true" src="${children}"></iframe>`;
+        return `<iframe class="rt-iframe" scrolling="no" frameborder="no" loading="lazy" allowtransparency="true" src="${children}"></iframe>`;
       case element.type === 'group-list-item':
         return `<ul class="rt-list">${children}</ul>`;
       default:

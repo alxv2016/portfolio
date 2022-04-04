@@ -1,11 +1,11 @@
 <ul class="blog-list" *ngIf="blogList$ | async as data">
   <li *ngFor="let blog of data" class="blog-list__item">
     <button class="blog-link" (click)="viewBlog(blog.uid)">
-      <span class="blog-link-date">{{ blog.first_publication_date }}</span>
+      <span class="blog-link-date">{{ blog.data.published_date }}</span>
       <div class="blog-link__content">
-        <h2 class="blog-link-title">{{ blog.data.page_title }}</h2>
+        <h2 class="blog-link-title">{{ blog.data.title[0].text }}</h2>
         <p class="blog-link-descr">
-          {{ blog.data.page_description }}
+          {{ blog.data.description }}
         </p>
       </div>
     </button>

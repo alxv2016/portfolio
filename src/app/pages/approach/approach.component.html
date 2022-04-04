@@ -1,11 +1,11 @@
 <div #hero class="c-approach__hero-container">
-  <c-hero [siteContent$]="siteContent$" [reversing]="reverseUpdate()"></c-hero>
+  <c-hero [approachContent$]="approachContent$" [reversing]="reverseUpdate()"></c-hero>
 </div>
-<ng-container *ngIf="siteContent$ | async as data">
+<ng-container *ngIf="approachContent$ | async as data">
   <section
     class="c-approach__container"
-    *ngFor="let p of data.approach"
-    [innerHTML]="p.approach_content | asHTML"
+    *ngFor="let p of data.sections"
+    [innerHTML]="p.section_content | asHTML"
   ></section>
 </ng-container>
 <div class="c-approach__end">

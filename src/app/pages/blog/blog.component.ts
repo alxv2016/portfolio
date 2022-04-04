@@ -10,9 +10,9 @@ import {
 } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, switchMap, take} from 'rxjs';
-import {BlogService} from 'src/app/services/blog.service';
 import {PrismicResult} from 'src/app/services/models/prismic.interface';
-import {PrismHighlightService} from 'src/app/services/prism-highlight.service';
+import {PrismService} from 'src/app/services/prism.service';
+import {PrismicService} from 'src/app/services/prismic.service';
 
 @Component({
   host: {
@@ -28,23 +28,25 @@ export class BlogComponent implements OnInit, AfterViewInit {
   @ViewChildren('htmlContent', {read: ElementRef}) htmlContent!: QueryList<ElementRef>;
   constructor(
     private route: ActivatedRoute,
-    private blogService: BlogService,
+    private prismic: PrismicService,
     private cd: ChangeDetectorRef,
     private element: ElementRef,
-    private prism: PrismHighlightService
+    private prism: PrismService
   ) {}
 
   ngOnInit(): void {
     this.blogData$ = this.route.paramMap.pipe(
       switchMap((params) => {
         const id = params.get('id');
-        return this.blogService.getBlog(id);
+        return this.prismic.getBlog(id);
       })
     );
   }
 
   ngAfterViewInit(): void {
-    this.htmlContent.changes.pipe(take(1)).subscribe((_) => {
+    this.htmlContent.changes.subscribe((_) => {
+      //
+      console.log(_);
       this.prism.highlightAll();
     });
   }

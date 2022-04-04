@@ -1,7 +1,7 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {ContentService} from 'src/app/services/content.service';
-import {AlxvCollection} from 'src/app/services/models/content.interface';
+import {HomeCollection} from 'src/app/services/models/home.interface';
+import {PrismicService} from 'src/app/services/prismic.service';
 
 @Component({
   host: {
@@ -13,10 +13,10 @@ import {AlxvCollection} from 'src/app/services/models/content.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlaygroundComponent implements OnInit {
-  data$?: Observable<AlxvCollection | null>;
-  constructor(private contentService: ContentService) {}
+  data$?: Observable<HomeCollection | null>;
+  constructor(private prismic: PrismicService) {}
 
   ngOnInit(): void {
-    this.data$ = this.contentService.getSiteState();
+    this.data$ = this.prismic.getHomeState();
   }
 }

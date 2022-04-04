@@ -1,13 +1,13 @@
 import {TestBed} from '@angular/core/testing';
 
-import {ContentService} from './content.service';
+import {PrismService} from './prism.service';
 
-describe('ContentService', () => {
-  let service: ContentService;
+describe('PrismService', () => {
+  let service: PrismService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ContentService);
+    service = TestBed.inject(PrismService);
   });
 
   it('should be created', () => {

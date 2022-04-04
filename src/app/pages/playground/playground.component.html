@@ -1,10 +1,10 @@
 <ul class="playground-list" *ngIf="data$ | async as data">
-  <li *ngFor="let playground of data.playground" class="playground-list__item">
-    <a class="project-link" [href]="playground.project_link.url" target="_blank">
-      <span class="project-link-date">{{ playground.project_date }}</span>
+  <li *ngFor="let project of data.projects" class="playground-list__item">
+    <a class="project-link" [href]="project.project_link.url" target="_blank">
+      <span class="project-link-date">{{ project.project_date }}</span>
       <div class="project-link__content">
         <div class="project-link-title-group">
-          <h2 class="project-link-title">{{ playground.project_title }}</h2>
+          <h2 class="project-link-title">{{ project.project_title }}</h2>
           <svg
             class="project-link-window-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +17,7 @@
             />
           </svg>
         </div>
-        <p class="project-link-descr">{{ playground.project_description }}</p>
+        <p class="project-link-descr">{{ project.project_description }}</p>
       </div>
     </a>
   </li>

@@ -11,15 +11,13 @@ import {
   OnInit,
 } from '@angular/core';
 import {AppComponent} from 'src/app/app.component';
-import {AlxvCollection, Sitelink} from 'src/app/services/models/content.interface';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import {RevealService} from '../reveal/reveal.service';
 import {Router} from '@angular/router';
 import {PlaygroundComponent} from 'src/app/pages/playground/playground.component';
 import {BlogListComponent} from 'src/app/pages/blog-list/blog-list.component';
-import {PrismicResult} from 'src/app/services/models/prismic.interface';
 import {Observable} from 'rxjs';
-import {BlogService} from 'src/app/services/blog.service';
+import {HomeCollection} from 'src/app/services/models/home.interface';
 
 @Component({
   host: {
@@ -30,15 +28,14 @@ import {BlogService} from 'src/app/services/blog.service';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements AfterViewInit {
-  @Input() siteContent$?: Observable<AlxvCollection | null>;
+  @Input() homeContent$?: Observable<HomeCollection | null>;
   constructor(
     private bottomPaneService: BottomPaneService,
     private revealService: RevealService,
     private inject: Injector,
     private router: Router,
     private zone: NgZone,
-    private cd: ChangeDetectorRef,
-    private blogService: BlogService
+    private cd: ChangeDetectorRef
   ) {}
 
   private sendEmail(email: string, subject: string): void {
@@ -56,7 +53,7 @@ export class FooterComponent implements AfterViewInit {
     this.revealService.getRevealHost(parent.revealHost.viewContainerRef);
   }
 
-  openBottomPane(link: Sitelink): void {
+  openBottomPane(link: any): void {
     switch (true) {
       case link.link_id === 'approach' && this.router.url !== `/${link.link_id}`:
         this.revealService.createReveal(false);
@@ -75,7 +72,6 @@ export class FooterComponent implements AfterViewInit {
         break;
       case link.link_id === 'blog':
         // console.log('playground');
-        this.blogService.getBlogList();
         this.bottomPaneService.createBottomPane(BlogListComponent, 'Blogs');
         break;
       case link.link_id === 'contact':

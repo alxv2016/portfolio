@@ -14,10 +14,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import {BehaviorSubject, Observable, Subject, takeUntil} from 'rxjs';
-import {ContentService} from 'src/app/services/content.service';
-import {AlxvCollection} from 'src/app/services/models/content.interface';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import {ApproachCollection} from 'src/app/services/models/approach.interface';
+import {PrismicService} from 'src/app/services/prismic.service';
 
 @Component({
   host: {class: 'c-approach'},
@@ -28,10 +28,10 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 })
 export class ApproachComponent implements OnInit, AfterViewInit {
   reversing$ = new BehaviorSubject<boolean>(false);
-  siteContent$?: Observable<AlxvCollection | null>;
+  approachContent$?: Observable<ApproachCollection | null>;
   @ViewChild('hero') hero!: ElementRef;
   constructor(
-    private contentService: ContentService,
+    private prismic: PrismicService,
     private zone: NgZone,
     private element: ElementRef,
     private cd: ChangeDetectorRef
@@ -42,7 +42,7 @@ export class ApproachComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.siteContent$ = this.contentService.getSiteState();
+    this.approachContent$ = this.prismic.getApproachState();
   }
 
   reverseUpdate(): Observable<boolean> {

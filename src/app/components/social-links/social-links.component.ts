@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, HostBinding, Input} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AlxvCollection} from 'src/app/services/models/content.interface';
+import {HomeCollection} from 'src/app/services/models/home.interface';
 
 @Component({
   host: {class: 'c-social-links'},
@@ -9,6 +9,6 @@ import {AlxvCollection} from 'src/app/services/models/content.interface';
   styleUrls: ['./social-links.component.scss'],
 })
 export class SocialLinksComponent {
-  @Input() siteContent$?: Observable<AlxvCollection | null>;
+  @Input() homeContent$?: Observable<HomeCollection | null>;
   constructor() {}
 }

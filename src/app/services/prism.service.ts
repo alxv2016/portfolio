@@ -5,12 +5,11 @@ import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-scss';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';
-//import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PrismHighlightService {
+export class PrismService {
   highlightAll(): void {
     Prism.manual = true;
     // console.log(Prism.plugins['NormalizeWhitespace']);
@@ -22,9 +21,9 @@ export class PrismHighlightService {
     //   'break-lines': 60,
     //   'spaces-to-tabs': 4,
     // });
-    Prism.hooks.add('before-highlight', function (env: any) {
-      env.code = env.element.innerText;
-    });
+    // Prism.hooks.add('before-highlight', function (env: any) {
+    //   env.code = env.element.innerText;
+    // });
     Prism.highlightAll();
   }
 }

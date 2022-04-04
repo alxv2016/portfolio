@@ -9,10 +9,9 @@ import {
   OnInit,
 } from '@angular/core';
 import {fromEvent, map, Observable, Subject, take, takeUntil, throttleTime} from 'rxjs';
-import {ContentService} from 'src/app/services/content.service';
-import {AlxvCollection} from 'src/app/services/models/content.interface';
+import {HomeCollection} from 'src/app/services/models/home.interface';
+import {PrismicService} from 'src/app/services/prismic.service';
 import {gsap} from 'gsap';
-import {PrismicResult} from 'src/app/services/models/prismic.interface';
 
 @Component({
   host: {class: 'c-home'},
@@ -22,10 +21,10 @@ import {PrismicResult} from 'src/app/services/models/prismic.interface';
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject();
-  siteContent$?: Observable<AlxvCollection | null>;
+  homeContent$?: Observable<HomeCollection | null>;
   constructor(
     private element: ElementRef,
-    private contentService: ContentService,
+    private prismic: PrismicService,
     private zone: NgZone,
     private changeRef: ChangeDetectorRef
   ) {}
@@ -65,7 +64,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.siteContent$ = this.contentService.getSiteState();
+    this.homeContent$ = this.prismic.getHomeState();
   }
 
   private applyLineStrokes() {

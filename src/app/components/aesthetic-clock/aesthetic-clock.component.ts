@@ -15,8 +15,8 @@ import {
 import {gsap} from 'gsap';
 import * as moment from 'moment';
 import {Observable} from 'rxjs';
-import {ContentService} from 'src/app/services/content.service';
-import {AlxvCollection} from 'src/app/services/models/content.interface';
+import {HomeCollection} from 'src/app/services/models/home.interface';
+import {PrismicService} from 'src/app/services/prismic.service';
 
 @Component({
   host: {class: 'c-clock'},
@@ -31,11 +31,11 @@ export class AestheticClockComponent implements OnInit, AfterViewInit, OnDestroy
   hours?: string | null;
   todaysDate?: string | null;
   meridian?: string | null;
-  siteContent$?: Observable<AlxvCollection | null>;
+  homeContent$?: Observable<HomeCollection | null>;
   startClock: any;
   @ViewChildren('digit', {read: ElementRef}) digit!: QueryList<ElementRef>;
   @ViewChildren('colon', {read: ElementRef}) colon!: QueryList<ElementRef>;
-  constructor(private ngZone: NgZone, private cd: ChangeDetectorRef, private contentService: ContentService) {
+  constructor(private ngZone: NgZone, private cd: ChangeDetectorRef, private prismic: PrismicService) {
     this.initGSAP = this.initGSAP.bind(this);
     this.initClock = this.initClock.bind(this);
   }
@@ -43,7 +43,7 @@ export class AestheticClockComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnInit(): void {
     const humanDate = moment();
     this.todaysDate = humanDate.format('dddd, MMMM DD YYYY');
-    this.siteContent$ = this.contentService.getSiteState();
+    this.homeContent$ = this.prismic.getHomeState();
   }
 
   private initClock(): void {

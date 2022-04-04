@@ -10,9 +10,9 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import {AlxvCollection} from 'src/app/services/models/content.interface';
 import {gsap} from 'gsap';
 import {Observable} from 'rxjs';
+import {ApproachCollection} from 'src/app/services/models/approach.interface';
 
 @Component({
   selector: 'c-hero',
@@ -26,7 +26,7 @@ import {Observable} from 'rxjs';
 export class HeroComponent implements AfterViewInit, OnDestroy {
   gsapAnimation!: GSAPAnimation;
   @ViewChild('scrollingHeadline') scrollHeadline!: ElementRef;
-  @Input() siteContent$?: Observable<AlxvCollection | null>;
+  @Input() approachContent$?: Observable<ApproachCollection | null>;
   @Input() reversing?: Observable<boolean>;
   constructor(private cd: ChangeDetectorRef, private zone: NgZone) {}
 
