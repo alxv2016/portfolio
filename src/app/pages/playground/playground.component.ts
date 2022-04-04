@@ -19,4 +19,8 @@ export class PlaygroundComponent implements OnInit {
   ngOnInit(): void {
     this.data$ = this.prismic.getHomeState();
   }
+
+  viewProject(url: string): void {
+    window.open(url, '_blank');
+  }
 }

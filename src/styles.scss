@@ -98,6 +98,13 @@ iframe.rt-iframe {
   padding: 0;
 }
 
+.rt-overline ~ .rt-display-2 {
+  margin-top: $spacing--xs;
+  @include breakpoint(sm) {
+    margin-top: $spacing--sm;
+  }
+}
+
 .c-blog {
   .rt-list {
     padding: $spacing--lg;

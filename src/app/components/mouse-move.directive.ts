@@ -1,13 +1,26 @@
 import {AfterViewInit, Directive, ElementRef, NgZone} from '@angular/core';
-import {fromEvent, map, Observable, throttleTime} from 'rxjs';
+import {catchError, fromEvent, map, Observable, of, switchMap, throttleTime} from 'rxjs';
 import {gsap} from 'gsap';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {state} from '@angular/animations';
 
 @Directive({
   selector: '[mouseMove]',
 })
 export class MouseMoveDirective implements AfterViewInit {
   parent = this.element.nativeElement.ownerDocument;
-  constructor(private element: ElementRef, private zone: NgZone) {}
+  constructor(private element: ElementRef, private zone: NgZone, private bp: BreakpointObserver) {}
+
+  private bpObserver() {
+    return this.bp.observe(['(min-width: 568px)']).pipe(
+      map((matches) => {
+        return matches;
+      }),
+      catchError((_error) => {
+        return of(null);
+      })
+    );
+  }
 
   private powerMagnets(els: any, pos: any) {
     els.forEach((el: HTMLElement) => {
@@ -52,11 +65,20 @@ export class MouseMoveDirective implements AfterViewInit {
   ngAfterViewInit(): void {
     // Get mousemove event and elements outside of Angular's change detection for performance
     this.zone.runOutsideAngular(() => {
-      this.mouseEvent().subscribe((m) => {
-        if (m.magnets.length !== 0) {
-          this.powerMagnets(m.magnets, m);
-        }
-      });
+      this.bpObserver()
+        .pipe(
+          switchMap((media: any) => {
+            if (media.matches) {
+              return this.mouseEvent();
+            }
+            return of(null);
+          })
+        )
+        .subscribe((m) => {
+          if (m && m.magnets.length !== 0) {
+            this.powerMagnets(m.magnets, m);
+          }
+        });
     });
   }
 }

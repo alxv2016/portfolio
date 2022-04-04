@@ -16,55 +16,52 @@ const initialState: DarkModeState = {
   providedIn: 'root',
 })
 export class DarkModeService {
-  storageKey = 'theme-preference';
+  storageKey = 'prefers-dark';
   // Our behaviourSubject store
   private _initialState = new BehaviorSubject<DarkModeState>(initialState);
-  // Dark mode state's subscription
+  // Dark mode state's subscription to detect user preference settings
   darkModeState$ = this.checkDarkMode().pipe(switchMap((_) => this._initialState.asObservable()));
-
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private mediaMatcher: MediaMatcher,
-    private bpObserver: BreakpointObserver
-  ) {
-    // initiate check on stored preferences
+  constructor(@Inject(DOCUMENT) private document: Document, private mediaMatcher: MediaMatcher) {
+    // initiate dark mode check
     this.getColorPreference();
-    // if (localStorage.getItem('prefersDarkMode') !== null) {
-    //   initialState.prefersDark = JSON.parse(localStorage.getItem('prefersDarkMode') || 'false');
-    //   this._initialState.next(initialState);
-    // }
   }
 
   private getColorPreference() {
+    // Check in local storage first
     if (localStorage.getItem(this.storageKey)) {
       initialState.prefersDark = JSON.parse(localStorage.getItem(this.storageKey) || 'false');
-      console.log(initialState);
       this._initialState.next(initialState);
       this.setPreference(initialState.prefersDark);
     } else {
-      initialState.prefersDark = this.mediaMatcher.matchMedia('(prefers-color-scheme): dark').matches;
+      // If no key has been set check user preference
+      initialState.prefersDark = this.mediaMatcher.matchMedia('(prefers-color-scheme: dark)').matches;
       this._initialState.next(initialState);
       this.setPreference(initialState.prefersDark);
     }
   }
-
+  // Set the preference
   private setPreference(state: boolean) {
     localStorage.setItem(this.storageKey, JSON.stringify(state));
     this.reflectPreference(state);
   }
 
   private reflectPreference(state: boolean): void {
+    // Toggle accessibility attributes and dark mode class
     const body = this.document.querySelector('body');
+    const darkModeBtn = this.document.querySelector('button[data-id="dark-mode-switch"]');
     if (state) {
       body?.classList.add('dark');
+      darkModeBtn?.classList.add('toggled');
+      darkModeBtn?.setAttribute('aria-checked', 'true');
     } else {
       body?.classList.remove('dark');
+      darkModeBtn?.classList.remove('toggled');
+      darkModeBtn?.setAttribute('aria-checked', 'false');
     }
   }
 
-  // Observes match media event changes through Angular CDK breakpoint observer
-  checkDarkMode(): Observable<any> {
-    console.log(this.document);
+  // Observes match media event changes through media matcher
+  private checkDarkMode(): Observable<any> {
     return fromEvent<MediaQueryListEvent>(this.mediaMatcher.matchMedia('(prefers-color-scheme: dark)'), 'change').pipe(
       map((state) => {
         initialState.prefersDark = state.matches;
@@ -75,18 +72,6 @@ export class DarkModeService {
         return of(initialState);
       })
     );
-    // return this.bpObserver.observe(['(prefers-color-scheme: dark)']).pipe(
-    //   distinctUntilChanged(),
-    //   map((prefersDark) => {
-    //     console.log(prefersDark);
-    //     initialState.prefersDark = prefersDark.matches;
-    //     this.setPreference(prefersDark.matches);
-    //     return initialState;
-    //   }),
-    //   catchError((_error) => {
-    //     return of(initialState);
-    //   })
-    // );
   }
 
   toggleDarkMode(): void {

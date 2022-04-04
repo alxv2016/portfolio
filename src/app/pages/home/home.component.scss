@@ -4,15 +4,8 @@
   display: block;
   height: 100%;
   width: 100%;
-  padding-top: $layout--lg;
+  padding-top: $layout--2xl;
   padding-bottom: $layout--2xl;
-  @include breakpoint(sm) {
-    padding-top: $layout--xl;
-  }
-  @include breakpoint(md) {
-    padding-top: $layout--2xl;
-    flex-direction: row;
-  }
 }
 
 .c-home {

@@ -43,8 +43,6 @@ import {distinctUntilChanged, filter, fromEvent, map, Observable, pairwise, shar
 export class HeaderComponent implements AfterViewInit {
   timeNow: string = '00:00:00';
   onBlog = false;
-  htmlBody = this.element.nativeElement.parentElement.parentElement;
-  @ViewChild('darkModeToggle') darkModeToggle!: ElementRef;
   @ViewChild('cursor') cursor!: ElementRef;
   constructor(
     private zone: NgZone,
@@ -132,29 +130,20 @@ export class HeaderComponent implements AfterViewInit {
       this.watchHeader();
       this.initClock();
     });
-    this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        const tree: UrlTree = this.router.parseUrl(e.url);
-        const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
-        const s: UrlSegment[] = g.segments;
-        if (s[0].path === 'blog') {
-          console.log('Im in blog');
-          this.onBlog = true;
-        } else {
-          this.onBlog = false;
-        }
-      }
-    });
-    this.darkModeService.darkModeState$.subscribe((darkState) => {
-      if (darkState.prefersDark) {
-        // this.render.addClass(this.htmlBody, 'dark');
-        this.render.addClass(this.darkModeToggle.nativeElement, 'toggled');
-        this.render.setAttribute(this.darkModeToggle.nativeElement, 'aria-checked', 'true');
-      } else {
-        // this.render.removeClass(this.htmlBody, 'dark');
-        this.render.removeClass(this.darkModeToggle.nativeElement, 'toggled');
-        this.render.setAttribute(this.darkModeToggle.nativeElement, 'aria-checked', 'false');
-      }
-    });
+    this.darkModeService.darkModeState$.subscribe();
+
+    // this.router.events.subscribe((e) => {
+    //   if (e instanceof NavigationEnd) {
+    //     const tree: UrlTree = this.router.parseUrl(e.url);
+    //     const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
+    //     const s: UrlSegment[] = g.segments;
+    //     if (s[0].path === 'blog') {
+    //       console.log('Im in blog');
+    //       this.onBlog = true;
+    //     } else {
+    //       this.onBlog = false;
+    //     }
+    //   }
+    // });
   }
 }

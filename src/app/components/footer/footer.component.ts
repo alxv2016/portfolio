@@ -4,11 +4,13 @@ import {
   ChangeDetectorRef,
   Component,
   DoCheck,
+  ElementRef,
   HostBinding,
   Injector,
   Input,
   NgZone,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import {AppComponent} from 'src/app/app.component';
 import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
@@ -29,6 +31,7 @@ import {HomeCollection} from 'src/app/services/models/home.interface';
 })
 export class FooterComponent implements AfterViewInit {
   @Input() homeContent$?: Observable<HomeCollection | null>;
+  @ViewChild('footerNav') footerNav!: ElementRef;
   constructor(
     private bottomPaneService: BottomPaneService,
     private revealService: RevealService,

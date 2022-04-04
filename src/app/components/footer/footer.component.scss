@@ -23,18 +23,18 @@
     width: 100%;
     pointer-events: none;
     overflow: hidden;
-    &::before {
-      position: absolute;
-      z-index: 2;
-      content: '';
-      height: 100%;
-      width: 100%;
-      opacity: 1;
-      background: linear-gradient(90deg, rgba(var(--color-bg-rgb), 0) 70%, rgba(var(--color-bg-rgb), 1) 100%);
-      @include breakpoint(sm) {
-        opacity: 0;
-      }
-    }
+    // &::before {
+    //   position: absolute;
+    //   z-index: 2;
+    //   content: '';
+    //   height: 100%;
+    //   width: 100%;
+    //   opacity: 1;
+    //   background: linear-gradient(90deg, rgba(var(--color-bg-rgb), 0) 70%, rgba(var(--color-bg-rgb), 1) 100%);
+    //   @include breakpoint(sm) {
+    //     opacity: 0;
+    //   }
+    // }
   }
   &__nav {
     position: relative;
