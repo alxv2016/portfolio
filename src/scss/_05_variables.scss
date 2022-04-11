@@ -1,6 +1,6 @@
 // Base type
-$base-font-family: 'Lato', 'Helvetica Neue', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
-$heading-font-family: 'Montserrat', sans-serif !default;
+$base-font-family: 'Inter', 'Helvetica Neue', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+$heading-font-family: 'Inter', sans-serif !default;
 $base-font-size: 1rem !default;
 $headline-line-height: 1.15 !default;
 $heading-line-height: 1.25 !default;
@@ -27,9 +27,9 @@ $icon-sizes: (
 // Font weights
 $font-weights: (
   regular: 400,
+  semi-bold: 600,
   bold: 700,
-  semi-bold: 800,
-  extra-bold: 900,
+  extra-bold: 800,
 ) !default;
 // Breakpoints
 $breakpoints: (

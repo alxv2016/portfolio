@@ -58,8 +58,8 @@
 .c-clock-digit {
   position: relative;
   display: block;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
+  font-family: $heading-font-family;
+  font-weight: font-weight('extra-bold');
   line-height: 0.8;
   letter-spacing: -0.25rem;
   font-style: italic;
@@ -71,7 +71,7 @@
   }
 
   &--seconds {
-    font-weight: 600;
+    font-weight: font-weight('bold');
     color: var(--color-type-clock-accent);
   }
 }
@@ -126,7 +126,7 @@
 
   &__label {
     font-size: $title--3;
-    font-weight: 700;
+    font-weight: font-weight('bold');
     line-height: 1;
     color: var(--color-type-clock);
     @include breakpoint(sm) {
@@ -137,7 +137,7 @@
 
 .c-clock-message {
   font-size: $body--1;
-  font-weight: font-weight(bold);
+  font-weight: font-weight('semi-bold');
   color: var(--color-type-clock);
 }
 

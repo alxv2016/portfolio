@@ -48,7 +48,7 @@ legend {
 .overline,
 .rt-overline {
   font-size: $body--1;
-  font-weight: font-weight('bold');
+  font-weight: font-weight('semi-bold');
   line-height: $heading-line-height;
   color: var(--color-type-overline);
   @include breakpoint(md) {
@@ -60,7 +60,7 @@ legend {
   font-family: $heading-font-family;
   font-size: $headliner--1;
   line-height: $heading-line-height;
-  font-weight: font-weight('semi-bold');
+  font-weight: font-weight('extra-bold');
   white-space: nowrap;
   user-select: none;
   color: var(--color-type-neutral);
@@ -77,7 +77,7 @@ legend {
   font-size: $title--2;
   font-family: $heading-font-family;
   line-height: $heading-line-height;
-  font-weight: font-weight('semi-bold');
+  font-weight: font-weight('extra-bold');
   color: currentColor;
   @include breakpoint(sm) {
     font-size: $title--1;
@@ -106,7 +106,7 @@ legend {
   font-size: $title--3;
   font-family: $heading-font-family;
   line-height: $heading-line-height;
-  font-weight: font-weight('bold');
+  font-weight: font-weight('extra-bold');
   color: currentColor;
   &:first-child {
     margin-top: 0;

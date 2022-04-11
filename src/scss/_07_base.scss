@@ -22,7 +22,7 @@ html {
 body {
   font-family: $base-font-family;
   line-height: $body-line-height;
-  font-weight: 400;
+  font-weight: font-weight('regular');
   height: 100%;
   color: var(--color-type-base);
   background-color: var(--color-bg);
