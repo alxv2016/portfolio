@@ -34,7 +34,7 @@
   justify-content: space-between;
   text-align: left;
   width: 100%;
-  color: var(--color-type-muted);
+  color: var(--text2);
   text-decoration: none;
   padding: $spacing--lg;
   transition: background-color 275ms ease;
@@ -49,7 +49,7 @@
   &:hover,
   &:focus {
     .project-link-title {
-      color: var(--color-type-link);
+      color: var(--text1);
       text-decoration: underline;
     }
   }
@@ -87,7 +87,7 @@
   font-size: $subtitle;
   font-weight: 900;
   transition: color 275ms ease;
-  color: var(--color-type-link);
+  color: var(--text2);
   @include breakpoint(md) {
     font-size: $subtitle--2;
   }
@@ -118,7 +118,7 @@
 .project-link-window-icon {
   height: 16px;
   width: 16px;
-  color: var(--color-type-muted);
+  color: var(--text1);
 }
 
 .project-link-title ~ .project-link-window-icon {

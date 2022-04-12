@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     this.homeContent$ = this.prismic.getHomeState();
     console.log('%c Hey! I see you peaking 👀', 'color: cyan; font-weight: bold; font-size: 16px');
     console.log(
-      '%c Alot of code and 🥃 to get this baby running 💯 🔥🔥',
+      '%c Alot of code and some 🥃 to get this baby running 💯 🔥🔥',
       'color: LightSalmon; font-weight: bold; font-size: 11px'
     );
   }

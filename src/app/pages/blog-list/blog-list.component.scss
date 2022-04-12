@@ -34,7 +34,7 @@
   justify-content: space-between;
   width: 100%;
   text-align: left;
-  color: var(--color-type-muted);
+  color: var(--text2);
   text-decoration: none;
   padding: $spacing--lg;
   transition: background-color 275ms ease;
@@ -49,7 +49,7 @@
   &:hover,
   &:focus {
     .blog-link-title {
-      color: var(--color-type-link);
+      color: var(--text1);
       text-decoration: underline;
     }
   }
@@ -73,7 +73,7 @@
     right: -34px;
     height: 2px;
     width: 24px;
-    background-color: var(--color-type-link);
+    background-color: var(--text1);
   }
 }
 
@@ -84,7 +84,7 @@
   font-size: $subtitle;
   font-weight: 900;
   transition: color 275ms ease;
-  color: var(--color-type-link);
+  color: var(--text1);
   @include breakpoint(md) {
     font-size: $subtitle--2;
   }
@@ -116,7 +116,7 @@
 .blog-link-window-icon {
   height: 16px;
   width: 16px;
-  color: var(--color-type-muted);
+  color: var(--text2);
 }
 
 .blog-link-title ~ .blog-link-window-icon {

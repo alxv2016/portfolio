@@ -40,9 +40,9 @@ export class RevealComponent implements AfterViewInit {
   private createRevealBlocks() {
     const document = this.element.nativeElement.ownerDocument;
     const style = getComputedStyle(document.body);
-    const block1 = style.getPropertyValue('--color-reveal-block1');
-    const block2 = style.getPropertyValue('--color-reveal-block2');
-    const block3 = style.getPropertyValue('--color-reveal-block3');
+    const block1 = style.getPropertyValue('--accent1');
+    const block2 = style.getPropertyValue('--surface2');
+    const block3 = style.getPropertyValue('--surface6');
     const colors = [block1, block2, block3];
     const revealBlocks = [];
     for (let i = 0; i < this.amount; i++) {

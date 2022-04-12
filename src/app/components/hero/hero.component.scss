@@ -21,14 +21,14 @@
     width: 100%;
     background: radial-gradient(
       circle,
-      rgba(var(--color-bg-rgb), 0) var(--progress-start),
-      rgba(var(--color-bg-rgb), 1) var(--progress-end)
+      hsla(var(--glass1) / 0) var(--progress-start),
+      hsla(var(--glass1) / 1) var(--progress-end)
     );
     mask: $noiseFilter,
       radial-gradient(
         circle,
-        rgba(var(--color-bg-rgb), 0) var(--progress-start),
-        rgba(var(--color-bg-rgb), 1) var(--progress-end)
+        hsla(var(--glass1) / 0) var(--progress-start),
+        hsla(var(--glass1) / 1) var(--progress-end)
       );
   }
 }

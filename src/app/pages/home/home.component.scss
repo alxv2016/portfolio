@@ -52,7 +52,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  // display: none;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -67,8 +66,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg, rgba(var(--color-bg-rgb), 0) 20%, rgba(var(--color-bg-rgb), 1) 70%);
-    @include frosted-glass(var(--color-bg-rgb), 0.25);
+    background: linear-gradient(0deg, hsla(var(--glass1) / 0) 5%, hsla(var(--glass1) / 1) 66%);
+    // @include frosted-glass(var(--glass1), 0.75);
   }
 }
 
@@ -77,11 +76,12 @@
 }
 
 .orb-lines {
-  color: var(--color-abstract-secondary);
+  color: var(--accent2);
 }
 
 .orb-lines-accent {
-  color: var(--color-abstract-primary);
+  mix-blend-mode: multiply;
+  color: var(--accent1);
 }
 
 .c-orb {

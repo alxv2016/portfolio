@@ -30,6 +30,7 @@ import {BottomPaneService} from '../bottom-pane/bottom-pane.service';
 import {AestheticClockComponent} from '../aesthetic-clock/aesthetic-clock.component';
 import {AppComponent} from 'src/app/app.component';
 import {distinctUntilChanged, filter, fromEvent, map, Observable, pairwise, share, throttleTime} from 'rxjs';
+import {ColorSchemeService} from 'src/app/services/color-scheme.service';
 
 @Component({
   host: {
@@ -51,7 +52,7 @@ export class HeaderComponent implements AfterViewInit {
     private inject: Injector,
     private element: ElementRef,
     private render: Renderer2,
-    private darkModeService: DarkModeService,
+    private colorSchemeService: ColorSchemeService,
     private router: Router,
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute
@@ -76,7 +77,7 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   toggleDarkMode(): void {
-    this.darkModeService.toggleDarkMode();
+    this.colorSchemeService.toggleDarkMode();
   }
 
   goHome(): void {
@@ -130,7 +131,8 @@ export class HeaderComponent implements AfterViewInit {
       this.watchHeader();
       this.initClock();
     });
-    this.darkModeService.darkModeState$.subscribe();
+    // this.darkModeService.darkModeState$.subscribe();
+    this.colorSchemeService.schemeState$.subscribe();
 
     // this.router.events.subscribe((e) => {
     //   if (e instanceof NavigationEnd) {

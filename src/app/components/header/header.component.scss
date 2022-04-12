@@ -8,7 +8,7 @@
   min-height: 68px;
   transition: transform 275ms ease;
   transform: translateY(0);
-  @include frosted-glass(var(--color-bg-rgb), 0.72);
+  @include frosted-glass(var(--glass1), 0.75);
   &[data-state='hidden'] {
     transform: translateY(-80px);
   }
@@ -53,7 +53,6 @@
 }
 
 .header-logo {
-  transition: color 275ms ease;
   height: 14px;
   width: auto;
   @include breakpoint(md) {
@@ -65,7 +64,7 @@
 }
 
 .dot {
-  color: var(--color-type-underline);
+  color: var(--accent1);
 }
 
 .time-btn {
@@ -80,7 +79,7 @@
   border-radius: $spacing--xs;
   &:hover,
   &:focus {
-    background-color: rgba(var(--color-bg-btn-rgb), 0.075);
+    background-color: var(--surface4);
   }
 }
 
@@ -97,7 +96,7 @@
   transition: background 320ms ease;
   &:hover,
   &:focus {
-    background-color: rgba(var(--color-bg-btn-rgb), 0.075);
+    background-color: var(--surface4);
   }
   svg {
     height: 24px;

@@ -5,6 +5,8 @@ html {
   box-sizing: border-box;
   height: 100%;
   font-size: 100%;
+  color: var(--text1);
+  background-color: var(--surface1);
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -24,8 +26,6 @@ body {
   line-height: $body-line-height;
   font-weight: font-weight('regular');
   height: 100%;
-  color: var(--color-type-base);
-  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // removes bounce in scrolling
@@ -39,7 +39,7 @@ body {
 // Links
 a {
   //color: $link-color;
-  color: var(--color-type-link);
+  color: var(--accent2);
   text-decoration: underline;
   // Remove the gray background on active links in IE 11.
   background-color: transparent;
