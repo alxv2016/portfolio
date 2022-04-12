@@ -11,68 +11,6 @@
 // Third party over-rides
 @import '~prismjs/themes/prism-okaidia.css';
 
-:root {
-  --color-bg: #{neutral(grey10)};
-  --color-bg-rgb: #{hexToRGB(neutral(grey10))};
-  --color-bg-btn-rgb: #{hexToRGB(primary(green80))};
-  --color-outline-rgb: #{hexToRGB(neutral(grey80))};
-  --color-shadow-rgb: #{hexToRGB(neutral(grey90))};
-  --color-abstract-primary: #{accent1(neon40)};
-  --color-abstract-secondary: #{accent1(neon50)};
-  --color-bottom-pane-bg: #{neutral(grey0)};
-  --color-reveal-block1: #{accent1(neon40)};
-  --color-reveal-block2: #{neutral(grey20)};
-  --color-reveal-block3: #{neutral(grey10)};
-  --color-logo-muted: #{neutral(grey20)};
-  // Motion
-  --color-motion-circle: #{secondary(lime70)};
-  --color-motion-semicircle: #{primary(green30)};
-  --color-motion-diamond: #{accent1(neon40)};
-  --color-motion-arc: #{primary(green50)};
-
-  // Typography Colors
-  --color-type-base: #{primary(green60)};
-  --color-type-overline: #{primary(green40)};
-  --color-type-neutral: #{neutral(grey20)};
-  --color-type-underline: #{accent1(neon60)};
-  --color-type-link: #{accent1(neon90)};
-  --color-type-strong: #{primary(green70)};
-  --color-type-clock: #{primary(green70)};
-  --color-type-clock-accent: #{primary(green40)};
-  --color-type-muted: #{primary(green60)};
-}
-
-body.dark {
-  --color-bg: #{neutral(grey90)};
-  --color-bg-rgb: #{hexToRGB(neutral(grey90))};
-  --color-bg-btn-rgb: #{hexToRGB(primary(green30))};
-  --color-outline-rgb: #{hexToRGB(neutral(grey10))};
-  --color-shadow-rgb: #{hexToRGB(neutral(grey90))};
-  --color-abstract-primary: #{accent1(neon40)};
-  --color-abstract-secondary: #{accent1(neon40)};
-  --color-bottom-pane-bg: #{neutral(grey80)};
-  --color-reveal-block1: #{accent1(neon50)};
-  --color-reveal-block2: #{neutral(grey70)};
-  --color-reveal-block3: #{neutral(grey80)};
-  --color-logo-muted: #{neutral(grey70)};
-  // Motion
-  --color-motion-circle: #{secondary(lime50)};
-  --color-motion-semicircle: #{primary(green20)};
-  --color-motion-diamond: #{accent1(neon40)};
-  --color-motion-arc: #{primary(green40)};
-
-  // Typography Colors
-  --color-type-base: #{primary(green10)};
-  --color-type-overline: #{primary(green30)};
-  --color-type-neutral: #{neutral(grey80)};
-  --color-type-underline: #{accent1(neon40)};
-  --color-type-link: #{accent1(neon40)};
-  --color-type-strong: #{primary(green0)};
-  --color-type-clock: #{primary(green30)};
-  --color-type-clock-accent: #{secondary(lime40)};
-  --color-type-muted: #{primary(green20)};
-}
-
 body.overlay {
   overflow: hidden;
 }

@@ -66,7 +66,7 @@
   border-top-right-radius: $spacing--lg;
   overflow: hidden;
   transform: translateY(102%);
-  @include elevate-4();
+  @include elevate-4(0.095);
   visibility: hidden;
 
   &__header {

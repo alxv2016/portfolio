@@ -94,7 +94,7 @@
     height: 48px;
     border-radius: 100%;
     flex-shrink: 0;
-    border: 2px solid var(--color-logo-muted);
+    border: 2px solid var(--brand);
     overflow: hidden;
     img {
       height: inherit;
@@ -123,7 +123,7 @@
     font-weight: font-weight('bold');
     line-height: $heading-line-height;
     font-size: $body--1;
-    color: var(--color-type-link);
+    color: var(--text2);
     @include breakpoint(md) {
       font-size: $subtitle;
     }
@@ -133,7 +133,7 @@
     position: relative;
     display: inline-block;
     font-size: $body--2;
-    color: var(--color-type-overline);
+    color: var(--text2);
     @include breakpoint(md) {
       font-size: $body--1;
     }
