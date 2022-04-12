@@ -8,6 +8,8 @@ import {AestheticClockComponent} from './aesthetic-clock/aesthetic-clock.compone
 import {AboutContentComponent} from './about-content/about-content.component';
 import {BalanceMotionComponent} from './balance-motion/balance-motion.component';
 import {HeroComponent} from './hero/hero.component';
+import {ColorSchemeComponent} from './color-scheme/color-scheme.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,8 +20,9 @@ import {HeroComponent} from './hero/hero.component';
     AboutContentComponent,
     BalanceMotionComponent,
     HeroComponent,
+    ColorSchemeComponent,
   ],
-  imports: [CommonModule, BottomPaneModule],
+  imports: [CommonModule, BottomPaneModule, FormsModule, ReactiveFormsModule],
   exports: [
     BalanceMotionComponent,
     HeaderComponent,
@@ -28,6 +31,7 @@ import {HeroComponent} from './hero/hero.component';
     AestheticClockComponent,
     AboutContentComponent,
     HeroComponent,
+    ColorSchemeComponent,
   ],
 })
 export class ComponentsModule {}

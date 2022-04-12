@@ -20,6 +20,7 @@ import {PlaygroundComponent} from 'src/app/pages/playground/playground.component
 import {BlogListComponent} from 'src/app/pages/blog-list/blog-list.component';
 import {Observable} from 'rxjs';
 import {HomeCollection} from 'src/app/services/models/home.interface';
+import {ColorSchemeComponent} from '../color-scheme/color-scheme.component';
 
 @Component({
   host: {
@@ -54,6 +55,10 @@ export class FooterComponent implements AfterViewInit {
     const parent = this.inject.get<AppComponent>(AppComponent);
     this.bottomPaneService.getBottomPaneHost(parent.bottomPaneHost.viewContainerRef);
     this.revealService.getRevealHost(parent.revealHost.viewContainerRef);
+  }
+
+  viewColorScheme(): void {
+    this.bottomPaneService.createBottomPane(ColorSchemeComponent, 'Color Scheme');
   }
 
   openBottomPane(link: any): void {

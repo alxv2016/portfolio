@@ -1,0 +1,52 @@
+<form class="theme-selection" [formGroup]="themeForm">
+  <div class="palettes">
+    <div class="palette brand-{{ i + 1 }}" *ngFor="let color of brandColors; index as i">
+      <span>{{ color }}</span>
+    </div>
+  </div>
+  <div class="palettes">
+    <div class="palette surface-{{ i + 1 }}" *ngFor="let surface of surfaces; index as i">
+      <span>{{ surface }}</span>
+    </div>
+  </div>
+  <div class="palettes">
+    <div class="palette neutral-{{ i + 1 }}" *ngFor="let neutral of nuetrals; index as i">
+      <span>{{ neutral }}</span>
+    </div>
+  </div>
+  <div class="palettes">
+    <div class="palette swatch-{{ i + 1 }}" *ngFor="let color of textColors; index as i">
+      <span>{{ color }}</span>
+    </div>
+  </div>
+  <fieldset>
+    <legend class="sr-only">Scheme</legend>
+    <div class="radio-group">
+      <div class="cr" *ngFor="let control of this.colorScheme">
+        <input
+          class="radio"
+          name="scheme"
+          [id]="control.value"
+          type="radio"
+          [value]="control.value"
+          formControlName="scheme"
+        />
+        <label [for]="control.value">{{ control.label }}</label>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="hue" id="hue">Hue</label>
+      <input
+        #hueSlider
+        name="hue"
+        type="range"
+        formControlName="hue"
+        aria-labelledby="hue"
+        [value]="0"
+        step="1"
+        min="0"
+        max="360"
+      />
+    </div>
+  </fieldset>
+</form>

@@ -1,17 +1,17 @@
 // Color variables
 * {
   // Brand HSL
-  --brand-hue: 82;
-  --brand-saturation: 24%;
-  --brand-lightness: 35%;
+  --brand-hue: 183;
+  --brand-saturation: 100%;
+  --brand-lightness: 14%;
   // Accent1 HSL
-  --accent1-hue: 84;
+  --accent1-hue: 163;
   --accent1-saturation: 91%;
-  --accent2-lightness: 64%;
+  --accent2-lightness: 39%;
   // Accent2 HSL
-  --accent2-hue: 213;
-  --accent2-saturation: 43%;
-  --accent2-lightness: 43%;
+  --accent2-hue: 43;
+  --accent2-saturation: 100%;
+  --accent2-lightness: 51%;
   /* Light theme */
   --brand-light: var(--brand-hue) var(--brand-saturation) var(--brand-lightness);
   --accent1-light: var(--accent1-hue) var(--accent1-saturation) var(--accent2-lightness);
@@ -19,13 +19,20 @@
   // Text
   --text1-light: var(--brand-hue) var(--brand-saturation) 10%;
   --text2-light: var(--brand-hue) 20% 20%;
-  //Surfaces
+  // Surfaces
   --surface1-light: var(--brand-hue) 10% 95%;
   --surface2-light: var(--brand-hue) 15% 94%;
   --surface3-light: var(--brand-hue) 20% 93%;
   --surface4-light: var(--brand-hue) 25% 92%;
   --surface5-light: var(--brand-hue) 30% 91%;
   --surface6-light: var(--brand-hue) 35% 90%;
+  // Neutrals
+  --neutral1-light: var(--brand-hue) 5% 8%;
+  --neutral2-light: var(--brand-hue) 5% 9%;
+  --neutral3-light: var(--brand-hue) 5% 10%;
+  --neutral4-light: var(--brand-hue) 5% 11%;
+  --neutral5-light: var(--brand-hue) 5% 12%;
+  --neutral6-light: var(--brand-hue) 5% 13%;
   // Shadows
   --surface-shadow-light: var(--brand-hue) 10% calc(var(--brand-lightness) / 5);
   --shadow-strength-light: 0.02;
@@ -43,6 +50,13 @@
   --surface4-dark: var(--brand-hue) 5% 11%;
   --surface5-dark: var(--brand-hue) 5% 12%;
   --surface6-dark: var(--brand-hue) 5% 13%;
+  // Neutrals
+  --neutral1-dark: var(--brand-hue) 5% 8%;
+  --neutral2-dark: var(--brand-hue) 5% 9%;
+  --neutral3-dark: var(--brand-hue) 5% 10%;
+  --neutral4-dark: var(--brand-hue) 5% 11%;
+  --neutral5-dark: var(--brand-hue) 5% 12%;
+  --neutral6-dark: var(--brand-hue) 5% 13%;
   // Shadows
   --surface-shadow-dark: var(--brand-hue) 50% 3%;
   --shadow-strength-dark: 0.8;
@@ -61,6 +75,12 @@
   --surface4: hsla(var(--surface4-light) / 1);
   --surface5: hsla(var(--surface5-light) / 1);
   --surface6: hsla(var(--surface6-light) / 1);
+  --neutral1: hsla(var(--neutral1-light) / 1);
+  --neutral2: hsla(var(--neutral2-light) / 1);
+  --neutral3: hsla(var(--neutral3-light) / 1);
+  --neutral4: hsla(var(--neutral4-light) / 1);
+  --neutral5: hsla(var(--neutral5-light) / 1);
+  --neutral6: hsla(var(--neutral6-light) / 1);
   --glass1: var(--surface1-light);
   --glass2: var(--surface2-light);
   --glass3: var(--surface3-light);
@@ -83,6 +103,12 @@
     --surface4: hsla(var(--surface4-dark) / 1);
     --surface5: hsla(var(--surface5-dark) / 1);
     --surface6: hsla(var(--surface6-dark) / 1);
+    --neutral1: hsla(var(--neutral1-dark) / 1);
+    --neutral2: hsla(var(--neutral2-dark) / 1);
+    --neutral3: hsla(var(--neutral3-dark) / 1);
+    --neutral4: hsla(var(--neutral4-dark) / 1);
+    --neutral5: hsla(var(--neutral5-dark) / 1);
+    --neutral6: hsla(var(--neutral6-dark) / 1);
     --glass1: var(--surface1-dark);
     --glass2: var(--surface2-dark);
     --glass3: var(--surface3-dark);
@@ -105,6 +131,12 @@
   --surface4: hsla(var(--surface4-light) / 1);
   --surface5: hsla(var(--surface5-light) / 1);
   --surface6: hsla(var(--surface6-light) / 1);
+  --neutral1: hsla(var(--neutral1-light) / 1);
+  --neutral2: hsla(var(--neutral2-light) / 1);
+  --neutral3: hsla(var(--neutral3-light) / 1);
+  --neutral4: hsla(var(--neutral4-light) / 1);
+  --neutral5: hsla(var(--neutral5-light) / 1);
+  --neutral6: hsla(var(--neutral6-light) / 1);
   --glass1: var(--surface1-light);
   --glass2: var(--surface2-light);
   --glass3: var(--surface3-light);
@@ -126,6 +158,12 @@
   --surface4: hsla(var(--surface4-dark) / 1);
   --surface5: hsla(var(--surface5-dark) / 1);
   --surface6: hsla(var(--surface6-dark) / 1);
+  --neutral1: hsla(var(--neutral1-dark) / 1);
+  --neutral2: hsla(var(--neutral2-dark) / 1);
+  --neutral3: hsla(var(--neutral3-dark) / 1);
+  --neutral4: hsla(var(--neutral4-dark) / 1);
+  --neutral5: hsla(var(--neutral5-dark) / 1);
+  --neutral6: hsla(var(--neutral6-dark) / 1);
   --glass1: var(--surface1-dark);
   --glass2: var(--surface2-dark);
   --glass3: var(--surface3-dark);

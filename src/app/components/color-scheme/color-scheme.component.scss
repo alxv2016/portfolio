@@ -1,0 +1,275 @@
+@import '../../../scss/00_imports';
+
+:host(.c-color-scheme) {
+  position: relative;
+  display: block;
+}
+
+.palettes {
+  position: relative;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  @include breakpoint(sm) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.palette {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  padding: $spacing--sm;
+  // border: 1px solid var(--surface6);
+  font-size: $overline;
+  font-weight: font-weight('semi-bold');
+  @include breakpoint(sm) {
+    height: 60px;
+  }
+}
+
+// Surfaces
+.surface-1 {
+  background-color: var(--surface1);
+}
+.surface-2 {
+  background-color: var(--surface2);
+}
+.surface-3 {
+  background-color: var(--surface3);
+}
+.surface-4 {
+  background-color: var(--surface4);
+}
+.surface-5 {
+  background-color: var(--surface5);
+}
+.surface-6 {
+  background-color: var(--surface6);
+}
+
+// Neutrals
+.neutral-1 {
+  background-color: var(--neutral1);
+}
+.neutral-2 {
+  background-color: var(--neutral2);
+}
+.neutral-3 {
+  background-color: var(--neutral3);
+}
+.neutral-4 {
+  background-color: var(--neutral4);
+}
+.neutral-5 {
+  background-color: var(--neutral5);
+}
+.neutral-6 {
+  background-color: var(--neutral6);
+}
+
+// Brand colors
+.brand-1 {
+  background-color: var(--brand);
+}
+.brand-2 {
+  background-color: var(--accent1);
+}
+.brand-3 {
+  background-color: var(--accent2);
+}
+
+// Form styles
+fieldset {
+  border: none;
+}
+
+form {
+  margin: 0;
+}
+
+legend,
+label {
+  font-size: $body--1;
+  font-weight: 500;
+  margin: 0;
+  @include breakpoint(md) {
+    font-size: $subtitle;
+  }
+}
+
+.radio-group {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: $spacing--4xl;
+  @include breakpoint(sm) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.cr {
+  position: relative;
+}
+
+.cr ~ .cr {
+  margin-top: $spacing--xl;
+  @include breakpoint(sm) {
+    margin-top: 0;
+    margin-left: $spacing--2xl;
+  }
+}
+
+// hide native buttons
+.radio,
+.checkbox {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  appearance: none;
+  pointer-events: none;
+}
+
+// label
+.radio + label,
+.checkbox + label {
+  display: inline-flex;
+  align-items: flex-start;
+  user-select: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+// custom buttons - basic style
+.radio + label::before,
+.checkbox + label::before {
+  content: '';
+  display: inline-block;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  top: calc((1em * 1.5 - 24px) / 2);
+  background-color: var(--surface1);
+  margin-right: 12px; // gap between custom input and label
+  transition: transform 0.2s, border 0.2s;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+  border: 2px solid currentColor;
+}
+
+.radio + label::before {
+  border-radius: 100%;
+}
+
+// radio only style
+.radio + label::before {
+  border-radius: 100%;
+}
+
+// checkbox only style
+.checkbox + label::before {
+  border-radius: 4px;
+}
+
+// :checked
+.radio:checked + label::before,
+.checkbox:checked + label::before {
+  background-color: var(--brand);
+  box-shadow: none;
+  border-color: var(--brand);
+  transition: transform 0.2s;
+}
+
+// :active
+.radio:active + label::before,
+.checkbox:active + label::before {
+  transform: scale(0.8);
+  transition: transform 0.2s;
+}
+
+// :checked:active
+.radio:checked:active + label::before,
+.checkbox:checked:active + label::before {
+  transform: none;
+  transition: none;
+}
+
+// radio button icon
+.radio:checked + label::before {
+  background-image: url("data:image/svg+xml,%3Csvg class='box' width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='8' fill='%23FFFFFF'/%3E%3C/svg%3E%0A");
+  background-size: 8px;
+}
+
+// checkbox button icon
+.checkbox:checked + label::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpolyline points='1 6.5 4 9.5 11 2.5' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: 12px;
+}
+
+// :focus
+.radio:checked:active + label::before,
+.checkbox:checked:active + label::before,
+.radio:focus + label::before,
+.checkbox:focus + label::before {
+  // border-color: currentColor;
+  outline: 5px auto Highlight;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+label + input[type='range'],
+legend + .radio-group {
+  margin-top: $spacing--xl;
+}
+
+input[type='range'] {
+  /* style setting variables */
+  --track-height: 0.5ex;
+  --track-fill: 0%;
+  --thumb-size: 3ex;
+  --thumb-offset: -1.25ex;
+  --thumb-highlight-size: 0px;
+
+  appearance: none; /* clear styles, make way for mine */
+  display: block;
+  inline-size: 100%; /* fill container */
+  margin: 1ex 0; /* ensure thumb isn't colliding with sibling content */
+  background: transparent; /* bg is in the track */
+  outline-offset: 5px; /* focus styles have space */
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  appearance: none; /* clear styles, make way for mine */
+  block-size: var(--track-height);
+  border-radius: 5ex;
+  background:
+    /* hard stop gradient:
+        - half transparent (where colorful fill we be)
+        - half dark track fill
+        - 1st background image is on top
+    */ linear-gradient(
+      to right,
+      transparent var(--track-fill),
+      var(--brand) 0%
+    ),
+    /* colorful fill effect, behind track surface fill */ var(--brand) fixed;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  appearance: none; /* clear styles, make way for mine */
+  cursor: ew-resize; /* cursor style to support drag direction */
+  border: 3px solid var(--accent2);
+  block-size: var(--thumb-size);
+  inline-size: var(--thumb-size);
+  margin-top: var(--thumb-offset);
+  border-radius: 50%;
+  background: var(--accent2) fixed;
+}
