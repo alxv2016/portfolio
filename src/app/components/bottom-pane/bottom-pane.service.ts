@@ -1,4 +1,14 @@
-import {ApplicationRef, ComponentRef, Injectable, Injector, Type, ViewChild, ViewContainerRef} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {
+  ApplicationRef,
+  ComponentRef,
+  Inject,
+  Injectable,
+  Injector,
+  Type,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import {Observable} from 'rxjs';
 import {BottomPaneComponent} from './bottom-pane.component';
 import {BottomPaneDirective} from './bottom-pane.directive';
@@ -12,7 +22,7 @@ export class BottomPaneService {
   // The view container's ref
   private viewContainerRef!: ViewContainerRef;
   @ViewChild(BottomPaneDirective, {static: true}) bottomPaneHost!: BottomPaneDirective;
-  constructor() {}
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
   createBottomPane(childComponent: Type<any>, title?: string | null, data?: any): void {
     // If an instance already exist destroy it first
@@ -29,9 +39,12 @@ export class BottomPaneService {
       this.componentRef.instance.contentData = data;
     }
     this.componentRef.instance.state$.next(true);
+    const doc = this.document.querySelector('body');
+    doc?.classList.add('no-scroll');
     // Watch component's state to destroy
     this.getState().subscribe((state) => {
       if (!state) {
+        doc?.classList.remove('no-scroll');
         this.componentRef.destroy();
       }
     });

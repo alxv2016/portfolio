@@ -101,7 +101,6 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   private createComponent(): void {
     // Save element clicked
     const ownerDocument = this.element.nativeElement.ownerDocument;
-    const body = ownerDocument.body;
     this.clickedElement = ownerDocument.activeElement;
     // We use the element template to create and insert the child component
     this.componentPortal.clear();
@@ -117,7 +116,6 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     requestAnimationFrame(() => {
       this.render.addClass(this.host, 'c-bottom-pane--animate');
       this.render.addClass(this.host, 'c-bottom-pane--visible');
-      this.render.addClass(body, 'overlay');
       this.transitionEventHandler = this.render.listen(this.host, 'transitionend', this.onTransitionEnd);
     });
     // Listen to keydown events
@@ -141,10 +139,8 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
   // Close the modal
   closeBottomSheet() {
     const ownerDocument = this.element.nativeElement.ownerDocument;
-    const body = ownerDocument.querySelector('body');
     this.render.addClass(this.host, 'c-bottom-pane--animate');
     this.render.removeClass(this.host, 'c-bottom-pane--visible');
-    this.render.removeClass(body, 'overlay');
     this.transitionEventHandler = this.render.listen(this.host, 'transitionend', (e) => this.onTransitionEnd(e, true));
     this.clickedElement.focus();
   }
