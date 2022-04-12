@@ -83,6 +83,29 @@
   background-color: var(--accent2);
 }
 
+.text-colors {
+  position: relative;
+  width: 100%;
+  padding: $spacing--4xl 0;
+  span {
+    display: inline-block;
+    line-height: $heading-line-height;
+    font-weight: font-weight('semi-bold');
+    color: var(--text2);
+  }
+  h1 {
+    margin-top: $spacing--sm;
+    font-weight: font-weight('bold');
+    color: var(--text1);
+  }
+  p {
+    color: var(--text1);
+  }
+  p ~ p {
+    color: var(--text2);
+  }
+}
+
 // Form styles
 fieldset {
   border: none;

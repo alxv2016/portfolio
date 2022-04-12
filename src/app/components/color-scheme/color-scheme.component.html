@@ -14,10 +14,14 @@
       <span>{{ neutral }}</span>
     </div>
   </div>
-  <div class="palettes">
-    <div class="palette swatch-{{ i + 1 }}" *ngFor="let color of textColors; index as i">
-      <span>{{ color }}</span>
-    </div>
+  <div class="text-colors">
+    <span>Create, Share, and Inspire.</span>
+    <h1>Do it for the love of Design & Development.</h1>
+    <p>
+      From Design to Development, I bridge the gap. Hi, I'm Alex; I'm a designer and front-end developer passionate
+      about crafting beautiful and delightful user interactions through modern web technology.
+    </p>
+    <p><strong>I am your friendly neighbourhood designer known for his technical skills.</strong></p>
   </div>
   <fieldset>
     <legend class="sr-only">Scheme</legend>
@@ -42,7 +46,7 @@
         type="range"
         formControlName="hue"
         aria-labelledby="hue"
-        [value]="0"
+        [value]="hue"
         step="1"
         min="0"
         max="360"

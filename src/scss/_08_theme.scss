@@ -5,11 +5,13 @@
   --brand-saturation: 100%;
   --brand-lightness: 14%;
   // Accent1 HSL
-  --accent1-hue: 163;
+  // --accent1-hue: 163;
+  --accent1-hue: calc(var(--brand-hue) - 20);
   --accent1-saturation: 91%;
   --accent2-lightness: 39%;
   // Accent2 HSL
-  --accent2-hue: 43;
+  // --accent2-hue: 43;
+  --accent2-hue: calc(var(--brand-hue) - 140);
   --accent2-saturation: 100%;
   --accent2-lightness: 51%;
   /* Light theme */
@@ -27,22 +29,22 @@
   --surface5-light: var(--brand-hue) 30% 91%;
   --surface6-light: var(--brand-hue) 35% 90%;
   // Neutrals
-  --neutral1-light: var(--brand-hue) 5% 8%;
-  --neutral2-light: var(--brand-hue) 5% 9%;
-  --neutral3-light: var(--brand-hue) 5% 10%;
-  --neutral4-light: var(--brand-hue) 5% 11%;
-  --neutral5-light: var(--brand-hue) 5% 12%;
-  --neutral6-light: var(--brand-hue) 5% 13%;
+  --neutral6-light: var(--brand-hue) 5% 5%;
+  --neutral5-light: var(--brand-hue) 5% 10%;
+  --neutral4-light: var(--brand-hue) 5% 15%;
+  --neutral3-light: var(--brand-hue) 5% 20%;
+  --neutral2-light: var(--brand-hue) 5% 25%;
+  --neutral1-light: var(--brand-hue) 5% 30%;
   // Shadows
   --surface-shadow-light: var(--brand-hue) 10% calc(var(--brand-lightness) / 5);
   --shadow-strength-light: 0.02;
   /* Dark theme */
   --brand-dark: var(--brand-hue) var(--brand-saturation) 40%;
   --accent1-dark: var(--accent1-hue) var(--accent1-saturation) 40%;
+  --accent2-dark: var(--accent2-hue) var(--accent2-saturation) 60%;
   // Text
   --text1-dark: var(--brand-hue) 10% 90%;
   --text2-dark: var(--brand-hue) 20% 80%;
-  --accent2-dark: var(--accent2-hue) var(--accent2-saturation) 60%;
   // Surfaces
   --surface1-dark: var(--brand-hue) 5% 8%;
   --surface2-dark: var(--brand-hue) 5% 9%;
@@ -51,12 +53,12 @@
   --surface5-dark: var(--brand-hue) 5% 12%;
   --surface6-dark: var(--brand-hue) 5% 13%;
   // Neutrals
-  --neutral1-dark: var(--brand-hue) 5% 8%;
-  --neutral2-dark: var(--brand-hue) 5% 9%;
-  --neutral3-dark: var(--brand-hue) 5% 10%;
-  --neutral4-dark: var(--brand-hue) 5% 11%;
-  --neutral5-dark: var(--brand-hue) 5% 12%;
-  --neutral6-dark: var(--brand-hue) 5% 13%;
+  --neutral6-dark: var(--brand-hue) 5% 8%;
+  --neutral5-dark: var(--brand-hue) 5% 9%;
+  --neutral4-dark: var(--brand-hue) 5% 10%;
+  --neutral3-dark: var(--brand-hue) 5% 11%;
+  --neutral2-dark: var(--brand-hue) 5% 12%;
+  --neutral1-dark: var(--brand-hue) 5% 13%;
   // Shadows
   --surface-shadow-dark: var(--brand-hue) 50% 3%;
   --shadow-strength-dark: 0.8;

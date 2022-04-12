@@ -1,4 +1,5 @@
-import {ChangeDetectionStrategy, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
@@ -29,30 +30,68 @@ export class ColorSchemeComponent implements OnInit {
   surfaces: string[] = ['Surface 1', 'Surface 2', 'Surface 3', 'Surface 4', 'Surface 5', 'Surface 6'];
   nuetrals: string[] = ['Nuetral 1', 'Nuetral 2', 'Neutral 3', 'Neutral 4', 'Neutral 5', 'Neutral 6'];
   brandColors: string[] = ['Brand', 'Accent 1', 'Accent 2'];
-  textColors: string[] = ['Text 1', 'Text 2', 'Text 3', 'Text 4'];
   themeForm!: FormGroup;
+  hue = this.getBrandHue();
   @ViewChild('hueSlider', {static: true}) hueSlider!: ElementRef;
-  constructor(private fb: FormBuilder, private render: Renderer2) {}
+  constructor(@Inject(DOCUMENT) private document: Document, private fb: FormBuilder, private render: Renderer2) {}
 
   private calcPercent(value: number) {
     const percent = (value / 360) * 100;
     return Number(percent.toFixed(3));
   }
 
+  private getBrandHue(): number {
+    const doc = this.document.firstElementChild!;
+    const hue = getComputedStyle(doc).getPropertyValue('--brand-hue').trim();
+    return Number(hue);
+  }
+
+  private checkScheme(): boolean {
+    return JSON.parse(localStorage.getItem('prefers-dark')!);
+  }
+
+  private setScheme(bool: boolean) {
+    localStorage.setItem('prefers-dark', JSON.stringify(bool));
+  }
+
   private setTrackFill(): void {
     const hue = this.themeForm.get('hue')?.value;
-    // const sat = this.themeForm.get('saturation')?.value;
-    // const light = this.themeForm.get('lightness')?.value;
-
     this.render.setAttribute(this.hueSlider.nativeElement, 'style', `--track-fill:${this.calcPercent(hue)}%;`);
-    // this.render.setAttribute(this.satSlider.nativeElement, 'style', `--track-fill:${sat}%;`);
-    // this.render.setAttribute(this.lightSlider.nativeElement, 'style', `--track-fill:${light}%;`);
+  }
+
+  private setColorScheme(scheme: string) {
+    const doc = this.document.firstElementChild;
+    this.render.setAttribute(doc, 'color-scheme', scheme);
+  }
+
+  private changeHue(hue: string): void {
+    const doc = this.document.firstElementChild!;
+    doc.setAttribute('style', `--brand-hue:${hue};`);
   }
 
   ngOnInit(): void {
+    const dark = this.checkScheme();
     this.themeForm = this.fb.group({
-      scheme: [],
-      hue: [],
+      scheme: [dark ? 'dark' : 'light'],
+      hue: [this.hue],
+    });
+    this.setTrackFill();
+    this.themeForm.valueChanges.subscribe((x) => {
+      this.render.setAttribute(this.hueSlider.nativeElement, 'style', `--track-fill:${this.calcPercent(x.hue)}%;`);
+      this.changeHue(x.hue);
+      switch (true) {
+        case x.scheme === 'light':
+          this.setColorScheme(x.scheme);
+          this.setScheme(false);
+          break;
+        case x.scheme === 'dark':
+          this.setColorScheme(x.scheme);
+          this.setScheme(true);
+          break;
+        case x.scheme === 'auto':
+          this.setColorScheme(x.scheme);
+          break;
+      }
     });
   }
 }
