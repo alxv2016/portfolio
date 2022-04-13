@@ -4,8 +4,11 @@
   display: block;
   height: 100%;
   width: 100%;
-  padding-top: $layout--2xl;
-  padding-bottom: $layout--2xl;
+  padding: $layout--2xl 0;
+  @include breakpoint(md) {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .c-home {
