@@ -123,7 +123,7 @@
     font-weight: font-weight('bold');
     line-height: $heading-line-height;
     font-size: $body--1;
-    color: var(--text2);
+    color: var(--text200);
     @include breakpoint(md) {
       font-size: $subtitle;
     }
@@ -133,7 +133,7 @@
     position: relative;
     display: inline-block;
     font-size: $body--2;
-    color: var(--text2);
+    color: var(--text200);
     @include breakpoint(md) {
       font-size: $body--1;
     }

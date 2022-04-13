@@ -34,10 +34,9 @@
   justify-content: space-between;
   width: 100%;
   text-align: left;
-  color: var(--text2);
+  color: currentColor;
   text-decoration: none;
   padding: $spacing--lg;
-  transition: background-color 275ms ease;
   border-radius: $spacing--xs;
   @include breakpoint(md) {
     flex-direction: row;
@@ -49,7 +48,6 @@
   &:hover,
   &:focus {
     .blog-link-title {
-      color: var(--text1);
       text-decoration: underline;
     }
   }
@@ -73,7 +71,7 @@
     right: -34px;
     height: 2px;
     width: 24px;
-    background-color: var(--text1);
+    background-color: var(--accent100);
   }
 }
 
@@ -83,8 +81,7 @@
   line-height: 1.25;
   font-size: $subtitle;
   font-weight: 900;
-  transition: color 275ms ease;
-  color: var(--text1);
+  color: currentColor;
   @include breakpoint(md) {
     font-size: $subtitle--2;
   }
@@ -116,7 +113,7 @@
 .blog-link-window-icon {
   height: 16px;
   width: 16px;
-  color: var(--text2);
+  color: currentColor;
 }
 
 .blog-link-title ~ .blog-link-window-icon {

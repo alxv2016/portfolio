@@ -70,22 +70,22 @@
   color: var(--light100);
 }
 .neutral-1 {
-  background-color: var(--neutral1);
+  background-color: var(--mid100);
 }
 .neutral-2 {
-  background-color: var(--neutral2);
+  background-color: var(--mid200);
 }
 .neutral-3 {
-  background-color: var(--neutral3);
+  background-color: var(--mid300);
 }
 .neutral-4 {
-  background-color: var(--neutral4);
+  background-color: var(--mid400);
 }
 .neutral-5 {
-  background-color: var(--neutral5);
+  background-color: var(--mid500);
 }
 .neutral-6 {
-  background-color: var(--neutral6);
+  background-color: var(--mid600);
 }
 
 .shade-1,
@@ -120,10 +120,10 @@
   background-color: var(--brand);
 }
 .brand-2 {
-  background-color: var(--accent1);
+  background-color: var(--accent100);
 }
 .brand-3 {
-  background-color: var(--accent2);
+  background-color: var(--accent200);
 }
 
 .text-colors {
@@ -134,18 +134,18 @@
     display: inline-block;
     line-height: $heading-line-height;
     font-weight: font-weight('semi-bold');
-    color: var(--text2);
+    color: var(--text200);
   }
   h1 {
     margin-top: $spacing--sm;
     font-weight: font-weight('bold');
-    color: var(--text1);
+    color: var(--text100);
   }
   p {
-    color: var(--text1);
+    color: var(--text100);
   }
   p ~ p {
-    color: var(--text2);
+    color: var(--text200);
   }
 }
 
@@ -332,10 +332,10 @@ input[type='range']::-webkit-slider-runnable-track {
 input[type='range']::-webkit-slider-thumb {
   appearance: none; /* clear styles, make way for mine */
   cursor: ew-resize; /* cursor style to support drag direction */
-  border: 3px solid var(--accent2);
+  border: 3px solid var(--accent200);
   block-size: var(--thumb-size);
   inline-size: var(--thumb-size);
   margin-top: var(--thumb-offset);
   border-radius: 50%;
-  background: var(--accent2) fixed;
+  background: var(--accent200) fixed;
 }

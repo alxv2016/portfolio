@@ -23,7 +23,7 @@ body {
   font-family: $base-font-family;
   line-height: $body-line-height;
   font-weight: font-weight('regular');
-  color: var(--text1);
+  color: var(--text100);
   background-color: var(--surface1);
   height: 100%;
   -webkit-font-smoothing: antialiased;
@@ -39,7 +39,7 @@ body {
 // Links
 a {
   //color: $link-color;
-  color: var(--accent2);
+  color: var(--brand);
   text-decoration: underline;
   // Remove the gray background on active links in IE 11.
   background-color: transparent;

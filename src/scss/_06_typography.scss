@@ -1,13 +1,16 @@
 /* Typography styles */
 p {
   color: currentColor;
-  font-size: $body--1;
+  font-size: $body--2;
   line-height: $body-line-height;
+  @include breakpoint(xs) {
+    font-size: $body--1;
+  }
   @include breakpoint(md) {
     font-size: $subtitle;
   }
   strong {
-    font-weight: font-weight(bold);
+    font-weight: font-weight('semi-bold');
   }
 }
 
@@ -46,10 +49,13 @@ legend {
 
 .overline,
 .rt-overline {
-  font-size: $body--1;
+  font-size: $body--2;
   font-weight: font-weight('semi-bold');
   line-height: $heading-line-height;
-  color: var(--text2);
+  color: var(--text200);
+  @include breakpoint(xs) {
+    font-size: $body--1;
+  }
   @include breakpoint(md) {
     font-size: $subtitle;
   }
@@ -73,11 +79,14 @@ legend {
 
 .display-2,
 .rt-display-2 {
-  font-size: $title--2;
+  font-size: $title--3;
   font-family: $heading-font-family;
   line-height: $heading-line-height;
   font-weight: font-weight('extra-bold');
   color: currentColor;
+  @include breakpoint(xs) {
+    font-size: $title--2;
+  }
   @include breakpoint(sm) {
     font-size: $title--1;
   }
@@ -92,7 +101,7 @@ legend {
     position: relative;
     display: inline-block;
     text-decoration: underline;
-    text-decoration-color: var(--accent1);
+    text-decoration-color: var(--accent200);
   }
   &:first-child {
     margin-top: 0;
@@ -102,13 +111,16 @@ legend {
 .display-3,
 .rt-display-3,
 .blog-title {
-  font-size: $title--3;
+  font-size: $subtitle--2;
   font-family: $heading-font-family;
   line-height: $heading-line-height;
   font-weight: font-weight('extra-bold');
   color: currentColor;
   &:first-child {
     margin-top: 0;
+  }
+  @include breakpoint(xs) {
+    font-size: $title--3;
   }
   @include breakpoint(md) {
     font-size: $title--2;
@@ -121,7 +133,7 @@ legend {
     position: relative;
     display: inline-block;
     text-decoration: underline;
-    text-decoration-color: var(--accent1);
+    text-decoration-color: var(--accent200);
   }
 }
 
@@ -172,7 +184,7 @@ legend {
 
 .blog-description {
   font-size: $body--1;
-  color: var(--text2);
+  color: var(--text200);
   @include breakpoint(md) {
     font-size: $subtitle;
   }
@@ -181,7 +193,7 @@ legend {
 .blog-date {
   font-size: $body--2;
   font-weight: font-weight('bold');
-  color: var(--text2);
+  color: var(--text200);
 }
 
 .blog-date ~ .blog-title {
