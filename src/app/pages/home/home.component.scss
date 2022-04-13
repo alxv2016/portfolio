@@ -23,9 +23,6 @@
     @include breakpoint(sm) {
       margin-bottom: $layout--lg;
     }
-    @include breakpoint(md) {
-      margin-bottom: $layout--xl;
-    }
   }
 }
 
