@@ -5,8 +5,6 @@ html {
   box-sizing: border-box;
   height: 100%;
   font-size: 100%;
-  color: var(--text1);
-  background-color: var(--surface1);
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -25,6 +23,8 @@ body {
   font-family: $base-font-family;
   line-height: $body-line-height;
   font-weight: font-weight('regular');
+  color: var(--text1);
+  background-color: var(--surface1);
   height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
