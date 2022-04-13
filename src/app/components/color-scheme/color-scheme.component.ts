@@ -27,8 +27,9 @@ export class ColorSchemeComponent implements OnInit {
       label: 'Dark',
     },
   ];
-  surfaces: string[] = ['Surface 1', 'Surface 2', 'Surface 3', 'Surface 4', 'Surface 5', 'Surface 6'];
+  tints: string[] = ['Tint 1', 'Tint 2', 'Tint 3', 'Tint 4', 'Tint 5', 'Tint 6'];
   nuetrals: string[] = ['Nuetral 1', 'Nuetral 2', 'Neutral 3', 'Neutral 4', 'Neutral 5', 'Neutral 6'];
+  shades: string[] = ['Shade 1', 'Shade 2', 'Shade 3', 'Shade 4', 'Shade 5', 'Shade 6'];
   brandColors: string[] = ['Brand', 'Accent 1', 'Accent 2'];
   themeForm!: FormGroup;
   hue = this.getBrandHue();

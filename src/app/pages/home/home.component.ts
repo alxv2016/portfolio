@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private animateAbstract(lines: any, linesAccent: any, pos: any) {
     const hypo = Math.sqrt(pos.x * pos.x + pos.y * pos.y);
     const angle = Math.atan2(pos.x, pos.y);
-    const x = Math.sin(angle) * hypo;
+    const x = -Math.sin(angle) * hypo;
     const y = Math.cos(angle) * hypo;
 
     gsap.to(lines, {

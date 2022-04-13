@@ -5,13 +5,18 @@
     </div>
   </div>
   <div class="palettes">
-    <div class="palette surface-{{ i + 1 }}" *ngFor="let surface of surfaces; index as i">
-      <span>{{ surface }}</span>
+    <div class="palette surface-{{ i + 1 }}" *ngFor="let tint of tints; index as i">
+      <span>{{ tint }}</span>
     </div>
   </div>
   <div class="palettes">
     <div class="palette neutral-{{ i + 1 }}" *ngFor="let neutral of nuetrals; index as i">
       <span>{{ neutral }}</span>
+    </div>
+  </div>
+  <div class="palettes">
+    <div class="palette shade-{{ i + 1 }}" *ngFor="let shade of shades; index as i">
+      <span>{{ shade }}</span>
     </div>
   </div>
   <div class="text-colors">
