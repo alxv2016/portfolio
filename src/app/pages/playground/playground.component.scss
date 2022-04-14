@@ -4,15 +4,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
   width: 100%;
+  padding-bottom: $layout--md;
 }
 
 .playground-list {
   position: relative;
   width: 100%;
-  height: 100%;
   &__item {
     position: relative;
     width: 100%;
