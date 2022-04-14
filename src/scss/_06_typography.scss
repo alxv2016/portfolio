@@ -14,22 +14,28 @@ p {
   }
 }
 
-p:only-child,
-p:only-of-type {
+p:only-child {
   margin: 0;
 }
 
-p ~ p,
 h1 ~ p,
 h2 ~ p {
   margin-top: $spacing--xl;
   @include breakpoint(md) {
-    margin-top: $spacing--2xl;
+    margin-top: $spacing--3xl;
   }
 }
 
+h2 ~ p,
 h3 ~ p,
 h4 ~ p {
+  margin-top: $spacing--lg;
+  @include breakpoint(md) {
+    margin-top: $spacing--xl;
+  }
+}
+
+p ~ p {
   margin-top: $spacing--lg;
   @include breakpoint(md) {
     margin-top: $spacing--xl;
@@ -56,9 +62,6 @@ legend {
   @include breakpoint(xs) {
     font-size: $body--1;
   }
-  @include breakpoint(md) {
-    font-size: $subtitle;
-  }
 }
 
 .display-responsive {
@@ -84,17 +87,14 @@ legend {
   line-height: $heading-line-height;
   font-weight: font-weight('extra-bold');
   color: currentColor;
-  @include breakpoint(xs) {
+  @include breakpoint(sm) {
     font-size: $title--2;
   }
-  @include breakpoint(sm) {
+  @include breakpoint(md) {
     font-size: $title--1;
   }
-  @include breakpoint(md) {
-    font-size: $large--title;
-  }
   @include breakpoint(lg) {
-    font-size: $huge--title;
+    font-size: $large--title;
   }
   em {
     font-style: normal;
@@ -111,7 +111,7 @@ legend {
 .display-3,
 .rt-display-3,
 .blog-title {
-  font-size: $subtitle--2;
+  font-size: $subtitle;
   font-family: $heading-font-family;
   line-height: $heading-line-height;
   font-weight: font-weight('extra-bold');
@@ -120,13 +120,13 @@ legend {
     margin-top: 0;
   }
   @include breakpoint(xs) {
-    font-size: $title--3;
+    font-size: $subtitle--2;
   }
   @include breakpoint(md) {
-    font-size: $title--2;
+    font-size: $title--3;
   }
   @include breakpoint(lg) {
-    font-size: $title--1;
+    font-size: $title--2;
   }
   em {
     font-style: normal;

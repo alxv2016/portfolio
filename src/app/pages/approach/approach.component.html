@@ -1,3 +1,6 @@
+<ng-container *ngIf="approachContent$ | async as data">
+  <h1 class="sr-only">{{ data.page_title[0].text }}</h1>
+</ng-container>
 <div #hero class="c-approach__hero-container">
   <c-hero [approachContent$]="approachContent$" [reversing]="reverseUpdate()"></c-hero>
 </div>
