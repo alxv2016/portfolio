@@ -25,14 +25,14 @@
     @include frosted-glass(var(--glass1), 0.125);
     will-change: opacity;
     opacity: 0;
-    transition: opacity 275ms 75ms ease;
+    transition: opacity 425ms ease;
   }
 }
 
 // Animate state
 :host-context(.c-bottom-pane--animate) .c-bottom-pane-window {
   visibility: visible;
-  transition: transform 275ms 75ms ease;
+  transition: transform 425ms 25ms ease;
 }
 
 // Opened state
