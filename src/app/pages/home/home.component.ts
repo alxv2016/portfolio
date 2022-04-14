@@ -7,6 +7,7 @@ import {
   NgZone,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import {fromEvent, map, Observable, Subject, take, takeUntil, throttleTime} from 'rxjs';
 import {HomeCollection} from 'src/app/services/models/home.interface';
@@ -22,6 +23,7 @@ import {gsap} from 'gsap';
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject();
   homeContent$?: Observable<HomeCollection | null>;
+  @ViewChild('abstract', {static: true}) abstract!: ElementRef;
   constructor(
     private element: ElementRef,
     private prismic: PrismicService,
@@ -39,13 +41,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private animateAbstract(lines: any, linesAccent: any, pos: any) {
-    const hypo = Math.sqrt(pos.x * pos.x + pos.y * pos.y);
-    const angle = Math.atan2(pos.x, pos.y);
-    const x = -Math.sin(angle) * hypo;
-    const y = Math.cos(angle) * hypo;
+    const bounds = this.abstract.nativeElement.getBoundingClientRect();
+    const elPos = {
+      x: Math.floor(pos.x - bounds.x),
+      y: Math.floor(pos.y - bounds.y),
+    };
+    const elCenter = {
+      x: elPos.x - bounds.width / 2,
+      y: elPos.y - bounds.height / 2,
+    };
+    const hypot = Math.floor(Math.hypot(elCenter.x, elCenter.y)) * 1.25;
 
     gsap.to(lines, {
-      strokeDashoffset: x / 2 - y / 2,
+      strokeDashoffset: hypot,
       stagger: {
         from: 'end',
         each: 0.025,
@@ -54,7 +62,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     gsap.to(linesAccent, {
-      strokeDashoffset: x / 2 - y / 2,
+      strokeDashoffset: hypot,
       stagger: {
         from: 'end',
         each: 0.03,
