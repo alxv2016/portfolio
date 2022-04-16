@@ -7,9 +7,20 @@ import {AsHTMLPipe} from '../services/as-html.pipe';
 import {PlaygroundComponent} from './playground/playground.component';
 import {BlogListComponent} from './blog-list/blog-list.component';
 import {BlogComponent} from './blog/blog.component';
+import {WorkListComponent} from './work-list/work-list.component';
+import {WorkComponent} from './work/work.component';
 
 @NgModule({
-  declarations: [HomeComponent, ApproachComponent, AsHTMLPipe, PlaygroundComponent, BlogListComponent, BlogComponent],
+  declarations: [
+    HomeComponent,
+    ApproachComponent,
+    AsHTMLPipe,
+    PlaygroundComponent,
+    BlogListComponent,
+    BlogComponent,
+    WorkListComponent,
+    WorkComponent,
+  ],
   imports: [CommonModule, ComponentsModule],
   exports: [PlaygroundComponent, BlogListComponent],
 })

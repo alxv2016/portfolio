@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ApproachComponent} from './pages/approach/approach.component';
 import {BlogComponent} from './pages/blog/blog.component';
 import {HomeComponent} from './pages/home/home.component';
+import {WorkComponent} from './pages/work/work.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -10,6 +11,10 @@ const routes: Routes = [
   {
     path: 'blog/:id',
     component: BlogComponent,
+  },
+  {
+    path: 'work/:id',
+    component: WorkComponent,
   },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
 ];

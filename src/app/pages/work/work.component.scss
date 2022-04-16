@@ -1,0 +1,194 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-work) {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: max-width('lg');
+  margin: auto;
+  padding-bottom: $layout--2xl;
+  margin-bottom: $layout--lg;
+}
+
+:host-context(.c-work) {
+  ul {
+    padding: $layout--2xl;
+    border: 1px solid red;
+  }
+}
+
+.c-work__hero {
+  position: relative;
+  width: 100%;
+  margin-top: $layout--xl;
+  margin-bottom: $layout--md;
+  @include breakpoint(md) {
+    margin-top: $layout--2xl;
+    margin-bottom: $layout--lg;
+  }
+
+  &-content {
+    position: relative;
+    width: 100%;
+  }
+
+  &-cover {
+    position: relative;
+    width: 100%;
+    p {
+      margin-top: $spacing--xl;
+    }
+  }
+
+  &-footer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    min-height: 28px;
+    padding: $spacing--lg $spacing--2xl;
+    @include breakpoint(sm) {
+      justify-content: flex-end;
+    }
+    @include frosted-glass(var(--glass2), 0.85);
+    a {
+      color: currentColor;
+    }
+  }
+
+  &-image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 320px;
+    overflow: hidden;
+    @include breakpoint(sm) {
+      height: 375px;
+    }
+    @include breakpoint(sm) {
+      height: 475px;
+    }
+    img {
+      position: relative;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &-content ~ &-cover {
+    margin-top: $layout--sm;
+    @include breakpoint(md) {
+      margin-top: $layout--md;
+    }
+  }
+}
+
+.c-work-title-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: $layout--sm;
+  @include breakpoint(sm) {
+    margin-bottom: $layout--md;
+  }
+  h1 ~ P {
+    margin-top: $spacing--xs;
+  }
+}
+
+.c-designer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @include breakpoint(sm) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__image {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    flex-shrink: 0;
+    border: 2px solid var(--accent100);
+    overflow: hidden;
+    img {
+      height: inherit;
+      width: inherit;
+      object-fit: cover;
+    }
+  }
+
+  &__image ~ &__info {
+    margin-top: $spacing--lg;
+    @include breakpoint(sm) {
+      margin-top: 0;
+      margin-left: $spacing--lg;
+    }
+  }
+
+  &__info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    position: relative;
+    display: inline-block;
+    font-weight: font-weight('bold');
+    line-height: $heading-line-height;
+    font-size: $body--1;
+    color: var(--text200);
+    @include breakpoint(md) {
+      font-size: $subtitle;
+    }
+  }
+
+  &__role {
+    position: relative;
+    display: inline-block;
+    font-size: $body--2;
+    color: var(--text200);
+    @include breakpoint(md) {
+      font-size: $body--1;
+    }
+  }
+}
+
+.c-work__section {
+  position: relative;
+  width: 100%;
+  margin-top: $layout--lg;
+  @include breakpoint(md) {
+    margin-top: $layout--xl;
+  }
+  div ~ div {
+    margin-top: $layout--lg;
+    @include breakpoint(md) {
+      margin-top: $layout--xl;
+    }
+  }
+}
+
+.c-section-other {
+  position: relative;
+  padding: $spacing--lg;
+  border-radius: $spacing--sm;
+  background-color: var(--surface6);
+  @include breakpoint(sm) {
+    padding: $spacing--xl;
+  }
+  @include breakpoint(md) {
+    padding: $spacing--2xl;
+  }
+  h2 {
+    color: var(--accent100);
+  }
+}

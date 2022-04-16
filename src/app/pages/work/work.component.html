@@ -1,0 +1,44 @@
+<ng-container *ngIf="workData$ | async as work">
+  <div class="c-work__hero">
+    <div class="c-work__hero-content">
+      <div class="c-work-title-group">
+        <h1 class="display-1">{{ work.data.title[0].text }}</h1>
+        <p class="work-description">{{ work.data.description }}</p>
+      </div>
+      <div class="c-designer">
+        <div class="c-designer__image">
+          <img
+            src="{{ work.data.designer[0].designer_profile.url }}"
+            alt="{{ work.data.designer[0].designer_profile.alt }}"
+          />
+        </div>
+        <div class="c-designer__info">
+          <span class="c-designer__name">{{ work.data.designer[0].designer_name }}</span>
+          <span class="c-designer__role">{{ work.data.designer[0].designer_role }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="c-work__hero-cover">
+      <div class="c-work__hero-image">
+        <img src="{{ work.data.cover_image.url }}" alt="{{ work.data.cover_image.alt }}" />
+        <div class="c-work__hero-footer">
+          <a href="{{ work.data.project_link.url }}" target="_blank">Launch project</a>
+        </div>
+      </div>
+      <p>{{ work.data.work_intro }}</p>
+    </div>
+  </div>
+  <section class="c-work__section">
+    <div #htmlContent *ngFor="let section of work.data.case_study">
+      <div class="c-section-other" *ngIf="section.section_id && section.section_id === 'challenge'; else other">
+        <div [outerHTML]="section.section_content | asHTML"></div>
+      </div>
+      <ng-template #other>
+        <div [outerHTML]="section.section_content | asHTML"></div>
+      </ng-template>
+      <pre
+        *ngIf="section.section_code.length !== 0"
+      ><code class="language-{{section.code_language}}">{{section.section_code[0].text}}</code></pre>
+    </div>
+  </section>
+</ng-container>

@@ -21,6 +21,7 @@ import {BlogListComponent} from 'src/app/pages/blog-list/blog-list.component';
 import {Observable} from 'rxjs';
 import {HomeCollection} from 'src/app/services/models/home.interface';
 import {ColorSchemeComponent} from '../color-scheme/color-scheme.component';
+import {WorkListComponent} from 'src/app/pages/work-list/work-list.component';
 
 @Component({
   host: {
@@ -77,6 +78,10 @@ export class FooterComponent implements AfterViewInit {
       case link.link_id === 'playground':
         // console.log('playground');
         this.bottomPaneService.createBottomPane(PlaygroundComponent, 'Coding Playground', 'this is a test');
+        break;
+      case link.link_id === 'work':
+        // console.log('playground');
+        this.bottomPaneService.createBottomPane(WorkListComponent, 'Work');
         break;
       case link.link_id === 'blog':
         // console.log('playground');

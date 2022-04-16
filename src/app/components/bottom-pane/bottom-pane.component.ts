@@ -130,7 +130,7 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     this.keydownEventHandler = this.render.listen('window', 'keydown', (e) =>
       this.focusTrap(e, ownerDocument, firstTabStop, lastTabStob)
     );
-    // Focus first element after transition ends - visibility initially hidden
+    //BUG transition end is taking too long to fire delay in first focus Focus first element after transition ends - visibility initially hidden
     const transitionEnd = this.render.listen(this.bottomSheetWindow.nativeElement, 'transitionend', (e) => {
       firstTabStop.focus();
       transitionEnd();

@@ -80,6 +80,34 @@ legend {
   }
 }
 
+.display-1,
+.rt-display-1 {
+  font-size: $title--2;
+  font-family: $heading-font-family;
+  line-height: $heading-line-height;
+  font-weight: font-weight('extra-bold');
+  color: currentColor;
+  @include breakpoint(sm) {
+    font-size: $title--1;
+  }
+  @include breakpoint(md) {
+    font-size: $large--title;
+  }
+  @include breakpoint(lg) {
+    font-size: $huge--title;
+  }
+  em {
+    font-style: normal;
+    position: relative;
+    display: inline-block;
+    text-decoration: underline;
+    text-decoration-color: var(--accent200);
+  }
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
 .display-2,
 .rt-display-2 {
   font-size: $title--3;

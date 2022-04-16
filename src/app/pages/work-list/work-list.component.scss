@@ -1,0 +1,123 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-work-list) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: $layout--md;
+}
+
+.work-list {
+  position: relative;
+  width: 100%;
+  &__item {
+    position: relative;
+    width: 100%;
+  }
+
+  &__item ~ &__item {
+    margin-top: $spacing--2xl;
+    @include breakpoint(md) {
+      margin-top: $spacing--3xl;
+    }
+  }
+}
+
+.work-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  color: currentColor;
+  text-decoration: none;
+  padding: $spacing--lg;
+  border-radius: $spacing--xs;
+  @include breakpoint(md) {
+    flex-direction: row;
+  }
+  &__content {
+    position: relative;
+    width: 100%;
+  }
+  &:hover,
+  &:focus {
+    .work-link-title {
+      text-decoration: underline;
+    }
+  }
+}
+
+.work-link-date {
+  position: relative;
+  display: block;
+  line-height: 1.25;
+  font-size: $overline;
+  white-space: nowrap;
+  font-weight: 900;
+  color: currentColor;
+  margin-top: $spacing--sm;
+  &::before {
+    position: absolute;
+    z-index: 0;
+    content: '';
+    top: 50%;
+    transform: translateY(-50%);
+    right: -34px;
+    height: 2px;
+    width: 24px;
+    background-color: var(--accent100);
+  }
+}
+
+.work-link-title {
+  position: relative;
+  margin: 0;
+  line-height: 1.25;
+  font-size: $subtitle;
+  font-weight: 900;
+  color: currentColor;
+  @include breakpoint(md) {
+    font-size: $subtitle--2;
+  }
+}
+
+.work-link-descr {
+  position: relative;
+  margin: 0;
+  font-size: $body--2;
+  text-align: left;
+  @include breakpoint(md) {
+    font-size: $body--1;
+  }
+}
+
+.work-link-title ~ .work-link-descr {
+  margin-top: $spacing--sm;
+}
+
+.work-link-date ~ .work-link__content {
+  padding-left: 0;
+  padding-top: $spacing--sm;
+  @include breakpoint(md) {
+    padding-left: $layout--xl;
+    padding-top: 0;
+  }
+}
+
+.work-link-window-icon {
+  height: 16px;
+  width: 16px;
+  color: currentColor;
+}
+
+.work-link-title ~ .work-link-window-icon {
+  margin-left: $spacing--sm;
+}
+
+.work-link-title-group ~ .work-link-descr {
+  margin-top: $spacing--md;
+}

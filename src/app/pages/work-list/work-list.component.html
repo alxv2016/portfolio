@@ -1,0 +1,13 @@
+<ul class="work-list" *ngIf="workList$ | async as data">
+  <li *ngFor="let work of data" class="work-list__item">
+    <button class="work-link" (click)="viewBlog(work.uid)">
+      <span class="work-link-date">{{ work.data.published_date }}</span>
+      <div class="work-link__content">
+        <h2 class="work-link-title">{{ work.data.title[0].text }}</h2>
+        <p class="work-link-descr">
+          {{ work.data.description }}
+        </p>
+      </div>
+    </button>
+  </li>
+</ul>
