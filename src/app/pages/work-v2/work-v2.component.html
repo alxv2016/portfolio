@@ -1,0 +1,99 @@
+<ng-container *ngIf="workData$ | async as work">
+  <div class="project-hero">
+    <div class="project-hero__content">
+      <h1 class="display-1">{{ work.data.title[0].text }}</h1>
+      <p>{{ work.data.description }}</p>
+      <div class="project-designer">
+        <div class="project-designer__image">
+          <img
+            src="{{ work.data.designer[0].profile_image.url }}"
+            alt="{{ work.data.designer[0].profile_image.alt }}"
+          />
+        </div>
+        <div class="project-designer__info">
+          <span class="project-designer__name">{{ work.data.designer[0].name }}</span>
+          <span class="project-designer__role">{{ work.data.designer[0].role }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section>
+    <div class="project-cover" *ngIf="work.data.project_cover.url">
+      <img src="{{ work.data.project_cover.url }}" />
+    </div>
+    <div #htmlContent class="section" [ngSwitch]="true" *ngFor="let section of work.data.section">
+      <!-- Intro -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'intro'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <ng-container *ngIf="section.images">
+          <div class="section-image" *ngFor="let image of section.images">
+            <img src="{{ image.desktop.url }}" />
+          </div>
+        </ng-container>
+      </ng-container>
+      <!-- Challenge -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'challenge'">
+        <div class="section-grid section--outline">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div class="section-col" [innerHTML]="section.content | asHTML"></div>
+        </div>
+        <ng-container *ngIf="section.images">
+          <div class="section-image" *ngFor="let image of section.images">
+            <img src="{{ image.desktop.url }}" />
+          </div>
+        </ng-container>
+      </ng-container>
+      <!-- Solution -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'solution'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <ng-container *ngIf="section.images">
+          <div class="section-image" *ngFor="let image of section.images">
+            <img src="{{ image.desktop.url }}" />
+          </div>
+        </ng-container>
+      </ng-container>
+      <!-- Experience  -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'experience'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <ng-container *ngIf="section.images">
+          <div class="section-image" *ngFor="let image of section.images">
+            <img src="{{ image.desktop.url }}" />
+          </div>
+        </ng-container>
+      </ng-container>
+      <!-- Results -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'results'">
+        <div class="section-grid section--outline">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div class="section-col" [innerHTML]="section.content | asHTML"></div>
+        </div>
+        <ng-container *ngIf="section.images">
+          <div class="section-image" *ngFor="let image of section.images">
+            <img src="{{ image.desktop.url }}" />
+          </div>
+        </ng-container>
+      </ng-container>
+      <!-- Details -->
+      <ng-container *ngSwitchDefault>
+        <div class="section-grid">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div class="section-col" [innerHTML]="section.content | asHTML"></div>
+        </div>
+        <ng-container *ngIf="section.images">
+          <div class="section-image" *ngFor="let image of section.images">
+            <img src="{{ image.desktop.url }}" />
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </section>
+</ng-container>
