@@ -146,12 +146,19 @@ export class PrismicService {
         return this.http.get<PrismicQuery>(`${this.ep}/documents/search`, {params, responseType: 'json'}).pipe(
           map((resp) => {
             const data = resp.results[0].data;
+            data.project_cover.url
+              ? (data.project_cover.url = this.cleanUrl(data.project_cover.url))
+              : data.project_cover.url;
             data.product_images.forEach((i: any) => {
-              i.desktop.url = this.cleanUrl(i.desktop.url);
+              i.image.url = this.cleanUrl(i.image.url);
             });
             data.section.forEach((s: any) => {
-              s['images'] = data.product_images.filter((i: any) => i.image_id === s.section_id);
-              s['images'].length !== 0 ? s['images'] : (s['images'] = null);
+              if (s.unique_id) {
+                s['images'] = data.product_images.filter((i: any) => i.unique_id === s.unique_id);
+                s['images'].length !== 0 ? s['images'] : (s['images'] = null);
+              } else {
+                s['images'] = null;
+              }
             });
             return resp.results[0];
           })
