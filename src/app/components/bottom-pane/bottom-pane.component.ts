@@ -82,6 +82,7 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     requestAnimationFrame(() => {
       this.render.removeClass(this.host, 'c-bottom-pane--animate');
       // remove transitionend event
+      this.handleFocusTrap();
       this.transitionEventHandler();
     });
   }
@@ -98,10 +99,27 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
     this.state$.next(false);
   }
 
-  private createComponent(): void {
+  private handleFocusTrap() {
     // Save element clicked
     const ownerDocument = this.element.nativeElement.ownerDocument;
     this.clickedElement = ownerDocument.activeElement;
+    // Listen to keydown events
+    // Focus first element
+    const focusElsNodeList = this.host.querySelectorAll<HTMLElement>(
+      'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
+    );
+    // Convert NodeList to Array
+    const focusEls = Array.from<HTMLElement>(focusElsNodeList);
+    const firstTabStop = focusEls[0];
+    const lastTabStob = focusEls[focusEls.length - 1];
+    this.keydownEventHandler = this.render.listen('window', 'keydown', (e) =>
+      this.focusTrap(e, ownerDocument, firstTabStop, lastTabStob)
+    );
+    // Focus on first element;
+    firstTabStop.focus();
+  }
+
+  private createComponent(): void {
     // We use the element template to create and insert the child component
     this.componentPortal.clear();
     this.childComponent = this.componentPortal.createComponent(this.componentType);
@@ -118,27 +136,9 @@ export class BottomPaneComponent implements AfterViewInit, OnDestroy {
       this.render.addClass(this.host, 'c-bottom-pane--visible');
       this.transitionEventHandler = this.render.listen(this.host, 'transitionend', this.onTransitionEnd);
     });
-    // Listen to keydown events
-    // Focus first element
-    const focusElsNodeList = this.host.querySelectorAll<HTMLElement>(
-      'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
-    );
-    // Convert NodeList to Array
-    const focusEls = Array.from<HTMLElement>(focusElsNodeList);
-    const firstTabStop = focusEls[0];
-    const lastTabStob = focusEls[focusEls.length - 1];
-    this.keydownEventHandler = this.render.listen('window', 'keydown', (e) =>
-      this.focusTrap(e, ownerDocument, firstTabStop, lastTabStob)
-    );
-    //BUG transition end is taking too long to fire delay in first focus Focus first element after transition ends - visibility initially hidden
-    const transitionEnd = this.render.listen(this.bottomSheetWindow.nativeElement, 'transitionend', (e) => {
-      firstTabStop.focus();
-      transitionEnd();
-    });
   }
   // Close the modal
   closeBottomSheet() {
-    const ownerDocument = this.element.nativeElement.ownerDocument;
     this.render.addClass(this.host, 'c-bottom-pane--animate');
     this.render.removeClass(this.host, 'c-bottom-pane--visible');
     this.transitionEventHandler = this.render.listen(this.host, 'transitionend', (e) => this.onTransitionEnd(e, true));
