@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ApproachComponent} from './pages/approach/approach.component';
 import {BlogComponent} from './pages/blog/blog.component';
+import {DesignSystemComponent} from './pages/design-system/design-system.component';
 import {HomeComponent} from './pages/home/home.component';
 import {WorkComponent} from './pages/work/work.component';
 
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'work/:id',
     component: WorkComponent,
+  },
+  {
+    path: 'design-system',
+    component: DesignSystemComponent,
   },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
 ];

@@ -1,0 +1,44 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-design-system) {
+  position: relative;
+  display: block;
+  margin-top: 68px;
+  width: 100%;
+  padding-bottom: $layout--2xl * 1.45;
+}
+
+section,
+.header {
+  margin-top: $layout--xl;
+  @include breakpoint(sm) {
+    margin-top: $layout--2xl;
+  }
+}
+
+section ~ section {
+  padding-top: $layout--md;
+  @include breakpoint(sm) {
+    padding-top: $layout--lg;
+  }
+  border-top: 0.45rem solid var(--mid100);
+}
+
+article {
+  max-width: 768px;
+}
+
+article ~ article {
+  margin-top: $layout--lg;
+  @include breakpoint(sm) {
+    margin-top: $layout--xl;
+  }
+  border-top: 0.125rem solid var(--mid100);
+}
+
+ul > li ~ li {
+  margin-top: $layout--md;
+  @include breakpoint(md) {
+    margin-top: $layout--lg;
+  }
+}

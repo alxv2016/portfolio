@@ -9,6 +9,7 @@ import {BlogListComponent} from './blog-list/blog-list.component';
 import {BlogComponent} from './blog/blog.component';
 import {WorkListComponent} from './work-list/work-list.component';
 import {WorkComponent} from './work/work.component';
+import {DesignSystemComponent} from './design-system/design-system.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {WorkComponent} from './work/work.component';
     BlogComponent,
     WorkListComponent,
     WorkComponent,
+    DesignSystemComponent,
   ],
   imports: [CommonModule, ComponentsModule],
   exports: [PlaygroundComponent, BlogListComponent],

@@ -62,6 +62,18 @@ export class FooterComponent implements AfterViewInit {
     this.bottomPaneService.createBottomPane(ColorSchemeComponent, 'Color Scheme');
   }
 
+  viewDesignSystem(): void {
+    this.revealService.createReveal(false);
+    this.revealService.getAnimationState().subscribe((state: boolean) => {
+      // need to trigger zone because reveal animations runs outside of ngZone (GSAP)
+      this.zone.run(() => {
+        if (state) {
+          this.router.navigate(['design-system']);
+        }
+      });
+    });
+  }
+
   openBottomPane(link: any): void {
     switch (true) {
       case link.link_id === 'approach' && this.router.url !== `/${link.link_id}`:

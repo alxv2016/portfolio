@@ -1,5 +1,70 @@
 /* Typography styles */
-p {
+h1,
+h2,
+h3,
+h4 {
+  color: currentColor;
+  font-weight: font-weight('bold');
+  line-height: $heading-line-height;
+  em {
+    font-style: normal;
+    position: relative;
+    display: inline-block;
+    text-decoration: underline;
+    text-decoration-color: var(--accent100);
+  }
+}
+
+h1,
+.h1,
+.rt-heading-1 {
+  font-size: $title--3;
+  @include breakpoint(xs) {
+    font-size: $title--2;
+  }
+  @include breakpoint(md) {
+    font-size: $title--1;
+  }
+}
+
+h2,
+.h2,
+.rt-heading-2 {
+  font-size: $subtitle--2;
+  @include breakpoint(xs) {
+    font-size: $title--3;
+  }
+  @include breakpoint(md) {
+    font-size: $title--2;
+  }
+}
+
+h3,
+.h3,
+.rt-heading-3 {
+  font-size: $subtitle;
+  @include breakpoint(xs) {
+    font-size: $subtitle--2;
+  }
+  @include breakpoint(md) {
+    font-size: $title--3;
+  }
+}
+
+h4,
+.h4,
+.rt-heading-4 {
+  font-size: $body--1;
+  @include breakpoint(xs) {
+    font-size: $subtitle;
+  }
+  @include breakpoint(md) {
+    font-size: $subtitle--2;
+  }
+}
+
+p,
+.body-1 {
   color: currentColor;
   font-size: $body--2;
   line-height: $body-line-height;
@@ -9,28 +74,53 @@ p {
   @include breakpoint(md) {
     font-size: $subtitle;
   }
-  strong {
-    font-weight: font-weight('semi-bold');
-  }
 }
 
 p:only-child {
   margin: 0;
 }
 
+strong {
+  font-weight: font-weight('semi-bold');
+}
+
+span ~ h1,
+span ~ h2,
+span ~ h3,
+span ~ p {
+  margin-top: $spacing--2xs;
+  @include breakpoint(sm) {
+    margin-top: $spacing--xs;
+  }
+}
+
+span ~ h4 {
+  margin-top: $spacing--2xs;
+}
+
 h1 ~ p,
-h2 ~ p {
+p ~ h1 {
   margin-top: $spacing--2xl;
   @include breakpoint(md) {
     margin-top: $spacing--3xl;
   }
 }
 
+h2 ~ p,
 h3 ~ p,
-h4 ~ p {
+p ~ h2,
+p ~ h3 {
   margin-top: $spacing--lg;
   @include breakpoint(md) {
     margin-top: $spacing--xl;
+  }
+}
+
+h4 ~ p,
+p ~ h4 {
+  margin-top: $spacing--md;
+  @include breakpoint(md) {
+    margin-top: $spacing--lg;
   }
 }
 
@@ -38,28 +128,6 @@ p ~ p {
   margin-top: $spacing--lg;
   @include breakpoint(md) {
     margin-top: $spacing--xl;
-  }
-}
-
-h1,
-h2,
-h3,
-h4,
-form,
-legend {
-  line-height: $heading-line-height;
-  font-weight: inherit;
-  margin: $spacing--xl 0 $spacing--sm;
-}
-
-.overline,
-.rt-overline {
-  font-size: $body--2;
-  font-weight: font-weight('semi-bold');
-  line-height: $heading-line-height;
-  color: var(--text200);
-  @include breakpoint(sm) {
-    font-size: $body--1;
   }
 }
 
@@ -79,21 +147,31 @@ legend {
   }
 }
 
+.overline,
+.rt-overline {
+  font-size: $body--2;
+  font-weight: font-weight('semi-bold');
+  line-height: $heading-line-height;
+  color: currentColor;
+  @include breakpoint(sm) {
+    font-size: $body--1;
+  }
+}
+
 .display-1,
 .rt-display-1 {
   font-size: $title--2;
-  font-family: $heading-font-family;
-  line-height: $heading-line-height;
+  line-height: $headline-line-height;
   font-weight: font-weight('extra-bold');
   color: currentColor;
   @include breakpoint(sm) {
-    font-size: $title--1;
-  }
-  @include breakpoint(md) {
     font-size: $large--title;
   }
-  @include breakpoint(lg) {
+  @include breakpoint(md) {
     font-size: $huge--title;
+  }
+  @include breakpoint(lg) {
+    font-size: $headliner--1;
   }
   &:first-child {
     margin-top: 0;
@@ -103,8 +181,7 @@ legend {
 .display-2,
 .rt-display-2 {
   font-size: $title--3;
-  font-family: $heading-font-family;
-  line-height: $heading-line-height;
+  line-height: $headline-line-height;
   font-weight: font-weight('extra-bold');
   color: currentColor;
   @include breakpoint(sm) {
@@ -116,22 +193,34 @@ legend {
   @include breakpoint(lg) {
     font-size: $huge--title;
   }
-  em {
-    font-style: normal;
-    position: relative;
-    display: inline-block;
-    text-decoration: underline;
-    text-decoration-color: var(--accent100);
-  }
   &:first-child {
     margin-top: 0;
   }
 }
 
 .display-3,
-.rt-display-3,
-.blog-title {
+.rt-display-3 {
   font-size: $subtitle;
+  line-height: $headline-line-height;
+  font-weight: font-weight('extra-bold');
+  color: currentColor;
+  @include breakpoint(sm) {
+    font-size: $title--2;
+  }
+  @include breakpoint(md) {
+    font-size: $title--1;
+  }
+  @include breakpoint(lg) {
+    font-size: $large--title;
+  }
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.display-4,
+.rt-display-4 {
+  font-size: $body--1;
   font-family: $heading-font-family;
   line-height: $heading-line-height;
   font-weight: font-weight('extra-bold');
@@ -139,14 +228,14 @@ legend {
   &:first-child {
     margin-top: 0;
   }
-  @include breakpoint(xs) {
-    font-size: $subtitle--2;
-  }
-  @include breakpoint(md) {
+  @include breakpoint(sm) {
     font-size: $title--3;
   }
-  @include breakpoint(lg) {
+  @include breakpoint(md) {
     font-size: $title--2;
+  }
+  @include breakpoint(lg) {
+    font-size: $title--1;
   }
   em {
     font-style: normal;
@@ -157,48 +246,24 @@ legend {
   }
 }
 
-.heading-2,
-.rt-heading-2 {
-  position: relative;
-  font-size: $subtitle;
-  font-family: $heading-font-family;
-  line-height: $heading-line-height;
-  font-weight: font-weight('bold');
+.body-2 {
   color: currentColor;
-  &:first-child {
-    margin-top: 0;
+  font-size: $body--2;
+  line-height: $body-line-height;
+  @include breakpoint(sm) {
+    font-size: $body--1;
   }
-  @include breakpoint(md) {
+}
+
+.body-large {
+  color: currentColor;
+  font-size: $body--1;
+  line-height: $body-line-height;
+  @include breakpoint(xs) {
+    font-size: $subtitle;
+  }
+  @include breakpoint(sm) {
     font-size: $subtitle--2;
-  }
-  @include breakpoint(lg) {
-    font-size: $title--3;
-  }
-}
-
-.heading-3,
-.rt-heading-3 {
-  position: relative;
-  font-size: $body--1;
-  font-family: $heading-font-family;
-  line-height: $heading-line-height;
-  font-weight: font-weight('bold');
-  color: currentColor;
-  &:first-child {
-    margin-top: 0;
-  }
-  @include breakpoint(md) {
-    font-size: $subtitle;
-  }
-}
-
-.headline {
-  font-size: $body--1;
-  font-weight: font-weight('bold');
-  line-height: $heading-line-height;
-  color: currentColor;
-  @include breakpoint(md) {
-    font-size: $subtitle;
   }
 }
 
