@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Observable, switchMap} from 'rxjs';
+import {Observable, switchMap, tap} from 'rxjs';
 import {PrismicResult} from 'src/app/services/models/prismic.interface';
 import {PrismService} from 'src/app/services/prism.service';
 import {PrismicService} from 'src/app/services/prismic.service';
@@ -20,7 +20,7 @@ import {PrismicService} from 'src/app/services/prismic.service';
   selector: 'c-work',
   templateUrl: './work.component.html',
   styleUrls: ['./work.component.scss'],
-  //encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkComponent implements OnInit, AfterViewInit {
@@ -35,13 +35,14 @@ export class WorkComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.prismic.getWork2('health_connected_v2').subscribe((d) => console.log(d));
     this.workData$ = this.route.paramMap.pipe(
       switchMap((params) => {
         const id = params.get('id');
+        console.log(id);
         return this.prismic.getWork(id);
       })
     );
+    this.workData$.subscribe();
   }
 
   ngAfterViewInit(): void {

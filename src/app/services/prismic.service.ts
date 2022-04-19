@@ -16,7 +16,6 @@ export class PrismicService {
   private approachState$ = new BehaviorSubject<ApproachCollection | null>(null);
   private blogList$ = new BehaviorSubject<PrismicBlogResult[] | null>(null);
   private workList$ = new BehaviorSubject<PrismicBlogResult[] | null>(null);
-  private workList2$ = new BehaviorSubject<PrismicBlogResult[] | null>(null);
   constructor(private http: HttpClient) {}
 
   getHomeState(): Observable<HomeCollection | null> {
@@ -33,10 +32,6 @@ export class PrismicService {
 
   getWorkListState(): Observable<PrismicBlogResult[] | null> {
     return this.workList$;
-  }
-
-  getWorkListState2(): Observable<PrismicBlogResult[] | null> {
-    return this.workList2$;
   }
 
   private prismicRef(): Observable<string> {
@@ -79,16 +74,6 @@ export class PrismicService {
   }
 
   private getWorkList(refToken: string): Observable<PrismicQuery> {
-    const query = '[[at(document.type, "case-study")]]';
-    const params = new HttpParams().set('ref', refToken).set('access_token', this.token).set('q', query);
-    return this.http.get<PrismicQuery>(`${this.ep}/documents/search`, {params, responseType: 'json'}).pipe(
-      map((data) => {
-        return data;
-      })
-    );
-  }
-
-  private getWorkList2(refToken: string): Observable<PrismicQuery> {
     const query = '[[at(document.type, "case_study")]]';
     const params = new HttpParams().set('ref', refToken).set('access_token', this.token).set('q', query);
     return this.http.get<PrismicQuery>(`${this.ep}/documents/search`, {params, responseType: 'json'}).pipe(
@@ -116,29 +101,11 @@ export class PrismicService {
     );
   }
 
-  getWork(id: string | null): Observable<PrismicBlogResult | null> {
-    return this.prismicRef().pipe(
-      switchMap((ref) => {
-        const query = `[[at(my.case-study.uid, "${id}")]]`;
-        const params = new HttpParams().set('ref', ref).set('access_token', this.token).set('q', query);
-        return this.http.get<PrismicQuery>(`${this.ep}/documents/search`, {params, responseType: 'json'}).pipe(
-          map((resp) => {
-            console.log(resp.results[0].data);
-            return resp.results[0];
-          })
-        );
-      }),
-      catchError((error) => {
-        return of(null);
-      })
-    );
-  }
-
   private cleanUrl(url: string | null) {
     return url ? url.split('?')[0] : null;
   }
 
-  getWork2(id: string | null): Observable<PrismicBlogResult | null> {
+  getWork(id: string | null): Observable<PrismicBlogResult | null> {
     return this.prismicRef().pipe(
       switchMap((ref) => {
         const query = `[[at(my.case_study.uid, "${id}")]]`;
@@ -174,19 +141,12 @@ export class PrismicService {
     this.prismicRef()
       .pipe(
         switchMap((ref) => {
-          return zip([
-            this.homeData(ref),
-            this.approachData(ref),
-            this.getWorkList(ref),
-            this.getBlogList(ref),
-            this.getWorkList2(ref),
-          ]).pipe(
+          return zip([this.homeData(ref), this.approachData(ref), this.getWorkList(ref), this.getBlogList(ref)]).pipe(
             map((data) => {
               this.homeState$.next(data[0].results[0].data);
               this.approachState$.next(data[1].results[0].data);
               this.workList$.next(data[2].results);
               this.blogList$.next(data[3].results);
-              this.workList2$.next(data[4].results);
               // console.log(data);
               return data;
             }),

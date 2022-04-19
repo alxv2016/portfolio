@@ -22,9 +22,9 @@
   &__container {
     width: 100%;
     max-width: 768px;
-    @include breakpoint(md) {
-      margin: auto;
-    }
+    // @include breakpoint(md) {
+    //   margin: auto;
+    // }
   }
 
   &__end {

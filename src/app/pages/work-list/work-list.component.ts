@@ -32,7 +32,7 @@ export class WorkListComponent implements OnInit {
       // need to trigger zone because reveal animations runs outside of ngZone (GSAP)
       this.zone.run(() => {
         if (state) {
-          this.router.navigate(['work2', workID]);
+          this.router.navigate(['work', workID]);
           this.bottomPaneService.closeBottomPane();
         }
       });
@@ -40,7 +40,7 @@ export class WorkListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.workList$ = this.prismic.getWorkListState2();
+    this.workList$ = this.prismic.getWorkListState();
   }
 
   ngAfterViewInit(): void {

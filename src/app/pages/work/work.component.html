@@ -1,44 +1,95 @@
 <ng-container *ngIf="workData$ | async as work">
-  <div class="c-work__hero">
-    <div class="c-work__hero-content">
-      <div class="c-work-title-group">
-        <h1 class="display-1">{{ work.data.title[0].text }}</h1>
-        <p class="work-description">{{ work.data.description }}</p>
-      </div>
-      <div class="c-designer">
-        <div class="c-designer__image">
-          <img
-            src="{{ work.data.designer[0].designer_profile.url }}"
-            alt="{{ work.data.designer[0].designer_profile.alt }}"
-          />
+  <div class="project-hero">
+    <div class="project-hero__content">
+      <h1 class="display-2">{{ work.data.title[0].text }}</h1>
+      <p>{{ work.data.description }}</p>
+      <div class="project-designer">
+        <div class="project-designer__icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-zap"
+          >
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+          </svg>
         </div>
-        <div class="c-designer__info">
-          <span class="c-designer__name">{{ work.data.designer[0].designer_name }}</span>
-          <span class="c-designer__role">{{ work.data.designer[0].designer_role }}</span>
-        </div>
-      </div>
-    </div>
-    <div class="c-work__hero-cover">
-      <div class="c-work__hero-image">
-        <img src="{{ work.data.cover_image.url }}" alt="{{ work.data.cover_image.alt }}" />
-        <div class="c-work__hero-footer">
-          <a href="{{ work.data.project_link.url }}" target="_blank">Launch project</a>
+        <div class="project-designer__info">
+          <span class="project-designer__name">{{ work.data.designer[0].role_label }}</span>
+          <span class="project-designer__role">{{ work.data.designer[0].role }}</span>
         </div>
       </div>
-      <p>{{ work.data.work_intro }}</p>
     </div>
   </div>
-  <section class="c-work__section">
-    <div #htmlContent *ngFor="let section of work.data.case_study">
-      <div class="c-section-other" *ngIf="section.section_id && section.section_id === 'challenge'; else other">
-        <div [outerHTML]="section.section_content | asHTML"></div>
-      </div>
-      <ng-template #other>
-        <div [outerHTML]="section.section_content | asHTML"></div>
-      </ng-template>
-      <pre
-        *ngIf="section.section_code.length !== 0"
-      ><code class="language-{{section.code_language}}">{{section.section_code[0].text}}</code></pre>
+  <section>
+    <div class="project-cover" *ngIf="work.data.project_cover.url">
+      <img src="{{ work.data.project_cover.url }}" />
+    </div>
+    <div #htmlContent class="section" [ngSwitch]="true" *ngFor="let section of work.data.section">
+      <!-- Intro -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'intro'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML" *ngIf="section.section_title[0].text"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
+        </div>
+      </ng-container>
+      <!-- Challenge -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'challenge'">
+        <div class="section-grid section--outline">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div class="section-col" [innerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
+        </div>
+      </ng-container>
+      <!-- Solution -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'solution'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
+        </div>
+      </ng-container>
+      <!-- Experience  -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'experience'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
+        </div>
+      </ng-container>
+      <!-- Results -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'results'">
+        <div class="section-grid section--outline">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div class="section-col" [innerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
+        </div>
+      </ng-container>
+      <!-- Details -->
+      <ng-container *ngSwitchDefault>
+        <div class="section-grid">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div class="section-col" [innerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
+        </div>
+      </ng-container>
     </div>
   </section>
 </ng-container>

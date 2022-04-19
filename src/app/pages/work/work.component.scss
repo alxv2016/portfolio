@@ -4,120 +4,66 @@
   position: relative;
   display: block;
   width: 100%;
-  max-width: max-width('lg');
-  margin: auto;
-  padding-bottom: $layout--2xl;
-  margin-bottom: $layout--lg;
+}
+section {
+  margin-bottom: $layout--2xl;
 }
 
-:host-context(.c-work) {
-  ul {
-    padding: $layout--2xl;
-    border: 1px solid red;
-  }
-}
-
-.c-work__hero {
-  position: relative;
-  width: 100%;
-  margin-top: $layout--xl;
-  margin-bottom: $layout--md;
-  @include breakpoint(md) {
-    margin-top: $layout--2xl;
-    margin-bottom: $layout--lg;
-  }
-
-  &-content {
-    position: relative;
-    width: 100%;
-  }
-
-  &-cover {
-    position: relative;
-    width: 100%;
-    p {
-      margin-top: $spacing--xl;
-    }
-  }
-
-  &-footer {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    min-height: 28px;
-    padding: $spacing--lg $spacing--2xl;
-    @include breakpoint(sm) {
-      justify-content: flex-end;
-    }
-    @include frosted-glass(var(--glass2), 0.85);
-    a {
-      color: currentColor;
-    }
-  }
-
-  &-image {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 320px;
-    overflow: hidden;
-    @include breakpoint(sm) {
-      height: 375px;
-    }
-    @include breakpoint(sm) {
-      height: 475px;
-    }
-    img {
-      position: relative;
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  &-content ~ &-cover {
-    margin-top: $layout--sm;
-    @include breakpoint(md) {
-      margin-top: $layout--md;
-    }
-  }
-}
-
-.c-work-title-group {
-  position: relative;
-  width: 100%;
-  margin-bottom: $layout--sm;
-  @include breakpoint(sm) {
-    margin-bottom: $layout--md;
-  }
-  h1 ~ P {
-    margin-top: $spacing--xs;
-  }
-}
-
-.c-designer {
+.project-hero {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  @include breakpoint(sm) {
-    flex-direction: row;
-    align-items: center;
+  margin-top: $layout--2xl;
+  width: 100%;
+  @include breakpoint(md) {
+    margin-top: $layout--2xl * 1.25;
+  }
+  &__content {
+    position: relative;
+
+    .display-1 {
+      font-size: $title--2 * 1.25;
+      margin: 0;
+      @include breakpoint(sm) {
+        font-size: $title--1 * 1.45;
+      }
+      @include breakpoint(md) {
+        font-size: $large--title * 1.45;
+      }
+      @include breakpoint(lg) {
+        font-size: $huge--title * 1.125;
+      }
+    }
+
+    p {
+      margin: 0;
+      margin-top: $spacing--xs;
+      color: var(--text200);
+    }
+  }
+}
+
+.project-designer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  margin-top: $layout--sm;
+  margin-bottom: $layout--lg;
+  @include breakpoint(md) {
+    margin-top: $layout--md;
+    margin-bottom: $layout--xl;
   }
 
-  &__image {
+  &__icon {
     position: relative;
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     border-radius: 100%;
     flex-shrink: 0;
-    border: 2px solid var(--accent100);
     overflow: hidden;
+    color: var(--accent100);
     img {
       height: inherit;
       width: inherit;
@@ -125,12 +71,8 @@
     }
   }
 
-  &__image ~ &__info {
-    margin-top: $spacing--lg;
-    @include breakpoint(sm) {
-      margin-top: 0;
-      margin-left: $spacing--lg;
-    }
+  &__icon ~ &__info {
+    margin-left: $spacing--md;
   }
 
   &__info {
@@ -145,7 +87,7 @@
     font-weight: font-weight('bold');
     line-height: $heading-line-height;
     font-size: $body--1;
-    color: var(--text200);
+    color: var(--text100);
     @include breakpoint(md) {
       font-size: $subtitle;
     }
@@ -162,14 +104,71 @@
   }
 }
 
-.c-work__section {
+.project-cover {
   position: relative;
   width: 100%;
-  margin-top: $layout--lg;
+  height: auto;
+  margin-bottom: $layout--xl;
   @include breakpoint(md) {
-    margin-top: $layout--xl;
+    margin-bottom: $layout--2xl;
   }
-  div ~ div {
+  img {
+    width: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+}
+
+.section {
+  position: relative;
+  width: 100%;
+  .rt-heading-3 ~ p {
+    margin-top: $spacing--xs;
+  }
+  .rt-heading-2 {
+    @include breakpoint(xs) {
+      font-size: $subtitle--2;
+    }
+    @include breakpoint(md) {
+      font-size: $title--3;
+    }
+    @include breakpoint(lg) {
+      font-size: $title--2;
+    }
+  }
+}
+
+.section ~ .section {
+  padding-top: $layout--xl;
+  @include breakpoint(md) {
+    padding-top: $layout--2xl * 1.25;
+  }
+}
+
+.section-intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  h2 ~ p {
+    margin-top: $spacing--sm;
+  }
+}
+
+.section-content {
+  position: relative;
+  width: 100%;
+  p {
+    max-width: 720px;
+    color: var(--text200);
+  }
+
+  p.block-img {
+    max-width: 100%;
+  }
+
+  ul {
+    max-width: 768px;
+    margin-left: auto;
     margin-top: $layout--lg;
     @include breakpoint(md) {
       margin-top: $layout--xl;
@@ -177,18 +176,48 @@
   }
 }
 
-.c-section-other {
+.section-grid {
   position: relative;
-  padding: $spacing--lg;
-  border-radius: $spacing--sm;
-  background-color: var(--surface6);
-  @include breakpoint(sm) {
-    padding: $spacing--xl;
-  }
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
   @include breakpoint(md) {
-    padding: $spacing--2xl;
-  }
-  h2 {
-    color: var(--accent100);
+    grid-template-columns: repeat(6, 1fr);
   }
 }
+
+.section--outline {
+  border-top: 1px solid var(--mid100);
+  border-bottom: 6px solid var(--mid100);
+  padding: $layout--xl 0;
+  @include breakpoint(md) {
+    padding: $layout--2xl 0;
+  }
+}
+
+.section-col {
+  grid-column: 1 / -1;
+  margin-top: $spacing--sm;
+  @include breakpoint(md) {
+    margin-top: 0;
+    grid-column: 3 / -1;
+  }
+}
+
+.image-grid {
+  position: relative;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  grid-gap: $spacing--lg;
+  grid-template-columns: repeat(1, 1fr);
+  margin-top: $layout--lg;
+  img {
+    object-fit: cover;
+    object-position: top center;
+  }
+}
+
+// .display-1, .rt-display-2, .rt-heading-2, .rt-display-3 {
+//   color: var(--brand);
+// }

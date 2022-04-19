@@ -22,6 +22,7 @@
   &__content {
     position: relative;
     margin-bottom: $layout--md;
+    max-width: 768px;
     @include breakpoint(sm) {
       margin-bottom: $layout--lg;
     }

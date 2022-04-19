@@ -50,8 +50,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       x: elPos.x - bounds.width / 2,
       y: elPos.y - bounds.height / 2,
     };
-    const hypot = Math.floor(Math.hypot(elCenter.x, elCenter.y)) * 1.25;
-
+    const hypot = Math.floor(Math.hypot(elCenter.x, elCenter.y));
     gsap.to(lines, {
       strokeDashoffset: hypot,
       stagger: {
