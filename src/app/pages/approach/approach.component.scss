@@ -5,12 +5,13 @@
   display: block;
   width: 100%;
   margin-top: 68px;
-  padding-bottom: $layout--2xl;
-  section ~ section {
-    margin-top: $layout--lg;
-    @include breakpoint(md) {
-      margin-top: $layout--xl;
-    }
+  padding-bottom: $layout--2xl * 1.25;
+}
+
+section ~ section {
+  margin-top: $layout--xl;
+  @include breakpoint(md) {
+    margin-top: $layout--2xl;
   }
 }
 
@@ -21,10 +22,11 @@
   }
   &__container {
     width: 100%;
+  }
+
+  &__container:nth-child(n + 4) {
     max-width: 768px;
-    // @include breakpoint(md) {
-    //   margin: auto;
-    // }
+    margin-left: auto;
   }
 
   &__end {

@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  private animateAbstract(lines: any, linesAccent: any, pos: any) {
+  private animateAbstract(lines: any, pos: any) {
     const bounds = this.abstract.nativeElement.getBoundingClientRect();
     const elPos = {
       x: Math.floor(pos.x - bounds.x),
@@ -50,17 +50,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       x: elPos.x - bounds.width / 2,
       y: elPos.y - bounds.height / 2,
     };
-    const hypot = Math.floor(Math.hypot(elCenter.x, elCenter.y));
+    const hypot = Math.floor(Math.hypot(elCenter.x, elCenter.y)) / 2;
     gsap.to(lines, {
-      strokeDashoffset: hypot,
-      stagger: {
-        from: 'end',
-        each: 0.025,
-      },
-      ease: 'power4.out',
-    });
-
-    gsap.to(linesAccent, {
       strokeDashoffset: hypot,
       stagger: {
         from: 'end',
@@ -75,21 +66,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private applyLineStrokes() {
-    const lines = this.element.nativeElement.querySelectorAll('.orb-lines > path');
-    const linesAccent = this.element.nativeElement.querySelectorAll('.orb-lines-accent > path');
+    const lines = this.element.nativeElement.querySelectorAll('.orb-lines-accent > path');
     if (lines) {
       gsap.set(lines, {
-        strokeDasharray: (i, target) => target.getTotalLength(),
-        strokeWidth: (i) => i / 2,
-      });
-      gsap.set(linesAccent, {
         strokeDasharray: (i, target) => target.getTotalLength(),
         strokeWidth: (i) => i / 2,
       });
     }
     return {
       lines,
-      linesAccent,
     };
   }
 
@@ -100,7 +85,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.mouseEvent()
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((m) => {
-          this.animateAbstract(abstract.lines, abstract.linesAccent, m);
+          this.animateAbstract(abstract.lines, m);
         });
     });
   }

@@ -81,7 +81,7 @@
 }
 
 .orb-lines {
-  color: var(--accent200);
+  color: var(--brand);
 }
 
 .orb-lines-accent {
@@ -94,7 +94,7 @@
   width: 568px;
   height: 568px;
   margin-bottom: $layout--md;
-  transform: skewX(-12deg);
+  transform: skewX(-6deg);
   @include breakpoint(sm) {
     width: 668px;
     height: 668px;

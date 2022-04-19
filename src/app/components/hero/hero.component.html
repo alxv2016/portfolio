@@ -2,7 +2,7 @@
   <c-balance-motion [reversing]="reversing"></c-balance-motion>
 </div>
 <div class="c-hero__col">
-  <h2 class="headline" *ngIf="approachContent$ | async as data">{{ data.page_headline }}</h2>
+  <h2 class="hero-headline" *ngIf="approachContent$ | async as data">{{ data.page_headline }}</h2>
 </div>
 <div class="c-hero__marquee">
   <div #scrollingHeadline class="scrolling-headline-track">

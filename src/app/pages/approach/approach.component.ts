@@ -12,6 +12,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import {BehaviorSubject, Observable, Subject, takeUntil} from 'rxjs';
 import {gsap} from 'gsap';
@@ -24,6 +25,7 @@ import {PrismicService} from 'src/app/services/prismic.service';
   selector: 'c-approach',
   templateUrl: './approach.component.html',
   styleUrls: ['./approach.component.scss'],
+  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApproachComponent implements OnInit, AfterViewInit {

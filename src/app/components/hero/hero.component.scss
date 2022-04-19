@@ -89,3 +89,10 @@
     height: 420px;
   }
 }
+
+.hero-headline {
+  font-weight: font-weight('extra-bold');
+  font-size: $title--3;
+  max-width: 375px;
+  color: var(--mid100);
+}
