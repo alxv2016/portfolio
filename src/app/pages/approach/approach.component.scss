@@ -5,7 +5,7 @@
   display: block;
   width: 100%;
   margin-top: 68px;
-  padding-bottom: $layout--2xl * 1.25;
+  padding-bottom: $layout--2xl * 1.45;
 }
 
 section ~ section {
@@ -22,10 +22,11 @@ section ~ section {
   }
   &__container {
     width: 100%;
+    max-width: 900px;
   }
 
   &__container:nth-child(n + 4) {
-    max-width: 768px;
+    max-width: 568px;
     margin-left: auto;
   }
 
