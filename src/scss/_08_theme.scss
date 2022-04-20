@@ -25,6 +25,13 @@
   --light500-light: var(--brand-hue) 20% 91%;
   --light600-light: var(--brand-hue) 15% 90%;
 
+  --grey100-light: var(--brand-hue) 8% 42%;
+  --grey200-light: var(--brand-hue) 7% 40%;
+  --grey300-light: var(--brand-hue) 6% 38%;
+  --grey400-light: var(--brand-hue) 5% 36%;
+  --grey500-light: var(--brand-hue) 4% 34%;
+  --grey600-light: var(--brand-hue) 3% 32%;
+
   --mid100-light: var(--brand-hue) 20% 32%;
   --mid200-light: var(--brand-hue) 18% 30%;
   --mid300-light: var(--brand-hue) 16% 28%;
@@ -50,6 +57,13 @@
   --light400-dark: var(--brand-hue) 25% 83%;
   --light500-dark: var(--brand-hue) 20% 82%;
   --light600-dark: var(--brand-hue) 15% 81%;
+
+  --grey100-dark: var(--brand-hue) 10% 60%;
+  --grey200-dark: var(--brand-hue) 9% 58%;
+  --grey300-dark: var(--brand-hue) 8% 56%;
+  --grey400-dark: var(--brand-hue) 7% 54%;
+  --grey500-dark: var(--brand-hue) 6% 52%;
+  --grey600-dark: var(--brand-hue) 5% 50%;
 
   --mid100-dark: var(--brand-hue) 20% 24%;
   --mid200-dark: var(--brand-hue) 18% 22%;
@@ -82,6 +96,13 @@
   --light500: hsl(var(--light500-light));
   --light600: hsl(var(--light600-light));
 
+  --grey100: hsl(var(--grey100-light));
+  --grey200: hsl(var(--grey200-light));
+  --grey300: hsl(var(--grey300-light));
+  --grey400: hsl(var(--grey400-light));
+  --grey500: hsl(var(--grey500-light));
+  --grey600: hsl(var(--grey600-light));
+
   --mid100: hsl(var(--mid100-light));
   --mid200: hsl(var(--mid200-light));
   --mid300: hsl(var(--mid300-light));
@@ -100,7 +121,9 @@
   --accent100: hsl(var(--accent100-light));
   --accent200: hsl(var(--accent200-light));
   --text100: hsl(var(--dark500-light));
-  --text200: hsl(var(--dark400-light));
+  --text200: hsl(var(--dark600-light));
+  --text300: hsl(var(--grey300-light));
+  --text400: hsl(var(--grey400-light));
 
   --surface1: hsl(var(--light100-light));
   --surface2: hsl(var(--light200-light));
@@ -129,6 +152,13 @@
     --light500: hsl(var(--light500-dark));
     --light600: hsl(var(--light600-dark));
 
+    --grey100: hsl(var(--grey100-dark));
+    --grey200: hsl(var(--grey200-dark));
+    --grey300: hsl(var(--grey300-dark));
+    --grey400: hsl(var(--grey400-dark));
+    --grey500: hsl(var(--grey500-dark));
+    --grey600: hsl(var(--grey600-dark));
+
     --mid100: hsl(var(--mid100-dark));
     --mid200: hsl(var(--mid200-dark));
     --mid300: hsl(var(--mid300-dark));
@@ -147,7 +177,9 @@
     --accent100: hsl(var(--accent100-dark));
     --accent200: hsl(var(--accent200-dark));
     --text100: hsl(var(--light100-dark));
-    --text200: hsl(var(--light200-dark));
+    --text200: hsl(var(--light300-dark));
+    --text300: hsl(var(--grey100-dark));
+    --text400: hsl(var(--grey200-dark));
 
     --surface1: hsl(var(--dark100-dark));
     --surface2: hsl(var(--dark200-dark));
@@ -176,6 +208,13 @@
   --light500: hsl(var(--light500-light));
   --light600: hsl(var(--light600-light));
 
+  --grey100: hsl(var(--grey100-light));
+  --grey200: hsl(var(--grey200-light));
+  --grey300: hsl(var(--grey300-light));
+  --grey400: hsl(var(--grey400-light));
+  --grey500: hsl(var(--grey500-light));
+  --grey600: hsl(var(--grey600-light));
+
   --mid100: hsl(var(--mid100-light));
   --mid200: hsl(var(--mid200-light));
   --mid300: hsl(var(--mid300-light));
@@ -194,7 +233,9 @@
   --accent100: hsl(var(--accent100-light));
   --accent200: hsl(var(--accent200-light));
   --text100: hsl(var(--dark500-light));
-  --text200: hsl(var(--dark400-light));
+  --text200: hsl(var(--dark600-light));
+  --text300: hsl(var(--grey300-light));
+  --text400: hsl(var(--grey400-light));
 
   --surface1: hsl(var(--light100-light));
   --surface2: hsl(var(--light200-light));
@@ -222,6 +263,13 @@
   --light500: hsl(var(--light500-dark));
   --light600: hsl(var(--light600-dark));
 
+  --grey100: hsl(var(--grey100-dark));
+  --grey200: hsl(var(--grey200-dark));
+  --grey300: hsl(var(--grey300-dark));
+  --grey400: hsl(var(--grey400-dark));
+  --grey500: hsl(var(--grey500-dark));
+  --grey600: hsl(var(--grey600-dark));
+
   --mid100: hsl(var(--mid100-dark));
   --mid200: hsl(var(--mid200-dark));
   --mid300: hsl(var(--mid300-dark));
@@ -240,7 +288,9 @@
   --accent100: hsl(var(--accent100-dark));
   --accent200: hsl(var(--accent200-dark));
   --text100: hsl(var(--light100-dark));
-  --text200: hsl(var(--light200-dark));
+  --text200: hsl(var(--light300-dark));
+  --text300: hsl(var(--grey100-dark));
+  --text400: hsl(var(--grey200-dark));
 
   --surface1: hsl(var(--dark100-dark));
   --surface2: hsl(var(--dark200-dark));

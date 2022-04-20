@@ -147,17 +147,6 @@ p ~ p {
   }
 }
 
-.overline,
-.rt-overline {
-  font-size: $body--2;
-  font-weight: font-weight('semi-bold');
-  line-height: $heading-line-height;
-  color: currentColor;
-  @include breakpoint(sm) {
-    font-size: $body--1;
-  }
-}
-
 .display-1,
 .rt-display-1 {
   font-size: $title--2;
@@ -265,6 +254,62 @@ p ~ p {
   @include breakpoint(sm) {
     font-size: $subtitle--2;
   }
+}
+
+.label {
+  font-size: $body--1;
+  @include breakpoint(xs) {
+    font-size: $subtitle;
+  }
+}
+
+.overline,
+.rt-overline {
+  font-size: $body--2;
+  line-height: $heading-line-height;
+  color: currentColor;
+  @include breakpoint(sm) {
+    font-size: $body--1;
+  }
+}
+
+small,
+.small {
+  font-size: $body--2;
+}
+
+.legal {
+  font-size: $legal;
+  @include breakpoint(xs) {
+    font-size: $overline;
+  }
+}
+
+strong,
+.strong {
+  font-weight: font-weight('semi-bold');
+}
+
+.bold {
+  font-weight: font-weight('bold');
+}
+
+.extra-bold {
+  font-weight: font-weight('extra-bold');
+}
+
+.numeric-display {
+  font-size: $clock-digit--sm;
+  line-height: $headline-line-height;
+  @include breakpoint(md) {
+    font-size: $clock-digit--md;
+  }
+}
+
+.mono-space {
+  color: currentColor;
+  font-size: $body--1;
+  font-family: $mono-font-family;
 }
 
 .blog-description {

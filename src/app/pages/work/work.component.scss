@@ -122,21 +122,6 @@ section {
 .section {
   position: relative;
   width: 100%;
-  .rt-heading-3 ~ p {
-    margin-top: $spacing--xs;
-  }
-  .rt-display-2 {
-    font-size: $title--3;
-    @include breakpoint(sm) {
-      font-size: $title--2;
-    }
-    @include breakpoint(md) {
-      font-size: $title--1;
-    }
-    @include breakpoint(lg) {
-      font-size: $large--title;
-    }
-  }
 }
 
 .section ~ .section {
@@ -150,9 +135,6 @@ section {
   position: relative;
   display: flex;
   flex-direction: column;
-  h2 ~ p {
-    margin-top: $spacing--sm;
-  }
 }
 
 .section-content {

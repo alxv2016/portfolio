@@ -1,118 +1,227 @@
 <div class="header">
-  <h1>ALXV Design System</h1>
-  <p>Work in progress</p>
+  <div class="header__container">
+    <h1 class="h2 bold">ALXV Design System</h1>
+    <span class="mono-space text-400 strong">Work in progress / V1.0</span>
+  </div>
+  <p class="body-2 text-400 mono-space">
+    A light-weight design system used for ALXV Toronto. Color, Typography, Spacing, Icons, and Components to build &
+    write content.
+  </p>
 </div>
+<!-- Colors -->
 <section class="section">
-  <h2>Colors</h2>
-  <h3>Brand:</h3>
+  <div class="section__header">
+    <h2 class="h3 bold">Colors</h2>
+  </div>
+  <div class="section__content">
+    <div class="palettes">
+      <div class="palette brand-{{ i + 1 }}" *ngFor="let color of brandColors; index as i">
+        <span>{{ color }}</span>
+      </div>
+    </div>
+    <div class="palettes">
+      <div class="palette surface-{{ i + 1 }}" *ngFor="let tint of tints; index as i">
+        <span>{{ tint }}</span>
+      </div>
+    </div>
+    <div class="palettes">
+      <div class="palette grey-{{ i + 1 }}" *ngFor="let grey of greys; index as i">
+        <span>{{ grey }}</span>
+      </div>
+    </div>
+    <div class="palettes">
+      <div class="palette neutral-{{ i + 1 }}" *ngFor="let neutral of nuetrals; index as i">
+        <span>{{ neutral }}</span>
+      </div>
+    </div>
+    <div class="palettes">
+      <div class="palette shade-{{ i + 1 }}" *ngFor="let shade of shades; index as i">
+        <span>{{ shade }}</span>
+      </div>
+    </div>
+  </div>
 </section>
+<!-- Font -->
 <section class="section">
-  <h2>Type Faces</h2>
-  <p>Inter</p>
-</section>
-<section class="section">
-  <h2>Typography</h2>
-  <article>
-    <h3>Display headings</h3>
-    <ul>
+  <div class="section__header">
+    <h2 class="h3 bold">Type Face</h2>
+  </div>
+  <div class="section__content">
+    <ul class="type-face-list">
       <li>
-        <span class="overline">Display 1</span>
-        <h1 class="display-1">Almost before we knew it, we had left the ground.</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
+        <div class="type-face">
+          <span class="type-face__weight text-300">Regular</span>
+          <span class="type-face__style type--400">Inter 400</span>
+        </div>
+        <div class="type-face">
+          <span class="type-face__weight text-300">SemiBold</span>
+          <span class="type-face__style type--600">Inter 600</span>
+        </div>
+        <div class="type-face">
+          <span class="type-face__weight text-300">Bold</span>
+          <span class="type-face__style type--700">Inter 700</span>
+        </div>
+        <div class="type-face">
+          <span class="type-face__weight text-300">ExtraBold</span>
+          <span class="type-face__style type--800">Inter 800</span>
+        </div>
       </li>
       <li>
-        <span class="overline">Display 2</span>
-        <h2 class="display-2">Almost before we knew it, we had left the ground.</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
-      </li>
-      <li>
-        <span class="overline">Display 3</span>
-        <h3 class="display-3">Almost before we knew it, we had left the ground.</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
-      </li>
-      <li>
-        <span class="overline">Display 4</span>
-        <h3 class="display-4">Almost before we knew it, we had left the ground.</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
+        <div class="type-face">
+          <span class="type-face__weight text-300">Regular</span>
+          <span class="type-face__style type--mono type--400">IBM Plex Mono 400</span>
+        </div>
+        <div class="type-face">
+          <span class="type-face__weight text-300">SemiBold</span>
+          <span class="type-face__style type--mono type--600">IBM Plex Mono 600</span>
+        </div>
       </li>
     </ul>
-  </article>
-  <article>
-    <h3>Heading Levels</h3>
-    <ul>
-      <li>
-        <span class="overline">Heading level 01</span>
-        <h1>Almost before we knew it, we had left the ground.</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
-      </li>
-      <li>
-        <span class="overline">Heading level 02</span>
-        <h2>Almost before we knew it, we had left the ground.</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
-      </li>
-      <li>
-        <span class="overline">Heading level 03</span>
-        <h3>Almost before we knew it, we had left the ground.</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
-      </li>
-      <li>
-        <span class="overline">Heading level 04</span>
-        <h4>Almost before we knew it, we had left the ground.</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
-      </li>
-    </ul>
-  </article>
-  <article>
-    <h3>Paragraphs</h3>
-    <ul>
-      <li>
-        <span class="overline">Body Large</span>
-        <p class="body-large">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
-      </li>
-      <li>
-        <span class="overline">Body 1</span>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
-      </li>
-      <li>
-        <span class="overline">Body 2</span>
-        <p class="body-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Sodales ut eu sem integer.
-        </p>
-      </li>
-    </ul>
-  </article>
+  </div>
 </section>
 <section class="section">
-  <h2>Components</h2>
+  <div class="section__header">
+    <h2 class="h3 bold">Typography</h2>
+  </div>
+  <div class="section__content">
+    <div class="section__content-header">
+      <h3 class="h4">Display headings</h3>
+    </div>
+    <article>
+      <ul class="typography-list">
+        <li>
+          <span class="overline extra-bold text-300">Display 1</span>
+          <h1 class="display-1">Almost before we knew it, we had left the ground.</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+        <li>
+          <span class="overline extra-bold text-300">Display 2</span>
+          <h2 class="display-2">Almost before we knew it, we had left the ground.</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+        <li>
+          <span class="overline extra-bold text-300">Display 3</span>
+          <h3 class="display-3">Almost before we knew it, we had left the ground.</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+        <li>
+          <span class="overline extra-bold text-300">Display 4</span>
+          <h3 class="display-4">Almost before we knew it, we had left the ground.</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+      </ul>
+    </article>
+  </div>
+  <div class="section__content">
+    <div class="section__content-header">
+      <h3 class="h4">Headings</h3>
+    </div>
+    <article>
+      <ul class="typography-list">
+        <li>
+          <span class="overline bold text-300">Heading level 01</span>
+          <h1>Almost before we knew it, we had left the ground.</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+        <li>
+          <span class="overline bold text-300">Heading level 02</span>
+          <h2>Almost before we knew it, we had left the ground.</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+        <li>
+          <span class="overline bold text-300">Heading level 03</span>
+          <h3>Almost before we knew it, we had left the ground.</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+        <li>
+          <span class="overline bold text-300">Heading level 04</span>
+          <h4>Almost before we knew it, we had left the ground.</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+      </ul>
+    </article>
+  </div>
+  <div class="section__content">
+    <div class="section__content-header">
+      <h3 class="h4">Paragraphs</h3>
+    </div>
+    <article>
+      <ul class="typography-list">
+        <li>
+          <span class="overline strong text-300">Body Large</span>
+          <p class="body-large">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+        <li>
+          <span class="overline strong text-300">Body 1</span>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+        <li>
+          <span class="overline strong text-300">Body 2</span>
+          <p class="body-2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Sodales ut eu sem integer.
+          </p>
+        </li>
+      </ul>
+    </article>
+  </div>
+  <div class="section__content">
+    <div class="section__content-header">
+      <h3 class="h4">Type Styles</h3>
+    </div>
+    <article>
+      <ul class="typography-list">
+        <li>
+          <span class="overline strong text-300">Label</span>
+          <p class="label">Almost before we knew it, we had left the ground.</p>
+        </li>
+        <li>
+          <span class="overline strong text-300">Overline</span>
+          <p class="overline">Almost before we knew it, we had left the ground.</p>
+        </li>
+        <li>
+          <span class="overline strong text-300">Small</span>
+          <p class="small">Almost before we knew it, we had left the ground.</p>
+        </li>
+        <li>
+          <span class="overline strong text-300">Legal</span>
+          <p class="legal">Almost before we knew it, we had left the ground.</p>
+        </li>
+        <li>
+          <span class="overline strong text-300">Numeric displays</span>
+          <p class="numeric-display">01:00</p>
+        </li>
+      </ul>
+    </article>
+  </div>
 </section>

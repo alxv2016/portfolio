@@ -27,6 +27,9 @@ body.no-scroll {
 }
 
 // Global Over-rides
+.rt-overline {
+  color: var(--text300);
+}
 
 iframe.rt-iframe {
   position: relative;
@@ -35,13 +38,6 @@ iframe.rt-iframe {
   border: none;
   margin: 0;
   padding: 0;
-}
-
-.rt-overline ~ .rt-display-2 {
-  margin-top: $spacing--xs;
-  @include breakpoint(sm) {
-    margin-top: $spacing--sm;
-  }
 }
 
 .rt-list {
