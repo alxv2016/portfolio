@@ -22,6 +22,7 @@ import {Observable} from 'rxjs';
 import {HomeCollection} from 'src/app/services/models/home.interface';
 import {ColorSchemeComponent} from '../color-scheme/color-scheme.component';
 import {WorkListComponent} from 'src/app/pages/work-list/work-list.component';
+import {OffCanvasService} from '../off-canvas/off-canvas.service';
 
 @Component({
   host: {
@@ -36,6 +37,7 @@ export class FooterComponent implements AfterViewInit {
   @ViewChild('footerNav') footerNav!: ElementRef;
   constructor(
     private bottomPaneService: BottomPaneService,
+    private offCanvas: OffCanvasService,
     private revealService: RevealService,
     private inject: Injector,
     private router: Router,
@@ -55,6 +57,7 @@ export class FooterComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const parent = this.inject.get<AppComponent>(AppComponent);
     this.bottomPaneService.getBottomPaneHost(parent.bottomPaneHost.viewContainerRef);
+    this.offCanvas.getViewRef(parent.bottomPaneHost.viewContainerRef);
     this.revealService.getRevealHost(parent.revealHost.viewContainerRef);
   }
 
@@ -72,6 +75,10 @@ export class FooterComponent implements AfterViewInit {
         }
       });
     });
+  }
+
+  openOffCanvas(): void {
+    this.offCanvas.createOffCanvas(ColorSchemeComponent, 'Testing');
   }
 
   openBottomPane(link: any): void {

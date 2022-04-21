@@ -10,6 +10,7 @@ import {BalanceMotionComponent} from './balance-motion/balance-motion.component'
 import {HeroComponent} from './hero/hero.component';
 import {ColorSchemeComponent} from './color-scheme/color-scheme.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {OffCanvasModule} from './off-canvas/off-canvas.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     HeroComponent,
     ColorSchemeComponent,
   ],
-  imports: [CommonModule, BottomPaneModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, BottomPaneModule, OffCanvasModule, FormsModule, ReactiveFormsModule],
   exports: [
     BalanceMotionComponent,
     HeaderComponent,

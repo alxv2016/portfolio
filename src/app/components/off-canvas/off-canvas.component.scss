@@ -1,0 +1,151 @@
+@import '../../../scss/00_imports';
+
+:host-context(.c-off-canvas) {
+  position: fixed;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  outline: none;
+  user-select: none;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: inherit;
+    width: inherit;
+    @include frosted-glass(var(--glass1), 0.125);
+    will-change: opacity;
+    opacity: 0;
+    transition: opacity 275ms ease;
+  }
+}
+
+// Animate state
+:host-context(.c-off-canvas--animate) .c-off-canvas-window {
+  visibility: visible;
+  transition: transform 325ms 25ms ease;
+}
+
+// Opened state
+:host-context(.c-off-canvas--visible) {
+  pointer-events: auto;
+  .c-off-canvas-window {
+    visibility: visible;
+    transform: none;
+  }
+}
+
+:host-context(.c-off-canvas--visible):host-context(.c-off-canvas) {
+  &::before {
+    opacity: 1;
+  }
+}
+
+.c-off-canvas-window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 7;
+  width: 100%;
+  height: 100%;
+  max-width: 968px;
+  color: currentColor;
+  background-color: var(--surface2);
+  overflow: hidden;
+  transform: translateX(102%);
+  @include elevate-4(0.095);
+  visibility: hidden;
+
+  &__header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 $spacing--lg;
+    @include breakpoint(md) {
+      padding: 0 $spacing--xl;
+    }
+    background-color: inherit;
+  }
+
+  &__content {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    flex-grow: 1;
+    padding: $spacing--lg $spacing--lg;
+    padding-top: $spacing--xl;
+    padding-right: 44px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @include breakpoint(md) {
+      padding: $spacing--xl $spacing--xl;
+      padding-top: $spacing--2xl;
+      padding-right: 44px;
+    }
+    /* Works on Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--surface6);
+      border-radius: 20px;
+      border: 2px solid transparent;
+    }
+  }
+}
+
+.c-off-canvas-title {
+  position: relative;
+  font-weight: font-weight('bold');
+  font-size: $subtitle;
+  color: currentColor;
+  margin: 0;
+  margin-top: $spacing--md;
+  @include breakpoint(md) {
+    font-size: $subtitle--2;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  z-index: 1;
+  top: $spacing--lg;
+  right: $spacing--sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  height: 44px;
+  width: 44px;
+  border-radius: 100%;
+  background-color: transparent;
+  transition: background 275ms ease;
+  @include breakpoint(md) {
+    right: $spacing--lg;
+  }
+  &:hover,
+  &:focus {
+    background-color: var(--surface4);
+  }
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+}

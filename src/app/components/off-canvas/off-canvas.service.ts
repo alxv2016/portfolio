@@ -1,30 +1,23 @@
 import {DOCUMENT} from '@angular/common';
-import {
-  ApplicationRef,
-  ComponentRef,
-  Inject,
-  Injectable,
-  Injector,
-  Type,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
+import {ComponentRef, Inject, Injectable, Type, ViewChild, ViewContainerRef} from '@angular/core';
 import {Observable} from 'rxjs';
-import {BottomPaneComponent} from './bottom-pane.component';
-import {BottomPaneDirective} from './bottom-pane.directive';
-import {BottomPaneModule} from './bottom-pane.module';
+import {OffCanvasComponent} from './off-canvas.component';
+import {OffCanvasDirective} from './off-canvas.directive';
+import {OffCanvasModule} from './off-canvas.module';
 
 @Injectable({
-  providedIn: BottomPaneModule,
+  providedIn: OffCanvasModule,
 })
-export class BottomPaneService {
-  private componentRef!: ComponentRef<BottomPaneComponent>;
-  // The view container's ref
+export class OffCanvasService {
+  private componentRef!: ComponentRef<OffCanvasComponent>;
+  // View ref
   private viewContainerRef!: ViewContainerRef;
-  @ViewChild(BottomPaneDirective, {static: true}) bottomPaneHost!: BottomPaneDirective;
+  @ViewChild(OffCanvasDirective, {static: true}) OffCanvasHost!: OffCanvasDirective;
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  createBottomPane(childComponent: Type<any>, title?: string | null, data?: any): void {
+  createOffCanvas(childComponent: Type<any>, title?: string | null, data?: any): void {
+    const doc = this.document.querySelector('body');
+    // const main = this.document.querySelector('main');
     // If an instance already exist destroy it first
     if (this.componentRef) {
       this.componentRef.destroy();
@@ -39,43 +32,34 @@ export class BottomPaneService {
       this.componentRef.instance.contentData = data;
     }
     this.componentRef.instance.state$.next(true);
-    const doc = this.document.querySelector('body');
     doc?.classList.add('no-scroll');
+    // main?.classList.add('off-set');
     // Watch component's state to destroy
     this.getState().subscribe((state) => {
       if (!state) {
         doc?.classList.remove('no-scroll');
+        // main?.classList.remove('off-set');
         this.componentRef.destroy();
       }
     });
   }
 
-  getBottomPaneHost(viewContainerRef: ViewContainerRef): void {
+  getViewRef(viewContainerRef: ViewContainerRef): void {
     this.viewContainerRef = viewContainerRef;
   }
 
-  closeBottomPane(): void {
+  close(): void {
     if (this.componentRef) {
-      this.componentRef.instance.closeBottomSheet();
+      this.componentRef.instance.close();
     }
   }
 
   private insertChildComponent(childComponent: Type<any>): void {
-    this.componentRef = this.viewContainerRef.createComponent(BottomPaneComponent);
+    this.componentRef = this.viewContainerRef.createComponent(OffCanvasComponent);
     this.componentRef.instance.componentType = childComponent;
   }
 
   private getState(): Observable<boolean> {
     return this.componentRef.instance.state$.asObservable();
   }
-
-  // private destroyComponent(componentRef: ComponentRef<BottomPaneComponent>): void {
-  //   componentRef.instance.state$.asObservable().subscribe((bool) => {
-  //     if (!bool) {
-  //       requestAnimationFrame(() => {
-  //         componentRef.destroy();
-  //       });
-  //     }
-  //   });
-  // }
 }
