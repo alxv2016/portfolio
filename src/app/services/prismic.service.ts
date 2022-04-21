@@ -119,7 +119,16 @@ export class PrismicService {
             data.product_images.forEach((i: any) => {
               i.image.url = this.cleanUrl(i.image.url);
             });
+            // NOTE: Prismic doesn't allow for nested arrays, so we're mapping the images array to each section by image ids
             data.section.forEach((s: any) => {
+              if (s.unique_id) {
+                s['images'] = data.product_images.filter((i: any) => i.unique_id === s.unique_id);
+                s['images'].length !== 0 ? s['images'] : (s['images'] = null);
+              } else {
+                s['images'] = null;
+              }
+            });
+            data.process_section.forEach((s: any) => {
               if (s.unique_id) {
                 s['images'] = data.product_images.filter((i: any) => i.unique_id === s.unique_id);
                 s['images'].length !== 0 ? s['images'] : (s['images'] = null);
