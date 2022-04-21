@@ -20,7 +20,7 @@ import {PrismicService} from 'src/app/services/prismic.service';
   selector: 'c-work',
   templateUrl: './work.component.html',
   styleUrls: ['./work.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  //encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkComponent implements OnInit, AfterViewInit {
