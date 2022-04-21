@@ -69,11 +69,14 @@
     position: relative;
     z-index: 1;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     width: 100%;
+    min-height: 44px;
+    margin-top: $spacing--lg;
     padding: 0 $spacing--lg;
-    @include breakpoint(md) {
-      padding: 0 $spacing--xl;
+    h1 {
+      margin: 0;
     }
     background-color: inherit;
   }
@@ -127,7 +130,7 @@
   position: absolute;
   z-index: 1;
   top: $spacing--lg;
-  right: $spacing--sm;
+  right: $spacing--lg;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,9 +140,6 @@
   border-radius: 100%;
   background-color: transparent;
   transition: background 275ms ease;
-  @include breakpoint(md) {
-    right: $spacing--lg;
-  }
   &:hover,
   &:focus {
     background-color: var(--surface4);
