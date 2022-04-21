@@ -60,6 +60,43 @@
           <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
         </div>
       </ng-container>
+      <!-- Process -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'process'">
+        <div class="section-grid section--process">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div class="section-col">
+            <p>
+              Health Connected was going through a huge redesign but alot of the core concepts still needed to remain.
+              By doing some research into our competitors and our users we started to identify the pain points of the
+              user's journey and what we can do to improve the overall new experience.
+            </p>
+            <div class="section-footer">
+              <button class="process-btn">
+                <span>In depth</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-eye"
+                >
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+            <!-- <p>Health Connected already had a user base during this time so we were able to ran some surveys and looked
+              into the
+              usage metrics to identify the pain points users were facing. We were also able to capture feedback from
+              employers who had signed up for the Health Connected program to get their insights and hear about their
+              employee's experiences.</p> -->
+          </div>
+          <!-- <div [outerHTML]="section.content | asHTML"></div> -->
+        </div>
+      </ng-container>
       <!-- Experience  -->
       <ng-container *ngSwitchCase="section.section_id && section.section_id === 'experience'">
         <div class="section-content">

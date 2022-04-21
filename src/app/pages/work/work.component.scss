@@ -21,19 +21,19 @@ section {
   &__content {
     position: relative;
 
-    .display-1 {
-      font-size: $title--2 * 1.25;
-      margin: 0;
-      @include breakpoint(sm) {
-        font-size: $title--1 * 1.45;
-      }
-      @include breakpoint(md) {
-        font-size: $large--title * 1.45;
-      }
-      @include breakpoint(lg) {
-        font-size: $huge--title * 1.125;
-      }
-    }
+    // .display-1 {
+    //   font-size: $title--2 * 1.25;
+    //   margin: 0;
+    //   @include breakpoint(sm) {
+    //     font-size: $title--1 * 1.45;
+    //   }
+    //   @include breakpoint(md) {
+    //     font-size: $large--title * 1.45;
+    //   }
+    //   @include breakpoint(lg) {
+    //     font-size: $huge--title * 1.125;
+    //   }
+    // }
 
     p {
       margin: 0;
@@ -183,6 +183,15 @@ section {
   }
 }
 
+.section--process {
+  border-top: 6px solid var(--mid100);
+  border-bottom: 14px solid var(--mid100);
+  padding: $layout--xl 0;
+  @include breakpoint(md) {
+    padding: $layout--2xl 0;
+  }
+}
+
 .section-col {
   grid-column: 1 / -1;
   margin-top: $spacing--sm;
@@ -190,6 +199,15 @@ section {
     margin-top: 0;
     grid-column: 3 / -1;
   }
+}
+
+.section-footer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: $layout--lg;
 }
 
 .image-grid {
@@ -203,6 +221,39 @@ section {
   img {
     object-fit: cover;
     object-position: top center;
+  }
+}
+
+.process-btn {
+  position: relative;
+  font-weight: font-weight('semi-bold');
+  font-size: $body--2;
+  color: currentColor;
+  line-height: 1.25;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  color: currentColor;
+  border-radius: 90px;
+  transition: color 320ms ease;
+  transition: background 320ms ease;
+  border: 1px solid var(--surface6);
+  padding: $spacing--xs;
+  padding-left: $spacing--lg;
+  &:hover,
+  &:focus {
+    background-color: var(--surface4);
+  }
+  span ~ svg {
+    margin-left: $spacing--lg;
+  }
+  svg {
+    height: 42px;
+    width: 42px;
+    stroke: var(--light100);
+    border-radius: 90px;
+    padding: $spacing--sm;
+    background-color: var(--brand);
   }
 }
 
