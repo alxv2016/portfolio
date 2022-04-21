@@ -13,11 +13,11 @@ import {
 import {ActivatedRoute} from '@angular/router';
 import {Observable, switchMap, tap} from 'rxjs';
 import {AppComponent} from 'src/app/app.component';
-import {ColorSchemeComponent} from 'src/app/components/color-scheme/color-scheme.component';
 import {OffCanvasService} from 'src/app/components/off-canvas/off-canvas.service';
 import {PrismicResult} from 'src/app/services/models/prismic.interface';
 import {PrismService} from 'src/app/services/prism.service';
 import {PrismicService} from 'src/app/services/prismic.service';
+import {WorkDiscoveryComponent} from '../work-discovery/work-discovery.component';
 
 @Component({
   host: {class: 'c-work'},
@@ -62,6 +62,6 @@ export class WorkComponent implements OnInit, AfterViewInit {
   }
 
   openOffCanvas(): void {
-    this.offCanvas.createOffCanvas(ColorSchemeComponent);
+    this.offCanvas.createOffCanvas(WorkDiscoveryComponent, 'Discovery');
   }
 }

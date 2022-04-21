@@ -75,6 +75,9 @@
     min-height: 44px;
     margin-top: $spacing--lg;
     padding: 0 $spacing--lg;
+    @include breakpoint(md) {
+      padding-left: $spacing--xl;
+    }
     h1 {
       margin: 0;
     }

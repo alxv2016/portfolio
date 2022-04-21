@@ -183,12 +183,15 @@ section {
   }
 }
 
+div.section--outline ~ div.section--outline {
+  border-top: none;
+}
+
 .section--process {
-  border-top: 6px solid var(--mid100);
-  border-bottom: 14px solid var(--mid100);
-  padding: $layout--xl 0;
+  border-bottom: 2px solid var(--mid100);
+  padding-bottom: $layout--xl;
   @include breakpoint(md) {
-    padding: $layout--2xl 0;
+    padding-bottom: $layout--2xl;
   }
 }
 

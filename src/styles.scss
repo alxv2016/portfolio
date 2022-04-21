@@ -10,11 +10,10 @@
 @import './scss/08_theme';
 // Third party over-rides
 @import '~prismjs/themes/prism-okaidia.css';
-
 body.no-scroll {
-  overflow: hidden;
+  height: 100vh;
+  overflow-y: hidden;
 }
-
 // main.off-set {
 //   transform: translateX(-18%);
 //   transition: transform 325ms ease-in;

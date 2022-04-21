@@ -26,6 +26,9 @@ body {
   color: var(--text100);
   background-color: var(--surface1);
   height: 100%;
+  // Prevents scroll bar shift
+  width: 100vw;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // removes bounce in scrolling

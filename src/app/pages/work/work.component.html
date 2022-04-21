@@ -50,18 +50,8 @@
           <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
         </div>
       </ng-container>
-      <!-- Solution -->
-      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'solution'">
-        <div class="section-content">
-          <div [outerHTML]="section.section_title | asHTML"></div>
-          <div [outerHTML]="section.content | asHTML"></div>
-        </div>
-        <div class="image-grid" *ngIf="section.images">
-          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
-        </div>
-      </ng-container>
       <!-- Process -->
-      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'process'">
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'discovery'">
         <div class="section-grid section--process">
           <div [outerHTML]="section.section_title | asHTML"></div>
           <div class="section-col">
@@ -89,12 +79,22 @@
               </button>
             </div>
             <!-- <p>Health Connected already had a user base during this time so we were able to ran some surveys and looked
-              into the
-              usage metrics to identify the pain points users were facing. We were also able to capture feedback from
-              employers who had signed up for the Health Connected program to get their insights and hear about their
-              employee's experiences.</p> -->
+                  into the
+                  usage metrics to identify the pain points users were facing. We were also able to capture feedback from
+                  employers who had signed up for the Health Connected program to get their insights and hear about their
+                  employee's experiences.</p> -->
           </div>
           <!-- <div [outerHTML]="section.content | asHTML"></div> -->
+        </div>
+      </ng-container>
+      <!-- Solution -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'solution'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
         </div>
       </ng-container>
       <!-- Experience  -->
