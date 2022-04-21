@@ -5,13 +5,13 @@
   display: block;
   width: 100%;
   margin-top: 68px;
-  padding-bottom: $layout--2xl * 1.45;
+  padding-bottom: $layout--2xl;
 }
 
 section ~ section {
-  margin-top: $layout--xl;
+  margin-top: $layout--lg;
   @include breakpoint(md) {
-    margin-top: $layout--2xl;
+    margin-top: $layout--xl;
   }
 }
 
@@ -22,13 +22,18 @@ section ~ section {
   }
   &__container {
     width: 100%;
-    max-width: 900px;
+    max-width: 800px;
   }
 
   &__container:nth-child(n + 4) {
-    max-width: 568px;
+    max-width: 768px;
     margin-left: auto;
   }
+
+  // &__container:nth-child(2n + 2) {
+  //   max-width: 768px;
+  //   margin-left: auto;
+  // }
 
   &__end {
     position: relative;

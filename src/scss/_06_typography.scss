@@ -16,8 +16,7 @@ h4 {
 }
 
 h1,
-.h1,
-.rt-heading-1 {
+.h1 {
   font-size: $title--3;
   @include breakpoint(xs) {
     font-size: $title--2;
@@ -28,8 +27,7 @@ h1,
 }
 
 h2,
-.h2,
-.rt-heading-2 {
+.h2 {
   font-size: $subtitle--2;
   @include breakpoint(xs) {
     font-size: $title--3;
@@ -40,8 +38,7 @@ h2,
 }
 
 h3,
-.h3,
-.rt-heading-3 {
+.h3 {
   font-size: $subtitle;
   @include breakpoint(xs) {
     font-size: $subtitle--2;
@@ -52,8 +49,7 @@ h3,
 }
 
 h4,
-.h4,
-.rt-heading-4 {
+.h4 {
   font-size: $body--1;
   @include breakpoint(xs) {
     font-size: $subtitle;
@@ -107,8 +103,14 @@ p ~ h1 {
 }
 
 h2 ~ p,
+p ~ h2 {
+  margin-top: $spacing--xl;
+  @include breakpoint(md) {
+    margin-top: $spacing--2xl;
+  }
+}
+
 h3 ~ p,
-p ~ h2,
 p ~ h3 {
   margin-top: $spacing--lg;
   @include breakpoint(md) {
@@ -147,8 +149,7 @@ p ~ p {
   }
 }
 
-.display-1,
-.rt-display-1 {
+.display-1 {
   font-size: $title--2;
   line-height: $headline-line-height;
   font-weight: font-weight('extra-bold');
@@ -167,8 +168,7 @@ p ~ p {
   }
 }
 
-.display-2,
-.rt-display-2 {
+.display-2 {
   font-size: $title--3;
   line-height: $headline-line-height;
   font-weight: font-weight('extra-bold');
@@ -187,9 +187,8 @@ p ~ p {
   }
 }
 
-.display-3,
-.rt-display-3 {
-  font-size: $subtitle;
+.display-3 {
+  font-size: $subtitle--2;
   line-height: $headline-line-height;
   font-weight: font-weight('extra-bold');
   color: currentColor;
@@ -207,9 +206,8 @@ p ~ p {
   }
 }
 
-.display-4,
-.rt-display-4 {
-  font-size: $body--1;
+.display-4 {
+  font-size: $subtitle;
   font-family: $heading-font-family;
   line-height: $heading-line-height;
   font-weight: font-weight('extra-bold');
@@ -263,8 +261,7 @@ p ~ p {
   }
 }
 
-.overline,
-.rt-overline {
+.overline {
   font-size: $body--2;
   line-height: $heading-line-height;
   color: currentColor;

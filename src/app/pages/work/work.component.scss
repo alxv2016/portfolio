@@ -140,8 +140,13 @@ section {
 .section-content {
   position: relative;
   width: 100%;
+
+  h2,
   p {
     max-width: 668px;
+  }
+
+  p {
     color: var(--text200);
   }
 
