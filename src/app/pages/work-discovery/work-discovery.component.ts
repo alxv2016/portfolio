@@ -16,6 +16,6 @@ export class WorkDiscoveryComponent implements OnInit {
 
   ngOnInit(): void {
     this.workData$ = this.prismic.getWorkState();
-    this.workData$.subscribe((resp) => console.log('process', resp));
+    // this.workData$.subscribe((resp) => console.log('process', resp));
   }
 }

@@ -66,38 +66,37 @@
   visibility: hidden;
 
   &__header {
-    position: relative;
+    position: fixed;
     z-index: 1;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    min-height: 44px;
-    margin-top: $spacing--lg;
+    align-items: center;
+    justify-content: space-between;
+    width: inherit;
+    min-height: 68px;
+    max-width: inherit;
     padding: 0 $spacing--lg;
+    @include frosted-glass(var(--glass1), 0.75);
     @include breakpoint(md) {
-      padding-left: $spacing--xl;
+      padding: 0 $spacing--xl;
     }
     h1 {
       margin: 0;
     }
-    background-color: inherit;
   }
 
   &__content {
     position: relative;
-    top: 0;
-    left: 0;
     width: 100%;
     flex-grow: 1;
     padding: $spacing--lg $spacing--lg;
-    padding-top: $spacing--xl;
+    padding-top: 68px;
     padding-right: 44px;
     overflow-x: hidden;
     overflow-y: auto;
+    scrollbar-gutter: stable;
     @include breakpoint(md) {
       padding: $spacing--xl $spacing--xl;
-      padding-top: $spacing--2xl;
+      padding-top: 68px;
       padding-right: 44px;
     }
     /* Works on Chrome, Edge, and Safari */
@@ -130,10 +129,9 @@
 }
 
 .close-btn {
-  position: absolute;
-  z-index: 1;
-  top: $spacing--lg;
-  right: $spacing--lg;
+  position: relative;
+  // top: $spacing--lg;
+  // right: $spacing--lg;
   display: flex;
   align-items: center;
   justify-content: center;

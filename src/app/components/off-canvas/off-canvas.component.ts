@@ -1,3 +1,4 @@
+import {DOCUMENT} from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -5,6 +6,7 @@ import {
   ComponentRef,
   ElementRef,
   HostBinding,
+  Inject,
   Input,
   NgZone,
   OnDestroy,
@@ -34,11 +36,38 @@ export class OffCanvasComponent implements AfterViewInit, OnDestroy {
   clickEventHandlers: any[] = [];
   @Input() contentData: any = null;
   @ViewChild('offCanvasWindow') offCanvasWindow!: ElementRef;
+  @ViewChild('offCanvasHeader') offCanvasHeader!: ElementRef;
+  @ViewChild('offCanvasContent') offCanvasContent!: ElementRef;
   @ViewChild('componentPortal', {read: ViewContainerRef, static: true}) componentPortal!: ViewContainerRef;
-  constructor(private element: ElementRef, private render: Renderer2, private zone: NgZone) {
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private element: ElementRef,
+    private render: Renderer2,
+    private zone: NgZone
+  ) {
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
     this.close = this.close.bind(this);
     this.focusTrap = this.focusTrap.bind(this);
+  }
+
+  private getScrollbarWidth() {
+    // Creating invisible container
+    const outer = this.element.nativeElement.ownerDocument.createElement('div');
+    outer.style.visibility = 'hidden';
+    outer.style.overflow = 'scroll'; // forcing scrollbar to appear
+    document.body.appendChild(outer);
+    // Creating inner element and placing it in the container
+    const inner = this.element.nativeElement.ownerDocument.createElement('div');
+    outer.appendChild(inner);
+    // Calculating difference between container's full width and the child width
+    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+    // Removing temporary elements from the DOM
+    outer.parentNode?.removeChild(outer);
+    return scrollbarWidth;
+  }
+
+  private checkScroll(parent: HTMLElement, child: HTMLElement): boolean {
+    return parent.clientHeight < child.scrollHeight;
   }
 
   private focusTrap(ev: KeyboardEvent, ownerDocument: Document, firstTabStop: HTMLElement, lastTabStob: HTMLElement) {
@@ -116,6 +145,17 @@ export class OffCanvasComponent implements AfterViewInit, OnDestroy {
     firstTabStop.focus();
   }
 
+  private checkScrollbar(): void {
+    // Adjust the header so it doesn't block scroll bar dynamically
+    const scrollbarWidth = this.getScrollbarWidth();
+    const scrollable = this.checkScroll(this.offCanvasWindow.nativeElement, this.offCanvasContent.nativeElement);
+    const bounds = this.offCanvasHeader.nativeElement.getBoundingClientRect();
+    if (scrollable) {
+      this.render.setStyle(this.offCanvasHeader.nativeElement, 'width', `calc(100% - ${scrollbarWidth}px)`);
+      this.render.setStyle(this.offCanvasHeader.nativeElement, 'max-width', `${bounds.width - scrollbarWidth}px`);
+    }
+  }
+
   private createComponent(): void {
     // We use the element template to create and insert the child component
     this.componentPortal.clear();
@@ -133,6 +173,7 @@ export class OffCanvasComponent implements AfterViewInit, OnDestroy {
       this.render.addClass(this.host, 'c-off-canvas--visible');
       this.transitionEventHandler = this.render.listen(this.host, 'transitionend', this.onTransitionEnd);
     });
+    this.checkScrollbar();
   }
 
   close() {

@@ -101,6 +101,8 @@ div.section--outline ~ div.section--outline {
 .image-grid {
   position: relative;
   width: 100%;
+  max-width: 800px;
+  margin-left: auto;
   display: grid;
   align-items: center;
   grid-gap: $spacing--lg;

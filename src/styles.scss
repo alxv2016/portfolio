@@ -8,21 +8,9 @@
 @import './scss/06_typography';
 @import './scss/07_base';
 @import './scss/08_theme';
+@import './scss/09_globals';
 // Third party over-rides
 @import '~prismjs/themes/prism-okaidia.css';
-body.no-scroll {
-  height: 100vh;
-  overflow-y: hidden;
-}
-// main.off-set {
-//   transform: translateX(-18%);
-//   transition: transform 325ms ease-in;
-// }
-
-// main {
-//   transform: none;
-//   transition: transform 325ms ease-out;
-// }
 
 // Utilities
 .sr-only:not(:focus):not(:active) {
@@ -33,73 +21,4 @@ body.no-scroll {
   position: absolute;
   white-space: nowrap;
   width: 1px;
-}
-
-// Global Over-rides
-.rt-overline {
-  color: var(--text300);
-}
-
-iframe.rt-iframe {
-  position: relative;
-  width: 100%;
-  height: 568px;
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-.rt-list {
-  padding: $spacing--lg;
-  padding-left: $layout--sm;
-  list-style: outside;
-  margin: $spacing--md 0;
-  color: currentColor;
-  font-size: $body--2;
-  line-height: $body-line-height;
-  @include breakpoint(xs) {
-    font-size: $body--1;
-  }
-  @include breakpoint(md) {
-    font-size: $subtitle;
-    padding-left: $layout--md;
-  }
-  strong {
-    font-weight: font-weight('semi-bold');
-  }
-
-  li ~ li {
-    margin-top: $spacing--2xl;
-  }
-}
-
-.c-blog {
-  // pre {
-  //   white-space: pre-wrap;
-  // }
-
-  // code {
-  //   // display: inline-block;
-  //   // border-radius: $spacing--xs;
-  //   // padding: $spacing--xs $spacing--sm;
-  //   // background-color: var(--color-bottom-pane-bg);
-  //   white-space: pre-wrap;
-  // }
-
-  .rt-heading-1,
-  .rt-heading-2 {
-    margin-top: $layout--lg;
-    @include breakpoint(md) {
-      margin-top: $layout--xl;
-    }
-  }
-
-  .rt-heading-3,
-  .rt-heading-4,
-  .block-img {
-    margin-top: $layout--md;
-    @include breakpoint(md) {
-      margin-top: $layout--lg;
-    }
-  }
 }
