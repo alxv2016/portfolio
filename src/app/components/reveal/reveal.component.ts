@@ -73,22 +73,26 @@ export class RevealComponent implements AfterViewInit {
           },
           ease: 'power4.out',
         })
-        .to(revealBlocks, {
-          yPercent: reverse ? 100 : -100,
-          stagger: {
-            each: 0.125,
-            from: 'end',
+        .to(
+          revealBlocks,
+          {
+            yPercent: reverse ? 100 : -100,
+            stagger: {
+              each: 0.125,
+              from: 'end',
+            },
+            ease: 'power4.out',
+            onStart: () => {
+              this.animationState$.next(true);
+            },
+            onComplete: () => {
+              this.render.removeClass(this.host, 'c-reveal--visible');
+              this.animationState$.next(false);
+              this.state$.next(false);
+            },
           },
-          ease: 'power4.out',
-          onStart: () => {
-            this.animationState$.next(true);
-          },
-          onComplete: () => {
-            this.render.removeClass(this.host, 'c-reveal--visible');
-            this.animationState$.next(false);
-            this.state$.next(false);
-          },
-        });
+          0.25
+        );
     });
   }
 

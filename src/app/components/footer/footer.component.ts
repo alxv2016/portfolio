@@ -84,15 +84,16 @@ export class FooterComponent implements AfterViewInit {
   openBottomPane(link: any): void {
     switch (true) {
       case link.link_id === 'approach' && this.router.url !== `/${link.link_id}`:
-        this.revealService.createReveal(false);
-        this.revealService.getAnimationState().subscribe((state: boolean) => {
-          // need to trigger zone because reveal animations runs outside of ngZone (GSAP)
-          this.zone.run(() => {
-            if (state) {
-              this.router.navigate(['approach']);
-            }
-          });
-        });
+        this.router.navigate(['approach']);
+        // this.revealService.createReveal(false);
+        // this.revealService.getAnimationState().subscribe((state: boolean) => {
+        //   // need to trigger zone because reveal animations runs outside of ngZone (GSAP)
+        //   this.zone.run(() => {
+        //     if (state) {
+        //       this.router.navigate(['approach']);
+        //     }
+        //   });
+        // });
         break;
       case link.link_id === 'playground':
         // console.log('playground');

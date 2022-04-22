@@ -38,16 +38,20 @@ export class BlogListComponent implements OnInit, AfterViewInit {
   ) {}
 
   viewBlog(blogID: string) {
-    this.revealService.createReveal(false);
-    this.revealService.getAnimationState().subscribe((state: boolean) => {
-      // need to trigger zone because reveal animations runs outside of ngZone (GSAP)
-      this.zone.run(() => {
-        if (state) {
-          this.router.navigate(['blog', blogID]);
-          this.bottomPaneService.closeBottomPane();
-        }
-      });
+    this.zone.run(() => {
+      this.router.navigate(['blog', blogID]);
+      this.bottomPaneService.closeBottomPane();
     });
+    // this.revealService.createReveal(false);
+    // this.revealService.getAnimationState().subscribe((state: boolean) => {
+    //   // need to trigger zone because reveal animations runs outside of ngZone (GSAP)
+    //   this.zone.run(() => {
+    //     if (state) {
+    //       this.router.navigate(['blog', blogID]);
+    //       this.bottomPaneService.closeBottomPane();
+    //     }
+    //   });
+    // });
   }
 
   ngOnInit(): void {

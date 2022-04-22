@@ -81,14 +81,15 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   goHome(): void {
-    this.revealService.createReveal(true);
-    this.revealService.getAnimationState().subscribe((state) => {
-      if (state) {
-        this.zone.run(() => {
-          this.router.navigate(['home']);
-        });
-      }
-    });
+    this.router.navigate(['home']);
+    // this.revealService.createReveal(true);
+    // this.revealService.getAnimationState().subscribe((state) => {
+    //   if (state) {
+    //     this.zone.run(() => {
+    //       this.router.navigate(['home']);
+    //     });
+    //   }
+    // });
   }
 
   private scrollEvent(): Observable<any> {
