@@ -55,8 +55,6 @@ export class WorkComponent implements OnInit, AfterViewInit {
     const parent = this.inject.get<AppComponent>(AppComponent);
     this.offCanvas.getViewRef(parent.offCanvasHost.viewContainerRef);
     this.htmlContent.changes.subscribe((_) => {
-      //
-      console.log(_);
       this.prism.highlightAll();
     });
   }

@@ -1,1 +1,81 @@
-<p>work-discovery works!</p>
+<ng-container *ngIf="workData$ | async as work">
+  <section>
+    <div #htmlContent class="section" [ngSwitch]="true" *ngFor="let section of work.data.process_section">
+      <!-- Intro -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'intro'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML" *ngIf="section.section_title[0].text"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <ng-container *ngFor="let image of section.images">
+            <img src="{{ image.image.url }}" />
+            <span class="figure-description"
+              ><small>{{ image.image_description }}</small></span
+            >
+          </ng-container>
+        </div>
+      </ng-container>
+      <!-- feedback -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'feedback'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML" *ngIf="section.section_title[0].text"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <ng-container *ngFor="let image of section.images">
+            <img src="{{ image.image.url }}" />
+            <p>
+              <small>{{ image.image_description }}</small>
+            </p>
+          </ng-container>
+        </div>
+      </ng-container>
+      <!-- Challenge -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'userflow'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML" *ngIf="section.section_title[0].text"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <ng-container *ngFor="let image of section.images">
+            <img src="{{ image.image.url }}" />
+            <p>
+              <small>{{ image.image_description }}</small>
+            </p>
+          </ng-container>
+        </div>
+      </ng-container>
+      <!-- Solution -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'wires'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
+        </div>
+      </ng-container>
+      <!-- Experience  -->
+      <ng-container *ngSwitchCase="section.section_id && section.section_id === 'concepts'">
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
+        </div>
+      </ng-container>
+      <!-- Details -->
+      <ng-container *ngSwitchDefault>
+        <div class="section-content">
+          <div [outerHTML]="section.section_title | asHTML" *ngIf="section.section_title[0].text"></div>
+          <div [outerHTML]="section.content | asHTML"></div>
+        </div>
+        <div class="image-grid" *ngIf="section.images">
+          <img *ngFor="let image of section.images" src="{{ image.image.url }}" />
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</ng-container>

@@ -16,6 +16,7 @@ export class PrismicService {
   private approachState$ = new BehaviorSubject<ApproachCollection | null>(null);
   private blogList$ = new BehaviorSubject<PrismicBlogResult[] | null>(null);
   private workList$ = new BehaviorSubject<PrismicBlogResult[] | null>(null);
+  private workState$ = new BehaviorSubject<any | null>(null);
   constructor(private http: HttpClient) {}
 
   getHomeState(): Observable<HomeCollection | null> {
@@ -32,6 +33,10 @@ export class PrismicService {
 
   getWorkListState(): Observable<PrismicBlogResult[] | null> {
     return this.workList$;
+  }
+
+  getWorkState(): Observable<any | null> {
+    return this.workState$;
   }
 
   private prismicRef(): Observable<string> {
@@ -141,6 +146,8 @@ export class PrismicService {
                 }
               });
             }
+            console.log(resp.results[0].data);
+            this.workState$.next(resp.results[0]);
             return resp.results[0];
           })
         );

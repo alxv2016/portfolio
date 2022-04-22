@@ -55,11 +55,7 @@
         <div class="section-grid section--process">
           <div [outerHTML]="section.section_title | asHTML"></div>
           <div class="section-col">
-            <p>
-              Health Connected was going through a huge redesign but alot of the core concepts still needed to remain.
-              By doing some research into our competitors and our users we started to identify the pain points of the
-              user's journey and what we can do to improve the overall new experience.
-            </p>
+            <div [outerHTML]="section.content | asHTML"></div>
             <div class="section-footer">
               <button class="process-btn" (click)="openOffCanvas()">
                 <span>In depth</span>
