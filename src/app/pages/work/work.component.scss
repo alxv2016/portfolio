@@ -6,7 +6,7 @@
   width: 100%;
 }
 section {
-  margin-bottom: $layout--2xl * 1.45;
+  margin-bottom: $layout--2xl * 1.25;
 }
 
 .project-hero {
@@ -20,21 +20,6 @@ section {
   }
   &__content {
     position: relative;
-
-    // .display-1 {
-    //   font-size: $title--2 * 1.25;
-    //   margin: 0;
-    //   @include breakpoint(sm) {
-    //     font-size: $title--1 * 1.45;
-    //   }
-    //   @include breakpoint(md) {
-    //     font-size: $large--title * 1.45;
-    //   }
-    //   @include breakpoint(lg) {
-    //     font-size: $huge--title * 1.125;
-    //   }
-    // }
-
     p {
       margin: 0;
       margin-top: $spacing--xs;
@@ -43,20 +28,20 @@ section {
   }
 }
 
-.project-designer {
+.project-info {
   position: relative;
   display: flex;
   width: 100%;
   flex-direction: row;
   align-items: center;
-  margin-top: $layout--sm;
+  margin-top: $layout--xs;
   margin-bottom: $layout--lg;
   @include breakpoint(md) {
-    margin-top: $layout--md;
+    margin-top: $layout--sm;
     margin-bottom: $layout--xl;
   }
 
-  &__icon {
+  svg {
     position: relative;
     width: 36px;
     height: 36px;
@@ -64,26 +49,12 @@ section {
     flex-shrink: 0;
     overflow: hidden;
     color: var(--accent100);
-    img {
-      height: inherit;
-      width: inherit;
-      object-fit: cover;
-    }
+    margin-right: $spacing--md;
   }
 
-  &__icon ~ &__info {
-    margin-left: $spacing--md;
-  }
-
-  &__info {
+  &__label {
     position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__name {
-    position: relative;
-    display: inline-block;
+    display: block;
     font-weight: font-weight('bold');
     line-height: $heading-line-height;
     font-size: $body--1;
@@ -95,7 +66,8 @@ section {
 
   &__role {
     position: relative;
-    display: inline-block;
+    display: block;
+    line-height: $heading-line-height;
     font-size: $body--2;
     color: var(--text200);
     @include breakpoint(md) {
@@ -108,9 +80,9 @@ section {
   position: relative;
   width: 100%;
   height: auto;
-  margin-bottom: $layout--xl;
+  margin-bottom: $layout--lg;
   @include breakpoint(md) {
-    margin-bottom: $layout--2xl;
+    margin-bottom: $layout--xl;
   }
   img {
     width: 100%;
@@ -127,7 +99,7 @@ section {
 .section ~ .section {
   padding-top: $layout--xl;
   @include breakpoint(md) {
-    padding-top: $layout--2xl * 1.25;
+    padding-top: $layout--2xl;
   }
 }
 
@@ -176,7 +148,7 @@ section {
 
 .section--outline {
   border-top: 1px solid var(--mid100);
-  border-bottom: 6px solid var(--mid100);
+  border-bottom: 4px solid var(--mid100);
   padding: $layout--xl 0;
   @include breakpoint(md) {
     padding: $layout--2xl 0;

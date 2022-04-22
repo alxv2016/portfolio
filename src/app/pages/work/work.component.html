@@ -3,24 +3,22 @@
     <div class="project-hero__content">
       <h1 class="display-2">{{ work.data.title[0].text }}</h1>
       <p>{{ work.data.description }}</p>
-      <div class="project-designer">
-        <div class="project-designer__icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-zap"
-          >
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-          </svg>
-        </div>
-        <div class="project-designer__info">
-          <span class="project-designer__name">{{ work.data.designer[0].role_label }}</span>
-          <span class="project-designer__role">{{ work.data.designer[0].role }}</span>
+      <div class="project-info">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-zap"
+        >
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </svg>
+        <div>
+          <span class="project-info__label">{{ work.data.designer[0].role_label }}</span>
+          <span class="project-info__role">{{ work.data.designer[0].role }}</span>
         </div>
       </div>
     </div>
