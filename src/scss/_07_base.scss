@@ -4,7 +4,7 @@
 html {
   box-sizing: border-box;
   height: 100%;
-  // font-size: 100%;
+  font-size: 100%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -16,7 +16,7 @@ html {
     box-sizing: inherit;
   }
   -webkit-tap-highlight-color: rbga(0, 0 0, 0);
-  -webkit-text-size-adjust: none;
+  // -webkit-text-size-adjust: none;
 }
 
 body {
