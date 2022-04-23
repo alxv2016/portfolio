@@ -7,8 +7,8 @@
   align-items: center;
   justify-content: flex-start;
   bottom: 0;
-  width: 100vw;
-  padding: $spacing--xl 0;
+  width: 100%;
+  padding-bottom: $spacing--2xl;
   pointer-events: none;
 }
 
@@ -40,11 +40,31 @@
     position: relative;
     display: inline-flex;
     width: 100%;
+    min-height: 68px;
     pointer-events: auto;
     @include frosted-glass(var(--glass1), 0.65);
-    border: 1px solid hsla(var(--glass3) / 0.025);
-    border-radius: $spacing--xs;
+    border: 1px solid hsla(var(--glass2) / 0.95);
+    scrollbar-gutter: stable;
     overflow-x: auto;
+    // scrollbar-width: none;
+    // &::-webkit-scrollbar  {
+    //   display: none;
+    // }
+    /* Works on Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+      // width: 8px;
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: currentColor;
+      border-radius: 0;
+      // border: 1px solid currentColor;
+    }
     @include breakpoint(sm) {
       width: auto;
     }

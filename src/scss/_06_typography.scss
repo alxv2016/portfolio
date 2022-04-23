@@ -10,8 +10,6 @@ h4 {
     font-style: normal;
     position: relative;
     display: inline-block;
-    text-decoration: underline;
-    text-decoration-color: var(--accent100);
   }
 }
 
@@ -150,86 +148,62 @@ p ~ p {
 }
 
 .display-1 {
-  font-size: $title--2;
-  line-height: $headline-line-height;
-  font-weight: font-weight('extra-bold');
-  color: currentColor;
-  @include breakpoint(sm) {
-    font-size: $large--title;
-  }
-  @include breakpoint(md) {
-    font-size: $huge--title;
-  }
-  @include breakpoint(lg) {
-    font-size: $headliner--1;
-  }
-  &:first-child {
-    margin-top: 0;
-  }
-}
-
-.display-2 {
-  font-size: $title--1;
-  line-height: $headline-line-height;
-  font-weight: font-weight('extra-bold');
-  color: currentColor;
-  @include breakpoint(sm) {
-    font-size: $title--1;
-  }
-  @include breakpoint(md) {
-    font-size: $large--title;
-  }
-  @include breakpoint(lg) {
-    font-size: $huge--title;
-  }
-  &:first-child {
-    margin-top: 0;
-  }
-}
-
-.display-3 {
   font-size: $title--3;
   line-height: $headline-line-height;
   font-weight: font-weight('extra-bold');
-  color: currentColor;
-  @include breakpoint(sm) {
+  @include breakpoint(xs) {
     font-size: $title--2;
   }
   @include breakpoint(md) {
     font-size: $title--1;
   }
   @include breakpoint(lg) {
-    font-size: $large--title;
-  }
-  &:first-child {
-    margin-top: 0;
+    font-size: $huge--title;
   }
 }
 
-.display-4 {
-  font-size: $subtitle;
-  font-family: $heading-font-family;
-  line-height: $heading-line-height;
+.display-2 {
+  font-size: $subtitle--2;
+  line-height: $headline-line-height;
   font-weight: font-weight('extra-bold');
-  color: currentColor;
-  &:first-child {
-    margin-top: 0;
-  }
-  @include breakpoint(sm) {
+  @include breakpoint(xs) {
     font-size: $title--3;
   }
   @include breakpoint(md) {
     font-size: $title--2;
   }
   @include breakpoint(lg) {
+    font-size: $large--title;
+  }
+}
+
+.display-3 {
+  font-size: $subtitle;
+  line-height: $headline-line-height;
+  font-weight: font-weight('extra-bold');
+  @include breakpoint(xs) {
+    font-size: $subtitle--2;
+  }
+  @include breakpoint(md) {
+    font-size: $title--3;
+  }
+  @include breakpoint(lg) {
     font-size: $title--1;
   }
-  em {
-    font-style: normal;
-    position: relative;
-    display: inline-block;
-    text-decoration: underline;
-    text-decoration-color: var(--accent200);
+}
+
+.display-4 {
+  font-size: $body--1;
+  line-height: $heading-line-height;
+  font-weight: font-weight('extra-bold');
+  @include breakpoint(xs) {
+    font-size: $subtitle;
+  }
+  @include breakpoint(md) {
+    font-size: $subtitle--2;
+  }
+  @include breakpoint(lg) {
+    font-size: $title--3;
   }
 }
 

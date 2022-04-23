@@ -6,6 +6,9 @@
         <li class="c-footer__list-item" *ngFor="let link of data.navigation">
           <button class="c-footer-link" (click)="openBottomPane(link)">{{ link.link_label }}</button>
         </li>
+        <li class="c-footer__list-item">
+          <button class="c-footer-link" (click)="viewDesignSystem()">Type scale</button>
+        </li>
       </ul>
     </nav>
   </div>
