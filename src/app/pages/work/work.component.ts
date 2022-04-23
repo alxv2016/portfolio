@@ -11,7 +11,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Observable, switchMap, tap} from 'rxjs';
+import {map, Observable, switchMap, tap} from 'rxjs';
 import {AppComponent} from 'src/app/app.component';
 import {OffCanvasService} from 'src/app/components/off-canvas/off-canvas.service';
 import {PrismicResult} from 'src/app/services/models/prismic.interface';
@@ -41,14 +41,15 @@ export class WorkComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.workData$ = this.route.paramMap.pipe(
-      switchMap((params) => {
-        const id = params.get('id');
-        console.log(id);
-        return this.prismic.getWork(id);
-      })
-    );
-    this.workData$.subscribe();
+    this.workData$ = this.route.data.pipe(map((d) => d['work']));
+    // this.workData$ = this.route.paramMap.pipe(
+    //   switchMap((params) => {
+    //     const id = params.get('id');
+    //     console.log(id);
+    //     return this.prismic.getWork(id);
+    //   })
+    // );
+    // this.workData$.subscribe();
   }
 
   ngAfterViewInit(): void {

@@ -5,6 +5,7 @@ import {BlogComponent} from './pages/blog/blog.component';
 import {DesignSystemComponent} from './pages/design-system/design-system.component';
 import {HomeComponent} from './pages/home/home.component';
 import {WorkComponent} from './pages/work/work.component';
+import {WorkResolver} from './services/work.resolver';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path: 'work/:id',
     component: WorkComponent,
+    resolve: {work: WorkResolver},
   },
   {
     path: 'design-system',

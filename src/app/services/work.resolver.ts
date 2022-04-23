@@ -1,0 +1,22 @@
+import {Injectable} from '@angular/core';
+import {Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot, ActivatedRoute} from '@angular/router';
+import {Observable, of, switchMap, tap} from 'rxjs';
+import {PrismicResult} from './models/prismic.interface';
+import {PrismicService} from './prismic.service';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class WorkResolver implements Resolve<PrismicResult | null> {
+  constructor(private prismic: PrismicService, private router: Router) {}
+  resolve(route: ActivatedRouteSnapshot): Observable<PrismicResult | null> {
+    const id = route.paramMap.get('id');
+    return this.prismic.getWork(id).pipe(
+      tap((data) => {
+        if (!data) {
+          this.router.navigate(['/']);
+        }
+      })
+    );
+  }
+}
