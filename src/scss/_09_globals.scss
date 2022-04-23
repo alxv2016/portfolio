@@ -1,6 +1,6 @@
 body.no-scroll {
-  height: 100vh;
   overflow-y: hidden;
+  pointer-events: none;
 }
 
 .section-content {
