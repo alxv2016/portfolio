@@ -169,7 +169,7 @@ p ~ p {
 }
 
 .display-2 {
-  font-size: $title--3;
+  font-size: $title--1;
   line-height: $headline-line-height;
   font-weight: font-weight('extra-bold');
   color: currentColor;
@@ -188,7 +188,7 @@ p ~ p {
 }
 
 .display-3 {
-  font-size: $subtitle--2;
+  font-size: $title--3;
   line-height: $headline-line-height;
   font-weight: font-weight('extra-bold');
   color: currentColor;
