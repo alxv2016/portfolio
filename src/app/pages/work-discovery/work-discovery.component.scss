@@ -40,11 +40,11 @@ section {
 .figure-description {
   position: relative;
   width: 100%;
-  max-width: 668px;
   margin-left: auto;
-  padding-left: $layout--md;
+  // padding-left: $layout--md;
   @include breakpoint(md) {
     padding-left: 0;
+    max-width: 668px;
   }
 }
 
