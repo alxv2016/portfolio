@@ -149,9 +149,10 @@ export class OffCanvasComponent implements AfterViewInit, OnDestroy {
     // Adjust the header so it doesn't block scroll bar dynamically
     const scrollbarWidth = this.getScrollbarWidth();
     const scrollable = this.checkScroll(this.offCanvasWindow.nativeElement, this.offCanvasContent.nativeElement);
-    const bounds = this.offCanvasHeader.nativeElement.getBoundingClientRect();
+    const bounds = this.offCanvasWindow.nativeElement.getBoundingClientRect();
+    console.log(bounds);
     if (scrollable) {
-      this.render.setStyle(this.offCanvasHeader.nativeElement, 'width', `calc(100% - ${scrollbarWidth}px)`);
+      this.render.setStyle(this.offCanvasHeader.nativeElement, 'width', `calc(90% - ${scrollbarWidth}px)`);
       this.render.setStyle(this.offCanvasHeader.nativeElement, 'max-width', `${bounds.width - scrollbarWidth}px`);
     }
   }
@@ -173,7 +174,7 @@ export class OffCanvasComponent implements AfterViewInit, OnDestroy {
       this.render.addClass(this.host, 'c-off-canvas--visible');
       this.transitionEventHandler = this.render.listen(this.host, 'transitionend', this.onTransitionEnd);
     });
-    this.checkScrollbar();
+    // this.checkScrollbar();
   }
 
   close() {

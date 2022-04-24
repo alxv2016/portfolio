@@ -1,6 +1,5 @@
-body.no-scroll {
-  // overflow-y: hidden;
-  pointer-events: none;
+html.no-scroll {
+  overflow: hidden;
 }
 
 .section-content {

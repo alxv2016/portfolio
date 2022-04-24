@@ -6,7 +6,6 @@ import {LoadingService} from './loading.service';
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
   constructor(private loading: LoadingService) {}
-
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.loading.show();
     return next.handle(request).pipe(

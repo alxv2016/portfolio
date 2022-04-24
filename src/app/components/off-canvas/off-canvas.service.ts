@@ -16,7 +16,7 @@ export class OffCanvasService {
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
   createOffCanvas(childComponent: Type<any>, title?: string | null, data?: any): void {
-    const doc = this.document.body;
+    const doc = this.document.querySelector('html');
     // const main = this.document.querySelector('main');
     // If an instance already exist destroy it first
     if (this.componentRef) {
