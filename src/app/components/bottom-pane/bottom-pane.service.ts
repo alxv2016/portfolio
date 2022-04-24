@@ -39,7 +39,7 @@ export class BottomPaneService {
       this.componentRef.instance.contentData = data;
     }
     this.componentRef.instance.state$.next(true);
-    const doc = this.document.querySelector('body');
+    const doc = this.document.querySelector('html');
     doc?.classList.add('no-scroll');
     // Watch component's state to destroy
     this.getState().subscribe((state) => {

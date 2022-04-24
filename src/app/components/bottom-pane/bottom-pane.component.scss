@@ -70,32 +70,32 @@
   visibility: hidden;
 
   &__header {
-    position: relative;
+    position: absolute;
     z-index: 1;
     display: flex;
     flex-direction: column;
     width: 100%;
+    min-height: 68px;
     padding: 0 $spacing--lg;
+    @include frosted-glass(var(--glass1), 0.75);
     @include breakpoint(md) {
       padding: 0 $spacing--xl;
     }
-    background-color: inherit;
   }
 
   &__content {
     position: relative;
-    top: 0;
-    left: 0;
     width: 100%;
     flex-grow: 1;
     padding: $spacing--lg $spacing--lg;
-    padding-top: $spacing--xl;
+    padding-top: 68px;
     padding-right: 44px;
     overflow-x: hidden;
     overflow-y: auto;
+    margin-top: $spacing--lg;
     @include breakpoint(md) {
       padding: $spacing--xl $spacing--xl;
-      padding-top: $spacing--2xl;
+      padding-top: 68px;
       padding-right: 44px;
     }
     /* Works on Chrome, Edge, and Safari */
@@ -108,8 +108,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--surface6);
-      border-radius: 20px;
+      background-color: currentColor;
       border: 2px solid transparent;
     }
   }
