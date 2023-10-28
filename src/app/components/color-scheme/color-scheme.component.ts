@@ -1,6 +1,6 @@
 import {DOCUMENT} from '@angular/common';
 import {ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 
 @Component({
   host: {class: 'c-color-scheme'},
@@ -31,10 +31,14 @@ export class ColorSchemeComponent implements OnInit {
   nuetrals: string[] = ['Nuetral 1', 'Nuetral 2', 'Neutral 3', 'Neutral 4', 'Neutral 5', 'Neutral 6'];
   shades: string[] = ['Shade 1', 'Shade 2', 'Shade 3', 'Shade 4', 'Shade 5', 'Shade 6'];
   brandColors: string[] = ['Brand', 'Accent 1', 'Accent 2'];
-  themeForm!: FormGroup;
+  themeForm!: UntypedFormGroup;
   hue = this.getBrandHue();
   @ViewChild('hueSlider', {static: true}) hueSlider!: ElementRef;
-  constructor(@Inject(DOCUMENT) private document: Document, private fb: FormBuilder, private render: Renderer2) {}
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private fb: UntypedFormBuilder,
+    private render: Renderer2
+  ) {}
 
   private calcPercent(value: number) {
     const percent = (value / 360) * 100;
